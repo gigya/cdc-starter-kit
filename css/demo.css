@@ -1,0 +1,197 @@
+/* - GENERAL IMPORTS - */
+.hidden {
+  display: none;
+}
+.flex-centered-container {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.flex-lefted-container {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  justify-content: left;
+}
+.flex-righted-container {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  justify-content: right;
+}
+.bordered {
+  border: 2px solid red;
+}
+.outlined {
+  outline: 2px solid red;
+}
+.uppercased {
+  text-transform: uppercase;
+}
+html {
+  background: #F2F6FA;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center 91px;
+}
+/* 0. Global Site Properties */
+html,
+body {
+  font-family: 'Questrial', sans-serif !important;
+  font-size: 14px!important;
+  font-weight: 300;
+}
+a {
+  font-size: 14px!important;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+/* 1. Layout */
+/* 1. Main Gigya Screensets Container */
+button {
+  font-size: 18px!important;
+  font-family: 'Questrial', sans-serif;
+}
+/* 2. Header & Footer */
+#gigya_actions_placeholder button {
+  width: 100%;
+  align-content: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.hero-foot {
+  display: none!important;
+  border: 2px solid #4287c4;
+}
+.sections {
+  margin-top: 60px;
+}
+/* GIGYA FIXES */
+.gigya-screen-caption {
+  display: none;
+}
+/* - SKELETON - */
+[class*=hint--][aria-label]:after {
+  font-weight: normal;
+  font-size: 16px;
+  padding: 12px;
+}
+/* NAVBAR */
+.navbar {
+  background: white!important;
+  /* Logged Image user */
+  /* Language */
+}
+.navbar .navbar-brand a {
+  text-decoration: none;
+}
+.navbar .navbar-brand .site-title {
+  margin-left: 25px;
+  top: 2px;
+  position: relative;
+  color: #999;
+}
+.navbar ion-icon {
+  font-size: 24px;
+  color: #999;
+  pointer-events: none;
+}
+.navbar .icon-link:hover ion-icon {
+  color: whitesmoke;
+}
+.navbar .icon-link.is-active ion-icon {
+  color: whitesmoke;
+}
+.navbar .navbar-item.is-account img {
+  height: 20px;
+  width: 20px;
+  max-height: 20px;
+  border-radius: 50%;
+  margin-top: 0px;
+  margin-left: 0px;
+}
+.navbar .navbar-item .user-image {
+  /* border: 2px solid red; */
+  position: relative;
+  top: 3px;
+}
+.navbar .provider-img {
+  border: 2px solid #333;
+  height: 30px!important;
+  width: 30px!important;
+  max-height: 30px!important;
+}
+.navbar .flag-icon {
+  border: 2px solid #555!important;
+  background-size: cover;
+  border-radius: 50px;
+  width: 1.5em;
+  height: 1.5em;
+}
+/* CONTAINER */
+.hero {
+  margin-top: 0px;
+  /* MESSAGE BOX */
+  /* Logged Sample Content (Overwriting core.css)*/
+}
+.hero .hero-body {
+  flex-grow: 1;
+  flex-shrink: 0;
+  padding: 5rem 1.5rem;
+}
+.hero section.header img.site-logo {
+  display: inline-block;
+  width: 45px;
+  top: 7px;
+  left: -15px;
+  position: relative;
+}
+.hero section.header h3.site-title {
+  display: inline-block;
+}
+.hero section.header .login-hr {
+  margin: .1rem 0;
+}
+.hero .box {
+  margin-top: 5rem;
+  max-height: 2000px;
+  min-height: 200px;
+  transition: max-height 1.35s ease-out;
+  border-radius: 15px;
+}
+.hero .box .gigya-placeholder {
+  overflow-x: auto;
+}
+.hero .box .avatar {
+  margin-top: -70px;
+  margin-bottom: -40px;
+}
+.hero .box .avatar img {
+  padding: 10px;
+  background: #fff;
+  border-radius: 50%;
+  max-width: 145px;
+  -webkit-box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+  box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+}
+.hero .message {
+  width: 50%;
+  margin-left: 25%;
+  /* border: 1px solid red; */
+}
+.hero .message.logged {
+  /*float: right;*/
+  /* background: beige; */
+  /* border: 1px solid green; */
+  /* top: 120px; */
+  position: relative;
+}
+.hero .view-wrapper {
+  padding: 0px;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}

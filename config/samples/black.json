@@ -1,0 +1,22 @@
+{
+    "menu_bg_color": "#000",
+    "menu_high_color": "#888",
+    "menu_text_color": "#fff",
+    "menu_logo": "sap-logo.png",
+    "main_pic": "sap-today.png",
+    "raas_prefix": "Default",
+    "site_title": "SAP CDC Demo",
+    "site_description": "SAP CDC Demo",
+    "container_id": "gigya_placeholder",
+    "lang": "en",
+    "sections": {
+        "hasLiteRegistration": true,
+        "hasRegistration": true,
+        "hasSamlLogin": true,
+        "hasSocialButtons": true,
+        "hasLogin": true,
+        "hasMobileLogin": true,
+        "hasPasswordlessLogin": true,
+        "hasCentralLogin": true
+    }
+}

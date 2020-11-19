@@ -1,0 +1,11 @@
+{
+    "site_title": "Gigya Starter Kit",
+    "site_description": "Sample Site with basic Gigya capabilities",
+    "menu_bg_color": "#0b83d8",
+    "menu_high_color": "#888",
+    "menu_text_color": "#fff",
+    "menu_pic": "gigya.png",
+    "main_pic": "gigya.png",
+    "raas_prefix": "Default",
+    "lang": "en"
+}

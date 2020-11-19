@@ -1,0 +1,18 @@
+{
+  "attributeQuotes"        : false,
+  "borderZero"             : false,
+  "spaceAroundOperator"    : { "enabled": false },
+  "maxCharPerLine"         : { "enabled": false },
+  "comment"                : { "enabled": false },
+  "importantRule"          : { "enabled": false },
+  "hexLength"              : { "enabled": false },
+  "propertyOrdering"       : { "enabled": false },
+  "singleLinePerProperty"  : { "enabled": false },
+  "spaceAroundBang"        : { "enabled": false },
+  "singleLinePerSelector"        : { "enabled": false },
+  "hexNotation"        : { "enabled": false },
+  "idSelector"        : { "enabled": false },
+  "qualifyingElement"        : { "enabled": false },
+  "singleLinePerSelector"        : { "enabled": false },
+  "newlineAfterBlock"      : { "enabled": false }
+}

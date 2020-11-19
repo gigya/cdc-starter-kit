@@ -1,0 +1,43 @@
+// main: ../../demo.less
+
+// 0. Display functions
+.hidden {display: none;}
+
+// 1. Flex Functions
+.flex-centered-container {
+    align-content: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.flex-lefted-container {
+    align-content: center;
+    align-items: center;
+    display: flex;
+    justify-content: left;
+}
+.flex-righted-container {
+    align-content: center;
+    align-items: center;
+    display: flex;
+    justify-content: right;
+}
+
+// 2. Border functions
+.bordered {
+    border: 2px solid red;
+}
+.outlined {
+    outline: 2px solid red;
+}
+.bordered(@color) {
+    border: 2px solid @color;
+}
+.outlined(@color) {
+    outline: 2px solid @color;
+}
+
+// 3. Font functions
+.uppercased {
+    text-transform: uppercase;
+}

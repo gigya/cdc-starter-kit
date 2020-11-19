@@ -1,0 +1,51 @@
+// main: ../../demo.less
+//
+// QUITAR CUANDO NODE!!!!
+
+html {
+    background: #F2F6FA;
+    // background-image: url('../../img/loading/horizontal.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center 91px;
+}
+
+/* 0. Global Site Properties */
+html, body {
+  font-family: @font-family!important;
+  font-size: 14px!important;
+  font-weight: 300;
+}
+
+a {
+    font-size: 14px!important;
+    text-decoration: none;
+    &:hover {text-decoration: underline;}
+}
+/* 1. Layout */
+    /* 1. Main Gigya Screensets Container */
+button {
+    font-size: 18px!important;
+    font-family: @font-family;
+}
+
+/* 2. Header & Footer */
+
+// Botones de acción
+#gigya_actions_placeholder {
+
+    button {
+        width: 100%;
+        .flex-centered-container();
+    }
+}
+
+// Escondemos el footer de momento aquí
+.hero-foot {
+    display: none!important;
+    .bordered(#4287c4);
+}
+
+.sections {
+    margin-top: 60px;
+}
