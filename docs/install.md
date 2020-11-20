@@ -1,6 +1,5 @@
 # Installation Guide
 
-This is the bla bla bla...
 
 ## 1. Create site in Gigya console
 
