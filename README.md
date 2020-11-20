@@ -1,16 +1,16 @@
 ![Create Site](docs/img/readme/0-gigya-starter-kit-v5.png)
 
-# **Gigya Web Starter Kit**
+# **SAP Customer Data Cloud Starter Kit**
 #### **{**HTML + CSS + JS**}**
 
 
-Gigya Web Starter Kit is a professional front-end template for building
-fast, robust, and adaptable web apps or sites including Gigya capabilities.
+SAP Customer Data Cloud Starter Kit is a simple front-end template for building
+fast, robust, and adaptable web apps or sites including SAP Customer Data Cloud capabilities.
 
-The project includes a demo website with the most common user flows, like registration, login, profile update, reset passord, etc. All these flows are offered OOTB using Gigya Screensets, and only using **html**, **css** and **js**.
+The project includes a demo website with the most common user flows, like registration, login, profile update, reset passord, etc. All these flows are offered OOTB using SAP Customer Data Cloud Screensets, and only using **html**, **css** and **js**.
 
-* Homepage: [https://github.com/juanatsap/gigya-starter-kit](https://github.com/juanatsap/gigya-starter-kit)
-* Source: [https://github.com/juanatsap/gigya-starter-kit](https://github.com/juanatsap/gigya-starter-kit)
+* Homepage: [https://github.com/gigya/cdc-starter-kit](https://github.com/gigya/cdc-starter-kit)
+* Source: [https://github.com/gigya/cdc-starter-kit](https://github.com/gigya/cdc-starter-kit)
 
 ## Quick start
 
@@ -71,7 +71,7 @@ This documentation is bundled with the project which makes it available for offl
 
 ## Additional Gigya Links
 
-Please follow this [link](docs/links.md) to find more related Gigya documentation.
+Please follow this [link](docs/links.md) to find more related SAP Customer Data Cloud documentation.
 
 ## Browser support
 
