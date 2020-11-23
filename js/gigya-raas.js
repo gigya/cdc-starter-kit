@@ -231,8 +231,11 @@ function onSubmit(event) {
     // }
 }
 
+
+
+
 function onAfterSubmit(event) {
-    gotoHome()
+    gotoHome();
 }
 
 

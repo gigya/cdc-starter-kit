@@ -94,10 +94,6 @@ function showUnloggedHTML() {
     /* Hide Registration Screenset */
     hideScreenset('edit_profile_placeholder');
 
-    /* Showing 'not logged' elements */
-    query('.message.not-logged').classList.remove('hidden');
-    query('.message.logged').classList.add('hidden');
-
     /* Switch Menu settings */
     const notLoggedElements = queryAll('.not-logged');
     for (const notLoggedElement of notLoggedElements) {
