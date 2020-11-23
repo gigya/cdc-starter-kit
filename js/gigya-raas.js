@@ -128,7 +128,8 @@ function editProfileWithRaaS(containerID) {
     gigya.accounts.showScreenSet({
         screenSet:'Default-ProfileUpdate',
         startScreen:'gigya-update-profile-screen',
-        containerID
+        containerID,
+        onAfterSubmit
     });
 }
 
@@ -229,6 +230,11 @@ function onSubmit(event) {
     //     }});
     // }
 }
+
+function onAfterSubmit(event) {
+    gotoHome()
+}
+
 
 /** **************************************************/
 //       GIGYA GLOBAL EVENT FUNCTIONS

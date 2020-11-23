@@ -52,28 +52,6 @@
                     <!-- Menu -->
                     <div class="navbar-menu">
 
-                        <!-- NOT LOGGED SECTION -->
-                        <div class="navbar-start not-logged">
-                            <div class="navbar-item is-icon drop-trigger">
-                                <a class="icon-link is-active hint--bottom hint--bounce hint--errorr hint--mediumm hint--rounded " href="javascript:liteRegisterWithRaaS();" aria-label="Subscribe to our newsletters!">
-                                    <ion-icon name="mail-outline"></ion-icon>
-                                    <span class="indicator"></span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="navbar-end not-logged">
-                            <div class="navbar-start">
-                                <div class="navbar-item is-icon drop-trigger">
-                                    <a class="icon-link hint--bottom hint--bounce hint--infoo hint--mediumm hint--rounded " aria-label="Login" href="javascript:showOrHighlightLoginScreen();">
-                                        <ion-icon name="person-outline"></ion-icon>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="navbar-item hint--bottom hint--bounce hint--successs hint--mediumm hint--rounded " aria-label="English">
-                                    <span class="flag-icon flag-icon-gb"></span>
-                            </div>
-                        </div>
-
                         <!-- LOGGED SECTION -->
                         <div class="navbar-start logged hidden">
                             <!-- Navbar Search -->
@@ -157,61 +135,21 @@
 
                         <!-- Site Info -->
 
-                        <!-- NOT LOGGED -->
-                        <section class="header not-logged hidden">
-                           <!-- <img class="site-logo" src="img/logos/loading.png" alt="{{Title}}" onerror="showErrorLogo(this)" /> -->
-                           <h3 class="title site-title is-2 has-text-grey">
-                               Welcome to <b>{{Title}}</b>
-                           </h3>
-                           <hr class="login-hr" />
-                           <p class="site-description subtitle is-size-4 has-text-weight-lighter has-text-grey has-text-centered">{{Description}}</p>
-                        </section>
 
                        <!-- LOGGED -->
                         <section class="header logged hidden">
                            <h3 class="title site-title has-text-grey">
                                <!-- Main Background image -->
                                <img class="body-img site-logo" src="img/logos/loading.png" alt="{{Title}}" onerror="showErrorLogo(this)" />
-                               Welcome again, {{Username}}
+                               Welcome again, {{Username}}, edit your info:
                            </h3>
                            <hr class="login-hr" />
                            <p class="site-description subtitle has-text-grey has-text-centered">Your last login was <b>{{Last Login}}</b></p>
 
+                           <!-- LOGGED SECTION: Edit Profile Placeholder -->
+                           <div class="gigya-placeholder" id="edit_profile_placeholder"></div>
+
                         </section>
-
-                        <!-- Main page content-->
-                        <div id="gigya_elements" class="box not-logged hidden">
-
-                            <!-- MAIN IMAGE -->
-                            <figure class="avatar">
-                                <img class="main-pic site-logo" src="img/logos/loading.png" alt="{{Title}}"onerror="showErrorLogo(this)" />
-                            </figure>
-
-                            <!-- Default Buttons -->
-                            <section class="sections not-loggedd hidden">
-                                   <div class="column">
-                                       <button onClick="javascript:liteRegisterWithRaaS('not_logged_placeholder')" class="button is-block {{#gigya.appareance.buttonsClass}} {{gigya.appareance.buttonsClass}} {{/gigya.appareance.buttonsClass}}is-large is-fullwidth">Subscribe</button>
-                                   </div>
-
-                                   <div class="column">
-                                       <button onClick="javascript:registerWithRaaS('not_logged_placeholder')" class="button is-block {{#gigya.appareance.buttonsClass}} {{gigya.appareance.buttonsClass}} {{/gigya.appareance.buttonsClass}} is-lightttt is-large is-fullwidth">Register</button>
-                                   </div>
-
-                                   <hr class="login" />
-
-                                   <div class="column is-12">
-                                       <button onClick="javascript:loginWithRaaS('not_logged_placeholder')" class="button is-block {{#gigya.appareance.buttonsClass}} {{gigya.appareance.buttonsClass}} {{/gigya.appareance.buttonsClass}}is-large is-fullwidth">Login</button>
-                                   </div>
-                            </section>
-
-                            <!-- Container for Gigya Screensets-->
-
-                            <!-- NOT LOGGED SECTION: Registration Placeholder -->
-                            <div class="gigya-placeholder" id="not_logged_placeholder"></div>
-                       </div>
-
-                       <!-- LOGGED SECTION: Sample Content Container -->
-                        <div class="logged sample_content logged hidden"></div>
                     </div>
                 </div>
             </div>

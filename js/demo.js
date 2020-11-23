@@ -63,17 +63,6 @@ function showLoggedHTML(user) {
         siteDescription.innerText = siteDescription.innerText.replaceAll('{{Last Login}}', lastLoginUserFriendlyDate);
     }
 
-    query('.message.logged').classList.remove('hidden');
-
-    /* Showing user info into HTML */
-    query('.message.not-logged').classList.add('hidden');
-    // query('.message.logged').classList.remove('hidden');
-
-    // Text for message
-    var html = '<strong>Welcome </strong> ' + username + ',<strong> email: </strong>' + email + '<hr/>';
-    html += '<strong>UID: </strong>' + uid + ', <strong>SP: </strong>' + provider;
-    query('.message.logged .message-body').innerHTML = html;
-
     /* Switch Menu settings */
     const notLoggedElements = queryAll('.not-logged');
     for (const notLoggedElement of notLoggedElements) {
@@ -132,22 +121,24 @@ function displayTemplate(tmpl, data) {
 
 function loadSampleContent(user) {
 
-    //
-    const path = './html/sample_content/ecommerce.html';
-    //
-    fetch(path)
-        .then((res) => { return res.text(); })
-        .then((out) => {
-            // console.log('HTML Content: %s', out);
-            // compile the template
-            var template = Handlebars.compile(out);
-            // execute the compiled template and print the output to the console
+    const sampleContent = query('.sample_content');
 
-            const compiled = template(user);
-            // console.log(compiled);
-            query('.sample_content').innerHTML = compiled;
+    if (sampleContent) {
+        const path = './html/sample_content/ecommerce.html';
+        //
+        fetch(path)
+            .then((res) => { return res.text(); })
+            .then((out) => {
+                // console.log('HTML Content: %s', out);
+                // compile the template
+                var template = Handlebars.compile(out);
+                // execute the compiled template and print the output to the console
 
-        }).catch((err) => { return console.error(err); });
+                const compiled = template(user);
+                // console.log(compiled);
+                sampleContent.innerHTML = compiled;
+            }).catch((err) => { return console.error(err); });
+    }
 }
 
 /**
@@ -171,7 +162,14 @@ function redirectIfLogged(user) {
 
         /* If logged, show user HTML */
         showLoggedHTML(user);
-        loadSampleContent(user);
+
+        /* In function of the page, show or sample content, or edit profile */
+        const url = window.location.href;
+        if (url.indexOf('edit-profile') <= 0) {
+            loadSampleContent(user);
+        } else {
+            editProfileWithRaaS('edit_profile_placeholder');
+        }
     }
 }
 
@@ -297,4 +295,9 @@ function prettyDate(time) {
     if (isNaN(dayDiff) || dayDiff < 0 || dayDiff >= 31) { return ''; }
     const prettifiedDate = dayDiff === 0 && (diff < 60 && 'just now' || diff < 120 && '1 minute ago' || diff < 3600 && Math.floor(diff / 60) + ' minutes ago' || diff < 7200 && '1 hour ago' || diff < 86400 && Math.floor(diff / 3600) + ' hours ago') || dayDiff === 1 && 'Yesterday' || dayDiff < 7 && dayDiff + ' days ago' || dayDiff < 31 && Math.ceil(dayDiff / 7) + ' weeks ago';
     return prettifiedDate;
+}
+
+
+function gotoHome() {
+    window.location.href = window.config.main_url;
 }
