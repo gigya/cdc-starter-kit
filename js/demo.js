@@ -237,6 +237,24 @@ function setUI(config) {
     /* CHANGE PAGE PROPERTIES */
     document.title = window.config.site_title;
     query('link[rel*="icon"]').href = window.config.menu_pic;
+
+
+    /* SET MAIN LINK */
+    query('.navbar-item').href = window.config.main_url;
+
+    /* SET BACKGROUND LINK COLOR HOVER */
+    var css = `.navbar .navbar-brand .navbar-item:hover {background: ${window.config.menu_bg_color_hover} !important;}`;
+    var style = document.createElement('style');
+
+    if (style.styleSheet) {
+        style.styleSheet.cssText = css;
+    } else {
+        style.appendChild(document.createTextNode(css));
+    }
+
+    document.getElementsByTagName('head')[0].appendChild(style);
+
+
 }
 
 /**
