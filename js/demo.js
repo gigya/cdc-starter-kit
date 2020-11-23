@@ -150,8 +150,8 @@ function redirectIfLogged(user) {
         console.log('You are not logged in.');
 
         showUnloggedHTML();
-        // loginWithRaaS('not_logged_placeholder');
-        registerWithRaaS('not_logged_placeholder');
+        loginWithRaaS('not_logged_placeholder');
+        // registerWithRaaS('not_logged_placeholder');
 
     } else {
         sessionStatus = 'loggedOut';
