@@ -1,3 +1,9 @@
+# Compiled binary addons (http://nodejs.org/api/addons.html)
+config/config.json
+config.json
+
+
+
 # Logs
 logs
 *.log
