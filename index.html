@@ -22,6 +22,9 @@
         <link rel="stylesheet" type="text/css" href="css/lib/core.css" />
         <link rel="stylesheet" type="text/css" href="css/demo.css" />
         <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
+
+        <!-- Import Navbar HTML as separate file -->
+        <link rel="import" href="html/skeleton/navbar.html" />
     </head>
 
     <body>
@@ -30,121 +33,7 @@
             <!-- Nav Bar -->
             <div id="main-navbar" class="navbar mobile-nabvar is-inline-flex is-transparent is-mobile no-shadow">
                 <div class="container is-fluid">
-
-                    <!-- BRAND -->
-                    <div class="navbar-brand">
-                        <a href="#" class="navbar-item">
-                            <img class="site-logo" src="img/logos/loading.png" width="150" style="float:none;" alt="{{Title}}">
-                            <h5 class="site-title is-size-5 has-text-weight-bold">{{Title}}</h5>
-                        </a>
-
-                        <!-- Nav Bar  MOBILE-->
-                        <div class="navbar-burger">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- Menu -->
-                    <div class="navbar-menu">
-
-                        <!-- NOT LOGGED SECTION -->
-                        <div class="navbar-start not-logged">
-                            <div class="navbar-item is-icon drop-trigger">
-                                <a class="icon-link is-active hint--bottom hint--bounce hint--errorr hint--mediumm hint--rounded " href="javascript:liteRegisterWithRaaS();" aria-label="Subscribe to our newsletters!">
-                                    <ion-icon name="mail-outline"></ion-icon>
-                                    <span class="indicator"></span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="navbar-end not-logged">
-                            <div class="navbar-start">
-                                <div class="navbar-item is-icon drop-trigger">
-                                    <a class="icon-link hint--bottom hint--bounce hint--infoo hint--mediumm hint--rounded " aria-label="Login" href="javascript:showOrHighlightLoginScreen();">
-                                        <ion-icon name="person-outline"></ion-icon>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="navbar-item hint--bottom hint--bounce hint--successs hint--mediumm hint--rounded " aria-label="English">
-                                    <span class="flag-icon flag-icon-gb"></span>
-                            </div>
-                        </div>
-
-                        <!-- LOGGED SECTION -->
-                        <div class="navbar-start logged hidden">
-                            <!-- Navbar Search -->
-
-                            <div class="navbar-item is-icon drop-trigger">
-                                <a class="icon-link is-primary is-friends" href="javascript:showSampleAlert();">
-                                    <ion-icon name="heart-outline"></ion-icon>
-                                </a>
-
-                            </div>
-                            <div class="navbar-item is-icon drop-trigger">
-                                <a class="icon-link is-primary" href="javascript:showSampleAlert();">
-                                    <ion-icon name="notifications-outline"></ion-icon>
-                                    <span class="indicator"></span>
-                                </a>
-
-                            </div>
-                            <div class="navbar-item is-icon drop-trigger">
-                                <a class="icon-link is-active hint--bottom hint--bounce hint--infoo hint--mediumm hint--rounded " aria-label="Subscribe to our newsletters!" href="javascript:liteRegisterWithRaaS();">
-                                    <ion-icon name="mail-outline"></ion-icon>
-                                    <span class="indicator"></span>
-                                </a>
-
-                            </div>
-                            <div class="navbar-item is-icon open-chat">
-                                <a class="icon-link is-primary" href="javascript:showSampleAlert();">
-                                    <ion-icon name="chatbox-outline"></ion-icon>
-                                    <span class="indicator"></span>
-                                </a>
-                            </div>
-                            <div class="modal sample-content-modal">
-                              <div class="modal-background"></div>
-                              <div class="modal-content">
-                                <!-- Any other Bulma elements you want -->
-                                <div class="notification is-infoo is-light is-size-4 has-text-centered">
-                                  Sample Content
-                                </div>
-
-                              </div>
-                              <!-- <button class="modal-close is-large" aria-label="close"></button> -->
-                            </div>
-                        </div>
-                        <div class="navbar-end logged hidden">
-
-                            <!-- User Logged Icon. EDIT PROFILE Action -->
-                            <div id="account-dropdown" class="navbar-item is-account drop-trigger has-caret">
-                                <div class="navbar-item is-icon drop-trigger hint--bottom hint--bounce hint--infoo hint--mediumm hint--rounded " aria-label="Edit Profile">
-                                    <a class="icon-link" href="edit-profile.html">
-                                        <div class="user-image">
-                                            <ion-icon class="not-hidden" name="person-outline"></ion-icon>
-                                            <img class="hidden provider-img" src="img/framework/profile_default_pic_small.png">
-                                            <span class="indicator"></span>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Logout Icon. LOGOUT ACTION -->
-                            <div class="navbar-item is-icon drop-trigger">
-                                <a class="icon-link hint--bottom hint--bounce hint--infoo hint--mediumm hint--rounded " aria-label="logout" href="javascript:logoutWithRaaS()">
-                                    <ion-icon name="log-out-outline"></ion-icon>
-                                </a>
-                            </div>
-                            <!-- Language Flags -->
-                            <div class="navbar-item hint--bottom hint--bounce hint--success hint--mediumm hint--rounded " aria-label="English">
-                                    <a href="javascript:showLanguageAlert()">
-                                        <span class="flag-icon flag-icon-gb"></span>
-                                    </a>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Navbar HTML content loaded dynamically and included in html/skeleton/navbar.html -->
                 </div>
             </div>
 
@@ -187,31 +76,14 @@
                                 <img class="main-pic site-logo" src="img/logos/loading.png" alt="{{Title}}"onerror="showErrorLogo(this)" />
                             </figure>
 
-                            <!-- Default Buttons -->
-                            <section class="sections not-loggedd hidden">
-                                   <div class="column">
-                                       <button onClick="javascript:liteRegisterWithRaaS('not_logged_placeholder')" class="button is-block {{#gigya.appareance.buttonsClass}} {{gigya.appareance.buttonsClass}} {{/gigya.appareance.buttonsClass}}is-large is-fullwidth">Subscribe</button>
-                                   </div>
-
-                                   <div class="column">
-                                       <button onClick="javascript:registerWithRaaS('not_logged_placeholder')" class="button is-block {{#gigya.appareance.buttonsClass}} {{gigya.appareance.buttonsClass}} {{/gigya.appareance.buttonsClass}} is-lightttt is-large is-fullwidth">Register</button>
-                                   </div>
-
-                                   <hr class="login" />
-
-                                   <div class="column is-12">
-                                       <button onClick="javascript:loginWithRaaS('not_logged_placeholder')" class="button is-block {{#gigya.appareance.buttonsClass}} {{gigya.appareance.buttonsClass}} {{/gigya.appareance.buttonsClass}}is-large is-fullwidth">Login</button>
-                                   </div>
-                            </section>
-
                             <!-- Container for Gigya Screensets-->
 
                             <!-- NOT LOGGED SECTION: Registration Placeholder -->
                             <div class="gigya-placeholder" id="not_logged_placeholder"></div>
                        </div>
 
-                       <!-- LOGGED SECTION: Sample Content Container -->
-                        <div class="logged sample_content logged hidden"></div>
+                       <!-- LOGGED SECTION: Sample Content Container. It will be substituted by the content in html/sample_content/-->
+                        <div class="logged sample_content hidden"></div>
                     </div>
                 </div>
             </div>
@@ -221,6 +93,7 @@
         </div>
 
         <!-- Gigya Script, Gigya RaaS Functions & Framework files  -->
+        <script type="text/javascript" lang="javascript" src="https://cdn.jsdelivr.net/npm/@webcomponents/html-imports@1.2.6/html-imports.min.js"></script>
         <script type="text/javascript" lang="javascript" src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
         <script type="text/javascript" lang="javascript" src="https://cdns.gigya.com/js/gigya.js?apikey=3_P6eTVo5EpI6zoB2c1ZgblyCrmx8OMOlrA932HVKEhhHCHwTdUJbBBEpAocpkb_nM"></script>
         <script type="text/javascript" lang="javascript" src="js/gigya-raas.js"></script>

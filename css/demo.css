@@ -77,7 +77,7 @@ button {
 /* - SKELETON - */
 [class*=hint--][aria-label]:after {
   font-weight: normal;
-  font-size: 16px;
+  font-size: 14px;
   padding: 12px;
 }
 /* NAVBAR */
@@ -145,13 +145,13 @@ button {
 }
 .hero section.header img.site-logo {
   display: inline-block;
-  width: 45px;
   top: 7px;
   left: -15px;
   position: relative;
 }
 .hero section.header h3.site-title {
   display: inline-block;
+  margin-top: 35px;
 }
 .hero section.header .login-hr {
   margin: .1rem 0;

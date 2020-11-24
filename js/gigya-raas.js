@@ -171,8 +171,9 @@ function hideScreenset(containerID) {
 /**
  * This function logs out a user from the website, and triggers an event (onLogout), to perform some operations
  * after the operation is finished.
+ * @param {function} callBackFunction the id of the HMTL element containing the form
  */
-function logoutWithRaaS() {
+function logoutWithRaaS(callBackFunction) {
 
     console.log('Logging out...');
 
@@ -182,13 +183,7 @@ function logoutWithRaaS() {
     });
 
     /* After the logout, we show the register screen again (as in the beginning) */
-    gigya.accounts.logout({ callback:function() {
-
-        // Show login instead of register
-        // query('.message.not-logged').classList.add('hidden');
-        loginWithRaaS('not_logged_placeholder');
-        // registerWithRaaS('not_logged_placeholder');
-    } });
+    gigya.accounts.logout({ callback: callBackFunction });
 }
 
 /** **************************************************/

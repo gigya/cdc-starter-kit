@@ -22,6 +22,10 @@
         <link rel="stylesheet" type="text/css" href="css/lib/core.css" />
         <link rel="stylesheet" type="text/css" href="css/demo.css" />
         <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
+
+        <!-- Import Navbar HTML as separate file -->
+        <link rel="import" href="html/skeleton/navbar.html" />
+
     </head>
 
     <body>
@@ -30,103 +34,9 @@
             <!-- Nav Bar -->
             <div id="main-navbar" class="navbar mobile-nabvar is-inline-flex is-transparent is-mobile no-shadow">
                 <div class="container is-fluid">
-
-                    <!-- BRAND -->
-                    <div class="navbar-brand">
-                        <a href="#" class="navbar-item">
-                            <img class="site-logo" src="img/logos/loading.png" width="150" style="float:none;" alt="{{Title}}">
-                            <h5 class="site-title is-size-5 has-text-weight-bold">{{Title}}</h5>
-                        </a>
-
-                        <!-- Nav Bar  MOBILE-->
-                        <div class="navbar-burger">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- Menu -->
-                    <div class="navbar-menu">
-
-                        <!-- LOGGED SECTION -->
-                        <div class="navbar-start logged hidden">
-                            <!-- Navbar Search -->
-
-                            <div class="navbar-item is-icon drop-trigger">
-                                <a class="icon-link is-primary is-friends" href="javascript:showSampleAlert();">
-                                    <ion-icon name="heart-outline"></ion-icon>
-                                </a>
-
-                            </div>
-                            <div class="navbar-item is-icon drop-trigger">
-                                <a class="icon-link is-primary" href="javascript:showSampleAlert();">
-                                    <ion-icon name="notifications-outline"></ion-icon>
-                                    <span class="indicator"></span>
-                                </a>
-
-                            </div>
-                            <div class="navbar-item is-icon drop-trigger">
-                                <a class="icon-link is-active hint--bottom hint--bounce hint--infoo hint--mediumm hint--rounded " aria-label="Subscribe to our newsletters!" href="javascript:liteRegisterWithRaaS();">
-                                    <ion-icon name="mail-outline"></ion-icon>
-                                    <span class="indicator"></span>
-                                </a>
-
-                            </div>
-                            <div class="navbar-item is-icon open-chat">
-                                <a class="icon-link is-primary" href="javascript:showSampleAlert();">
-                                    <ion-icon name="chatbox-outline"></ion-icon>
-                                    <span class="indicator"></span>
-                                </a>
-                            </div>
-                            <div class="modal sample-content-modal">
-                              <div class="modal-background"></div>
-                              <div class="modal-content">
-                                <!-- Any other Bulma elements you want -->
-                                <div class="notification is-infoo is-light is-size-4 has-text-centered">
-                                  Sample Content
-                                </div>
-
-                              </div>
-                              <!-- <button class="modal-close is-large" aria-label="close"></button> -->
-                            </div>
-                        </div>
-                        <div class="navbar-end logged hidden">
-
-                            <!-- User Logged Icon. EDIT PROFILE Action -->
-                            <div id="account-dropdown" class="navbar-item is-account drop-trigger has-caret">
-                                <div class="navbar-item is-icon drop-trigger hint--bottom hint--bounce hint--infoo hint--mediumm hint--rounded " aria-label="Edit Profile">
-                                    <a class="icon-link" href="edit-profile.html">
-                                        <div class="user-image">
-                                            <ion-icon class="not-hidden" name="person-outline"></ion-icon>
-                                            <img class="hidden provider-img" src="img/framework/profile_default_pic_small.png">
-                                            <span class="indicator"></span>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Logout Icon. LOGOUT ACTION -->
-                            <div class="navbar-item is-icon drop-trigger">
-                                <a class="icon-link hint--bottom hint--bounce hint--infoo hint--mediumm hint--rounded " aria-label="logout" href="javascript:logoutWithRaaS()">
-                                    <ion-icon name="log-out-outline"></ion-icon>
-                                </a>
-                            </div>
-                            <!-- Language Flags -->
-                            <div class="navbar-item hint--bottom hint--bounce hint--success hint--mediumm hint--rounded " aria-label="English">
-                                    <a href="javascript:showLanguageAlert()">
-                                        <span class="flag-icon flag-icon-gb"></span>
-                                    </a>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Navbar HTML content loaded dynamically and included in html/skeleton/navbar.html -->
                 </div>
             </div>
-
-
 
             <!-- Page Content -->
            <div class="hero-body">
@@ -141,14 +51,29 @@
                            <h3 class="title site-title has-text-grey">
                                <!-- Main Background image -->
                                <img class="body-img site-logo" src="img/logos/loading.png" alt="{{Title}}" onerror="showErrorLogo(this)" />
-                               Welcome again, {{Username}}, edit your info:
+                               Welcome again, {{Username}}
                            </h3>
                            <hr class="login-hr" />
+                           <!-- <p class="site-description subtitle has-text-grey has-text-centered">Edit your personal details:</b></p> -->
                            <p class="site-description subtitle has-text-grey has-text-centered">Your last login was <b>{{Last Login}}</b></p>
 
                            <!-- LOGGED SECTION: Edit Profile Placeholder -->
-                           <div class="gigya-placeholder" id="edit_profile_placeholder"></div>
+                           <div id="gigya_elements" class="box">
 
+                               <!-- MAIN IMAGE -->
+                               <figure class="avatar">
+                                   <img class="main-pic site-logo" src="img/logos/loading.png" alt="{{Title}}"onerror="showErrorLogo(this)" />
+                               </figure>
+
+                               <br />
+                               <br />
+                               <br />
+                               <p class="site-description subtitle has-text-grey has-text-centered">Edit your personal details:</b></p>
+                               <hr class="login-hr" />
+
+                               <!-- EDIT PROFILE Placeholder -->
+                               <div class="gigya-placeholder" id="edit_profile_placeholder"></div>
+                          </div>
                         </section>
                     </div>
                 </div>
@@ -159,6 +84,7 @@
         </div>
 
         <!-- Gigya Script, Gigya RaaS Functions & Framework files  -->
+        <script type="text/javascript" lang="javascript" src="https://cdn.jsdelivr.net/npm/@webcomponents/html-imports@1.2.6/html-imports.min.js"></script>
         <script type="text/javascript" lang="javascript" src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
         <script type="text/javascript" lang="javascript" src="https://cdns.gigya.com/js/gigya.js?apikey=3_P6eTVo5EpI6zoB2c1ZgblyCrmx8OMOlrA932HVKEhhHCHwTdUJbBBEpAocpkb_nM"></script>
         <script type="text/javascript" lang="javascript" src="js/gigya-raas.js"></script>

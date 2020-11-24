@@ -91,9 +91,6 @@ function showLoggedHTML(user) {
  */
 function showUnloggedHTML() {
 
-    /* Hide Registration Screenset */
-    hideScreenset('edit_profile_placeholder');
-
     /* Switch Menu settings */
     const notLoggedElements = queryAll('.not-logged');
     for (const notLoggedElement of notLoggedElements) {
@@ -102,16 +99,6 @@ function showUnloggedHTML() {
     const loggedElements = queryAll('.logged');
     for (const loggedElement of loggedElements) {
         loggedElement.classList.add('hidden');
-    }
-}
-
-
-function displayTemplate(tmpl, data) {
-    console.log('display %o with data %o', tmpl, data);
-    if (templates[tmpl] !== undefined) {
-        var template = templates[tmpl];
-        var html = template(data);
-        query('.sample_content').innerHTML(html);
     }
 }
 
@@ -180,7 +167,7 @@ function loadConfigurationFromFile() {
             console.table(out);
             // debugger;
             window.config = out;
-            setUI(window.config);
+            setUI();
 
         }).catch((err) => { return console.error(err); });
 }
@@ -209,10 +196,19 @@ function showOrHighlightLoginScreen() {
  * Set all UI conponents using the configuration object and the state of the user
  * @param {object} config Configuration object
  */
-function setUI(config) {
+function setUI() {
+    console.log('Setting UI...');
+    const config = window.config;
+
+    // Adding Nabvar
+    var link = document.querySelector('link[rel="import"]');
+    // Clone the <template> in the import.
+    var template = link.import.querySelector('template');
+    var clone = document.importNode(template.content, true);
+    document.querySelector('#main-navbar .container').appendChild(clone);
 
     /* CHANGE SITE LOGO / MENU LOGO */
-    var srcMenuPic = 'img/logos/' + window.config.menu_pic;
+    var srcMenuPic = 'img/logos/' + config.menu_pic;
     const srcMenuPicElements = queryAll('.site-logo');
     for (const srcMenuPicElement of srcMenuPicElements) {
         srcMenuPicElement.setAttribute('src', srcMenuPic);
@@ -222,22 +218,22 @@ function setUI(config) {
     const siteTitles = queryAll('.site-title');
     const siteDescriptions = queryAll('.site-description');
     for (const siteTitle of siteTitles) {
-        siteTitle.innerText = siteTitle.innerText.replaceAll('{{Title}}', window.config.site_title);
+        siteTitle.innerText = siteTitle.innerText.replaceAll('{{Title}}', config.site_title);
     }
     for (const siteDescription of siteDescriptions) {
-        siteDescription.innerText = siteDescription.innerText.replaceAll('{{Description}}', window.config.site_description);
+        siteDescription.innerText = siteDescription.innerText.replaceAll('{{Description}}', config.site_description);
     }
 
     /* CHANGE PAGE PROPERTIES */
-    document.title = window.config.site_title;
-    query('link[rel*="icon"]').href = window.config.menu_pic;
+    document.title = config.site_title;
+    query('link[rel*="icon"]').href = config.menu_pic;
 
 
     /* SET MAIN LINK */
-    query('.navbar-item').href = window.config.main_url;
+    query('.navbar-item').href = config.main_url;
 
     /* SET BACKGROUND LINK COLOR HOVER */
-    var css = `.navbar .navbar-brand .navbar-item:hover {background: ${window.config.menu_bg_color_hover} !important;}`;
+    var css = `.navbar .navbar-brand .navbar-item:hover {background: ${config.menu_bg_color_hover} !important;}`;
     var style = document.createElement('style');
 
     if (style.styleSheet) {
@@ -293,7 +289,18 @@ function prettyDate(time) {
     return prettifiedDate;
 }
 
+function gotoUnloggedPage() {
 
+    // Check if we are in edit page. If yes, go to home page. If not, present login window again.
+    const editPlaceholder = query('#edit_profile_placeholder');
+    if (editPlaceholder) {
+        gotoHome();
+    } else {
+        showUnloggedHTML();
+        loginWithRaaS('not_logged_placeholder');
+    }
+
+}
 function gotoHome() {
     window.location.href = window.config.main_url;
 }
