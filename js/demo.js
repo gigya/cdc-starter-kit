@@ -178,7 +178,7 @@ function loadConfigurationFromFile() {
 
             // debugger;
             window.config = out;
-            setUI();
+            setUI(out);
 
         }).catch((err) => { return console.error(err); });
 }
@@ -207,9 +207,9 @@ function showOrHighlightLoginScreen() {
  * Set all UI conponents using the configuration object and the state of the user
  * @param {object} config Configuration object
  */
-function setUI() {
+function setUI(config) {
     console.log('Setting UI...');
-    const config = window.config;
+//    const config = window.config;
 
     // Adding Nabvar
     var link = document.querySelector('link[rel="import"]');
