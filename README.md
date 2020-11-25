@@ -17,7 +17,8 @@ The project includes a demo website with the most common user flows, like regist
 Follow the [Installation Guide](docs/install.md) to have this demo running in less than 10 minutes.
 
 Can't wait? Check out our demo site!
-* [Gigya](https://juan.gigya-cs.com/gigya-starter-kit)
+
+* [Demo Site](https://juan.gigya-cs.com/gigya-starter-kit/)
 
 ## Included Flows
 
