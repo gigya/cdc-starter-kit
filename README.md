@@ -89,18 +89,6 @@ just that we'll ensure compatibility with the ones mentioned above.*
 
 If you find yourself running into issues during installation or running the web application, please send a email to any of the contributors. We would be happy to discuss how they can be solved.
 
-## Contributors
-
-- [romain.gorrias@sap.com](mailto:romain.gorrias@sap.com)
-- [alex.lepape@sap.com](mailto:alex.lepape@sap.com)
-- [juan.andres.moreno@sap.com](mailto:juan.andres.moreno@sap.com)
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
-
-## Supporters
-
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.sap.com/index.html" target="_blank"><img src="docs/img/logos/sap4.png" width="100"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://www.sap.com/acquired-brands/what-is-gigya.html" target="_blank"><img src="docs/img/logos/gigya2.png" width="100"></a>
 
 ## License
 
