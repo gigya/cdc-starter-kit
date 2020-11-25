@@ -84,6 +84,7 @@ function registerWithRaaS(containerID) {
     gigya.accounts.showScreenSet({
         screenSet:'Default-RegistrationLogin',
         startScreen:'gigya-register-screen',
+        lang: window.config.lang,
         containerID, // <-- if we omit this property the screen it's shown in a pop-up
 
         // Some sample events..
@@ -112,6 +113,7 @@ function loginWithRaaS(containerID) {
     gigya.accounts.showScreenSet({
         screenSet:'Default-RegistrationLogin',
         startScreen:'gigya-login-screen',
+        lang: window.config.lang,
         containerID
     });
 }
@@ -128,6 +130,7 @@ function editProfileWithRaaS(containerID) {
     gigya.accounts.showScreenSet({
         screenSet:'Default-ProfileUpdate',
         startScreen:'gigya-update-profile-screen',
+        lang: window.config.lang,
         containerID,
         onAfterSubmit
     });
@@ -143,6 +146,7 @@ function liteRegisterWithRaaS(containerID) {
     gigya.accounts.showScreenSet({
         screenSet:'Default-LiteRegistration',
         startScreen: 'gigya-subscribe-with-email-screen',
+        lang: window.config.lang,
         containerID
     });
 }
@@ -156,6 +160,7 @@ function changePasswordWithRaaS(containerID) {
     gigya.accounts.showScreenSet({
         screenSet:'Default-ProfileUpdate',
         startScreen:'gigya-change-password-screen',
+        lang: window.config.lang,
         containerID
     });
 }

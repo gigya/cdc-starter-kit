@@ -156,6 +156,12 @@ function redirectIfLogged(user) {
     }
 }
 
+
+function capitalize(s) {
+    if (typeof s !== 'string') { return ''; }
+    return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
 /**
  * Loads the configuration file into the window object to be used later on to customize the UI
  */
@@ -165,6 +171,11 @@ function loadConfigurationFromFile() {
         .then((out) => {
             console.log('Config file: ');
             console.table(out);
+
+            // Set language name from language code
+            let languageNames = new Intl.DisplayNames([ out.lang ], { type: 'language' });
+            out.langName = capitalize(languageNames.of(out.lang));
+
             // debugger;
             window.config = out;
             setUI();
@@ -231,6 +242,20 @@ function setUI() {
 
     /* SET MAIN LINK */
     query('.navbar-item').href = config.main_url;
+
+    /* SET CORRECT FLAG IN FUNCTION OF LANGUAGE */
+    queryAll('.flag-container').forEach((item, i) => {
+        item.setAttribute('aria-label', window.config.langName);
+    });
+    queryAll('.flag-icon').forEach((item, i) => {
+
+        // Fix english flag.
+        let lang = window.config.lang;
+        if (lang === 'en') {
+            lang = 'gb';
+        }
+        item.classList.add('flag-icon-' + lang);
+    });
 
     /* SET BACKGROUND LINK COLOR HOVER */
     var css = `.navbar .navbar-brand .navbar-item:hover {background: ${config.menu_bg_color_hover} !important;}`;
