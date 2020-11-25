@@ -16,10 +16,8 @@ The project includes a demo website with the most common user flows, like regist
 
 Follow the [Installation Guide](docs/install.md) to have this demo running in less than 10 minutes.
 
-Can't wait? Check out our demo sites!
-* [SAP](https://juan.gigya-cs.com/gigya/gigya-starter-kit-sap)
-* [Gigya](https://juan.gigya-cs.com/gigya/gigya-starter-kit-gigya)
-* [Sample Red](https://juan.gigya-cs.com/gigya/gigya-starter-kit-sample-red)
+Can't wait? Check out our demo site!
+* [Gigya](https://juan.gigya-cs.com/gigya-starter-kit)
 
 ## Included Flows
 
