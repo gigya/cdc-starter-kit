@@ -50,28 +50,6 @@
  */
 
 /** *****************************************************/
-//                   MAIN FUNCTION
-/** *****************************************************/
-/**
- * This function will be triggered once Gigya is fully loaded and ready to be used.
- * See more in: https://developers.gigya.com/display/GD/onGigyaServiceReady+Template
- */
-function onGigyaServiceReady() {
-
-    /* Adding the global onlogin event */
-    gigya.socialize.addEventHandlers({
-        onLogin
-    });
-
-    /* Check if the user was previously logged in */
-    if (typeof gigya === 'undefined') {
-        alert('Gigya is not loaded on this page :(');
-    } else {
-        gigya.accounts.getAccountInfo({ include:'emails, profile', callback: redirectIfLogged });
-    }
-}
-
-/** *****************************************************/
 //             GIGYA SCREENSET FUNCTIONS
 /** *****************************************************/
 /**
@@ -132,7 +110,7 @@ function editProfileWithRaaS(containerID) {
         startScreen:'gigya-update-profile-screen',
         lang: window.config.lang,
         containerID,
-        onAfterSubmit
+        onAfterSubmit: gotoHome
     });
 }
 
@@ -215,29 +193,7 @@ function onBeforeSubmit(event) {
  * @param  {object} event Form Event object
  */
 function onSubmit(event) {
-    // gigya.accounts.getAccountInfo({include:'emails, profile',callback: redirectIfLogged});
-    //
-    // // Check if the change was the email, if yes, send a verification email with the unverified email
-    // if (window.currentUser.profile.email !== event.profile.email) {
-    //
-    //     gigya.accounts.initRegistration({callback: function (e) {
-    //         var verificationParams = {
-    //             regToken: e.regToken,
-    //             email: event.profile.email,
-    //             callback: function (e) {console.log(e);}
-    //         };
-    //         gigya.accounts.resendVerificationCode(verificationParams);
-    //     }});
-    // }
 }
-
-
-
-
-function onAfterSubmit(event) {
-    gotoHome();
-}
-
 
 /** **************************************************/
 //       GIGYA GLOBAL EVENT FUNCTIONS

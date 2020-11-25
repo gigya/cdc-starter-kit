@@ -18,16 +18,33 @@ const queryAll = document.querySelectorAll.bind(document);
 var sessionStatus = 'loggedOut'; // possible values: loggedOut, loggedIn
 
 
-/** *****************************************************/
-//              MAIN FRAMEWORK FUNCTION
-/** *****************************************************/
-window.addEventListener('load', (event) => {
 
-    console.log('DOM fully loaded and parsed');
+/** *****************************************************/
+//                   MAIN FUNCTION
+/** *****************************************************/
+/**
+ * This function will be triggered once Gigya is fully loaded and ready to be used.
+ * See more in: https://developers.gigya.com/display/GD/onGigyaServiceReady+Template
+ */
+function onGigyaServiceReady() {
+    //
+    // /* Adding the global onlogin event */
+    // gigya.socialize.addEventHandlers({
+    //     onLogin
+    // });
 
-    /* Load Configuration */
-    loadConfigurationFromFile();
-});
+
+    /* Check if the user was previously logged in */
+    if (typeof gigya === 'undefined') {
+        alert('Gigya is not loaded on this page :(');
+    } else {
+
+        /* Load Configuration */
+        loadConfigurationFromFile();
+    }
+}
+
+
 
 /** *****************************************************/
 //                   DEMO CORE FUNCTIONS
@@ -133,15 +150,15 @@ function redirectIfLogged(user) {
 
     /* If not logged, show registration form */
     if (!user.UID) {
-        sessionStatus = 'loggedIn';
+        sessionStatus = 'loggedOut';
+
         console.log('You are not logged in.');
 
-        showUnloggedHTML();
-        loginWithRaaS('not_logged_placeholder');
-        // registerWithRaaS('not_logged_placeholder');
+        /* In function of the page, show or show login page, or redirect to home */
+        gotoUnloggedPage();
 
     } else {
-        sessionStatus = 'loggedOut';
+        sessionStatus = 'loggedIn';
 
         /* If logged, show user HTML */
         showLoggedHTML(user);
@@ -169,18 +186,29 @@ function loadConfigurationFromFile() {
     fetch('./config/config.json')
         .then((res) => { return res.json(); })
         .then((out) => {
-            console.log('Config file: ');
-            console.table(out);
 
-            // Set language name from language code
-            let languageNames = new Intl.DisplayNames([ out.lang ], { type: 'language' });
-            out.langName = capitalize(languageNames.of(out.lang));
-
-            // debugger;
-            window.config = out;
-            setUI(out);
+            // Start demo page
+            startDemo(out);
 
         }).catch((err) => { return console.error(err); });
+}
+
+/**
+ * [startDemo description]
+ * @param  {[type]} out [description]
+ */
+function startDemo(out) {
+
+    // Store config in window global (:-s)
+    console.log('Config file: ');
+    console.table(out);
+    window.config = out;
+
+    // Start UI;
+    setUI(out);
+
+    // Check if user is logged in or not
+    gigya.accounts.getAccountInfo({ include:'emails, profile', callback: redirectIfLogged });
 }
 
 function showOrHighlightLoginScreen() {
