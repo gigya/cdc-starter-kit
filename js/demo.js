@@ -355,5 +355,5 @@ function gotoUnloggedPage() {
 
 }
 function gotoHome() {
-    window.location.href = window.config.main_url;
+    window.location.href = window.config.main_url.replace('http://', 'https://');
 }
