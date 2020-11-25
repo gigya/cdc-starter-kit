@@ -94,6 +94,13 @@ button {
   top: 2px;
   position: relative;
   color: #999;
+  margin-right: 20px;
+}
+.navbar .navbar-brand img {
+  width: auto;
+}
+.navbar .navbar-menu {
+  background: white!important;
 }
 .navbar ion-icon {
   font-size: 24px;
