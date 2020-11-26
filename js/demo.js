@@ -237,7 +237,7 @@ function showOrHighlightLoginScreen() {
  */
 function setUI(config) {
     console.log('Setting UI...');
-//    const config = window.config;
+    //    const config = window.config;
 
     // Adding Nabvar
     var link = document.querySelector('link[rel="import"]');
@@ -272,8 +272,14 @@ function setUI(config) {
     query('.navbar-item').href = config.main_url;
 
     /* SET CORRECT FLAG IN FUNCTION OF LANGUAGE */
+
+
+    // Set language name from language code
+    let languageNames = new Intl.DisplayNames([ config.lang ], { type: 'language' });
+    const langName = capitalize(languageNames.of(config.lang));
+
     queryAll('.flag-container').forEach((item, i) => {
-        item.setAttribute('aria-label', window.config.langName);
+        item.setAttribute('aria-label', langName);
     });
     queryAll('.flag-icon').forEach((item, i) => {
 
