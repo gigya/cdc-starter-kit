@@ -78,13 +78,40 @@
     }
 
     /* Language */
+    /* Flag Dropdown */
     .flag-icon {
         border: 2px solid #555!important;
         background-size: cover;
         border-radius: 50px;
         width: 1.5em;
         height: 1.5em;
+        text-indent: 20px;
     }
+
+
+
+    #language_dropdown {
+        .dropdown-menu {
+            max-height: 400px;
+            overflow: auto;
+            border-radius: 13px;
+            box-shadow: 0px 5px 16px rgba(0,0,0,0.05);
+            left: -245px;
+            width: 10px;
+            // display: block;
+            top: 64px;
+
+            .dropdown-item {
+
+               &:hover {
+                   .flag-icon {font-weight: bold;}
+
+               }
+            }
+        }
+    }
+
+
 }
 
 /* CONTAINER */

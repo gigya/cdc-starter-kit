@@ -202,6 +202,12 @@ function startDemo(out) {
     // Store config in window global (:-s)
     console.log('Config file: ');
     console.table(out);
+
+    // Get proper language
+    const storedLanguage = getLanguage();
+    if (storedLanguage !== null) {
+        out.lang = storedLanguage;
+    }
     window.config = out;
 
     // Start UI;
@@ -278,18 +284,34 @@ function setUI(config) {
     let languageNames = new Intl.DisplayNames([ config.lang ], { type: 'language' });
     const langName = capitalize(languageNames.of(config.lang));
 
-    queryAll('.flag-container').forEach((item, i) => {
-        item.setAttribute('aria-label', langName);
-    });
-    queryAll('.flag-icon').forEach((item, i) => {
+    fetch('./config/languages.json')
+        .then((res) => { return res.json(); })
+        .then((out) => {
 
-        // Fix english flag.
-        let lang = window.config.lang;
-        if (lang === 'en') {
-            lang = 'gb';
-        }
-        item.classList.add('flag-icon-' + lang);
-    });
+            // Start demo page
+            console.log(out);
+            // debugger;
+            const flagsContainer = query('#language_dropdown .dropdown-content');
+            for (var i = 0; i < out.languages.length; i++) {
+                const oneLanguage = out.languages[i];
+                const html = createEntryFor(oneLanguage);
+                flagsContainer.appendChild(html);
+            }
+
+            // Tooltip
+            queryAll('.flag-container').forEach((item, i) => {
+                item.setAttribute('aria-label', langName);
+            });
+
+            // Selected Flag
+            const langSelectedFlag = getFlagIconFor(out.languages, config.lang);
+            queryAll('.flag-container >a>.flag-icon').forEach((item) => {
+                // Fix english flag.
+                item.classList.add('flag-icon-' + langSelectedFlag);
+            });
+
+        }).catch((err) => { return console.error(err); });
+
 
     /* SET BACKGROUND LINK COLOR HOVER */
     var css = `.navbar .navbar-brand .navbar-item:hover {background: ${config.menu_bg_color_hover} !important;}`;
@@ -306,6 +328,59 @@ function setUI(config) {
 
 }
 
+function getFlagIconFor(languages, language) {
+    for (var i = 0; i < languages.length; i++) {
+        const oneLanguage = languages[i];
+        if(oneLanguage.key === language){
+            return oneLanguage.flag;
+        }
+    }
+    return '';
+}
+function changeLanguage(language) {
+
+    // set the language in local storage
+    localStorage.setItem('language', language);
+
+    // Refresh the page
+    gotoHome();
+}
+
+function getLanguage() {
+    // get the language from local storage
+    return localStorage.getItem('language');
+}
+
+function createEntryFor(language) {
+
+    // Add a
+    var aObj = document.createElement('a');
+
+    // Add span
+    var spanObj = document.createElement('span');
+
+    // Set attribute for img, such as id
+    spanObj.setAttribute('class', 'flag-icon flag-icon-' + language.flag);
+    spanObj.innerText = language.label;
+
+    // Create element and return
+    aObj.onclick = function() { changeLanguage(language.key); };
+    aObj.setAttribute('class', 'dropdown-item');
+    aObj.href = '#';
+    aObj.appendChild(spanObj);
+    return aObj;
+}
+
+function toggleLanguageDropDown() {
+    const langDropdown = query('#language_dropdown');
+    const isActive = langDropdown.classList.contains('is-active');
+    // debugger;
+    if (isActive) {
+        langDropdown.classList.remove('is-active');
+    } else {
+        langDropdown.classList.add('is-active');
+    }
+}
 /**
  * [showErrorLogo description]
  * @param  {object} element element from DOM

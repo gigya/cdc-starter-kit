@@ -2,203 +2,253 @@
     "languages": [
         {
             "label": "Arabic",
-            "key": "ar"
+            "key": "ar",
+            "flag": "ar"
         },
         {
             "label": "Bulgarian",
-            "key": "bg"
+            "key": "bg",
+            "flag": "bg"
         },
         {
             "label": "Catalan",
-            "key": "ca"
+            "key": "ca",
+            "flag": "es-ca"
         },
         {
             "label": "Chinese (Hong Kong)",
-            "key": "zh-hk"
+            "key": "zh-hk",
+            "flag": "zh"
         },
         {
             "label": "Chinese (Mandarin)",
-            "key": "zh-cn"
+            "key": "zh-cn",
+            "flag": "zh"
         },
         {
             "label": "Chinese (Taiwan)",
-            "key": "zh-tw"
+            "key": "zh-tw",
+            "flag": "zh"
         },
         {
             "label": "Croatian",
-            "key": "hr"
+            "key": "hr",
+            "flag": "hr"
         },
         {
             "label": "Czech",
-            "key": "cs"
+            "key": "cs",
+            "flag": "cs"
         },
         {
             "label": "Danish",
-            "key": "da"
+            "key": "da",
+            "flag": "da"
         },
         {
             "label": "Dutch",
-            "key": "nl"
+            "key": "nl",
+            "flag": "nl"
         },
         {
             "label": "Dutch Informal",
-            "key": "nl-inf"
+            "key": "nl-inf",
+            "flag": "nl"
         },
         {
             "label": "English (default)",
-            "key": "en"
+            "key": "en",
+            "flag": "gb"
         },
         {
             "label": "Estonian",
-            "key": "et-ee"
+            "key": "et-ee",
+            "flag": "et"
         },
         {
             "label": "Finnish",
-            "key": "fi"
+            "key": "fi",
+            "flag": "fi"
         },
         {
             "label": "French",
-            "key": "fr"
+            "key": "fr",
+            "flag": "fr"
         },
         {
             "label": "French Informal",
-            "key": "fr-inf"
+            "key": "fr-inf",
+            "flag": "fr"
         },
         {
             "label": "German",
-            "key": "de"
+            "key": "de",
+            "flag": "de"
         },
         {
             "label": "German Informal",
-            "key": "de-inf"
+            "key": "de-inf",
+            "flag": "de"
         },
         {
             "label": "Greek",
-            "key": "el"
+            "key": "el",
+            "flag": "el"
         },
         {
             "label": "Hebrew",
-            "key": "he"
+            "key": "he",
+            "flag": "he"
         },
         {
             "label": "Hindi (*SMS TFA Only)",
-            "key": "hi"
+            "key": "hi",
+            "flag": "hi"
         },
         {
             "label": "Hungarian",
-            "key": "hu"
+            "key": "hu",
+            "flag": "hu"
         },
         {
             "label": "Indonesian (Bahasa)",
-            "key": "id"
+            "key": "id",
+            "flag": "id"
         },
         {
             "label": "Italian",
-            "key": "it"
+            "key": "it",
+            "flag": "it"
         },
         {
             "label": "Japanese",
-            "key": "ja"
+            "key": "ja",
+            "flag": "ja"
         },
         {
             "label": "Kannada (*SMS TFA Only)",
-            "key": "kn"
+            "key": "kn",
+            "flag": "kn"
         },
         {
             "label": "Korean",
-            "key": "ko"
+            "key": "ko",
+            "flag": "ko"
         },
         {
             "label": "Latvian",
-            "key": "lv-lv"
+            "key": "lv-lv",
+            "flag": "lv"
         },
         {
             "label": "Lithuanian",
-            "key": "lt-lt"
+            "key": "lt-lt",
+            "flag": "lt"
         },
         {
             "label": "Malay",
-            "key": "ms"
+            "key": "ms",
+            "flag": "ms"
         },
         {
             "label": "Marathi (*SMS TFA Only)",
-            "key": "mr"
+            "key": "mr",
+            "flag": "mr"
         },
         {
             "label": "Norwegian",
-            "key": "no"
+            "key": "no",
+            "flag": "no"
         },
         {
             "label": "Persian (Farsi)",
-            "key": "fa"
+            "key": "fa",
+            "flag": "fa"
         },
         {
             "label": "Polish",
-            "key": "pl"
+            "key": "pl",
+            "flag": "pl"
         },
         {
             "label": "Portuguese",
-            "key": "pt"
+            "key": "pt",
+            "flag": "pt"
         },
         {
             "label": "Portuguese (Brazil)",
-            "key": "pt-br"
+            "key": "pt-br",
+            "flag": "br"
         },
         {
             "label": "Romanian",
-            "key": "ro"
+            "key": "ro",
+            "flag": "ro"
         },
         {
             "label": "Russian",
-            "key": "ru"
+            "key": "ru",
+            "flag": "ru"
         },
         {
             "label": "Serbian (Cyrillic)",
-            "key": "sr"
+            "key": "sr",
+            "flag": "sr"
         },
         {
             "label": "Slovak",
-            "key": "sk"
+            "key": "sk",
+            "flag": "sk"
         },
         {
             "label": "Slovenian",
-            "key": "sl"
+            "key": "sl",
+            "flag": "sl"
         },
         {
             "label": "Spanish",
-            "key": "es"
+            "key": "es",
+            "flag": "es"
         },
         {
             "label": "Spanish (Lat-Am)",
-            "key": "es-mx"
+            "key": "es-mx",
+            "flag": "mx"
         },
         {
             "label": "Spanish Informal",
-            "key": "es-inf"
+            "key": "es-inf",
+            "flag": "es"
         },
         {
             "label": "Swedish",
-            "key": "sv"
+            "key": "sv",
+            "flag": "sv"
         },
         {
             "label": "Tagalog",
-            "key": "tl"
+            "key": "tl",
+            "flag": "tl"
         },
         {
             "label": "Thai",
-            "key": "th"
+            "key": "th",
+            "flag": "th"
         },
         {
             "label": "Turkish",
-            "key": "tr"
+            "key": "tr",
+            "flag": "tr"
         },
         {
             "label": "Ukrainian",
-            "key": "uk"
+            "key": "uk",
+            "flag": "uk"
         },
         {
             "label": "Vietnamese",
-            "key": "vi"
+            "key": "vi",
+            "flag": "vi"
         }
     ]
 }
