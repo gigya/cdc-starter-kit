@@ -18,17 +18,17 @@
         {
             "label": "Chinese (Hong Kong)",
             "key": "zh-hk",
-            "flag": "zh"
+            "flag": "cn"
         },
         {
             "label": "Chinese (Mandarin)",
             "key": "zh-cn",
-            "flag": "zh"
+            "flag": "cn"
         },
         {
             "label": "Chinese (Taiwan)",
             "key": "zh-tw",
-            "flag": "zh"
+            "flag": "cn"
         },
         {
             "label": "Croatian",
@@ -38,12 +38,12 @@
         {
             "label": "Czech",
             "key": "cs",
-            "flag": "cs"
+            "flag": "cz"
         },
         {
             "label": "Danish",
             "key": "da",
-            "flag": "da"
+            "flag": "dk"
         },
         {
             "label": "Dutch",

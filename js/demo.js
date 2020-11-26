@@ -291,12 +291,14 @@ function setUI(config) {
             // Start demo page
             console.log(out);
             // debugger;
-            const flagsContainer = query('#language_dropdown .dropdown-content');
-            for (var i = 0; i < out.languages.length; i++) {
-                const oneLanguage = out.languages[i];
-                const html = createEntryFor(oneLanguage);
-                flagsContainer.appendChild(html);
-            }
+            queryAll('.language-dropdown .dropdown-content').forEach((flagsContainer, i) => {
+                for (var i = 0; i < out.languages.length; i++) {
+                    const oneLanguage = out.languages[i];
+                    const html = createEntryFor(oneLanguage);
+                    flagsContainer.appendChild(html);
+                }
+            });
+
 
             // Tooltip
             queryAll('.flag-container').forEach((item, i) => {
@@ -343,7 +345,7 @@ function changeLanguage(language) {
     localStorage.setItem('language', language);
 
     // Refresh the page
-    gotoHome();
+    location.href = location.href;
 }
 
 function getLanguage() {
@@ -372,14 +374,15 @@ function createEntryFor(language) {
 }
 
 function toggleLanguageDropDown() {
-    const langDropdown = query('#language_dropdown');
-    const isActive = langDropdown.classList.contains('is-active');
-    // debugger;
-    if (isActive) {
-        langDropdown.classList.remove('is-active');
-    } else {
-        langDropdown.classList.add('is-active');
-    }
+    queryAll('.language-dropdown').forEach((langDropdown, i) => {
+        const isActive = langDropdown.classList.contains('is-active');
+        // debugger;
+        if (isActive) {
+            langDropdown.classList.remove('is-active');
+        } else {
+            langDropdown.classList.add('is-active');
+        }
+    });
 }
 /**
  * [showErrorLogo description]

@@ -85,7 +85,7 @@
 
 
             <!--Basic Dropdown For Languages-->
-                <div id="language_dropdown" class="dropdown is-spaced is-accent dropdown-trigger">
+            <div class="language-dropdown dropdown is-spaced is-accent dropdown-trigger">
                     <div class="flag-container navbar-item hint--bottom-left hint--bounce hint--successs hint--mediumm hint--rounded " aria-label="English">
                         <a href="javascript:toggleLanguageDropDown()">
                             <span class="flag-icon"></span>
@@ -123,11 +123,18 @@
                 </a>
             </div>
             <!-- Language Flags -->
-            <div class="flag-container navbar-item hint--bottom-left hint--bounce hint--successs hint--mediumm hint--rounded " aria-label="English">
-                    <a href="javascript:toggleLanguageDropDown()">
-                        <span class="flag-icon"></span>
-                    </a>
-            </div>
+            <!--Basic Dropdown For Languages-->
+                <div class="language-dropdown dropdown is-spaced is-accent dropdown-trigger">
+                    <div class="flag-container navbar-item hint--bottom-left hint--bounce hint--successs hint--mediumm hint--rounded " aria-label="English">
+                        <a href="javascript:toggleLanguageDropDown()">
+                            <span class="flag-icon"></span>
+                        </a>
+                    </div>
+                    <div class="dropdown-menu" role="menu">
+                        <div class="dropdown-content">
+                        </div>
+                    </div>
+                </div>
         </div>
     </div>
 </template>

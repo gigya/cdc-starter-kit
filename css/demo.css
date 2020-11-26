@@ -141,7 +141,7 @@ button {
   height: 1.5em;
   text-indent: 20px;
 }
-.navbar #language_dropdown .dropdown-menu {
+.navbar .language-dropdown .dropdown-menu {
   max-height: 400px;
   overflow: auto;
   border-radius: 13px;
@@ -150,7 +150,7 @@ button {
   width: 10px;
   top: 64px;
 }
-.navbar #language_dropdown .dropdown-menu .dropdown-item:hover .flag-icon {
+.navbar .language-dropdown .dropdown-menu .dropdown-item:hover .flag-icon {
   font-weight: bold;
 }
 /* CONTAINER */
