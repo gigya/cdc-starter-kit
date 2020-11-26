@@ -1,0 +1,204 @@
+{
+    "languages": [
+        {
+            "label": "Arabic",
+            "key": "ar"
+        },
+        {
+            "label": "Bulgarian",
+            "key": "bg"
+        },
+        {
+            "label": "Catalan",
+            "key": "ca"
+        },
+        {
+            "label": "Chinese (Hong Kong)",
+            "key": "zh-hk"
+        },
+        {
+            "label": "Chinese (Mandarin)",
+            "key": "zh-cn"
+        },
+        {
+            "label": "Chinese (Taiwan)",
+            "key": "zh-tw"
+        },
+        {
+            "label": "Croatian",
+            "key": "hr"
+        },
+        {
+            "label": "Czech",
+            "key": "cs"
+        },
+        {
+            "label": "Danish",
+            "key": "da"
+        },
+        {
+            "label": "Dutch",
+            "key": "nl"
+        },
+        {
+            "label": "Dutch Informal",
+            "key": "nl-inf"
+        },
+        {
+            "label": "English (default)",
+            "key": "en"
+        },
+        {
+            "label": "Estonian",
+            "key": "et-ee"
+        },
+        {
+            "label": "Finnish",
+            "key": "fi"
+        },
+        {
+            "label": "French",
+            "key": "fr"
+        },
+        {
+            "label": "French Informal",
+            "key": "fr-inf"
+        },
+        {
+            "label": "German",
+            "key": "de"
+        },
+        {
+            "label": "German Informal",
+            "key": "de-inf"
+        },
+        {
+            "label": "Greek",
+            "key": "el"
+        },
+        {
+            "label": "Hebrew",
+            "key": "he"
+        },
+        {
+            "label": "Hindi (*SMS TFA Only)",
+            "key": "hi"
+        },
+        {
+            "label": "Hungarian",
+            "key": "hu"
+        },
+        {
+            "label": "Indonesian (Bahasa)",
+            "key": "id"
+        },
+        {
+            "label": "Italian",
+            "key": "it"
+        },
+        {
+            "label": "Japanese",
+            "key": "ja"
+        },
+        {
+            "label": "Kannada (*SMS TFA Only)",
+            "key": "kn"
+        },
+        {
+            "label": "Korean",
+            "key": "ko"
+        },
+        {
+            "label": "Latvian",
+            "key": "lv-lv"
+        },
+        {
+            "label": "Lithuanian",
+            "key": "lt-lt"
+        },
+        {
+            "label": "Malay",
+            "key": "ms"
+        },
+        {
+            "label": "Marathi (*SMS TFA Only)",
+            "key": "mr"
+        },
+        {
+            "label": "Norwegian",
+            "key": "no"
+        },
+        {
+            "label": "Persian (Farsi)",
+            "key": "fa"
+        },
+        {
+            "label": "Polish",
+            "key": "pl"
+        },
+        {
+            "label": "Portuguese",
+            "key": "pt"
+        },
+        {
+            "label": "Portuguese (Brazil)",
+            "key": "pt-br"
+        },
+        {
+            "label": "Romanian",
+            "key": "ro"
+        },
+        {
+            "label": "Russian",
+            "key": "ru"
+        },
+        {
+            "label": "Serbian (Cyrillic)",
+            "key": "sr"
+        },
+        {
+            "label": "Slovak",
+            "key": "sk"
+        },
+        {
+            "label": "Slovenian",
+            "key": "sl"
+        },
+        {
+            "label": "Spanish",
+            "key": "es"
+        },
+        {
+            "label": "Spanish (Lat-Am)",
+            "key": "es-mx"
+        },
+        {
+            "label": "Spanish Informal",
+            "key": "es-inf"
+        },
+        {
+            "label": "Swedish",
+            "key": "sv"
+        },
+        {
+            "label": "Tagalog",
+            "key": "tl"
+        },
+        {
+            "label": "Thai",
+            "key": "th"
+        },
+        {
+            "label": "Turkish",
+            "key": "tr"
+        },
+        {
+            "label": "Ukrainian",
+            "key": "uk"
+        },
+        {
+            "label": "Vietnamese",
+            "key": "vi"
+        }
+    ]
+}
