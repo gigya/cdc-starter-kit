@@ -3,7 +3,7 @@
         {
             "label": "Arabic",
             "key": "ar",
-            "flag": "ar"
+            "flag": "eg"
         },
         {
             "label": "Bulgarian",
@@ -93,17 +93,17 @@
         {
             "label": "Greek",
             "key": "el",
-            "flag": "el"
+            "flag": "gr"
         },
         {
             "label": "Hebrew",
             "key": "he",
-            "flag": "he"
+            "flag": "il"
         },
         {
             "label": "Hindi (*SMS TFA Only)",
             "key": "hi",
-            "flag": "hi"
+            "flag": "in"
         },
         {
             "label": "Hungarian",
@@ -123,7 +123,7 @@
         {
             "label": "Japanese",
             "key": "ja",
-            "flag": "ja"
+            "flag": "jp"
         },
         {
             "label": "Kannada (*SMS TFA Only)",
@@ -133,7 +133,7 @@
         {
             "label": "Korean",
             "key": "ko",
-            "flag": "ko"
+            "flag": "kr"
         },
         {
             "label": "Latvian",
@@ -163,7 +163,7 @@
         {
             "label": "Persian (Farsi)",
             "key": "fa",
-            "flag": "fa"
+            "flag": "ir"
         },
         {
             "label": "Polish",
@@ -243,7 +243,7 @@
         {
             "label": "Ukrainian",
             "key": "uk",
-            "flag": "uk"
+            "flag": "ua"
         },
         {
             "label": "Vietnamese",
