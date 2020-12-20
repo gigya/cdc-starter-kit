@@ -89,7 +89,7 @@ button {
   /* Flag Dropdown */
 }
 .navbar .navbar-brand {
-  border-bottom: 1px solid #e8e8e8;
+  height: auto;
 }
 .navbar .navbar-brand a {
   text-decoration: none;
