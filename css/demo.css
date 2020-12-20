@@ -83,10 +83,12 @@ button {
 /* NAVBAR */
 .navbar {
   background: white!important;
-  border-bottom: 1px solid #e8e8e8!important;
   /* Logged Image user */
   /* Language */
   /* Flag Dropdown */
+}
+.navbar .navbar-item:not(.is-icon):hover {
+  height: auto;
 }
 .navbar .navbar-brand {
   height: auto;

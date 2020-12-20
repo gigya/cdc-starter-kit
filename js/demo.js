@@ -317,7 +317,7 @@ function setUI(config) {
 
 
     /* SET BACKGORUND & BACKGROUND LINK COLOR HOVER FOR NAVBAR */
-    var css = `.navbar .navbar-brand .navbar-item:hover, .navbar .navbar-menu .navbar-item:hover {background: ${config.menu_bg_color_hover} !important;}`;
+    var css = `.navbar .navbar-brand .navbar-item:not(.is-icon):hover, .navbar .navbar-menu .navbar-item:not(.is-icon):hover {background: ${config.menu_bg_color_hover} !important; height:auto;}`;
     css += `.navbar .navbar-brand, .navbar .navbar-menu {background: ${config.menu_bg_color} !important;}`;
     var style = document.createElement('style');
 
