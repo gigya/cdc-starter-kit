@@ -8,6 +8,6 @@
     "menu_pic": "gigya.png",
     "main_url": "https://sites.gigya-starter-kit.local",
     "main_pic": "gigya.png",
-    "raas_prefix": "GEDI",
-    "lang": "pt"
+    "raas_prefix": "Default",
+    "lang": "en"
 }
