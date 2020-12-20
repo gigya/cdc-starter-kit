@@ -83,9 +83,13 @@ button {
 /* NAVBAR */
 .navbar {
   background: white!important;
+  border-bottom: 1px solid #e8e8e8!important;
   /* Logged Image user */
   /* Language */
   /* Flag Dropdown */
+}
+.navbar .navbar-brand {
+  border-bottom: 1px solid #e8e8e8;
 }
 .navbar .navbar-brand a {
   text-decoration: none;

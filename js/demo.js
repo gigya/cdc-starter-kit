@@ -316,9 +316,9 @@ function setUI(config) {
         }).catch((err) => { return console.error(err); });
 
 
-    /* SET BACKGROUND LINK COLOR HOVER */
-    var css = `.navbar .navbar-brand .navbar-item:hover {background: ${config.menu_bg_color_hover} !important;}`;
-    css += `.navbar .navbar-brand {background: ${config.menu_bg_color} !important;}`;
+    /* SET BACKGORUND & BACKGROUND LINK COLOR HOVER FOR NAVBAR */
+    var css = `.navbar .navbar-brand .navbar-item:hover, .navbar .navbar-menu .navbar-item:hover {background: ${config.menu_bg_color_hover} !important;}`;
+    css += `.navbar .navbar-brand, .navbar .navbar-menu {background: ${config.menu_bg_color} !important;}`;
     var style = document.createElement('style');
 
     if (style.styleSheet) {
