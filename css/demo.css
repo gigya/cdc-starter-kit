@@ -96,7 +96,8 @@ button {
 .navbar .navbar-brand a {
   text-decoration: none;
 }
-.navbar .navbar-brand .site-title {
+.navbar .navbar-brand .site-title,
+.navbar .navbar-brand .menu-description {
   margin-left: 25px;
   top: 2px;
   position: relative;

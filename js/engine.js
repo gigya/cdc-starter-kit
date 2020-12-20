@@ -17,35 +17,6 @@ const query = document.querySelector.bind(document);
 const queryAll = document.querySelectorAll.bind(document);
 var sessionStatus = 'loggedOut'; // possible values: loggedOut, loggedIn
 
-
-
-/** *****************************************************/
-//                   MAIN FUNCTION
-/** *****************************************************/
-/**
- * This function will be triggered once Gigya is fully loaded and ready to be used.
- * See more in: https://developers.gigya.com/display/GD/onGigyaServiceReady+Template
- */
-function onGigyaServiceReady() {
-    //
-    // /* Adding the global onlogin event */
-    // gigya.socialize.addEventHandlers({
-    //     onLogin
-    // });
-
-
-    /* Check if the user was previously logged in */
-    if (typeof gigya === 'undefined') {
-        alert('Gigya is not loaded on this page :(');
-    } else {
-
-        /* Load Configuration */
-        loadConfigurationFromFile();
-    }
-}
-
-
-
 /** *****************************************************/
 //                   DEMO CORE FUNCTIONS
 /** *****************************************************/
@@ -253,21 +224,25 @@ function setUI(config) {
     document.querySelector('#main-navbar .container').appendChild(clone);
 
     /* CHANGE SITE LOGO / MENU LOGO */
+    var srcMainPic = 'img/logos/' + config.main_pic;
     var srcMenuPic = 'img/logos/' + config.menu_pic;
-    const srcMenuPicElements = queryAll('.site-logo');
-    for (const srcMenuPicElement of srcMenuPicElements) {
-        srcMenuPicElement.setAttribute('src', srcMenuPic);
-    }
+    const srcMainPicElement = query('.main-pic');
+    srcMainPicElement.setAttribute('src', srcMainPic);
+    const srcMenuPicElement = query('.menu-pic');
+    srcMenuPicElement.setAttribute('src', srcMenuPic);
 
     /* CHANGE TITLE AND DESCRIPTION */
     const siteTitles = queryAll('.site-title');
     const siteDescriptions = queryAll('.site-description');
+    const menuDescription = query('.menu-description');
+
     for (const siteTitle of siteTitles) {
         siteTitle.innerText = siteTitle.innerText.replaceAll('{{Title}}', config.site_title);
     }
     for (const siteDescription of siteDescriptions) {
         siteDescription.innerText = siteDescription.innerText.replaceAll('{{Description}}', config.site_description);
     }
+    menuDescription.innerText = config.menu_description;
 
     /* CHANGE PAGE PROPERTIES */
     document.title = config.site_title;
@@ -316,9 +291,14 @@ function setUI(config) {
         }).catch((err) => { return console.error(err); });
 
 
-    /* SET BACKGORUND & BACKGROUND LINK COLOR HOVER FOR NAVBAR */
+    /* SET BACKGROUND & BACKGROUND LINK COLOR HOVER FOR NAVBAR */
     var css = `.navbar .navbar-brand .navbar-item:not(.is-icon):hover, .navbar .navbar-menu .navbar-item:not(.is-icon):hover {background: ${config.menu_bg_color_hover} !important; height:auto;}`;
     css += `.navbar .navbar-brand, .navbar .navbar-menu {background: ${config.menu_bg_color} !important;}`;
+
+    /* SET BACKGROUND & FONT COLORS FOR WEBSITE */
+    css += `body {background: ${config.background_color} !important;}`;
+    css += `body .title, body .subtitle {color: ${config.text_color} !important;}`;
+
     var style = document.createElement('style');
 
     if (style.styleSheet) {
@@ -412,6 +392,7 @@ function showSampleAlert() {
 function showLanguageAlert() {
     alert('Show the language of the screensets: [' + window.config.lang.toUpperCase() + ']');
 }
+
 // -- 3. Utils
 /**
  * Takes an ISO time and returns a string representing how long ago the date represents.

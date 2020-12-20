@@ -1,13 +1,14 @@
 {
     "site_title": "SAP Customer Data Cloud Starter Kit",
+    "menu_description": "CDC Starter Kit",
     "site_description": "Sample Site with basic Customer Data Cloud capabilities",
     "menu_bg_color": "white",
     "menu_bg_color_hover": "whitesmoke",
-    "menu_high_color": "#888",
-    "menu_text_color": "#fff",
-    "menu_pic": "gigya.png",
+    "text_color": "#7a7a7a",
+    "background_color": "#f4f4f4",
+    "menu_pic": "sap.png",
     "main_url": "https://sites.gigya-starter-kit.local",
-    "main_pic": "gigya.png",
+    "main_pic": "sap.png",
     "raas_prefix": "Default",
     "lang": "en"
 }
