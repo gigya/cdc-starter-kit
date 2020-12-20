@@ -292,8 +292,12 @@ function setUI(config) {
 
 
     /* SET BACKGROUND & BACKGROUND LINK COLOR HOVER FOR NAVBAR */
-    var css = `.navbar .navbar-brand .navbar-item:not(.is-icon):hover, .navbar .navbar-menu .navbar-item:not(.is-icon):hover {background: ${config.menu_bg_color_hover} !important; height:auto;}`;
+    var css = '';
+    css = `.navbar .navbar-brand .navbar-item:not(.is-icon):hover, .navbar .navbar-menu .navbar-item:not(.is-icon):hover {background: ${config.menu_bg_color_hover} !important; height:auto;}`;
     css += `.navbar .navbar-brand, .navbar .navbar-menu {background: ${config.menu_bg_color} !important;}`;
+    css += `.navbar .navbar-brand .menu-description {color: ${config.menu_text_color} !important;}`;
+    css += `.mobile-navbar .navbar-burger span {background-color: ${config.menu_text_color} !important;}`;
+    css += `.navbar ion-icon {color: ${config.menu_text_color} !important;}`;
 
     /* SET BACKGROUND & FONT COLORS FOR WEBSITE */
     css += `body {background: ${config.background_color} !important;}`;
