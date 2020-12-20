@@ -1,7 +1,7 @@
 {
     "site_title": "SAP Customer Data Cloud Starter Kit",
     "site_description": "Sample Site with basic Customer Data Cloud capabilities",
-    "menu_bg_color": "#0b83d8",
+    "menu_bg_color": "white",
     "menu_bg_color_hover": "whitesmoke",
     "menu_high_color": "#888",
     "menu_text_color": "#fff",

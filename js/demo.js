@@ -293,8 +293,8 @@ function setUI(config) {
             console.log(out);
             // debugger;
             queryAll('.language-dropdown .dropdown-content').forEach((flagsContainer, i) => {
-                for (var i = 0; i < out.languages.length; i++) {
-                    const oneLanguage = out.languages[i];
+                for (var j = 0; j < out.languages.length; j++) {
+                    const oneLanguage = out.languages[j];
                     const html = createEntryFor(oneLanguage);
                     flagsContainer.appendChild(html);
                 }
@@ -318,6 +318,7 @@ function setUI(config) {
 
     /* SET BACKGROUND LINK COLOR HOVER */
     var css = `.navbar .navbar-brand .navbar-item:hover {background: ${config.menu_bg_color_hover} !important;}`;
+    css += `.navbar .navbar-brand {background: ${config.menu_bg_color} !important;}`;
     var style = document.createElement('style');
 
     if (style.styleSheet) {
@@ -385,6 +386,7 @@ function toggleLanguageDropDown() {
         }
     });
 }
+
 /**
  * [showErrorLogo description]
  * @param  {object} element element from DOM
