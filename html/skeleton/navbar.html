@@ -10,7 +10,13 @@
         <!-- NOT LOGGED SECTION -->
         <div class="navbar-start not-logged">
             <div class="navbar-item is-icon drop-trigger">
-                <a class="icon-link is-active hint--bottom hint--bounce hint--errorr hint--mediumm hint--rounded " href="javascript:liteRegisterWithRaaS();" aria-label="Subscribe to our newsletters!">
+                <a class="icon-link is-activee hint--bottom hint--bounce hint--errorr hint--mediumm hint--rounded " href="javascript:registerWithRaaS();" aria-label="Sign Up!">
+                    <ion-icon name="person-add-outline"></ion-icon>
+                    <span class="indicator"></span>
+                </a>
+            </div>
+            <div class="navbar-item is-icon drop-trigger">
+                <a class="icon-link hint--bottom hint--bounce hint--errorr hint--mediumm hint--rounded " href="javascript:liteRegisterWithRaaS();" aria-label="Subscribe to our newsletters!">
                     <ion-icon name="mail-outline"></ion-icon>
                     <span class="indicator"></span>
                 </a>
@@ -72,19 +78,55 @@
 
     <!-- Menu -->
     <div class="navbar-menu">
+        <div class="navbar-end both-logged">
 
-        <!-- NOT LOGGED SECTION -->
-        <div class="navbar-end not-logged">
+            <!-- System Info (Datacerner and API Key) -->
             <div class="navbar-start">
-                <div class="navbar-item is-icon drop-trigger">
-                    <a class="icon-link hint--bottom hint--bounce hint--infoo hint--mediumm hint--rounded " aria-label="Login" href="javascript:showOrHighlightLoginScreen();">
-                        <ion-icon name="person-outline"></ion-icon>
+                <div class="navbar-item">
+                    <button class="button-datacenter hint--bottom hint--bounce hint--infoo hint--mediumm hint--rounded button button is-white is-hovered" aria-label="Datacenter">
+                        <ion-icon name="server-outline"></ion-icon>
+                        <span class="span-datacenter has-text-grey"></span>
+                    </button>
+                </div>
+                <div class="navbar-item">
+                    <button class="button-apikey hint--bottom-left hint--bounce hint--infoo hint--mediumm hint--rounded button is-white is-hovered" aria-label="{{Api Key}}">
+                        <ion-icon name="key-outline"></ion-icon>
+                        <span class="span-apikey has-text-grey"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="navbar-item is-icon drop-trigger is-separator">|</div>
+
+            <!-- NOT LOGGED SECTION -->
+            <div class="navbar-item is-icon drop-trigger not-logged">
+                <a class="icon-link hint--bottom hint--bounce hint--infoo hint--mediumm hint--rounded " aria-label="Login" href="javascript:showOrHighlightLoginScreen();">
+                    <ion-icon name="person-outline"></ion-icon>
+                </a>
+            </div>
+
+            <!-- LOGGED SECTION -->
+
+                <!-- User Logged Icon. EDIT PROFILE Action -->
+                <div class="logged hidden navbar-item is-account is-not-icon hint--bottom hint--bounce hint--infoo hint--mediumm hint--rounded " aria-label="Edit Profile">
+                    <a class="icon-link" href="edit-profile.html">
+                        <div class="user-image">
+                            <ion-icon class="not-hidden" name="person-outline"></ion-icon>
+                            <img class="hidden provider-img" src="img/framework/profile_default_pic_small.png">
+                            <span class="indicator"></span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Logout Icon. LOGOUT ACTION -->
+                <div class="logged hidden navbar-item is-icon drop-trigger">
+                    <a class="icon-link hint--bottom hint--bounce hint--infoo hint--mediumm hint--rounded " aria-label="logout" href="javascript:logoutWithRaaS(gotoUnloggedPage)">
+                        <ion-icon name="log-out-outline"></ion-icon>
                     </a>
                 </div>
             </div>
 
-
             <!--Basic Dropdown For Languages-->
+            <div class="navbar-item is-icon drop-trigger is-separator">|</div>
             <div class="language-dropdown dropdown is-spaced is-accent dropdown-trigger">
                     <div class="flag-container navbar-item hint--bottom-left hint--bounce hint--successs hint--mediumm hint--rounded " aria-label="English">
                         <a href="javascript:toggleLanguageDropDown()">
@@ -95,46 +137,10 @@
                         <div class="dropdown-content">
                         </div>
                     </div>
-                </div>
-
+            </div>
+            <div class="navbar-item is-icon drop-trigger is-separator">|</div>
 
         </div>
 
-        <!-- LOGGED SECTION -->
-        <div class="navbar-end logged hidden">
 
-            <!-- User Logged Icon. EDIT PROFILE Action -->
-            <div id="account-dropdown" class="navbar-item is-account drop-trigger has-caret">
-                <div class="navbar-item is-icon drop-trigger hint--bottom hint--bounce hint--infoo hint--mediumm hint--rounded " aria-label="Edit Profile">
-                    <a class="icon-link" href="edit-profile.html">
-                        <div class="user-image">
-                            <ion-icon class="not-hidden" name="person-outline"></ion-icon>
-                            <img class="hidden provider-img" src="img/framework/profile_default_pic_small.png">
-                            <span class="indicator"></span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Logout Icon. LOGOUT ACTION -->
-            <div class="navbar-item is-icon drop-trigger">
-                <a class="icon-link hint--bottom hint--bounce hint--infoo hint--mediumm hint--rounded " aria-label="logout" href="javascript:logoutWithRaaS(gotoUnloggedPage)">
-                    <ion-icon name="log-out-outline"></ion-icon>
-                </a>
-            </div>
-            <!-- Language Flags -->
-            <!--Basic Dropdown For Languages-->
-                <div class="language-dropdown dropdown is-spaced is-accent dropdown-trigger">
-                    <div class="flag-container navbar-item hint--bottom-left hint--bounce hint--successs hint--mediumm hint--rounded " aria-label="English">
-                        <a href="javascript:toggleLanguageDropDown()">
-                            <span class="flag-icon"></span>
-                        </a>
-                    </div>
-                    <div class="dropdown-menu" role="menu">
-                        <div class="dropdown-content">
-                        </div>
-                    </div>
-                </div>
-        </div>
-    </div>
 </template>

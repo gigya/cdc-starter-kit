@@ -235,6 +235,10 @@ function setUI(config) {
     const siteTitles = queryAll('.site-title');
     const siteDescriptions = queryAll('.site-description');
     const menuDescription = query('.menu-description');
+    const apiKeyButton = query('.button-apikey');
+    const apiKeySpan = query('.span-apikey');
+    const datacenterButton = query('.button-datacenter');
+    const datacenterSpan = query('.span-datacenter');
 
     for (const siteTitle of siteTitles) {
         siteTitle.innerText = siteTitle.innerText.replaceAll('{{Title}}', config.site_title);
@@ -243,6 +247,11 @@ function setUI(config) {
         siteDescription.innerText = siteDescription.innerText.replaceAll('{{Description}}', config.site_description);
     }
     menuDescription.innerText = config.menu_description;
+
+    apiKeyButton.setAttribute('aria-label', 'ApiKey: ' + getApiKeyFromSite());
+    apiKeySpan.innerText = getApiKeyFromSite().substring(0, 6) + '...';
+    datacenterButton.setAttribute('aria-label', 'Datacenter: ' + getDatacenterFromSite());
+    datacenterSpan.innerText = getDatacenterFromSite();
 
     /* CHANGE PAGE PROPERTIES */
     document.title = config.site_title;
@@ -297,7 +306,7 @@ function setUI(config) {
     css += `.navbar .navbar-brand, .navbar .navbar-menu {background: ${config.menu_bg_color} !important;}`;
     css += `.navbar .navbar-brand .menu-description {color: ${config.menu_text_color} !important;}`;
     css += `.mobile-navbar .navbar-burger span {background-color: ${config.menu_text_color} !important;}`;
-    css += `.navbar ion-icon {color: ${config.menu_text_color} !important;}`;
+    // css += `.navbar ion-icon {color: ${config.menu_text_color} !important;}`;
 
     /* SET BACKGROUND & FONT COLORS FOR WEBSITE */
     css += `body {background: ${config.background_color} !important;}`;
@@ -428,4 +437,10 @@ function gotoUnloggedPage() {
 }
 function gotoHome() {
     window.location.href = window.config.main_url.replace('http://', 'https://');
+}
+function getApiKeyFromSite() {
+    return gigya.thisScript.APIKey;
+}
+function getDatacenterFromSite() {
+    return gigya.dataCenter;
 }

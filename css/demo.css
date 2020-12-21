@@ -1,6 +1,6 @@
 /* - GENERAL IMPORTS - */
 .hidden {
-  display: none;
+  display: none!important;
 }
 .flex-centered-container {
   align-content: center;
@@ -72,7 +72,16 @@ button {
 }
 /* GIGYA FIXES */
 .gigya-screen-caption {
-  display: none;
+  color: #999!important;
+  text-align: center;
+  width: 100%!important;
+  font-family: 'Questrial', sans-serif !important;
+  padding: 0!important;
+  margin-top: 50px!important;
+  padding-bottom: 20px!important;
+  margin-bottom: -30px !important;
+  border-bottom-color: #f1f1f1!important;
+  font-size: 1.4em!important;
 }
 /* - SKELETON - */
 [class*=hint--][aria-label]:after {
@@ -133,6 +142,23 @@ button {
   /* border: 2px solid red; */
   position: relative;
   top: 3px;
+}
+.navbar .navbar-item.is-separator {
+  opacity: .4;
+  cursor: default;
+}
+.navbar .navbar-item .button {
+  width: auto;
+  background: transparent;
+}
+.navbar .navbar-item .button.is-white.is-focused:not(:active),
+.navbar .navbar-item .button.is-white:focus:not(:active) {
+  box-shadow: none;
+}
+.navbar .navbar-item .span-apikey,
+.navbar .navbar-item .span-datacenter {
+  font-size: .7em;
+  padding: 0 10px;
 }
 .navbar .provider-img {
   border: 2px solid #333;
