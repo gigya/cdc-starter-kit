@@ -306,7 +306,7 @@ function setUI(config) {
     css += `.navbar .navbar-brand, .navbar .navbar-menu {background: ${config.menu_bg_color} !important;}`;
     css += `.navbar .navbar-brand .menu-description {color: ${config.menu_text_color} !important;}`;
     css += `.mobile-navbar .navbar-burger span {background-color: ${config.menu_text_color} !important;}`;
-    // css += `.navbar ion-icon {color: ${config.menu_text_color} !important;}`;
+    css += `.navbar .icon-link ion-icon, .navbar .span-datacenter,  .navbar .span-apikey, .navbar .button-datacenter ion-icon, .navbar .button-apikey ion-icon, .navbar .is-separator {color: ${config.menu_text_color} !important;}`;
 
     /* SET BACKGROUND & FONT COLORS FOR WEBSITE */
     css += `body {background: ${config.background_color} !important;}`;

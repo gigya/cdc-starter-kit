@@ -160,6 +160,16 @@ button {
   font-size: .7em;
   padding: 0 10px;
 }
+.navbar .navbar-item .icon-link,
+.navbar .navbar-item .button-datacenter,
+.navbar .navbar-item .button-apikey {
+  opacity: 0.8;
+}
+.navbar .navbar-item .icon-link:hover,
+.navbar .navbar-item .button-datacenter:hover,
+.navbar .navbar-item .button-apikey:hover {
+  opacity: 1;
+}
 .navbar .provider-img {
   border: 2px solid #333;
   height: 30px!important;
@@ -209,6 +219,7 @@ button {
 }
 .hero section.header .login-hr {
   margin: .1rem 0;
+  background: transparent;
 }
 .hero .box {
   margin-top: 5rem;
