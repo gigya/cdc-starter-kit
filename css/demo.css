@@ -90,6 +90,13 @@ button {
   padding: 12px;
 }
 /* NAVBAR */
+.navbar,
+.navbar-end,
+.navbar-menu,
+.navbar-start {
+  align-items: stretch;
+  display: flex;
+}
 .navbar {
   background: white!important;
   /* Logged Image user */
@@ -259,4 +266,16 @@ button {
   padding: 0px;
   -webkit-transition: all .3s;
   transition: all .3s;
+}
+.navbar-menu {
+  display: none;
+}
+.navbar-menu.is-opened {
+  display: flex;
+  justify-content: flex-end;
+}
+@media screen and (min-width: 1024px) {
+  .navbar-menu {
+    display: flex;
+  }
 }

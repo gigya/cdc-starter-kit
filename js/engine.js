@@ -406,6 +406,15 @@ function showLanguageAlert() {
     alert('Show the language of the screensets: [' + window.config.lang.toUpperCase() + ']');
 }
 
+function toggleBurgerMenu() {
+    // debugger;
+    var navbarMenu = query('.navbar-menu');
+    if (navbarMenu.classList.contains('is-opened')) {
+        navbarMenu.classList.remove('is-opened');
+    } else {
+        navbarMenu.classList.add('is-opened');
+    }
+}
 // -- 3. Utils
 /**
  * Takes an ISO time and returns a string representing how long ago the date represents.

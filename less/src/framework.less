@@ -14,6 +14,12 @@
 
 
 /* NAVBAR */
+// Fixing default navbar behaviour and preparing it to use the burger button
+.navbar, .navbar-end, .navbar-menu, .navbar-start {
+    align-items: stretch;
+    display: flex;
+}
+
 .navbar {
 
     background: white!important;
@@ -237,4 +243,18 @@
     -webkit-transition: all .3s;
     transition: all .3s;
     }
+}
+
+
+
+// Fixing menu for mobile
+.navbar-menu {
+    display: none;
+    &.is-opened {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+@media screen and (min-width: 1024px) {
+    .navbar-menu {display: flex;}
 }
