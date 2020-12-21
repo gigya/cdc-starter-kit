@@ -1,89 +1,3 @@
-/* - GENERAL IMPORTS - */
-.hidden {
-  display: none!important;
-}
-.flex-centered-container {
-  align-content: center;
-  align-items: center;
-  display: flex;
-  justify-content: center;
-}
-.flex-lefted-container {
-  align-content: center;
-  align-items: center;
-  display: flex;
-  justify-content: left;
-}
-.flex-righted-container {
-  align-content: center;
-  align-items: center;
-  display: flex;
-  justify-content: right;
-}
-.bordered {
-  border: 2px solid red;
-}
-.outlined {
-  outline: 2px solid red;
-}
-.uppercased {
-  text-transform: uppercase;
-}
-html {
-  background: #F2F6FA;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center 91px;
-}
-/* 0. Global Site Properties */
-html,
-body {
-  font-family: 'Questrial', sans-serif !important;
-  font-size: 14px!important;
-  font-weight: 300;
-}
-a {
-  font-size: 14px!important;
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
-}
-/* 1. Layout */
-/* 1. Main Gigya Screensets Container */
-button {
-  font-size: 18px!important;
-  font-family: 'Questrial', sans-serif;
-}
-/* 2. Header & Footer */
-#gigya_actions_placeholder button {
-  width: 100%;
-  align-content: center;
-  align-items: center;
-  display: flex;
-  justify-content: center;
-}
-.hero-foot {
-  display: none!important;
-  border: 2px solid #4287c4;
-}
-.sections {
-  margin-top: 60px;
-}
-/* GIGYA FIXES */
-.gigya-screen-caption {
-  color: #999!important;
-  text-align: center;
-  width: 100%!important;
-  font-family: 'Questrial', sans-serif !important;
-  padding: 0!important;
-  margin-top: 50px!important;
-  padding-bottom: 20px!important;
-  margin-bottom: -30px !important;
-  border-bottom-color: #f1f1f1!important;
-  font-size: 1.4em!important;
-}
-/* - SKELETON - */
 [class*=hint--][aria-label]:after {
   font-weight: normal;
   font-size: 14px;
@@ -275,7 +189,8 @@ button {
   justify-content: flex-end;
 }
 .navbar-menu.is-opened .flag-icon {
-  margin-top: 8px;
+  margin-top: 20px;
+  border: 2px solid red;
 }
 @media screen and (min-width: 1024px) {
   .navbar-menu {
