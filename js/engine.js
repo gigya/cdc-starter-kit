@@ -266,8 +266,12 @@ function setUI(config) {
 
     // Set language name from language code
     const lang = config.lang.replaceAll('-inf', '');
-    let languageNames = new Intl.DisplayNames([ lang ], { type: 'language' });
-    const langName = capitalize(languageNames.of(lang));
+    if (Intl.DisplayNames) {
+        languageNames = new Intl.DisplayNames([ lang ], { type: 'language' });
+        langName = capitalize(languageNames.of(lang));
+    } else {
+        langName = lang.toUpperCase();
+    }
 
     fetch('./config/languages.json')
         .then((res) => { return res.json(); })
