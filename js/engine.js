@@ -62,7 +62,7 @@ function showLoggedHTML(user) {
     }
 
     /* Look for user image */
-    const profileUserImage = user.profile.photoURL;
+    const profileUserImage = user.profile.photoURL ? user.profile.photoURL : '';
     if (profileUserImage !== '') {
         const imageTag = query('.user-image img');
         const iconTag = query('.user-image ion-icon');
