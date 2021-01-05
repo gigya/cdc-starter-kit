@@ -58,12 +58,30 @@
         font-size: 24px;
         color: #999;
         pointer-events: none;
+
+        &.social-provider-icon {
+            padding: 5px;
+            color: whitesmoke!important;
+            margin-left: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px #ccc;
+        }
+        &.is-site {
+            background: #f1ab2b!important;
+        }
+        &.is-apple {
+            background: #333!important;
+        }
+        &.is-amazon {
+            background: #333!important;
+            color: #febd69!important;
+        }
     }
     .icon-link:hover ion-icon {
-        color: whitesmoke;
+        color: whitesmoke!important;
     }
     .icon-link.is-active ion-icon {
-        color: whitesmoke;
+        color: whitesmoke!important;
     }
 
     .navbar-item {
@@ -96,7 +114,7 @@
                 box-shadow: none;
             }
         }
-        .span-apikey, .span-datacenter {
+        .span-apikey, .span-datacenter, .span-providers {
             font-size: .7em;
             // .bordered();
             padding: 0 10px;

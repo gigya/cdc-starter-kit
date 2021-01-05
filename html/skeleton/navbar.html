@@ -106,41 +106,47 @@
 
             <!-- LOGGED SECTION -->
 
-                <!-- User Logged Icon. EDIT PROFILE Action -->
-                <div class="logged hidden navbar-item is-account is-not-icon hint--bottom hint--bounce hint--infoo hint--mediumm hint--rounded " aria-label="Edit Profile">
-                    <a class="icon-link" href="edit-profile.html">
-                        <div class="user-image">
-                            <ion-icon class="not-hidden" name="person-outline"></ion-icon>
-                            <img class="hidden provider-img" src="img/framework/profile_default_pic_small.png">
-                            <span class="indicator"></span>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Logout Icon. LOGOUT ACTION -->
-                <div class="logged hidden navbar-item is-icon drop-trigger">
-                    <a class="icon-link hint--bottom hint--bounce hint--infoo hint--mediumm hint--rounded " aria-label="logout" href="javascript:logoutWithRaaS(gotoUnloggedPage)">
-                        <ion-icon name="log-out-outline"></ion-icon>
-                    </a>
-                </div>
+            <!-- User Logged Icon. EDIT PROFILE Action -->
+            <div class="logged hidden navbar-item">
+                <button class="button-providers hint--bottom hint--bounce hint--infoo hint--mediumm hint--rounded button button is-white is-hovered" aria-label="Providers">
+                    <!-- <ion-icon name="apps-outline"></ion-icon> -->
+                    <span class="span-providers has-text-grey">Providers:</span>
+                </button>
+            </div>
+            <div class="logged hidden navbar-item is-icon drop-trigger is-separator">|</div>
+            <div class="logged hidden navbar-item is-account is-not-icon hint--bottom hint--bounce hint--infoo hint--mediumm hint--rounded " aria-label="Edit Profile">
+                <a class="icon-link" href="edit-profile.html">
+                    <div class="user-image">
+                        <ion-icon class="not-hidden" name="person-outline"></ion-icon>
+                        <img class="hidden provider-img" src="img/framework/profile_default_pic_small.png">
+                        <span class="indicator"></span>
+                    </div>
+                </a>
             </div>
 
-            <!--Basic Dropdown For Languages-->
-            <div class="navbar-item is-icon drop-trigger is-separator">|</div>
-            <div class="language-dropdown dropdown is-spaced is-accent dropdown-trigger">
-                    <div class="flag-container navbar-item hint--bottom-left hint--bounce hint--successs hint--mediumm hint--rounded " aria-label="English">
-                        <a href="javascript:toggleLanguageDropDown()">
-                            <span class="flag-icon"></span>
-                        </a>
-                    </div>
-                    <div class="dropdown-menu" role="menu">
-                        <div class="dropdown-content">
-                        </div>
-                    </div>
+            <!-- Logout Icon. LOGOUT ACTION -->
+            <div class="logged hidden navbar-item is-icon drop-trigger">
+                <a class="icon-link hint--bottom hint--bounce hint--infoo hint--mediumm hint--rounded " aria-label="logout" href="javascript:logoutWithRaaS(gotoUnloggedPage)">
+                    <ion-icon name="log-out-outline"></ion-icon>
+                </a>
             </div>
-            <div class="navbar-item is-icon drop-trigger is-separator">|</div>
-
         </div>
 
+        <!--Basic Dropdown For Languages-->
+        <div class="navbar-item is-icon drop-trigger is-separator">|</div>
+        <div class="language-dropdown dropdown is-spaced is-accent dropdown-trigger">
+            <div class="flag-container navbar-item hint--bottom-left hint--bounce hint--successs hint--mediumm hint--rounded " aria-label="English">
+                <a href="javascript:toggleLanguageDropDown()">
+                    <span class="flag-icon"></span>
+                </a>
+            </div>
+            <div class="dropdown-menu" role="menu">
+                <div class="dropdown-content">
+                </div>
+            </div>
+        </div>
+        <div class="navbar-item is-icon drop-trigger is-separator">|</div>
+
+    </div>
 
 </template>

@@ -70,6 +70,37 @@ function showLoggedHTML(user) {
         iconTag.classList.add('hidden');
         imageTag.setAttribute('src', profileUserImage);
     }
+
+    // Paint Providers
+    const providersButton = query('.button-providers');
+    const providersButtonIcons = queryAll('.button-providers ion-icon');
+    const providersSpan = query('.span-providers');
+    var socialProvidersAsArray = user.socialProviders.split(',');
+    var socialProvidersAsArraySanitized = [];
+
+    // Get all providers and clean them separately
+    for (var i = 0; i < providersButtonIcons.length; i++) {
+        const oneProvidersButtonIcon = providersButtonIcons[i];
+        providersButton.removeChild(oneProvidersButtonIcon);
+    }
+
+
+    // Get all providers and clean them separately
+    for (var j = 0; j < socialProvidersAsArray.length; j++) {
+        const oneSocialProvider = socialProvidersAsArray[j];
+        const oneSocialProviderSanitized = sanitizeSocial(oneSocialProvider);
+        socialProvidersAsArraySanitized.push(oneSocialProviderSanitized);
+        const newSocialIconChild = document.createElement('ion-icon');
+        var iconName = 'logo-' + oneSocialProviderSanitized.toLowerCase();
+        iconName = iconName === 'logo-site' ? 'browsers-outline' : iconName;
+        newSocialIconChild.setAttribute('name', iconName);
+        newSocialIconChild.classList.add('social-provider-icon');
+        newSocialIconChild.classList.add('is-' + oneSocialProviderSanitized.toLowerCase());
+        providersButton.appendChild(newSocialIconChild);
+    }
+
+    // Show all providers label
+    providersButton.setAttribute('aria-label', socialProvidersAsArraySanitized.join(', '));
 }
 
 /**
@@ -310,7 +341,7 @@ function setUI(config) {
     css += `.navbar .navbar-brand, .navbar .navbar-menu {background: ${config.menu_bg_color} !important;}`;
     css += `.navbar .navbar-brand .menu-description {color: ${config.menu_text_color} !important;}`;
     css += `.mobile-navbar .navbar-burger span {background-color: ${config.menu_text_color} !important;}`;
-    css += `.navbar .icon-link ion-icon, .navbar .span-datacenter,  .navbar .span-apikey, .navbar .button-datacenter ion-icon, .navbar .button-apikey ion-icon, .navbar .is-separator {color: ${config.menu_text_color} !important;}`;
+    css += `.navbar .icon-link ion-icon, .navbar .span-datacenter,  .navbar .span-apikey,  .navbar .span-providers, .navbar .button-datacenter ion-icon, .navbar .button-apikey ion-icon, .navbar .is-separator {color: ${config.menu_text_color} !important;}`;
 
     /* SET BACKGROUND & FONT COLORS FOR WEBSITE */
     css += `body {background: ${config.background_color} !important;}`;
@@ -456,4 +487,12 @@ function getApiKeyFromSite() {
 }
 function getDatacenterFromSite() {
     return gigya.dataCenter;
+}
+function sanitizeSocial(provider) {
+    // Label identity provi0der
+    var identityProviderLabel = query('.provider-label');
+    var replaceChars = { ',':', ', 'googleplus':'Google', 'saml-':'SAML' };
+    var identityProviderSanitized = provider.replace(/,|googleplus|saml-/g, function(match) { return replaceChars[match]; });
+    var identityProviderSanitizedAndCapitalized = capitalize(identityProviderSanitized);
+    return identityProviderSanitizedAndCapitalized;
 }
