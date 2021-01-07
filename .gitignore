@@ -2,7 +2,8 @@
 # config/config.json
 # config.json
 
-
+# Atom FTP Plugin
+.ftpconfig
 
 # Logs
 logs
