@@ -70,7 +70,9 @@
                         </section>
 
                         <!-- Main page content-->
-                        <div id="gigya_elements" class="box not-logged hidden">
+
+                        <!-- NOT LOGGED SECTION: Registration Placeholder -->
+                        <div class="not-logged box">
 
                             <!-- MAIN IMAGE -->
                             <figure class="avatar">
@@ -78,13 +80,15 @@
                             </figure>
 
                             <!-- Container for Gigya Screensets-->
-
-                            <!-- NOT LOGGED SECTION: Registration Placeholder -->
                             <div class="gigya-placeholder" id="not_logged_placeholder"></div>
+
                        </div>
 
-                       <!-- LOGGED SECTION: Sample Content Container. It will be substituted by the content in html/sample_content/-->
-                        <div class="logged sample_content hidden"></div>
+                       <!-- LOGGED SECTION: Sample Content Container. -->
+                        <div class="sample_content logged hidden">
+                            <!-- It will be substituted by the content in html/sample_content/-->
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -93,11 +97,13 @@
 
         </div>
 
-        <!-- Gigya Script, Gigya RaaS Functions & Framework files  -->
-
+        <!-- Gigya script. Put here your __API_KEY__  -->
         <!-- <script type="text/javascript" lang="javascript" src="https://cdns.gigya.com/js/gigya.js?apikey=__API_KEY__"></script> -->
+
+        <!-- Gigya EXAMPLE. Remove with after setting your __API_KEY__  -->
         <script type="text/javascript" lang="javascript" src="https://cdns.gigya.com/js/gigya.js?apikey=3_P6eTVo5EpI6zoB2c1ZgblyCrmx8OMOlrA932HVKEhhHCHwTdUJbBBEpAocpkb_nM"></script>
 
+        <!-- Framework files  -->
         <script type="text/javascript" lang="javascript" src="https://cdn.jsdelivr.net/npm/@webcomponents/html-imports@1.2.6/html-imports.min.js"></script>
         <script type="text/javascript" lang="javascript" src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
         <script type="text/javascript" lang="javascript" src="js/gigya-raas.js"></script>
