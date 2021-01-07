@@ -5,6 +5,9 @@
 # Atom FTP Plugin
 .ftpconfig
 
+# .htAccess
+.htaccess
+
 # Logs
 logs
 *.log
