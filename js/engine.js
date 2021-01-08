@@ -286,7 +286,7 @@ function setUI(config) {
 
     /* CHANGE PAGE PROPERTIES */
     document.title = config.site_title;
-    query('link[rel*="icon"]').href = config.menu_pic;
+    query('link[rel*="icon"]').href = 'img/logos/' + config.menu_pic;
 
 
     /* SET MAIN LINK */
