@@ -21,13 +21,13 @@ All gigya related links are fully functional, allowing us to register, login, ed
 
 ## 2. Configuration of the project (config.json)
 
-The title, logo, and descriptions for the website can be easily set modifying the ```config.config.json``` and refreshing the page.
+The title, logo, and descriptions for the website can be easily set modifying the ```config/config.json``` and refreshing the page.
 
 You can customize as well some basic aspects of the look and feel for your website, like the background, the colors of the links, or the colors and background for the navigation bar.
 
 Note that there are some properties lke _raas_prefix_, or _lang_, that they need to be correctly set in order to have the site properly working.
 
-All these properties are placed in the ```config/config.json``` file.
+The include properties are:
 
 | Name | Description |
 |-|-|
