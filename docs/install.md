@@ -44,3 +44,5 @@ Now that we have a site in Gigya, we can include it into a web project. To do it
 1. Navigate to ```http://localhost/my-gigya-demo-app```
 
 1. Enjoy!
+
+Once you have the site working, it's time to understand the basics reading the [Basic Guide](basic.md), where you will be able to adapt the site to your needs.
