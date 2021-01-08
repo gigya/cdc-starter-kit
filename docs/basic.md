@@ -81,7 +81,76 @@ If your screensets in the console are like "Default-RegistrationLogin" or "Defau
 12. Linking accounts
 
 ## 3. Project Structure
-_WIP_
+
+In this section we will show the project file structure with a brief explanation of the main folders and files.
+
+```
+├── config
+│   ├── config.json
+│   └── languages.json
+|
+├── css
+│   ├── demo.css
+│   └── lib
+│       ├── bulma-social.min.css
+│       └── core.min.css
+|
+├── docs
+│   ├── advanced.md
+│   ├── basic.md
+│   ├── img/
+│   ├── install.md
+│   └── links.md
+|
+├── html
+│   ├── consents
+│   │   ├── deletion.html
+│   │   ├── privacy.html
+│   │   └── tos.html
+│   ├── facebook
+│   │   └── channelURL.html
+│   ├── sample_content
+│   │   └── ecommerce.html
+│   └── skeleton
+│       └── navbar.html
+|
+├── img/*
+|
+├── js
+│   ├── engine.js
+│   ├── gigya-raas.js
+│   └── main.js
+|
+├── less
+│   ├── demo.less
+│   └── src
+│       ├── framework.less
+│       └── lib
+│           ├── classes.less
+│           ├── gigya.less
+│           ├── layout.less
+│           └── variables.less
+|
+├── CONTRIBUTING.md
+├── LICENSE.txt
+├── NOTICE.txt
+├── README.md
+├── index.html
+└── edit-profile.html
+
+```
+
+1. __config__: Folder for the configuration files. You can configure the site behavior and sources, as well as the languages in the dropdown.
+2. __css__: The generated css files to be used in the project.
+3. __docs__: This set of docs.
+4. __html__: Main HTML content of the site. Navigation bar and logged sample content it's stored here.
+5. __img__: It contains all the images for the project.
+6. __js__: It contains the files with the logic of the site. It has a specific file for Gigya functions, another one to make the site demo work, and a last one (main.js), that will start all the process.
+7. __less__: css files are automatically generated using this less files as source. Using a proper plugin, any modification over these files will generate a new css set of files in the /css folder.
+8. __index.html__: This is the main page of the site. It contains all the elements needed to manage both logged and not logged states for the user.
+9. __edit-profile.html__: The edit profile page. This page will be shown only for logged in users, being redirected to the index.html page when the session of the user is not present.
+10. __Other files__: The rest of the files are or README files, or editor configuration files, like the .eslintrc.js. Git files are also there, and they can all be removed and the project will work as expected.
+
 
 ## 4. What else.
 
