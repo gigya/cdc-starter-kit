@@ -140,4 +140,4 @@ In this section we will show the project file structure with a brief explanation
 
 ## 4. What else.
 
-If you want to know how to enhace/ extend the capabilities of this site, with elements like Captcha, Events, Extensions, etc, read the [Advanced Guide](advanced.md).
+Athough the site it's fully functional, there is still much more content to cover. If you want to know how to enhace/ extend the capabilities of this site, with elements like Captcha, Events, Registration Completion, Extensions, to know how to integrate consents, etc., take a look at the [Links Page](advanced.md), where you will find how to implement many of these improvements.

@@ -65,7 +65,7 @@ Global features (Cross-flow capabilities):
 
 ## Documentation
 
-Take a look at the [basic guide](docs/basic.md) to enhance and improve the functionality of the project. For complex topics, like i18n, customization, personalization or events the [advanced guide](docs/advanced.md) it's a good start point.
+Take a look at the [basic guide](docs/basic.md) to understand how enhance and improve the functionality of this project.
 
 This documentation is bundled with the project which makes it available for offline reading and provides a useful starting point for any documentation you want to write about your project.
 
