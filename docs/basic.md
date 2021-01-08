@@ -65,20 +65,6 @@ Here you can find an example of this file:
 ```
 If your screensets in the console are like "Default-RegistrationLogin" or "Default-UpdateProfile", then this file will work for the project without any modifications.
 
-## 3. Features:
-
-1. Registration
-2. Login
-3. Update Profile
-4. Email Verification
-5. Reset Password
-6. Change Password
-7. Subscribe
-8. Consent
-9. Lite Registration
-10. Passwordless login. (Phone Login)
-11. Social Login
-12. Linking accounts
 
 ## 3. Project Structure
 
