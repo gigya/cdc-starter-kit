@@ -18,8 +18,8 @@ Follow the [Installation Guide](docs/install.md) to have this demo running in le
 
 Can't wait? Check out our demo site!
 
- ![Demo Site](docs/img/basic/0-not-logged-with-language.png)
 * [Demo Site](https://juan.gigya-cs.com/cdc-starter-kit/)
+ [[Demo Site](docs/img/basic/0-not-logged-with-language.png)](https://juan.gigya-cs.com/cdc-starter-kit/)
 
 ## Included Flows
 
@@ -61,7 +61,7 @@ Global features (Cross-flow capabilities):
 
 1. Gigya Console access with Create Site capabilities.
 
-1. Web server. (Apache, ngix, ...):
+1. Web server. (Apache, ngix, ...)
 
 ## Documentation
 
@@ -71,7 +71,7 @@ This documentation is bundled with the project which makes it available for offl
 
 ## Additional Gigya Links
 
-Please follow this [link](docs/links.md) to find more related SAP Customer Data Cloud documentation.
+Please follow this [link](docs/links.md) to find more related SAP Customer Data Cloud documentation about the configuration / enhacement of this site.
 
 ## Browser support
 
@@ -92,4 +92,4 @@ If you find yourself running into issues during installation or running the web 
 
 ## License
 
-This project is licensed under the [MIT License](http://www.apache.org/licenses/LICENSE-2.0), Copyright (c) 2020 SAP-CDC. For more information see `LICENSE.md`
+This project is licensed under the [MIT License](http://www.apache.org/licenses/LICENSE-2.0), Copyright (c) 2021 SAP-CDC. For more information see `LICENSE.md`
