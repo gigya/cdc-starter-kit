@@ -19,7 +19,7 @@ Follow the [Installation Guide](docs/install.md) to have this demo running in le
 Can't wait? Check out our demo site!
 
 * [Demo Site](https://juan.gigya-cs.com/cdc-starter-kit/)
- [Demo Site](docs/img/basic/0-not-logged-with-language.png)]
+ ![Demo Site](docs/img/basic/0-not-logged-with-language.png)
 
 ## Included Flows
 
