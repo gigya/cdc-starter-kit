@@ -69,6 +69,9 @@ Take a look at the [basic guide](docs/basic.md) to understand how enhance and i
 
 This documentation is bundled with the project which makes it available for offline reading and provides a useful starting point for any documentation you want to write about your project.
 
+All relevant code it's commented (internally and function by function), making easier the integration of the relevant functions in other projects
+
+
 ## Additional Gigya Links
 
 Please follow this [link](docs/links.md) to find more related SAP Customer Data Cloud documentation about the configuration / enhacement of this site.
