@@ -18,7 +18,7 @@ Follow the [Installation Guide](docs/install.md) to have this demo running in le
 
 Can't wait? Check out our demo site!
 
- ![Demo Site](docs/img/basic/logged-with-edit-profile.png)
+ ![Demo Site](docs/img/basic/1-logged-with-edit-profile.png)
 * [Demo Site](https://juan.gigya-cs.com/cdc-starter-kit/)
 
 ## Included Flows
