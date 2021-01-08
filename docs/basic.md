@@ -25,9 +25,7 @@ The title, logo, and descriptions for the website can be easily set modifying th
 
 You can customize as well some basic aspects of the look and feel for your website, like the background, the colors of the links, or the colors and background for the navigation bar.
 
-Note that there are some properties lke _raas_prefix_, or _lang_, that they need to be correctly set in order to have the site properly working.
-
-The include properties are:
+Note that there are some properties lke _raas_prefix_, or _lang_, that they need to be correctly set in order to have the site properly working. The include properties are:
 
 | Name | Description |
 |-|-|
@@ -64,7 +62,6 @@ Here you can find an example of this file:
     "raas_prefix": "Default",
     "lang": "en"
 }
-
 ```
 If your screensets in the console are like "Default-RegistrationLogin" or "Default-UpdateProfile", then this file will work for the project without any modifications.
 
@@ -88,4 +85,4 @@ _WIP_
 
 ## 4. What else.
 
-If you want to know how to enhace/ extend the capabilities of this site, with elements like Captcha, Events, Extensions, etc, read the [Advanced Guide](docs/advanced.md).
+If you want to know how to enhace/ extend the capabilities of this site, with elements like Captcha, Events, Extensions, etc, read the [Advanced Guide](advanced.md).
