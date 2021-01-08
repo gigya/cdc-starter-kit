@@ -3,6 +3,9 @@
 /** *****************************************************/
 /**
  * This function will be triggered once Gigya is fully loaded and ready to be used.
+ * In the function **onGigyaServiceReady**, we check if the user is logged or not,
+ * and show different sections depending on that state.
+ *
  * See more in: https://developers.gigya.com/display/GD/onGigyaServiceReady+Template
  */
 function onGigyaServiceReady() {
@@ -12,7 +15,7 @@ function onGigyaServiceReady() {
         alert('Gigya is not loaded on this page :(');
     } else {
 
-        /* Load Configuration */
+        /* Load Configuration from setup/config.json */
         loadConfigurationFromFile();
     }
 }

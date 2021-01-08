@@ -1,6 +1,6 @@
 /**
  * ----------------
- *  # Main JS File
+ *  # Demo Engine JS File
  * ----------------
  *
  * This file includes some util and HTML functions to make the site fully functional, and to show/hide elements
@@ -18,172 +18,11 @@ const queryAll = document.querySelectorAll.bind(document);
 var sessionStatus = 'loggedOut'; // possible values: loggedOut, loggedIn
 
 /** *****************************************************/
-//                   DEMO CORE FUNCTIONS
+//                 1. DEMO CORE FUNCTIONS
 /** *****************************************************/
-
-// -- 1. Core
 /**
- * Injects the user data into the HTML of the page
- *
- * @param  {object} user User info object
- */
-function showLoggedHTML(user) {
-
-    /* Hide Registration Screenset */
-    hideScreenset('not_logged_placeholder');
-
-    /* Taking relevant info for user */
-    var provider = user.loginProvider;
-    var uid = user.UID;
-    var email = user.profile.email;
-    var username = user.profile.firstName;
-
-    /* Change the username in the web */
-    const siteTitles = queryAll('.site-title');
-    const siteDescriptions = queryAll('.site-description');
-    const lastLoginUserFriendlyDate = prettyDate(user.lastLogin);
-
-    for (const siteTitle of siteTitles) {
-        siteTitle.innerText = siteTitle.innerText.replaceAll('{{Username}}', username);
-    }
-
-    for (const siteDescription of siteDescriptions) {
-        siteDescription.innerText = siteDescription.innerText.replaceAll('{{Last Login}}', lastLoginUserFriendlyDate);
-    }
-
-    /* Switch Menu settings */
-    const notLoggedElements = queryAll('.not-logged');
-    for (const notLoggedElement of notLoggedElements) {
-        notLoggedElement.classList.add('hidden');
-    }
-    const loggedElements = queryAll('.logged');
-    for (const loggedElement of loggedElements) {
-        loggedElement.classList.remove('hidden');
-    }
-
-    /* Look for user image */
-    const profileUserImage = user.profile.photoURL ? user.profile.photoURL : '';
-    if (profileUserImage !== '') {
-        const imageTag = query('.user-image img');
-        const iconTag = query('.user-image ion-icon');
-        imageTag.classList.remove('hidden');
-        iconTag.classList.add('hidden');
-        imageTag.setAttribute('src', profileUserImage);
-    }
-
-    // Paint Providers
-    const providersButton = query('.button-providers');
-    const providersButtonIcons = queryAll('.button-providers ion-icon');
-    const providersSpan = query('.span-providers');
-    var socialProvidersAsArray = user.socialProviders.split(',');
-    var socialProvidersAsArraySanitized = [];
-
-    // Get all providers and clean them separately
-    for (var i = 0; i < providersButtonIcons.length; i++) {
-        const oneProvidersButtonIcon = providersButtonIcons[i];
-        providersButton.removeChild(oneProvidersButtonIcon);
-    }
-
-
-    // Get all providers and clean them separately
-    for (var j = 0; j < socialProvidersAsArray.length; j++) {
-        const oneSocialProvider = socialProvidersAsArray[j];
-        const oneSocialProviderSanitized = sanitizeSocial(oneSocialProvider);
-        socialProvidersAsArraySanitized.push(oneSocialProviderSanitized);
-        const newSocialIconChild = document.createElement('ion-icon');
-        var iconName = 'logo-' + oneSocialProviderSanitized.toLowerCase();
-        iconName = iconName === 'logo-site' ? 'browsers-outline' : iconName;
-        newSocialIconChild.setAttribute('name', iconName);
-        newSocialIconChild.classList.add('social-provider-icon');
-        newSocialIconChild.classList.add('is-' + oneSocialProviderSanitized.toLowerCase());
-        providersButton.appendChild(newSocialIconChild);
-    }
-
-    // Show all providers label
-    providersButton.setAttribute('aria-label', socialProvidersAsArraySanitized.join(', '));
-}
-
-/**
- * Hides the logged info for the user and shows the non-logged section
- *
- * @param  {object} user User info object
- */
-function showUnloggedHTML() {
-
-    /* Switch Menu settings */
-    const notLoggedElements = queryAll('.not-logged');
-    for (const notLoggedElement of notLoggedElements) {
-        notLoggedElement.classList.remove('hidden');
-    }
-    const loggedElements = queryAll('.logged');
-    for (const loggedElement of loggedElements) {
-        loggedElement.classList.add('hidden');
-    }
-}
-
-function loadSampleContent(user) {
-
-    const sampleContent = query('.sample_content');
-
-    if (sampleContent) {
-        const path = './html/sample_content/ecommerce.html';
-        //
-        fetch(path)
-            .then((res) => { return res.text(); })
-            .then((out) => {
-                // console.log('HTML Content: %s', out);
-                // compile the template
-                var template = Handlebars.compile(out);
-                // execute the compiled template and print the output to the console
-
-                const compiled = template(user);
-                // console.log(compiled);
-                sampleContent.innerHTML = compiled;
-            }).catch((err) => { return console.error(err); });
-    }
-}
-
-/**
- * Check Gigya session Functions
- *
- * @param  {object} user User info object
- */
-function redirectIfLogged(user) {
-
-    /* If not logged, show registration form */
-    if (!user.UID) {
-        sessionStatus = 'loggedOut';
-
-        console.log('You are not logged in.');
-
-        /* In function of the page, show or show login page, or redirect to home */
-        gotoUnloggedPage();
-
-    } else {
-        sessionStatus = 'loggedIn';
-
-        /* If logged, show user HTML */
-        showLoggedHTML(user);
-
-        /* In function of the page, show or sample content, or edit profile */
-        const url = window.location.href;
-        if (url.indexOf('edit-profile') <= 0) {
-            loadSampleContent(user);
-        } else {
-            editProfileWithRaaS('edit_profile_placeholder');
-        }
-    }
-}
-
-
-function capitalize(s) {
-    if (typeof s !== 'string') { return ''; }
-    return s.charAt(0).toUpperCase() + s.slice(1);
-}
-
-/**
- * Loads the configuration file into the window object to be used later on to customize the UI
- */
+* Loads the configuration file into the window object to be used later on to customize the UI
+*/
 function loadConfigurationFromFile() {
     fetch('./config/config.json')
         .then((res) => { return res.json(); })
@@ -219,32 +58,69 @@ function startDemo(out) {
     gigya.accounts.getAccountInfo({ include:'emails, profile', callback: redirectIfLogged });
 }
 
-function showOrHighlightLoginScreen() {
+/**
+ * Check Gigya session Functions
+ *
+ * @param  {object} user User info object
+ */
+function redirectIfLogged(user) {
 
-    // Look if the screenset was already shown
-    const loginScreenset = query('#not_logged_placeholder .gigya-login-form');
+    /* If not logged, show registration form */
+    if (!user.UID) {
+        sessionStatus = 'loggedOut';
 
-    // If yes, highlight the first field once (UX improvement)
-    if (loginScreenset !== null) {
-        console.log('highlignthing only...');
-        const input = loginScreenset.querySelector('input[name="username"]');
-        input.focus(); // sets focus to element
+        console.log('You are not logged in.');
+
+        /* In function of the page, show or show login page, or redirect to home */
+        gotoUnloggedPage();
 
     } else {
-        // Showing login screen
-        loginWithRaaS('not_logged_placeholder');
-        // Continue as usual
-        console.log('show login screen');
+        sessionStatus = 'loggedIn';
+
+        /* If logged, show user HTML */
+        showLoggedHTML(user);
+
+        /* In function of the page, show or sample content, or edit profile */
+        const url = window.location.href;
+        if (url.indexOf('edit-profile') <= 0) {
+            loadSampleContent(user);
+        } else {
+            editProfileWithRaaS('edit_profile_placeholder');
+        }
     }
 }
 
-// -- 2. UI
+/**
+ * Switch the page elements into a non logged state
+ */
+function gotoUnloggedPage() {
+
+    // Check if we are in edit page. If yes, go to home page. If not, present login window again.
+    const editPlaceholder = query('#edit_profile_placeholder');
+    if (editPlaceholder) {
+        gotoHome();
+    } else {
+        showUnloggedHTML();
+        loginWithRaaS('not_logged_placeholder');
+    }
+}
+
+/**
+ * Goes to the home page (defined in parameter 'main_url' inside config/config.json)
+ */
+function gotoHome() {
+    window.location.href = window.config.main_url.replace('http://', 'https://');
+}
+
+
+/** *****************************************************/
+//                    2. UI FUNCTIONS
+/** *****************************************************/
 /**
  * Set all UI conponents using the configuration object and the state of the user
  * @param {object} config Configuration object
  */
 function setUI(config) {
-    console.log('Setting UI...');
     //    const config = window.config;
 
     // Adding Nabvar
@@ -356,10 +232,187 @@ function setUI(config) {
     }
 
     document.getElementsByTagName('head')[0].appendChild(style);
-
-
 }
 
+/**
+ * Injects the user data into the HTML of the page
+ *
+ * @param  {object} user User info object
+ */
+function showLoggedHTML(user) {
+
+    /* Hide Registration Screenset */
+    hideScreenset('not_logged_placeholder');
+
+    /* Taking relevant info for user */
+    var provider = user.loginProvider;
+    var uid = user.UID;
+    var email = user.profile.email;
+    var username = user.profile.firstName;
+
+    /* Change the username in the web */
+    const siteTitles = queryAll('.site-title');
+    const siteDescriptions = queryAll('.site-description');
+    const lastLoginUserFriendlyDate = prettyDate(user.lastLogin);
+
+    for (const siteTitle of siteTitles) {
+        siteTitle.innerText = siteTitle.innerText.replaceAll('{{Username}}', username);
+    }
+
+    for (const siteDescription of siteDescriptions) {
+        siteDescription.innerText = siteDescription.innerText.replaceAll('{{Last Login}}', lastLoginUserFriendlyDate);
+    }
+
+    /* Switch Menu settings */
+    const notLoggedElements = queryAll('.not-logged');
+    for (const notLoggedElement of notLoggedElements) {
+        notLoggedElement.classList.add('hidden');
+    }
+    const loggedElements = queryAll('.logged');
+    for (const loggedElement of loggedElements) {
+        loggedElement.classList.remove('hidden');
+    }
+
+    /* Look for user image */
+    const profileUserImage = user.profile.photoURL ? user.profile.photoURL : '';
+    if (profileUserImage !== '') {
+        const imageTag = query('.user-image img');
+        const iconTag = query('.user-image ion-icon');
+        imageTag.classList.remove('hidden');
+        iconTag.classList.add('hidden');
+        imageTag.setAttribute('src', profileUserImage);
+    }
+
+    // Paint Providers
+    const providersButton = query('.button-providers');
+    const providersButtonIcons = queryAll('.button-providers ion-icon');
+    const providersSpan = query('.span-providers');
+    var socialProvidersAsArray = user.socialProviders.split(',');
+    var socialProvidersAsArraySanitized = [];
+
+    // Get all providers and clean them separately
+    for (var i = 0; i < providersButtonIcons.length; i++) {
+        const oneProvidersButtonIcon = providersButtonIcons[i];
+        providersButton.removeChild(oneProvidersButtonIcon);
+    }
+
+
+    // Get all providers and clean them separately
+    for (var j = 0; j < socialProvidersAsArray.length; j++) {
+        const oneSocialProvider = socialProvidersAsArray[j];
+        const oneSocialProviderSanitized = sanitizeSocial(oneSocialProvider);
+        socialProvidersAsArraySanitized.push(oneSocialProviderSanitized);
+        const newSocialIconChild = document.createElement('ion-icon');
+        var iconName = 'logo-' + oneSocialProviderSanitized.toLowerCase();
+        iconName = iconName === 'logo-site' ? 'browsers-outline' : iconName;
+        newSocialIconChild.setAttribute('name', iconName);
+        newSocialIconChild.classList.add('social-provider-icon');
+        newSocialIconChild.classList.add('is-' + oneSocialProviderSanitized.toLowerCase());
+        providersButton.appendChild(newSocialIconChild);
+    }
+
+    // Show all providers label
+    providersButton.setAttribute('aria-label', socialProvidersAsArraySanitized.join(', '));
+}
+
+/**
+ * Hides the logged info for the user and shows the non-logged section
+ *
+ * @param  {object} user User info object
+ */
+function showUnloggedHTML() {
+
+    /* Switch Menu settings */
+    const notLoggedElements = queryAll('.not-logged');
+    for (const notLoggedElement of notLoggedElements) {
+        notLoggedElement.classList.remove('hidden');
+    }
+    const loggedElements = queryAll('.logged');
+    for (const loggedElement of loggedElements) {
+        loggedElement.classList.add('hidden');
+    }
+}
+
+/**
+ * [showErrorLogo description]
+ * @param  {object} element element from DOM
+ */
+function showErrorLogo(element) {
+    element.onerror = null;
+    element.src = 'img/skeleton/logo-error.png';
+}
+
+/**
+ * Shows/Hides the right part of the navbar menu for small screen sizes
+ */
+function toggleBurgerMenu() {
+    // debugger;
+    var navbarMenu = query('.navbar-menu');
+    if (navbarMenu.classList.contains('is-opened')) {
+        navbarMenu.classList.remove('is-opened');
+    } else {
+        navbarMenu.classList.add('is-opened');
+    }
+}
+
+/**
+ * Load some static content inside the page to show that the user is logged
+ * @param  {object} user The user object
+ */
+function loadSampleContent(user) {
+
+    const sampleContent = query('.sample_content');
+
+    if (sampleContent) {
+        const path = './html/sample_content/ecommerce.html';
+        //
+        fetch(path)
+            .then((res) => { return res.text(); })
+            .then((out) => {
+                // console.log('HTML Content: %s', out);
+                // compile the template
+                var template = Handlebars.compile(out);
+                // execute the compiled template and print the output to the console
+
+                const compiled = template(user);
+                // console.log(compiled);
+                sampleContent.innerHTML = compiled;
+            }).catch((err) => { return console.error(err); });
+    }
+}
+
+/**
+ * Shows the login screen, or focus the email field if the screen is already present
+ */
+function showOrHighlightLoginScreen() {
+
+    // Look if the screenset was already shown
+    const loginScreenset = query('#not_logged_placeholder .gigya-login-form');
+
+    // If yes, highlight the first field once (UX improvement)
+    if (loginScreenset !== null) {
+        console.log('highlignthing only...');
+        const input = loginScreenset.querySelector('input[name="username"]');
+        input.focus(); // sets focus to element
+
+    } else {
+        // Showing login screen
+        loginWithRaaS('not_logged_placeholder');
+        // Continue as usual
+        console.log('show login screen');
+    }
+}
+
+/** *****************************************************/
+//                3. LANGUAGE FUNCTIONS
+/** *****************************************************/
+
+/**
+ * Get the proper icon for the incoming language using the arrays of languages (config/languages.json)
+ * @param  {array} languages The array of languages
+ * @param  {string} language  The language to use for the flag
+ * @returns {string} The proper flag code as string
+ */
 function getFlagIconFor(languages, language) {
     for (var i = 0; i < languages.length; i++) {
         const oneLanguage = languages[i];
@@ -369,6 +422,11 @@ function getFlagIconFor(languages, language) {
     }
     return '';
 }
+
+/**
+ * Change the current language with the incoming one and refresh the page to reload the screensets
+ * @param  {string} language The incoming language
+ */
 function changeLanguage(language) {
 
     // set the language in local storage
@@ -378,11 +436,20 @@ function changeLanguage(language) {
     location.href = location.href;
 }
 
+/**
+ * Gets the language from the localStorage
+ * @returns {string} The language from the localStorage
+ */
 function getLanguage() {
     // get the language from local storage
     return localStorage.getItem('language');
 }
 
+/**
+ * Creates an entry for the dropdown with the incoming language
+ * @param  {string} language The language string
+ * @returns {object} The generated entry for the dropdown
+ */
 function createEntryFor(language) {
 
     // Add a
@@ -403,6 +470,9 @@ function createEntryFor(language) {
     return aObj;
 }
 
+/**
+ * Toggles the language dropdown in the navbar
+ */
 function toggleLanguageDropDown() {
     queryAll('.language-dropdown').forEach((langDropdown, i) => {
         const isActive = langDropdown.classList.contains('is-active');
@@ -415,42 +485,19 @@ function toggleLanguageDropDown() {
     });
 }
 
+/** *****************************************************/
+//                      4. UTILS
+/** *****************************************************/
 /**
- * [showErrorLogo description]
- * @param  {object} element element from DOM
+ * Capitalizes a string
+ * @param  {string} s The incoming string
+ * @returns {string}   The string capitalized
  */
-function showErrorLogo(element) {
-    element.onerror = null;
-    element.src = 'img/skeleton/logo-error.png';
+function capitalize(s) {
+    if (typeof s !== 'string') { return ''; }
+    return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
-function showSampleAlert() {
-
-    // Toggle Class
-    console.log('Sample Content');
-    const sampleContentElement = query('.sample-content-modal');
-    sampleContentElement.classList.add('is-active');
-
-    // Add Event Handler to close the popup
-    sampleContentElement.addEventListener('click', function() {
-        // console.log('obj');
-        this.classList.remove('is-active');
-    });
-}
-function showLanguageAlert() {
-    alert('Show the language of the screensets: [' + window.config.lang.toUpperCase() + ']');
-}
-
-function toggleBurgerMenu() {
-    // debugger;
-    var navbarMenu = query('.navbar-menu');
-    if (navbarMenu.classList.contains('is-opened')) {
-        navbarMenu.classList.remove('is-opened');
-    } else {
-        navbarMenu.classList.add('is-opened');
-    }
-}
-// -- 3. Utils
 /**
  * Takes an ISO time and returns a string representing how long ago the date represents.
  * @param  {int} time Unix Time
@@ -467,27 +514,27 @@ function prettyDate(time) {
     return prettifiedDate;
 }
 
-function gotoUnloggedPage() {
-
-    // Check if we are in edit page. If yes, go to home page. If not, present login window again.
-    const editPlaceholder = query('#edit_profile_placeholder');
-    if (editPlaceholder) {
-        gotoHome();
-    } else {
-        showUnloggedHTML();
-        loginWithRaaS('not_logged_placeholder');
-    }
-
-}
-function gotoHome() {
-    window.location.href = window.config.main_url.replace('http://', 'https://');
-}
+/**
+ * Gets the api key of the site
+ * @returns {string} The api key
+ */
 function getApiKeyFromSite() {
     return gigya.thisScript.APIKey;
 }
+
+/**
+ * Gets the datacenter of the site
+ * @returns {string} The datacenter
+ */
 function getDatacenterFromSite() {
     return gigya.dataCenter;
 }
+
+/**
+ * Standarizes the name for some social networks
+ * @param  {string} provider The original provider name
+ * @returns {string} The standarized name
+ */
 function sanitizeSocial(provider) {
     // Label identity provi0der
     var identityProviderLabel = query('.provider-label');

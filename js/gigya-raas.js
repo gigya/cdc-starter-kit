@@ -3,7 +3,7 @@
  * # Gigya RaaS JS File
  * ---------------------
  *
- * This file includes all functions that interact with Gigya screensets, as well as the main Gigya initialization
+ * This file includes all functions that interact with Gigya screensets, except the main Gigya initialization
  * function, **onGigyaServiceReady**, where we check if the user is logged or not, and show different sections
  * depending on that state.
  *
@@ -69,8 +69,13 @@ function registerWithRaaS(containerID) {
         onBeforeSubmit,
         onSubmit,
         onAfterScreenLoad
-
     });
+
+    /* Actions associated to events. - If autologin enabled -  */
+    gigya.accounts.addEventHandlers({
+        onLogin: onLogin,
+    });
+
 }
 
 /**
@@ -80,13 +85,6 @@ function registerWithRaaS(containerID) {
  */
 function loginWithRaaS(containerID) {
 
-    console.log('Logging in...');
-
-    /* Actions associated to events */
-    gigya.accounts.addEventHandlers({
-        onLogin: onLogin,
-    });
-
     /* Launch Screenset */
     gigya.accounts.showScreenSet({
         screenSet:'Default-RegistrationLogin',
@@ -94,6 +92,12 @@ function loginWithRaaS(containerID) {
         lang: window.config.lang,
         containerID
     });
+
+    /* Actions associated to events */
+    gigya.accounts.addEventHandlers({
+        onLogin: onLogin,
+    });
+
 }
 
 /**
@@ -101,8 +105,6 @@ function loginWithRaaS(containerID) {
  * @param  {string} containerID The container ID for the edit profile page
  */
 function editProfileWithRaaS(containerID) {
-
-    console.log('Editing profile...');
 
     /* Launch Screenset */
     gigya.accounts.showScreenSet({
@@ -134,6 +136,7 @@ function liteRegisterWithRaaS(containerID) {
  * @param  {string} containerID The container ID for the register page
  */
 function changePasswordWithRaaS(containerID) {
+
     // Launch Screenset
     gigya.accounts.showScreenSet({
         screenSet:'Default-ProfileUpdate',
@@ -157,8 +160,6 @@ function hideScreenset(containerID) {
  * @param {function} callBackFunction the id of the HMTL element containing the form
  */
 function logoutWithRaaS(callBackFunction) {
-
-    console.log('Logging out...');
 
     /* Actions associated to events */
     gigya.accounts.addEventHandlers({
@@ -204,9 +205,7 @@ function onSubmit(event) {
  */
 function onLogin(response) {
 
-    // Save token ID
-    window.tokenID = response;
-    // debugger;
+    // Get the user information, redirecting if needed to the logged in page
     if (response.profile !== null) {
         gigya.accounts.getAccountInfo({ include:'emails, profile', callback: redirectIfLogged });
     }
@@ -218,6 +217,7 @@ function onLogin(response) {
  */
 function onLogout(response) {
 
+    // Shows the unlogged HTML of the page
     if (response.eventName === 'logout') {
         console.log('User has logged out');
         showUnloggedHTML();
