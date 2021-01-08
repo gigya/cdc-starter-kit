@@ -38,7 +38,7 @@ Note that there are some properties lke _raas_prefix_, or _lang_, that they need
 |```text_color```|Color for the main text in the site
 |```background_color```|Background color of the site
 |```menu_pic```|Menu picture for the site (in the navbar)
-|```main_url```|Main url of the site (for redirectiions and proper linking)
+|```main_url```|Main url of the site (for redirections and proper linking)
 |```main_pic```|Main picture for the site
 |```raas_prefix```|Gigya Prefix for the screensets
 |```lang```|Default Language

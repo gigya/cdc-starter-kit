@@ -45,4 +45,6 @@ Now that we have a site in Gigya, we can include it into a web project. To do it
 
 1. Enjoy!
 
+## 3. Next steps
+
 Once you have the site working, it's time to understand the basics reading the [Basic Guide](basic.md), where you will be able to adapt the site to your needs.
