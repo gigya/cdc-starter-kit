@@ -361,10 +361,10 @@ function toggleBurgerMenu() {
  */
 function loadSampleContent(user) {
 
-    const sampleContent = query('.sample_content');
+    const sampleContent = query('.sample-content');
 
     if (sampleContent) {
-        const path = './html/sample_content/ecommerce.html';
+        const path = './html/sample-content/ecommerce.html';
         //
         fetch(path)
             .then((res) => { return res.text(); })
