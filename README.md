@@ -1,5 +1,4 @@
 [![Demo Site](docs/img/readme/0-gigya-starter-kit-v5.png)](https://juan.gigya-cs.com/cdc-starter-kit/)
-[![Demo Site](docs/img/basic/0-not-logged-with-language.png)](https://juan.gigya-cs.com/cdc-starter-kit/)
 
 # **SAP Customer Data Cloud Starter Kit**
 #### **{**HTML + CSS + JS**}**
@@ -21,6 +20,9 @@ Can't wait? Check out our demo site!
 
 * [Demo Site](https://juan.gigya-cs.com/cdc-starter-kit/)
  <!-- [![Demo Site](docs/img/basic/0-not-logged-with-language.png)](https://juan.gigya-cs.com/cdc-starter-kit/) -->
+
+
+ [![Demo Site](docs/img/basic/0-not-logged-with-language.png)](https://juan.gigya-cs.com/cdc-starter-kit/)
 
 
 ## Included Flows
