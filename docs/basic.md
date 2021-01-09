@@ -156,18 +156,6 @@ Apart from that, the project uses some external CSS libraries to enhance/improve
 1. **Hints CSS**: A pure CSS tooltip library. [Link](https://kushagra.dev/lab/hint/).
 1. **IonIcons**: Premium designed icons for use in web, iOS, Android, and desktop apps. [Link](https://ionicons.com/v4/).
 1. **Fonts**: _Roboto_ and _Questrial_ fonts added.
-<!-- Bulma, ionicons, hint and Questrial font.-->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hint.css/2.6.0/hint.min.css" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-<link rel="stylesheet" type="text/css" href="css/lib/bulma-social.min.css" />
-<link rel="stylesheet" type="text/css" href="css/lib/core.min.css" />
-<link rel="stylesheet" type="text/css" href="css/demo.css" />
-<script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>
-<!-- Import Navbar HTML as separate file -->
-<link rel="import" href="html/skeleton/navbar.html" />
-
 
 
 ### 4.2. JavaScript
