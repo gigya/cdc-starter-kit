@@ -23,22 +23,24 @@ var sessionStatus = 'loggedOut'; // possible values: loggedOut, loggedIn
 /**
 * Loads the configuration file into the window object to be used later on to customize the UI
 */
-function loadConfigurationFromFile() {
+function initDemo() {
+
+    // Read configuration file and load it
     fetch('./config/config.json')
         .then((res) => { return res.json(); })
         .then((out) => {
 
-            // Start demo page
-            startDemo(out);
+            // Init webpage
+            loadConfig(out);
 
         }).catch((err) => { return console.error(err); });
 }
 
 /**
- * [startDemo description]
+ * [loadConfig description]
  * @param  {[type]} out [description]
  */
-function startDemo(out) {
+function loadConfig(out) {
 
     // Store config in window global (:-s)
     console.log('Config file: ');

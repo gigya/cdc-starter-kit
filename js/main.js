@@ -19,6 +19,6 @@ function onGigyaServiceReady() {
     } else {
 
         /* Load Configuration from setup/config.json */
-        loadConfigurationFromFile();
+        initDemo();
     }
 }

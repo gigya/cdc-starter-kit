@@ -176,13 +176,13 @@ function onGigyaServiceReady() {
     } else {
 
         /* Load Configuration from setup/config.json */
-        loadConfigurationFromFile();
+        initDemo();
     }
 }
 
 ````
 
-The```loadConfigurationFromFile``` function (inside ```js/engine.js```), reads the configuration file placed into (```config/config.json```) and take the values to initialize the site.
+The```initDemo``` function (inside ```js/engine.js```), reads the configuration file placed into (```config/config.json```) and take the values to initialize the site.
 
 > **DISCLAIMER**: This framework doesn't pretend to be a good example / good practice for a real website. The objective here is to learn how Gigya works. Therefore aspects like security, UX, speed, responsivity, etc., are far from ideal.
 >
