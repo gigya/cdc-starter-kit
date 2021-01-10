@@ -67,7 +67,7 @@ function loadConfigFromFile(out) {
  */
 function redirectIfLogged(user) {
 
-    /* If not logged, show registration form */
+    /* If not logged, show login form */
     if (!user.UID) {
         sessionStatus = 'loggedOut';
 

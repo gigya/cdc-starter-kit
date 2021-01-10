@@ -69,7 +69,7 @@ Global features (Cross-flow capabilities):
 
 ## Documentation
 
-Take a look at the [basic guide](docs/basic.md) to understand how to enhance and improve this project's functionality.
+Take a look at the [Basic Guide](docs/basic.md) to understand how to configure and customize your project. If you want to go deeper and understand the implementation basics, please go to the [Advanced Guide](docs/advanced.md), to these and many other details.
 
 This documentation is bundled with the project, making it available for offline reading and provides a useful starting point for any documentation you want to write about your project.
 
@@ -78,7 +78,7 @@ All relevant code is commented internally, function by function, making easier t
 
 ## Additional Gigya Links
 
-Please follow this [link](docs/links.md) to find more related SAP CDC documentation about the configuration/enhancement of this site.
+Please follow this [Link](docs/links.md) to find more related SAP CDC documentation about the configuration/enhancement of this site.
 
 ## Browser support
 
