@@ -16,9 +16,8 @@ The project includes a demo website with the most common user flows, like regist
 
 Follow the [Installation Guide](docs/install.md) to have this demo running in less than 10 minutes.
 
-Can't wait? Check out our demo site!
+Can't wait? Check out our [demo site](https://juan.gigya-cs.com/cdc-starter-kit/)!
 
-* [Demo Site](https://juan.gigya-cs.com/cdc-starter-kit/)
  <!-- [![Demo Site](docs/img/basic/0-not-logged-with-language.png)](https://juan.gigya-cs.com/cdc-starter-kit/) -->
 
 
@@ -31,17 +30,17 @@ The included flows in the demo are:
 
 | Flow | Description |
 |-|-|
-| Registration | A [Full Registration](https://developers.gigya.com/display/GD/Screen-Sets#Screen-Sets-RegistrationFlows) user flow, which creates a user in Gigya. Depending on the policies, screenset customizations, and/or user data completion defined in the schema, a set of different options will be triggered.|
+| Registration | A [Full Registration](https://developers.gigya.com/display/GD/Screen-Sets#Screen-Sets-RegistrationFlows) user flow, which creates a user in Gigya.|
 | Login | [Login](https://developers.gigya.com/display/GD/Screen-Sets#Screen-Sets-RegistrationFlows) capabilities for created users in Gigya. |
 | Update Profile | Once logged, you have the screens used when [updating](https://developers.gigya.com/display/GD/Default+Screen-sets#DefaultScreen-sets-DefaultScreen-Sets) a user profile. |
 | Email / Code Verification | Performs email / code verification inside the registration flow. To be [enabled](https://developers.gigya.com/display/GD/Policies#Policies-email_verificationEmailVerification) in Gigya console. |
-| Reset Password | Link to get a [Reset Password](https://developers.gigya.com/display/GD/Email+Templates#EmailTemplates-PasswordReset) email whenever a user chooses to reset their password. The is valid for 1 hour by default.|
+| Reset Password | Link to get a [Reset Password](https://developers.gigya.com/display/GD/Email+Templates#EmailTemplates-PasswordReset) email whenever a user chooses to reset their password. The link is valid for 1 hour by default.|
 | Change Password | Once logged in, link to [change](https://developers.gigya.com/display/GD/Policies#Policies-PasswordChange) the current user password. |
 | Consent | Test Gigya [Consent](https://developers.gigya.com/display/GD/Consent+Management) features with very few steps and checks them inside the console. |
 | Subscriptions / Lite Registrations | No password involved. Used typically for subscriptions, and any flow where only an email address is required, such as competition sign-ups, unlocking restricted content, voting, etc. For more information, see [Lite Registration](). |
 | Passwordless login. (Phone Login) | Users can log in or register using their mobile phones. A temporary code (one-time password, or OTP) is sent to their phones and used to authenticate them. For more information, see [Phone Number Login](https://developers.gigya.com/display/GD/Phone+Number+Login). |
 | Social Login | Login with Facebook, Google, Apple, Twitter, LinkedIn, etc..., and create a Gigya account with the data obtained from that [Social Provider](https://developers.gigya.com/display/GD/Social+Login). |
-| Link Accounts | With social, enable [Linking Accounts](https://developers.gigya.com/display/GD/Linking+Social+Accounts) to merge them into a single one, associated with two identities, rather than maintaining two separate accounts. |
+| Link Accounts | With social accounts, enable [Linking](https://developers.gigya.com/display/GD/Linking+Social+Accounts) feature to merge them into a single one, associated with two identities, rather than maintaining two separate accounts. |
 
 
 #### Features
@@ -69,16 +68,15 @@ Global features (Cross-flow capabilities):
 
 ## Documentation
 
-Take a look at the [Basic Guide](docs/basic.md) to understand how to configure and customize your project. If you want to go deeper and understand the implementation basics, please go to the [Advanced Guide](docs/advanced.md), to these and many other details.
+Take a look at the [Basic Guide](docs/basic.md) to understand how to configure and customize your project. If you want to go deeper and understand the implementation basics, please go to the [Advanced Guide](docs/advanced.md), where you will find these and many other details.
 
 This documentation is bundled with the project, making it available for offline reading and provides a useful starting point for any documentation you want to write about your project.
 
-All relevant code is commented internally, function by function, making easier the integration with other projects.
-
+All relevant code (html, js, and css/less) is commented internally, so it can help developers understand how it was done and make it easier to integrate with other projects.
 
 ## Additional Gigya Links
 
-Please follow this [Link](docs/links.md) to find more related SAP CDC documentation about the configuration/enhancement of this site.
+Please follow this [link](docs/links.md) to find more related SAP CDC documentation about the configuration/enhancement of this site.
 
 ## Browser support
 
