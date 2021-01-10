@@ -16,7 +16,7 @@ The navigation bar will reflect the user's current status (if it is logged or no
 
 All Gigya related links are fully functional, allowing us to register, login, edit the profile, and in general, interact with Gigya WebSDK. When logged in, a list of the user's identity providers is shown in the navigation bar.
 
-![Bar Example](img/basic/1-logged-short-bar.png)
+![Bar Example](img/basic/0-example-bar-1.png)
 
 
 ## 2. Configuration of the project (config.json)
