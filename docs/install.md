@@ -28,7 +28,7 @@ You're done here.
 
 Now that we have a site in Gigya, we can include it in a web project. To do it:
 
-1. Download or clone the project into your web folder.
+1. [Download](https://github.com/gigya/cdc-starter-kit/releases) or clone the project into your web folder.
 
 ```
 git clone https://github.com/gigya/cdc-starter-kit my-gigya-demo-app
