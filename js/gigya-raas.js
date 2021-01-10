@@ -3,12 +3,7 @@
  * # Gigya RaaS JS File
  * ---------------------
  *
- * This file includes all functions that interact with Gigya screensets, except the main Gigya initialization
- * function, **onGigyaServiceReady**, where we check if the user is logged or not, and show different sections
- * depending on that state.
- *
- * Find more details about **onGigyaServiceReady** here:
- * [onGigyaServiceReady](https://developers.gigya.com/display/GD/onGigyaServiceReady+Template)
+ * This file includes all functions that interact with Gigya screensets, events and WebSDK capabilities.
  *
  * The included operations OOTB are:
  *
@@ -43,7 +38,7 @@
  * [Global Events](https://developers.gigya.com/display/GD/Events#Events-GlobalApplicationEventsGlobalApplicationEvents)
  *
  *
- * @link   https://github.com/juanatsap/gigya-starter-kit/blob/master/js/gigya-raas.js
+ * @link   https://github.com/gigya/cdc-starter-kit/blob/master/js/gigya-raas.js
  * @file   This file defines the main functions to make the demo site work.
  * @author juan.andres.moreno@sap.com
  * @since  1.0.0

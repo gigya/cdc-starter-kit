@@ -6,7 +6,7 @@
  * This file includes some util and HTML functions to make the site fully functional, and to show/hide elements
  * depending if the user is logged or not.
  *
- * @link   https://github.com/juanatsap/gigya-starter-kit/blob/master/js/main.js
+ * @link   https://github.com/gigya/cdc-starter-kit/blob/master/js/engine.js
  * @file   This file defines the main functions to make the demo site work.
  * @author juan.andres.moreno@sap.com
  * @since  1.0.0
@@ -23,7 +23,7 @@ var sessionStatus = 'loggedOut'; // possible values: loggedOut, loggedIn
 /**
 * Loads the configuration file into the window object to be used later on to customize the UI
 */
-function initDemo() {
+function initDemoSite() {
 
     // Read configuration file and load it
     fetch('./config/config.json')
@@ -31,16 +31,16 @@ function initDemo() {
         .then((out) => {
 
             // Init webpage
-            loadConfig(out);
+            loadConfigFromFile(out);
 
         }).catch((err) => { return console.error(err); });
 }
 
 /**
- * [loadConfig description]
- * @param  {[type]} out [description]
+ * Loads the site UI using the configuration file coming as parameter
+ * @param  {object} out the config from the file
  */
-function loadConfig(out) {
+function loadConfigFromFile(out) {
 
     // Store config in window global (:-s)
     console.log('Config file: ');
@@ -54,7 +54,7 @@ function loadConfig(out) {
     window.config = out;
 
     // Start UI;
-    setUI(out);
+    renderUI(out);
 
     // Check if user is logged in or not
     gigya.accounts.getAccountInfo({ include:'emails, profile', callback: redirectIfLogged });
@@ -122,15 +122,57 @@ function gotoHome() {
  * Set all UI conponents using the configuration object and the state of the user
  * @param {object} config Configuration object
  */
-function setUI(config) {
-    //    const config = window.config;
+function renderUI(config) {
 
+    // First, we render the navbar from file, and once loaded, we start with all the rest of the renders
+    const path = './html/skeleton/navbar.html';
+    fetch(path)
+        .then((res) => { return res.text(); })
+        .then((out) => {
+
+            // With the html of the nabvar loaded, we start rendering all elements
+
+            // 1. Render Navbar
+            renderNavbar(out);
+
+            // 2. Render Main site data (Title, description, image, ...)
+            renderMainSiteData(config);
+
+            // 3. Set Active language flag
+            setActiveLanguageFlag(config);
+
+            // 4. CSS from the config file
+            includeConfigCss(config);
+
+        }).catch((err) => { return console.error(err); });
+}
+
+/**
+ * Render the nabvar
+ * @param {object} out The html of the navbar
+ */
+function renderNavbar(out){
     // Adding Nabvar
-    var link = document.querySelector('link[rel="import"]');
-    // Clone the <template> in the import.
-    var template = link.import.querySelector('template');
-    var clone = document.importNode(template.content, true);
-    document.querySelector('#main-navbar .container').appendChild(clone);
+    var outAsElement = htmlToElement(out);
+    document.querySelector('#main-navbar .container').innerHTML = outAsElement.innerHTML;
+}
+
+/**
+ * @param {String} html representing a single element
+ * @returns {Element}
+ */
+function htmlToElement(html) {
+    var template = document.createElement('template');
+    var htmlTrimmed = html.trim(); // Never return a text node of whitespace as the result
+    template.innerHTML = htmlTrimmed;
+    return template.content.firstChild;
+}
+
+/**
+ * Render the title, description, image and datacenter + api key for the site
+ * @param {object} config The configuration object
+ */
+function renderMainSiteData(config){
 
     /* CHANGE SITE LOGO / MENU LOGO */
     var srcMainPic = 'img/logos/' + config.main_pic;
@@ -166,12 +208,18 @@ function setUI(config) {
     document.title = config.site_title;
     query('link[rel*="icon"]').href = 'img/logos/' + config.menu_pic;
 
-
     /* SET MAIN LINK */
     query('.navbar-item').href = config.main_url;
 
-    /* SET CORRECT FLAG IN FUNCTION OF LANGUAGE */
+}
 
+/**
+ * Set the correct language and tooltip for the language
+ * @param {object} config The configuration object
+ */
+function setActiveLanguageFlag(config) {
+
+    /* SET CORRECT FLAG IN FUNCTION OF LANGUAGE */
 
     // Set language name from language code
     const lang = config.lang.replaceAll('-inf', '');
@@ -197,7 +245,6 @@ function setUI(config) {
                 }
             });
 
-
             // Tooltip
             queryAll('.flag-container').forEach((item, i) => {
                 item.setAttribute('aria-label', langName);
@@ -211,7 +258,13 @@ function setUI(config) {
             });
 
         }).catch((err) => { return console.error(err); });
+}
 
+/**
+ * Sets the css to adapt to the configuration of the site (config/config.json)
+ * @param {object} config The configuration object
+ */
+function includeConfigCss(config) {
 
     /* SET BACKGROUND & BACKGROUND LINK COLOR HOVER FOR NAVBAR */
     var css = '';
@@ -405,6 +458,7 @@ function showOrHighlightLoginScreen() {
     }
 }
 
+
 /** *****************************************************/
 //                3. LANGUAGE FUNCTIONS
 /** *****************************************************/
@@ -486,6 +540,7 @@ function toggleLanguageDropDown() {
         }
     });
 }
+
 
 /** *****************************************************/
 //                      4. UTILS
