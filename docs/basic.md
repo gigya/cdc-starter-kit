@@ -81,6 +81,6 @@ Although the site is designed as a __Single Page Application__ (located in ```/i
 
 We can see the Update Profile form for the logged user on this page, where we can edit some information and store it again in Gigya. This is a protected page, meaning that if the user is not logged and try to access it, it will be redirected to the ```/ìndex.html``` page to re-login or register a new user.
 
-## 4. What else.
+## 4. Next steps.
 
 If you want to know how to enhance/ extend this site's capabilities, with elements like the structure, how it works, details about the styles, etc., read the [Advanced Guide](advanced.md).
