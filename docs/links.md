@@ -2,11 +2,6 @@
 
 Find here useful links to Gigya documentation:
 
-###### SITE CONFIGURATION
-- [Console Administration](https://developers.gigya.com/display/GD/Console+Administration)
-- [Global Access](https://developers.gigya.com/display/GD/Global+Access)
-- [Changes that may require your action](https://developers.gigya.com/display/GD/Changes+That+May+Require+Your+Action)
-
 ###### WEB SDK
 - [Web SDK](https://developers.gigya.com/display/GD/Web+SDK)
 - [Using the Web SDK](https://developers.gigya.com/display/GD/Using+The+Web+SDK)
@@ -26,11 +21,6 @@ Find here useful links to Gigya documentation:
 - [Accounts Data Object](https://developers.gigya.com/display/GD/Accounts+Data+Object)
 - [Encrypted Fields](https://developers.gigya.com/display/GD/Encrypted+Fields)
 
-###### CONSENT MANAGEMENT
-- [Consent Management](https://developers.gigya.com/display/GD/Consent+Management)
-- [Consent Vault](https://developers.gigya.com/display/GD/Consent+Vault)
-- [Communication Preferences](https://developers.gigya.com/display/GD/Communication+Preferences)
-
 ###### LITE REGISTRATION
 - [Lite Registration](https://developers.gigya.com/display/GD/Lite+Registration)
 - [Preference Center](https://developers.gigya.com/display/GD/Preference+Center)
@@ -40,6 +30,11 @@ Find here useful links to Gigya documentation:
     - [Facebook](https://developers.gigya.com/display/GD/Facebook)
     - [Google](https://developers.gigya.com/display/GD/Google)
     - [Apple](https://developers.gigya.com/display/GD/Apple)
+
+###### CONSENT MANAGEMENT
+- [Consent Management](https://developers.gigya.com/display/GD/Consent+Management)
+- [Consent Vault](https://developers.gigya.com/display/GD/Consent+Vault)
+- [Communication Preferences](https://developers.gigya.com/display/GD/Communication+Preferences)
 
 ###### FEDERATION
 - [SAML](https://developers.gigya.com/display/GD/SAML)
@@ -60,3 +55,8 @@ Find here useful links to Gigya documentation:
 ###### SSL & CERTIFICATES
 - [Certificate Provisioning](https://developers.gigya.com/display/GD/Certificate+Provisioning)
 - [Obtaining and Setting Up Your SSL Certificate](https://developers.gigya.com/display/GD/Obtaining+and+Setting+Up+Your+SSL+Certificate)
+
+###### SITE CONFIGURATION
+- [Console Administration](https://developers.gigya.com/display/GD/Console+Administration)
+- [Global Access](https://developers.gigya.com/display/GD/Global+Access)
+- [Changes that may require your action](https://developers.gigya.com/display/GD/Changes+That+May+Require+Your+Action)
