@@ -235,7 +235,7 @@ function setActiveLanguageFlag(config) {
         .then((out) => {
 
             // Start demo page
-            console.log(out);
+            // console.log(out);
             // debugger;
             queryAll('.language-dropdown .dropdown-content').forEach((flagsContainer, i) => {
                 for (var j = 0; j < out.languages.length; j++) {
