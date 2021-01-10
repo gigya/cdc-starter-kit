@@ -124,37 +124,30 @@ function gotoHome() {
  */
 function renderUI(config) {
 
-    // First, we render the navbar from file, and once loaded, we start with all the rest of the renders
-    const path = './html/skeleton/navbar.html';
-    fetch(path)
-        .then((res) => { return res.text(); })
-        .then((out) => {
+    // 1. Render Navbar
+    renderNavbar();
 
-            // With the html of the nabvar loaded, we start rendering all elements
+    // 2. Render Main site data (Title, description, image, ...)
+    renderMainSiteData(config);
 
-            // 1. Render Navbar
-            renderNavbar(out);
+    // 3. Set Active language flag
+    setActiveLanguageFlag(config);
 
-            // 2. Render Main site data (Title, description, image, ...)
-            renderMainSiteData(config);
-
-            // 3. Set Active language flag
-            setActiveLanguageFlag(config);
-
-            // 4. CSS from the config file
-            includeConfigCss(config);
-
-        }).catch((err) => { return console.error(err); });
+    // 4. CSS from the config file
+    includeConfigCss(config);
 }
 
 /**
  * Render the nabvar
  * @param {object} out The html of the navbar
  */
-function renderNavbar(out){
+function renderNavbar(){
     // Adding Nabvar
-    var outAsElement = htmlToElement(out);
-    document.querySelector('#main-navbar .container').innerHTML = outAsElement.innerHTML;
+    var link = document.querySelector('link[rel="import"]');
+    // Clone the <template> in the import.
+    var template = link.import.querySelector('template');
+    var clone = document.importNode(template.content, true);
+    document.querySelector('#main-navbar .container').appendChild(clone);
 }
 
 /**
