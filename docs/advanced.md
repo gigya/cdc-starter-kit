@@ -81,53 +81,7 @@ This section shows the project file structure with a brief explanation of the ma
 ## 2. How it works
 
 This project is a simple HTML + JS + CSS project, although it has some libraries that empower/enhance the standard web capabilities. In this section we detail all of them.
-
-### 2.1. Styles
-Although it uses css at the end, the project styles are built using [less](https://lesscss.org), generating a file called ```demo.css```, which is the one used in the main web pages of the app: ```/ìndex.html``` and ```èdit-profile.html```.
-
-Apart from that, the project uses some external CSS libraries to enhance/improve the project look and feel:
-
-1. **Bulma CSS Framework**:  Simple, elegant, and modern CSS framework. [Link](https://bulma.io/).
-
-1. **Bulma Social Buttons**: Social Buttons and Colors for Bulma. [Link](https://aldi.github.io/bulma-social/).
-1. **Friendkit**: Social Media UI Kit. [Link](https://themeforest.net/item/friendkit-social-media-ui-kit/24621825?irgwc=1&clickid=XyNzMA1WgxyLUPTwUx0Mo3EoUkEy6pS0t0%3A5So0&iradid=275988&irpid=1288816&iradtype=ONLINE_TRACKING_LINK&irmptype=mediapartner&mp_value1=&utm_campaign=af_impact_radius_1288816&utm_medium=affiliate&utm_source=impact_radius).
-1. **Flag Icons**: A collection of all country flags in SVG — plus the CSS for easier integration. [Link](https://github.com/lipis/flag-icon-css).
-1. **Hints CSS**: A pure CSS tooltip library. [Link](https://kushagra.dev/lab/hint/).
-1. **IonIcons**: Premium designed icons for use in web, iOS, Android, and desktop apps. [Link](https://ionicons.com/v4/).
-1. **Fonts**: _Roboto_ and _Questrial_ fonts added.
-
-
-### 2.2. JavaScript
-The project uses vanilla javascript  for all their interactions, although it uses [handlebars](https://handlebars.org) as template engine to simplify the pages and make them more meaningful. There are three main files that manage all the website:
-
-1. **gigya-raas.js**: This file contains all typical gigya functions in a RaaS process. You will find here the triggers for the login, the registration, or the reset password process. __This is the file you want to copy in your project to have a set of default gigya functions__.
-
-1. **engine.js**: This file contains all the logic needed to make the site work. All these core functions, like managing the sessions, re-painting the screen, dealing with dates, etc., are included in this file.
-
-1. **main.js**: This file contains the main Gigya trigger ```onGigyaServiceReady```. When present, this function is triggered automatically once Gigya it's fully loaded (in ```index.html```). This is the content of the file:
-
-```javascript
-function onGigyaServiceReady() {
-
-    /* Check if the user was previously logged in */
-    if (typeof gigya === 'undefined') {
-        alert('Gigya is not loaded on this page :(');
-    } else {
-
-        /* Load Configuration from setup/config.json */
-        initDemoSite();
-    }
-}
-
-````
-
-The```initDemoSite``` function (inside ```js/engine.js```), reads the configuration file placed into (```config/config.json```) and take the values to initialize the site.
-
-> **DISCLAIMER**: This framework doesn't pretend to be a good example / good practice for a real website. The objective here is to learn how Gigya works. Therefore aspects like security, UX, speed, responsivity, etc., are far from ideal.
->
-> Please, use your own web technology when integrating Gigya, and think of this as a simplification of a real use case._
-
-### 2.3. HTML
+### 2.1. HTML
 
 This is what we call "One Page Application" meaning that all interactions will occur under the same page: ```index.html```. The control of the status it's stored and calculated each time using the javascript engine, re-painting in the screen the elements depending on if we are logged or not.
 
@@ -260,7 +214,50 @@ The navigation bar and the sample content are _injected_ using the [handlebars](
 
 The ```edit-profile.html``` page it's very similar to this one, except for the fact that it hasn't ```non-logged``` elements, because it's a protected page. In case you try to access it without a session, you will be redirected to the login process again.
 
+### 2.2. JavaScript
+The project uses vanilla javascript  for all their interactions, although it uses [handlebars](https://handlebars.org) as template engine to simplify the pages and make them more meaningful. There are three main files that manage all the website:
 
-## 5. What else.
+1. **gigya-raas.js**: This file contains all typical gigya functions in a RaaS process. You will find here the triggers for the login, the registration, or the reset password process. __This is the file you want to copy in your project to have a set of default gigya functions__.
+
+1. **engine.js**: This file contains all the logic needed to make the site work. All these core functions, like managing the sessions, re-painting the screen, dealing with dates, etc., are included in this file.
+
+1. **main.js**: This file contains the main Gigya trigger ```onGigyaServiceReady```. When present, this function is triggered automatically once Gigya it's fully loaded (in ```index.html```). This is the content of the file:
+
+```javascript
+function onGigyaServiceReady() {
+
+    /* Check if the user was previously logged in */
+    if (typeof gigya === 'undefined') {
+        alert('Gigya is not loaded on this page :(');
+    } else {
+
+        /* Load Configuration from setup/config.json */
+        initDemoSite();
+    }
+}
+
+````
+
+The```initDemoSite``` function (inside ```js/engine.js```), reads the configuration file placed into (```config/config.json```) and take the values to initialize the site.
+
+> **DISCLAIMER**: This framework doesn't pretend to be a good example / good practice for a real website. The objective here is to learn how Gigya works. Therefore aspects like security, UX, speed, responsivity, etc., are far from ideal.
+>
+> Please, use your own web technology when integrating Gigya, and think of this as a simplification of a real use case._
+
+### 2.3. Styles
+Although it uses css at the end, the project styles are built using [less](https://lesscss.org), generating a file called ```demo.css```, which is the one used in the main web pages of the app: ```/ìndex.html``` and ```èdit-profile.html```.
+
+Apart from that, the project uses some external CSS libraries to enhance/improve the project look and feel:
+
+1. **Bulma CSS Framework**:  Simple, elegant, and modern CSS framework. [Link](https://bulma.io/).
+
+1. **Bulma Social Buttons**: Social Buttons and Colors for Bulma. [Link](https://aldi.github.io/bulma-social/).
+1. **Friendkit**: Social Media UI Kit. [Link](https://themeforest.net/item/friendkit-social-media-ui-kit/24621825?irgwc=1&clickid=XyNzMA1WgxyLUPTwUx0Mo3EoUkEy6pS0t0%3A5So0&iradid=275988&irpid=1288816&iradtype=ONLINE_TRACKING_LINK&irmptype=mediapartner&mp_value1=&utm_campaign=af_impact_radius_1288816&utm_medium=affiliate&utm_source=impact_radius).
+1. **Flag Icons**: A collection of all country flags in SVG — plus the CSS for easier integration. [Link](https://github.com/lipis/flag-icon-css).
+1. **Hints CSS**: A pure CSS tooltip library. [Link](https://kushagra.dev/lab/hint/).
+1. **IonIcons**: Premium designed icons for use in web, iOS, Android, and desktop apps. [Link](https://ionicons.com/v4/).
+1. **Fonts**: _Roboto_ and _Questrial_ fonts added.
+
+## 3. What else.
 
 Although the site it's fully functional, there is still much more content to cover. If you want to know how to enhance/ extend the capabilities of this site, with elements like Captcha, Events, Registration Completion, Extensions, to understand how to integrate consents, etc., take a look at the [Links Page](links.md), where you will find how to implement many of these improvements.
