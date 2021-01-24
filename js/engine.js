@@ -111,7 +111,8 @@ function gotoUnloggedPage() {
  * Goes to the home page (defined in parameter 'main_url' inside config/config.json)
  */
 function gotoHome() {
-    window.location.href = window.config.main_url.replace('http://', 'https://');
+    // window.location.href = window.config.main_url.replace('http://', 'https://');
+    window.location.href = window.config.main_url;
 }
 
 
