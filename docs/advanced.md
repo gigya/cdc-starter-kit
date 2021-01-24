@@ -22,7 +22,7 @@ This section shows the project file structure with a brief explanation of the ma
 ├── docs
 │   ├── advanced.md
 │   ├── basic.md
-│   ├── img/
+│   ├── img/*
 │   ├── install.md
 │   └── links.md
 |
@@ -71,7 +71,7 @@ This section shows the project file structure with a brief explanation of the ma
 3. __docs__: This set of docs.
 4. __html__: Main HTML content of the site. The navigation bar and logged sample content it's stored here.
 5. __img__: It contains all the images for the project.
-6. __js__: It contains the files with the logic of the site. It has a specific file for Gigya functions, another one to make the site demo work, and a last one (main.js), that will start all the process.
+6. __js__: It contains the files with the logic of the site. It has a specific file for Gigya functions (gigya-raas.js), another one to make the site demo work (engine.js), and a last one (main.js), that will start all the process.
 7. __less__: css files are automatically generated using these less files as source. Using a proper plugin, any modification over these files will generate a new css set of files in the /css folder.
 8. __index.html__: This is the main page of the site. It contains all the elements needed to manage both logged and not logged states for the user.
 9. __edit-profile.html__: The edit profile page. This page will be shown only for logged in users, being redirected to the index.html page when the user's session is not present.
