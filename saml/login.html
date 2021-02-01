@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script type="text/javascript" src="http://cdn.gigya.com/js/gigya.js?apiKey=3_9dOsZf5aTJz_NjvOCbN3drROVnldaAk7YlklIBFDzdCb2u39DwTCFYbbb6FkFL0O">
+        {'enableSSOToken': true}
+        </script>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script>
+            gigya.socialize.addEventHandlers({
+                onLogin: function() {
+                    console.log('saml redirection...');
+                    gigya.fidm.saml.continueSSO();
+                }
+            });
+
+            gigya.accounts.showScreenSet({
+                    screenSet: 'Default-RegistrationLogin',
+                    containerID: "container",
+                    sessionExpiration: '20000'
+            });
+        </script>
+    </body>
+</html>
