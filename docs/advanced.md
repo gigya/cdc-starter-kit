@@ -55,6 +55,12 @@ This section shows the project file structure with a brief explanation of the ma
 │           ├── layout.less
 │           └── variables.less
 |
+├── saml
+│   ├── login.html
+│   ├── logout.html
+│   ├── proxy.html
+│   └── error.html
+│
 ├── CONTRIBUTING.md
 ├── LICENSE.txt
 ├── NOTICE.txt
@@ -73,6 +79,7 @@ This section shows the project file structure with a brief explanation of the ma
 5. __img__: It contains all the images for the project.
 6. __js__: It contains the files with the logic of the site. It has a specific file for Gigya functions (gigya-raas.js), another one to make the site demo work (engine.js), and a last one (main.js), that will start all the process.
 7. __less__: css files are automatically generated using these less files as source. Using a proper plugin, any modification over these files will generate a new css set of files in the /css folder.
+7. __saml__: files needed if you want to use this site as Service Provider in SAML.
 8. __index.html__: This is the main page of the site. It contains all the elements needed to manage both logged and not logged states for the user.
 9. __edit-profile.html__: The edit profile page. This page will be shown only for logged in users, being redirected to the index.html page when the user's session is not present.
 10. __Other files__: The rest of the files are or README files, or editor configuration files, like the .eslintrc.js. Git files are also there, and they can all be removed, and the project will work as expected.
