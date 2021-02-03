@@ -21,8 +21,8 @@ var sessionStatus = 'loggedOut'; // possible values: loggedOut, loggedIn
 //                 1. DEMO CORE FUNCTIONS
 /** *****************************************************/
 /**
-* Loads the configuration file into the window object to be used later on to customize the UI
-*/
+ * Loads the configuration file into the window object to be used later on to customize the UI
+ */
 function initDemoSite() {
 
     // Read configuration file and load it
@@ -57,7 +57,7 @@ function loadConfigFromFile(out) {
     renderUI(out);
 
     // Check if user is logged in or not
-    gigya.accounts.getAccountInfo({ include:'emails, profile', callback: redirectIfLogged });
+    gigya.accounts.getAccountInfo({ include: 'emails, profile', callback: redirectIfLogged });
 }
 
 /**
@@ -152,7 +152,7 @@ function renderUI(config) {
  * Render the nabvar
  * @param {object} out The html of the navbar
  */
-function renderNavbar(out){
+function renderNavbar(out) {
     // Adding Nabvar
     var outAsElement = htmlToElement(out);
     document.querySelector('#main-navbar .container').innerHTML = outAsElement.innerHTML;
@@ -173,7 +173,7 @@ function htmlToElement(html) {
  * Render the title, description, image and datacenter + api key for the site
  * @param {object} config The configuration object
  */
-function renderMainSiteData(config){
+function renderMainSiteData(config) {
 
     /* CHANGE SITE LOGO / MENU LOGO */
     var srcMainPic = 'img/logos/' + config.main_pic;
@@ -225,7 +225,7 @@ function setActiveLanguageFlag(config) {
     // Set language name from language code
     const lang = config.lang.replaceAll('-inf', '');
     if (Intl.DisplayNames) {
-        languageNames = new Intl.DisplayNames([ lang ], { type: 'language' });
+        languageNames = new Intl.DisplayNames([lang], { type: 'language' });
         langName = capitalize(languageNames.of(lang));
     } else {
         langName = lang.toUpperCase();
@@ -305,6 +305,7 @@ function showLoggedHTML(user) {
     var uid = user.UID;
     var email = user.profile.email;
     var username = user.profile.firstName;
+    username = typeof username !== 'undefined' ? username : '(NO NAME)';
 
     /* Change the username in the web */
     const siteTitles = queryAll('.site-title');
@@ -360,6 +361,11 @@ function showLoggedHTML(user) {
         socialProvidersAsArraySanitized.push(oneSocialProviderSanitized);
         const newSocialIconChild = document.createElement('ion-icon');
         var iconName = 'logo-' + oneSocialProviderSanitized.toLowerCase();
+
+        // SAML Case
+        if (provider.indexOf('saml-') === 0) {
+            iconName = 'key';
+        }
         iconName = iconName === 'logo-site' ? 'browsers-outline' : iconName;
         newSocialIconChild.setAttribute('name', iconName);
         newSocialIconChild.classList.add('social-provider-icon');
@@ -473,7 +479,7 @@ function showOrHighlightLoginScreen() {
 function getFlagIconFor(languages, language) {
     for (var i = 0; i < languages.length; i++) {
         const oneLanguage = languages[i];
-        if(oneLanguage.key === language){
+        if (oneLanguage.key === language) {
             return oneLanguage.flag;
         }
     }
@@ -603,8 +609,11 @@ function getDatacenterFromSite() {
 function sanitizeSocial(provider) {
     // Label identity provi0der
     var identityProviderLabel = query('.provider-label');
-    var replaceChars = { ',':', ', 'googleplus':'Google', 'saml-':'SAML' };
+    var replaceChars = { ',': ', ', 'googleplus': 'Google', 'saml-': 'saml-' };
     var identityProviderSanitized = provider.replace(/,|googleplus|saml-/g, function(match) { return replaceChars[match]; });
     var identityProviderSanitizedAndCapitalized = capitalize(identityProviderSanitized);
+    if (provider.indexOf('saml-') === 0) {
+        return identityProviderSanitized;
+    }
     return identityProviderSanitizedAndCapitalized;
 }

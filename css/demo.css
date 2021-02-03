@@ -72,7 +72,7 @@ button {
 }
 /* GIGYA FIXES */
 .gigya-screen-caption {
-  color: #999!important;
+  color: #999 !important;
   text-align: center;
   width: 100%!important;
   font-family: 'Questrial', sans-serif !important;
@@ -80,8 +80,8 @@ button {
   margin-top: 50px!important;
   padding-bottom: 20px!important;
   margin-bottom: -30px !important;
-  border-bottom-color: #f1f1f1!important;
-  font-size: 1.4em!important;
+  border-bottom-color: #f1f1f1 !important;
+  font-size: 1.4em !important;
 }
 /* - SKELETON - */
 [class*=hint--][aria-label]:after {
@@ -139,14 +139,17 @@ button {
   box-shadow: 0px 0px 5px #ccc;
 }
 .navbar ion-icon.is-site {
-  background: #f1ab2b!important;
+  background: #f1ab2b !important;
 }
 .navbar ion-icon.is-apple {
-  background: #333!important;
+  background: #333 !important;
 }
 .navbar ion-icon.is-amazon {
-  background: #333!important;
-  color: #febd69!important;
+  background: #333 !important;
+  color: #febd69 !important;
+}
+.navbar ion-icon[class*='is-saml'] {
+  color: #f1ab2b !important;
 }
 .navbar .icon-link:hover ion-icon {
   color: whitesmoke!important;
@@ -168,7 +171,7 @@ button {
   top: 3px;
 }
 .navbar .navbar-item.is-separator {
-  opacity: .4;
+  opacity: 0.4;
   cursor: default;
 }
 .navbar .navbar-item .button {
@@ -182,7 +185,7 @@ button {
 .navbar .navbar-item .span-apikey,
 .navbar .navbar-item .span-datacenter,
 .navbar .navbar-item .span-providers {
-  font-size: .7em;
+  font-size: 0.7em;
   padding: 0 10px;
 }
 .navbar .navbar-item .icon-link,
@@ -202,7 +205,7 @@ button {
   max-height: 30px!important;
 }
 .navbar .flag-icon {
-  border: 2px solid #555!important;
+  border: 2px solid #555 !important;
   background-size: cover;
   border-radius: 50px;
   width: 1.5em;
@@ -243,7 +246,7 @@ button {
   margin-top: 35px;
 }
 .hero section.header .login-hr {
-  margin: .1rem 0;
+  margin: 0.1rem 0;
   background: transparent;
 }
 .hero .box {
@@ -282,8 +285,8 @@ button {
 }
 .hero .view-wrapper {
   padding: 0px;
-  -webkit-transition: all .3s;
-  transition: all .3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
 }
 .navbar-menu {
   display: none;

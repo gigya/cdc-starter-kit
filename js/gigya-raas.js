@@ -55,8 +55,8 @@ function registerWithRaaS(containerID) {
 
     /* Launch Screenset */
     gigya.accounts.showScreenSet({
-        screenSet:'Default-RegistrationLogin',
-        startScreen:'gigya-register-screen',
+        screenSet: 'Default-RegistrationLogin',
+        startScreen: 'gigya-register-screen',
         lang: window.config.lang,
         containerID, // <-- if we omit this property the screen it's shown in a pop-up
 
@@ -82,10 +82,13 @@ function loginWithRaaS(containerID) {
 
     /* Launch Screenset */
     gigya.accounts.showScreenSet({
-        screenSet:'Default-RegistrationLogin',
-        startScreen:'gigya-login-screen',
+        screenSet: 'Default-RegistrationLogin',
+        startScreen: 'gigya-login-screen',
         lang: window.config.lang,
-        containerID
+        containerID,
+
+        // Events..
+        // onAfterScreenLoad
     });
 
     /* Actions associated to events */
@@ -103,8 +106,8 @@ function editProfileWithRaaS(containerID) {
 
     /* Launch Screenset */
     gigya.accounts.showScreenSet({
-        screenSet:'Default-ProfileUpdate',
-        startScreen:'gigya-update-profile-screen',
+        screenSet: 'Default-ProfileUpdate',
+        startScreen: 'gigya-update-profile-screen',
         lang: window.config.lang,
         containerID,
         onAfterSubmit: gotoHome
@@ -114,12 +117,12 @@ function editProfileWithRaaS(containerID) {
 /**
  * This function shows the lite registration form in a popup.
  * @param  {string} containerID The container ID for the lite registration page
-*/
+ */
 function liteRegisterWithRaaS(containerID) {
 
     /* Launch Screenset */
     gigya.accounts.showScreenSet({
-        screenSet:'Default-LiteRegistration',
+        screenSet: 'Default-LiteRegistration',
         startScreen: 'gigya-subscribe-with-email-screen',
         lang: window.config.lang,
         containerID
@@ -134,8 +137,8 @@ function changePasswordWithRaaS(containerID) {
 
     // Launch Screenset
     gigya.accounts.showScreenSet({
-        screenSet:'Default-ProfileUpdate',
-        startScreen:'gigya-change-password-screen',
+        screenSet: 'Default-ProfileUpdate',
+        startScreen: 'gigya-change-password-screen',
         lang: window.config.lang,
         containerID
     });
@@ -169,11 +172,10 @@ function logoutWithRaaS(callBackFunction) {
 //       GIGYA SCREENSET EVENT FUNCTIONS
 /** **************************************************/
 /**
-* A reference to a function that will be called before a new screen is rendered.
-* @param  {object} event Form Event object
-*/
-function onAfterScreenLoad(event) {
-}
+ * A reference to a function that will be called before a new screen is rendered.
+ * @param  {object} event Form Event object
+ */
+function onAfterScreenLoad(event) {}
 
 /**
  * Event handler function that will be called before a form is submitted.
@@ -188,8 +190,7 @@ function onBeforeSubmit(event) {
  * Event handler function that will be called when a form is submitted.
  * @param  {object} event Form Event object
  */
-function onSubmit(event) {
-}
+function onSubmit(event) {}
 
 /** **************************************************/
 //       GIGYA GLOBAL EVENT FUNCTIONS
@@ -202,7 +203,7 @@ function onLogin(response) {
 
     // Get the user information, redirecting if needed to the logged in page
     if (response.profile !== null) {
-        gigya.accounts.getAccountInfo({ include:'emails, profile', callback: redirectIfLogged });
+        gigya.accounts.getAccountInfo({ include: 'emails, profile', callback: redirectIfLogged });
     }
 }
 
