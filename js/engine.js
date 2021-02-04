@@ -363,7 +363,7 @@ function showLoggedHTML(user) {
         var iconName = 'logo-' + oneSocialProviderSanitized.toLowerCase();
 
         // SAML Case
-        if (provider.indexOf('saml-') === 0) {
+        if (oneSocialProviderSanitized.indexOf('saml-') === 0) {
             iconName = 'key';
         }
         iconName = iconName === 'logo-site' ? 'browsers-outline' : iconName;
