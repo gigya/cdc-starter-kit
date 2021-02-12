@@ -8,9 +8,9 @@
     // background: whitesmoke;
     // color: #333;
 }
-[class*=hint--]:after {
+// [class*=hint--]:after {
 // background:#383838;color:#fff; border-color: blue;
-}
+// }
 
 
 /* NAVBAR */
@@ -185,6 +185,42 @@
         flex-grow: 1;
         flex-shrink: 0;
         padding: 5rem 1.5rem;
+        
+        // Logout effect
+        filter: blur(0px);
+        -webkit-transition: filter 1.0s;
+        transition: filter 1.0s;
+
+        &.blurred {
+            -webkit-transition: filter 1.0s;
+            transition: filter 1.0s;
+            filter: blur(1px);
+
+            &::after {
+                content: "Logging out...";
+                background-color: #FFBA10;
+                border-color: black;
+                border-style: dotted;
+                width: 100%;
+                border: 2px solid red;
+                position: absolute;
+                text-align: center;
+                font-size: 2em;
+                color: #333;
+                    border: solid 3px #eee;
+                    border-bottom-color: #EF6565;
+                    border-radius: 50%;
+                    content: "";
+                    height: 40px;
+                    left: 50%;
+                    position: absolute;
+                    top: 50%;
+                    transform: translate3d(-50%, -50%, 0);
+                    width: 40px;
+
+            }
+        }
+
     }
     // Far from the top
     margin-top: 0px;

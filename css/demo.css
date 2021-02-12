@@ -234,6 +234,35 @@ button {
   flex-grow: 1;
   flex-shrink: 0;
   padding: 5rem 1.5rem;
+  filter: blur(0px);
+  -webkit-transition: filter 1s;
+  transition: filter 1s;
+}
+.hero .hero-body.blurred {
+  -webkit-transition: filter 1s;
+  transition: filter 1s;
+  filter: blur(1px);
+}
+.hero .hero-body.blurred::after {
+  content: "Logging out...";
+  background-color: #FFBA10;
+  border-color: black;
+  border-style: dotted;
+  width: 100%;
+  border: 2px solid red;
+  text-align: center;
+  font-size: 2em;
+  color: #333;
+  border: solid 3px #eee;
+  border-bottom-color: #EF6565;
+  border-radius: 50%;
+  content: "";
+  height: 40px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  width: 40px;
 }
 .hero section.header img.site-logo {
   display: inline-block;

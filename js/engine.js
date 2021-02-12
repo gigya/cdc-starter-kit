@@ -15,7 +15,7 @@
 // -- 0. window.document Shorthands
 const query = document.querySelector.bind(document);
 const queryAll = document.querySelectorAll.bind(document);
-var sessionStatus = 'loggedOut'; // possible values: loggedOut, loggedIn
+const logConfigFile = true; // Shows/hides config file into the console
 
 /** *****************************************************/
 //                 1. DEMO CORE FUNCTIONS
@@ -43,8 +43,10 @@ function initDemoSite() {
 function loadConfigFromFile(out) {
 
     // Store config in window global (:-s)
-    console.log('Config file: ');
-    console.table(out);
+    if (logConfigFile) {
+        console.log('Config file: ');
+        console.table(out);
+    }
 
     // Get proper language
     const storedLanguage = getLanguage();
@@ -69,7 +71,6 @@ function redirectIfLogged(user) {
 
     /* If not logged, show login form */
     if (!user.UID) {
-        sessionStatus = 'loggedOut';
 
         console.log('You are not logged in.');
 
@@ -77,7 +78,6 @@ function redirectIfLogged(user) {
         gotoUnloggedPage();
 
     } else {
-        sessionStatus = 'loggedIn';
 
         /* If logged, show user HTML */
         showLoggedHTML(user);
@@ -384,6 +384,9 @@ function showLoggedHTML(user) {
  */
 function showUnloggedHTML() {
 
+    /* Unblur the body */
+    unBlurBody();
+
     /* Switch Menu settings */
     const notLoggedElements = queryAll('.not-logged');
     for (const notLoggedElement of notLoggedElements) {
@@ -463,6 +466,36 @@ function showOrHighlightLoginScreen() {
         // Continue as usual
         console.log('show login screen');
     }
+}
+/**
+ * Blurres the body while the page is logging out
+ */
+function logoutFromSite() {
+
+    // Blur the body while logging out
+    blurBody();
+
+    // Call the logout function with the callback function
+    logoutWithRaaS(gotoUnloggedPage);
+}
+
+function blurBody() {
+
+    // console.log('blurring body...');
+    // Take the body and blurry it while logging out
+    // const transitionStyle = 'filter: blur(10px);';
+    // query('.hero-body').setAttribute("style", transitionStyle);
+    query('.hero-body').classList.add('blurred');
+}
+
+function unBlurBody() {
+
+    // console.log('unblurring body...');
+    // Take the body and blurry it while logging out
+    // const transitionStyle = 'filter: blur(0px);';
+    // query('.hero-body').setAttribute("style", transitionStyle);
+    query('.hero-body').classList.remove('blurred');
+
 }
 
 
@@ -611,8 +644,9 @@ function sanitizeSocial(provider) {
     var identityProviderLabel = query('.provider-label');
     var replaceChars = { ',': ', ', 'googleplus': 'Google', 'saml-': 'saml-' };
     var identityProviderSanitized = provider.replace(/,|googleplus|saml-/g, function(match) { return replaceChars[match]; });
+
     var identityProviderSanitizedAndCapitalized = capitalize(identityProviderSanitized);
-    if (provider.indexOf('saml-') === 0) {
+    if (identityProviderSanitized.indexOf('saml-') === 0) {
         return identityProviderSanitized;
     }
     return identityProviderSanitizedAndCapitalized;

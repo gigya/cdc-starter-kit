@@ -1,4 +1,6 @@
-var OFF = 0, WARN = 1, ERROR = 2;
+var OFF = 0,
+    WARN = 1,
+    ERROR = 2;
 
 module.exports = exports = {
     "env": {
@@ -12,7 +14,7 @@ module.exports = exports = {
         "no-extra-parens": ERROR,
         "no-unexpected-multiline": ERROR,
         // All JSDoc comments must be valid
-        "valid-jsdoc": [ ERROR, {
+        "valid-jsdoc": [ERROR, {
             "requireReturn": false,
             "requireReturnDescription": false,
             "requireParamDescription": true,
@@ -24,7 +26,7 @@ module.exports = exports = {
         // Best Practices
 
         // Allowed a getter without setter, but all setters require getters
-        "accessor-pairs": [ ERROR, {
+        "accessor-pairs": [ERROR, {
             "getWithoutSet": false,
             "setWithoutGet": true
         }],
@@ -33,9 +35,9 @@ module.exports = exports = {
         "curly": ERROR,
         "default-case": WARN,
         // the dot goes with the property when doing multiline
-        "dot-location": [ WARN, "property" ],
+        "dot-location": [WARN, "property"],
         "dot-notation": WARN,
-        "eqeqeq": [ ERROR, "smart" ],
+        "eqeqeq": [ERROR, "smart"],
         "guard-for-in": OFF,
         "no-alert": OFF,
         "no-caller": ERROR,
@@ -49,7 +51,7 @@ module.exports = exports = {
         "no-extend-native": ERROR,
         "no-extra-bind": WARN,
         "no-floating-decimal": WARN,
-        "no-implicit-coercion": [ WARN, {
+        "no-implicit-coercion": [WARN, {
             "boolean": true,
             "number": true,
             "string": true
@@ -57,7 +59,6 @@ module.exports = exports = {
         "no-implied-eval": ERROR,
         "no-invalid-this": ERROR,
         "no-iterator": ERROR,
-        "no-labels": WARN,
         "no-lone-blocks": WARN,
         "no-loop-func": ERROR,
         "no-magic-numbers": OFF,
@@ -81,22 +82,22 @@ module.exports = exports = {
         "no-useless-concat": ERROR,
         "no-void": WARN,
         // Produce warnings when something is commented as TODO or FIXME
-        "no-warning-comments": [ WARN, {
-            "terms": [ "TODO", "FIXME" ],
+        "no-warning-comments": [WARN, {
+            "terms": ["TODO", "FIXME"],
             "location": "start"
         }],
         "no-with": WARN,
         "radix": WARN,
         "vars-on-top": OFF,
         // Enforces the style of wrapped functions
-        "wrap-iife": [ ERROR, "outside" ],
+        "wrap-iife": [ERROR, "outside"],
         "yoda": ERROR,
 
         // Strict Mode - for ES6, never use strict.
-        "strict": [ ERROR, "never" ],
+        "strict": [ERROR, "never"],
 
         // Variables
-        "init-declarations": [ ERROR, "always" ],
+        "init-declarations": [ERROR, "always"],
         "no-catch-shadow": WARN,
         "no-delete-var": ERROR,
         "no-label-var": ERROR,
@@ -112,7 +113,7 @@ module.exports = exports = {
         "no-use-before-define": ERROR,
 
         // Node.js and CommonJS
-        "callback-return": [ WARN, [ "callback", "next" ]],
+        "callback-return": [WARN, ["callback", "next"]],
         "global-require": ERROR,
         "handle-callback-err": WARN,
         "no-mixed-requires": WARN,
@@ -124,43 +125,43 @@ module.exports = exports = {
         "no-sync": WARN,
 
         // ECMAScript 6 support
-        "arrow-body-style": [ ERROR, "always" ],
-        "arrow-parens": [ ERROR, "always" ],
-        "arrow-spacing": [ ERROR, { "before": true, "after": true }],
+        "arrow-body-style": [ERROR, "always"],
+        "arrow-parens": [ERROR, "always"],
+        "arrow-spacing": [ERROR, { "before": true, "after": true }],
         "constructor-super": ERROR,
-        "generator-star-spacing": [ ERROR, "before" ],
+        "generator-star-spacing": [ERROR, "before"],
         "no-class-assign": ERROR,
         "no-const-assign": ERROR,
         "no-dupe-class-members": ERROR,
         "no-this-before-super": ERROR,
         "no-var": OFF,
-        "object-shorthand": [ OFF, "never" ],
+        "object-shorthand": [OFF, "never"],
         "prefer-arrow-callback": OFF,
         "prefer-spread": WARN,
         "prefer-template": OFF,
         "require-yield": ERROR,
 
         // Stylistic - everything here is a warning because of style.
-        "array-bracket-spacing": [ WARN, "always" ],
-        "block-spacing": [ WARN, "always" ],
-        "brace-style": [ WARN, "1tbs", { "allowSingleLine": true } ],
+        "array-bracket-spacing": [WARN, "always"],
+        "block-spacing": [WARN, "always"],
+        "brace-style": [WARN, "1tbs", { "allowSingleLine": true }],
         "camelcase": WARN,
-        "comma-spacing": [ WARN, { "before": false, "after": true } ],
-        "comma-style": [ WARN, "last" ],
-        "computed-property-spacing": [ WARN, "never" ],
-        "consistent-this": [ WARN, "self" ],
+        "comma-spacing": [WARN, { "before": false, "after": true }],
+        "comma-style": [WARN, "last"],
+        "computed-property-spacing": [WARN, "never"],
+        "consistent-this": [WARN, "self"],
         "eol-last": WARN,
         "func-names": OFF,
-        "func-style": [ OFF, "declaration" ],
-        "id-length": [ OFF, { "min": 2, "max": 32 } ],
-        "indent": [ WARN, 4 ],
-        "jsx-quotes": [ WARN, "prefer-double" ],
-        "linebreak-style": [ WARN, "unix" ],
-        "lines-around-comment": [ WARN, { "beforeBlockComment": true } ],
-        "max-depth": [ WARN, 8 ],
-        "max-len": [ OFF, 132 ],
-        "max-nested-callbacks": [ WARN, 8 ],
-        "max-params": [ WARN, 8 ],
+        "func-style": [OFF, "declaration"],
+        "id-length": [OFF, { "min": 2, "max": 32 }],
+        "indent": [WARN, 4],
+        "jsx-quotes": [WARN, "prefer-double"],
+        "linebreak-style": [WARN, "unix"],
+        "lines-around-comment": [WARN, { "beforeBlockComment": true }],
+        "max-depth": [WARN, 8],
+        "max-len": [OFF, 132],
+        "max-nested-callbacks": [WARN, 8],
+        "max-params": [WARN, 8],
         "new-cap": WARN,
         "new-parens": WARN,
         "no-array-constructor": WARN,
@@ -172,7 +173,6 @@ module.exports = exports = {
         "no-mixed-spaces-and-tabs": WARN,
         "no-multiple-empty-lines": WARN,
         "no-negated-condition": OFF,
-        "no-use-before-define": OFF,
         "no-nested-ternary": OFF,
         "no-new-object": WARN,
         "no-plusplus": OFF,
@@ -181,29 +181,29 @@ module.exports = exports = {
         "no-trailing-spaces": WARN,
         "no-underscore-dangle": WARN,
         "no-unneeded-ternary": OFF,
-        "object-curly-spacing": [ WARN, "always" ],
+        "object-curly-spacing": [WARN, "always"],
         "one-var": OFF,
-        "operator-assignment": [ OFF, "never" ],
-        "operator-linebreak": [ WARN, "after" ],
-        "padded-blocks": [ OFF, "never" ],
-        "quote-props": [ WARN, "consistent-as-needed" ],
-        "quotes": [ WARN, "single" ],
-        "require-jsdoc": [ OFF, {
+        "operator-assignment": [OFF, "never"],
+        "operator-linebreak": [WARN, "after"],
+        "padded-blocks": [OFF, "never"],
+        "quote-props": [WARN, "consistent-as-needed"],
+        "quotes": [WARN, "single"],
+        "require-jsdoc": [OFF, {
             "require": {
                 "FunctionDeclaration": true,
                 "MethodDefinition": true,
                 "ClassDeclaration": false
             }
         }],
-        "semi-spacing": [ WARN, { "before": false, "after": true }],
-        "semi": [ ERROR, "always" ],
+        "semi-spacing": [WARN, { "before": false, "after": true }],
+        "semi": [ERROR, "always"],
         "sort-vars": OFF,
-        "space-before-blocks": [ OFF, "always" ],
-        "space-before-function-paren": [ WARN, "never" ],
-        "space-in-parens": [ WARN, "never" ],
-        "space-infix-ops": [ WARN, { "int32Hint": true } ],
+        "space-before-blocks": [OFF, "always"],
+        "space-before-function-paren": [WARN, "never"],
+        "space-in-parens": [WARN, "never"],
+        "space-infix-ops": [WARN, { "int32Hint": true }],
         "space-unary-ops": ERROR,
-        "spaced-comment": [ WARN, "always" ],
+        "spaced-comment": [WARN, "always"],
         "wrap-regex": WARN
     }
 };
