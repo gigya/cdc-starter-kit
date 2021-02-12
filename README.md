@@ -38,7 +38,6 @@ The included flows in the demo are:
 | Change Password | Once logged in, link to [change](https://developers.gigya.com/display/GD/Policies#Policies-PasswordChange) the current user password. |
 | Consent | Test Gigya [Consent](https://developers.gigya.com/display/GD/Consent+Management) features with very few steps and checks them inside the console. |
 | Subscriptions / Lite Registrations | No password involved. Used typically for subscriptions, and any flow where only an email address is required, such as competition sign-ups, unlocking restricted content, voting, etc. For more information, see [Lite Registration](). |
-| Passwordless login. (Phone Login) | Users can log in or register using their mobile phones. A temporary code (one-time password, or OTP) is sent to their phones and used to authenticate them. For more information, see [Phone Number Login](https://developers.gigya.com/display/GD/Phone+Number+Login). |
 | Social Login | Login with Facebook, Google, Apple, Twitter, LinkedIn, etc..., and create a Gigya account with the data obtained from that [Social Provider](https://developers.gigya.com/display/GD/Social+Login). |
 | Link Accounts | With social accounts, enable [Linking](https://developers.gigya.com/display/GD/Linking+Social+Accounts) feature to merge them into a single one, associated with two identities, rather than maintaining two separate accounts. |
 
