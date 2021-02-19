@@ -1,99 +1,101 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <!-- Basic HTML  meta tags -->
-        <title></title>
 
-        <!-- Metas -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <link rel="icon" type="image/png" href="img/favicon.ico" />
+<head>
+    <!-- Basic HTML  meta tags -->
+    <title></title>
 
-        <!-- Framework CSS -->
+    <!-- Metas -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="icon" type="image/png" href="img/favicon.ico" />
 
-        <!-- Bulma, Bulma extras hints .-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hint.css/2.6.0/hint.min.css" crossorigin="anonymous" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" crossorigin="anonymous" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <!-- Framework CSS -->
 
-        <link rel="stylesheet" type="text/css" href="css/lib/bulma-social.min.css" />
-        <link rel="stylesheet" type="text/css" href="css/lib/core.min.css" />
-        <link rel="stylesheet" type="text/css" href="css/demo.css" />
+    <!-- Bulma, Bulma extras hints .-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hint.css/2.6.0/hint.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Questrial&amp;display=swap" rel="stylesheet" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="css/lib/bulma-social.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/lib/core.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/demo.css" />
 
-        <!-- Ionicons -->
-        <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>
-    </head>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Questrial&amp;display=swap" rel="stylesheet" crossorigin="anonymous" />
 
-    <body>
-        <section class="hero is-loading is-fullheight">
+    <!-- Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>
+</head>
 
-            <!-- Nav Bar -->
-            <div id="main-navbar" class="navbar mobile-navbar is-inline-flex is-transparent is-mobile no-shadow">
-                <div class="container is-fluid">
-                    <!-- Navbar HTML content loaded dynamically and included in html/skeleton/navbar.html -->
-                </div>
+<body>
+    <section class="hero is-loading is-fullheight">
+
+        <!-- Nav Bar -->
+        <div id="main-navbar" class="navbar mobile-navbar is-inline-flex is-transparent is-mobile no-shadow">
+            <div class="container is-fluid">
+                <!-- Navbar HTML content loaded dynamically and included in html/skeleton/navbar.html -->
             </div>
-
-            <!-- Page Content -->
-           <div class="hero-body">
-               <div class="container has-text-centered">
-                    <div class="column is-6 is-offset-3">
-
-                        <!-- Site Info -->
-
-                       <!-- LOGGED -->
-                        <section class="header logged hidden">
-                           <h3 class="title site-title has-text-grey">
-                               <!-- Main Background image -->
-                               <img class="body-img site-logo" src="img/logos/loading.png" alt="{{Title}}" onerror="showErrorLogo(this)" />
-                               Welcome again, {{Username}}
-                           </h3>
-                           <hr class="login-hr" />
-                           <!-- <p class="site-description subtitle has-text-grey has-text-centered">Edit your personal details:</b></p> -->
-                           <p class="site-description subtitle has-text-grey has-text-centered">Your last login was <b>{{Last Login}}</b></p>
-
-                           <!-- LOGGED SECTION: Edit Profile Placeholder -->
-                           <div class="box">
-
-                               <!-- MAIN IMAGE -->
-                               <figure class="avatar">
-                                   <img class="main-pic site-logo" src="img/logos/loading.png" alt="{{Title}}"onerror="showErrorLogo(this)" />
-                               </figure>
-
-                               <br />
-                               <br />
-                               <br />
-                               <p class="site-description subtitle has-text-grey has-text-centered">Edit your personal details:</b></p>
-                               <hr class="login-hr" />
-
-                               <!-- EDIT PROFILE Placeholder -->
-                               <div class="gigya-placeholder" id="edit_profile_placeholder"></div>
-                          </div>
-                        </section>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-
         </div>
 
-        <!-- Gigya script. Put here your __API_KEY__  -->
-        <!-- <script type="text/javascript" lang="javascript" src="https://cdns.gigya.com/js/gigya.js?apikey=__API_KEY__"></script> -->
+        <!-- Page Content -->
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <div class="column is-6 is-offset-3">
 
-        <!-- Gigya EXAMPLE!!. Remove with after setting your __API_KEY__  -->
-        <script type="text/javascript" lang="javascript" src="https://cdns.gigya.com/js/gigya.js?apikey=3_P6eTVo5EpI6zoB2c1ZgblyCrmx8OMOlrA932HVKEhhHCHwTdUJbBBEpAocpkb_nM"></script>
+                    <!-- Site Info -->
 
-        <!-- Framework files  -->
-        <script type="text/javascript" lang="javascript" src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
-        <script type="text/javascript" lang="javascript" src="js/gigya-raas.js"></script>
-        <script type="text/javascript" lang="javascript" src="js/engine.js"></script>
-        <script type="text/javascript" lang="javascript" src="js/main.js"></script>
-    </body>
+                    <!-- LOGGED -->
+                    <section class="header logged hidden">
+                        <h3 class="title site-title has-text-grey">
+                            <!-- Main Background image -->
+                            <img class="body-img site-logo" src="img/logos/loading.png" alt="{{Title}}" onerror="showErrorLogo(this)" /> Welcome again, {{Username}}
+                        </h3>
+                        <hr class="login-hr" />
+                        <!-- <p class="site-description subtitle has-text-grey has-text-centered">Edit your personal details:</b></p> -->
+                        <p class="site-description subtitle has-text-grey has-text-centered">Your last login was <b>{{Last Login}}</b></p>
+
+                        <!-- LOGGED SECTION: Edit Profile Placeholder -->
+                        <div class="box">
+
+                            <!-- MAIN IMAGE -->
+                            <figure class="avatar">
+                                <img class="main-pic site-logo" src="img/logos/loading.png" alt="{{Title}}" onerror="showErrorLogo(this)" />
+                            </figure>
+
+                            <br />
+                            <br />
+                            <br />
+                            <p class="site-description subtitle has-text-grey has-text-centered">Edit your personal details:</b>
+                            </p>
+                            <hr class="login-hr" />
+
+                            <!-- EDIT PROFILE Placeholder -->
+                            <div class="gigya-placeholder" id="edit_profile_placeholder"></div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    </div>
+
+    <!-- Gigya EXAMPLE!!. Remove with after setting your __API_KEY__  -->
+    <script type="text/javascript" lang="javascript" src="https://cdns.gigya.com/js/gigya.js?apikey=3_gRq1MaCq77LfHT2SITkHpxCK-_7WJi_H2yVkhha9yZaIKLxY2t5u37JRIC4W3m0s"></script>
+
+    <!-- Gigya script. Put here your __API_KEY__  -->
+    <!-- <script type="text/javascript" lang="javascript" src="https://cdns.gigya.com/js/gigya.js?apikey=__API_KEY__"></script> -->
+
+    <!-- Framework files  -->
+    <script type="text/javascript" lang="javascript" src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script type="text/javascript" lang="javascript" src="js/gigya-raas.js"></script>
+    <script type="text/javascript" lang="javascript" src="js/engine.js"></script>
+    <script type="text/javascript" lang="javascript" src="js/main.js"></script>
+</body>
+
 </html>
