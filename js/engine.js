@@ -436,6 +436,7 @@ function loadSampleContent(user) {
             .then((out) => {
                 // console.log('HTML Content: %s', out);
                 // compile the template
+                // debugger;
                 var template = Handlebars.compile(out);
                 // execute the compiled template and print the output to the console
 
@@ -485,7 +486,8 @@ function blurBody() {
     // Take the body and blurry it while logging out
     // const transitionStyle = 'filter: blur(10px);';
     // query('.hero-body').setAttribute("style", transitionStyle);
-    query('.hero-body').classList.add('blurred');
+
+    // query('.hero-body').classList.add('blurred');
 }
 
 function unBlurBody() {
@@ -494,7 +496,8 @@ function unBlurBody() {
     // Take the body and blurry it while logging out
     // const transitionStyle = 'filter: blur(0px);';
     // query('.hero-body').setAttribute("style", transitionStyle);
-    query('.hero-body').classList.remove('blurred');
+
+    // query('.hero-body').classList.remove('blurred');
 
 }
 
