@@ -760,6 +760,7 @@ function increasePreviousLogins(response) {
             if (user.status !== "FAIL" && user.data.previousLogins) {
                 // Increment number of logins count.
                 const previousLogins = (user.data.previousLogins || 0) + 1;
+                const recieveOfferAlerts = user.data.recieveOfferAlerts ? user.data.recieveOfferAlerts : false;
                 gigya.accounts.setAccountInfo({
                     data: {
 
@@ -768,9 +769,8 @@ function increasePreviousLogins(response) {
 
                     },
                     callback: (event2) => {
-
                         // Check if we must show or not the progressive profile screenset
-                        checkIfShowConsentsPopup(event2, previousLogins);
+                        checkIfShowConsentsPopup(event2, previousLogins, recieveOfferAlerts);
 
                         // Re-render the counter after this increase
                         renderPreviousLoginsIfDefined(previousLogins);
@@ -782,12 +782,12 @@ function increasePreviousLogins(response) {
     });
 }
 
-function checkIfShowConsentsPopup(event, previousLogins) {
+function checkIfShowConsentsPopup(event, previousLogins, recieveOfferAlerts) {
     // debugger;
     console.log('event & previous Logings:>> %o & %o', event, previousLogins);
 
     if (event.status !== "FAIL") {
-        if (previousLogins % 3 === 0) {
+        if (previousLogins % 3 === 0 && recieveOfferAlerts === true) {
             console.log('sale');
             /* Launch Screenset */
             gigya.accounts.showScreenSet({
@@ -803,6 +803,8 @@ function checkIfShowConsentsPopup(event, previousLogins) {
     }
 }
 
+
+/** DELETION */
 
 function showDeletionModal() {
 
