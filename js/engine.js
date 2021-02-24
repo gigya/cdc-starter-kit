@@ -757,7 +757,7 @@ function increasePreviousLogins(response) {
 
             console.log('user :>> %o', user);
 
-            if (user.status !== "FAIL" && user.data.previousLogins) {
+            if (user.status !== "FAIL") {
                 // Increment number of logins count.
                 const previousLogins = (user.data.previousLogins || 0) + 1;
                 const recieveOfferAlerts = user.data.recieveOfferAlerts ? user.data.recieveOfferAlerts : false;
@@ -787,7 +787,7 @@ function checkIfShowConsentsPopup(event, previousLogins, recieveOfferAlerts) {
     console.log('event & previous Logings:>> %o & %o', event, previousLogins);
 
     if (event.status !== "FAIL") {
-        if (previousLogins % 3 === 0 && recieveOfferAlerts === true) {
+        if (previousLogins % 2 === 0 && recieveOfferAlerts === true) {
             console.log('sale');
             /* Launch Screenset */
             gigya.accounts.showScreenSet({
