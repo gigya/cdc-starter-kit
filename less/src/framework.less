@@ -12,7 +12,6 @@
 // background:#383838;color:#fff; border-color: blue;
 // }
 
-
 /* NAVBAR */
 // Fixing default navbar behaviour and preparing it to use the burger button
 .navbar, .navbar-end, .navbar-menu, .navbar-start {
@@ -102,9 +101,19 @@
 
         // User Image
         .user-image {
-            /* border: 2px solid red; */
             position: relative;
             top: 3px;
+            .indicator {
+                display: block;
+                position: absolute;
+                top: -2px!important;
+                right: -6px!important;
+                height: 13px;
+                width: 13px;
+                border-radius: 50%;
+                border: 2px solid #fff;
+                background: #1fb91f!important;
+            }
         }
         &.is-separator {
             opacity: .4;
@@ -118,14 +127,17 @@
                 box-shadow: none;
             }
         }
-        .span-apikey, .span-datacenter, .span-providers {
+        .span-apikey, .span-datacenter, .span-previous-logins, .span-providers {
             font-size: .7em;
             // .bordered();
             padding: 0 10px;
         }
 
 
-        .icon-link, .button-datacenter, .button-apikey {
+        .icon-link,
+        .button-datacenter,
+        .button-apikey,
+        .button-previous-logins {
             opacity: 0.8;
             &:hover {
                 opacity: 1;
@@ -303,8 +315,6 @@
     }
 }
 
-
-
 // Fixing menu for mobile
 .navbar-menu {
     display: none;
@@ -319,4 +329,13 @@
 }
 @media screen and (min-width: 1024px) {
     .navbar-menu {display: flex;}
+}
+
+// Delete popup (edit profile) 
+.delete-icon {
+        position: relative;
+        top: 4px;
+        font-weight: bold;
+        margin-right: 7px;
+        font-size: 1.5rem;
 }

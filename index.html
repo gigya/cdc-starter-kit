@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hint.css/2.6.0/hint.min.css" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-extensions@6.2.7/dist/css/bulma-extensions.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bulma-extensions@6.2.7/dist/js/bulma-extensions.min.js"></script>
+
 
     <link rel="stylesheet" type="text/css" href="css/lib/bulma-social.min.css" />
     <link rel="stylesheet" type="text/css" href="css/lib/core.min.css" />
@@ -50,7 +53,7 @@
                     <!-- Site Info -->
 
                     <!-- NOT LOGGED -->
-                    <section class="header not-logged hidden">
+                    <section class="header not-logged is-hidden">
                         <!-- <img class="site-logo" src="img/logos/loading.png" alt="{{Title}}" onerror="showErrorLogo(this)" /> -->
                         <h3 class="title site-title is-2 has-text-grey">
                             Welcome to <b>{{Title}}</b>
@@ -60,7 +63,7 @@
                     </section>
 
                     <!-- LOGGED -->
-                    <section class="header logged hidden">
+                    <section class="header logged is-hidden">
                         <h3 class="title site-title has-text-grey">
                             <!-- Main Background image -->
                             <img class="body-img site-logo" src="img/logos/loading.png" alt="{{Title}}" onerror="showErrorLogo(this)" /> Welcome again, {{Username}}
@@ -73,7 +76,7 @@
                     <!-- Main page content-->
 
                     <!-- NOT LOGGED SECTION: Registration Placeholder -->
-                    <div class="not-logged box hidden">
+                    <div class="not-logged box is-hidden">
 
                         <!-- MAIN IMAGE -->
                         <figure class="avatar">
@@ -86,7 +89,7 @@
                     </div>
 
                     <!-- LOGGED SECTION: Sample Content Container. -->
-                    <div class="sample-content logged hidden">
+                    <div class="sample-content logged is-hidden">
                         <!-- It will be substituted by the content in html/sample-content/-->
                     </div>
 
@@ -111,7 +114,47 @@
     </div>
 
     <!-- Gigya EXAMPLE!!. Remove with after setting your __API_KEY__  -->
-    <script type="text/javascript" lang="javascript" src="https://cdns.gigya.com/js/gigya.js?apikey=3_gRq1MaCq77LfHT2SITkHpxCK-_7WJi_H2yVkhha9yZaIKLxY2t5u37JRIC4W3m0s"></script>
+    <script type="text/javascript" lang="javascript" src="https://cdns.gigya.com/js/gigya.js?apikey=3_gRq1MaCq77LfHT2SITkHpxCK-_7WJi_H2yVkhha9yZaIKLxY2t5u37JRIC4W3m0s">
+        {
+            lang: 'es',
+
+            customEventMap: {
+
+                eventMap: [{
+                    events: '*',
+                    args: [function(e) {
+                        return e;
+                    }],
+                    method: function(e) {
+                        // debugger;
+                        // 0. TAKE EVENT INFO
+                        var eventName = e.eventName;
+                        var methodName = e.methodName;
+                        // console.log(gigya.thisScript.globalConf);
+                        // 1. LOG EVENT ?
+                        if (typeof logEvents !== 'undefined') {
+                            logEvents(eventName, methodName, true);
+                        } else {
+                            console.log('logEvents undefined');
+                        }
+
+                        switch (eventName) {
+                            case 'login':
+                                increasePreviousLogins(e);
+                                break;
+                                // case 'afterScreenLoad': trackOnAfterScreenLoadEvents(e); break;
+                                // case 'beforeRequest':   trackBeforeRequestEvents    (e); break;
+                                // case 'afterResponse':   trackAfterResponseEvents    (e); break;
+                                // case 'beforeSubmit':  ≤  trackBeforeSubmitEvents     (e); break;
+                                // case 'afterSubmit':    trackAfterSubmitEvents(e); break;
+                                // case 'hide':            trackCloseScreensetEvents   (e); break;
+                        }
+
+                    }
+                }]
+            }
+        }
+    </script>
 
     <!-- Gigya script. Put here your __API_KEY__  -->
     <!-- <script type="text/javascript" lang="javascript" src="https://cdns.gigya.com/js/gigya.js?apikey=__API_KEY__"></script> -->

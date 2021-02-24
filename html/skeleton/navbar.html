@@ -10,13 +10,13 @@
         <!-- NOT LOGGED SECTION -->
         <div class="navbar-start not-logged">
             <div class="navbar-item is-icon drop-trigger">
-                <a class="icon-link is-activee hint--bottom hint--bounce hint--errorr hint--mediumm hint--rounded " href="javascript:registerWithRaaS('not_logged_placeholder');" aria-label="Sign Up!">
+                <a class="icon-link is-active hint--bottom hint--bounce hint--errorr hint--mediumm hint--rounded " href="javascript:registerWithRaaS('not_logged_placeholder');" aria-label="Sign Up!">
                     <ion-icon name="person-add-outline"></ion-icon>
                     <span class="indicator"></span>
                 </a>
             </div>
             <div class="navbar-item is-icon drop-trigger">
-                <a class="icon-link hint--bottom hint--bounce hint--errorr hint--mediumm hint--rounded " href="javascript:liteRegisterWithRaaS();" aria-label="Subscribe to our newsletters!">
+                <a class="icon-link is-activee hint--bottom hint--bounce hint--errorr hint--mediumm hint--rounded " href="javascript:liteRegisterWithRaaS();" aria-label="Subscribe to our newsletters!">
                     <ion-icon name="mail-outline"></ion-icon>
                     <span class="indicator"></span>
                 </a>
@@ -30,7 +30,7 @@
         </div>
 
         <!-- LOGGED SECTION -->
-        <div class="navbar-start logged hidden">
+        <div class="navbar-start logged is-hidden">
             <!-- Navbar Search -->
 
             <div class="navbar-item is-icon drop-trigger">
@@ -96,6 +96,12 @@
 
             <!-- System Info (Datacerner and API Key) -->
             <div class="navbar-start">
+                <div class="navbar-item logged is-hidden">
+                    <button class="button-previous-logins hint--bottom hint--bounce hint--infoo hint--mediumm hint--rounded button button is-white is-hovered" aria-label="Previous Logins">
+                        <ion-icon name="lock-open-outline"></ion-icon>
+                        <span class="span-previous-logins has-text-grey"></span>
+                    </button>
+                </div>
                 <div class="navbar-item">
                     <button class="button-datacenter hint--bottom hint--bounce hint--infoo hint--mediumm hint--rounded button button is-white is-hovered" aria-label="Datacenter">
                         <ion-icon name="server-outline"></ion-icon>
@@ -121,25 +127,25 @@
             <!-- LOGGED SECTION -->
 
             <!-- User Logged Icon. EDIT PROFILE Action -->
-            <div class="logged hidden navbar-item">
+            <div class="logged is-hidden navbar-item">
                 <button class="button-providers hint--bottom hint--bounce hint--infoo hint--mediumm hint--rounded button button is-white is-hovered" aria-label="Providers">
                     <!-- <ion-icon name="apps-outline"></ion-icon> -->
                     <span class="span-providers has-text-grey">Providers:</span>
                 </button>
             </div>
-            <div class="logged hidden navbar-item is-icon drop-trigger is-separator">|</div>
-            <div class="logged hidden navbar-item is-account is-not-icon hint--bottom hint--bounce hint--infoo hint--mediumm hint--rounded " aria-label="Edit Profile">
+            <div class="logged is-hidden navbar-item is-icon drop-trigger is-separator">|</div>
+            <div class="logged is-hidden navbar-item is-account is-not-icon hint--bottom hint--bounce hint--infoo hint--mediumm hint--rounded " aria-label="Edit Profile">
                 <a class="icon-link" href="edit-profile.html">
                     <div class="user-image">
                         <ion-icon class="not-hidden" name="person-outline"></ion-icon>
-                        <img class="hidden provider-img" src="img/framework/profile_default_pic_small.png">
+                        <img class="is-hidden provider-img" src="img/framework/profile_default_pic_small.png">
                         <span class="indicator"></span>
                     </div>
                 </a>
             </div>
 
             <!-- Logout Icon. LOGOUT ACTION -->
-            <div class="logged hidden navbar-item is-icon drop-trigger">
+            <div class="logged is-hidden navbar-item is-icon drop-trigger">
                 <a class="icon-link hint--bottom hint--bounce hint--infoo hint--mediumm hint--rounded " aria-label="logout" href="javascript:logoutFromSite()">
                     <ion-icon name="log-out-outline"></ion-icon>
                 </a>

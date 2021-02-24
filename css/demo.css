@@ -1,7 +1,4 @@
 /* - GENERAL IMPORTS - */
-.hidden {
-  display: none!important;
-}
 .flex-centered-container {
   align-content: center;
   align-items: center;
@@ -28,6 +25,9 @@
 }
 .uppercased {
   text-transform: uppercase;
+}
+.is-fullwidth {
+  width: 100%!important;
 }
 html {
   background: #F2F6FA;
@@ -166,9 +166,19 @@ button {
   margin-left: 0px;
 }
 .navbar .navbar-item .user-image {
-  /* border: 2px solid red; */
   position: relative;
   top: 3px;
+}
+.navbar .navbar-item .user-image .indicator {
+  display: block;
+  position: absolute;
+  top: -2px !important;
+  right: -6px !important;
+  height: 13px;
+  width: 13px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  background: #1fb91f !important;
 }
 .navbar .navbar-item.is-separator {
   opacity: 0.4;
@@ -184,18 +194,21 @@ button {
 }
 .navbar .navbar-item .span-apikey,
 .navbar .navbar-item .span-datacenter,
+.navbar .navbar-item .span-previous-logins,
 .navbar .navbar-item .span-providers {
   font-size: 0.7em;
   padding: 0 10px;
 }
 .navbar .navbar-item .icon-link,
 .navbar .navbar-item .button-datacenter,
-.navbar .navbar-item .button-apikey {
+.navbar .navbar-item .button-apikey,
+.navbar .navbar-item .button-previous-logins {
   opacity: 0.8;
 }
 .navbar .navbar-item .icon-link:hover,
 .navbar .navbar-item .button-datacenter:hover,
-.navbar .navbar-item .button-apikey:hover {
+.navbar .navbar-item .button-apikey:hover,
+.navbar .navbar-item .button-previous-logins:hover {
   opacity: 1;
 }
 .navbar .provider-img {
@@ -331,4 +344,11 @@ button {
   .navbar-menu {
     display: flex;
   }
+}
+.delete-icon {
+  position: relative;
+  top: 4px;
+  font-weight: bold;
+  margin-right: 7px;
+  font-size: 1.5rem;
 }

@@ -59,7 +59,7 @@ function loadConfigFromFile(out) {
     renderUI(out);
 
     // Check if user is logged in or not
-    gigya.accounts.getAccountInfo({ include: 'emails, profile', callback: redirectIfLogged });
+    gigya.accounts.getAccountInfo({ include: 'emails, profile, data', callback: redirectIfLogged });
 }
 
 /**
@@ -81,6 +81,7 @@ function redirectIfLogged(user) {
 
         /* If logged, show user HTML */
         showLoggedHTML(user);
+
 
         /* In function of the page, show or sample content, or edit profile */
         const url = window.location.href;
@@ -189,8 +190,8 @@ function renderMainSiteData(config) {
     const menuDescription = query('.menu-description');
     const apiKeyButton = query('.button-apikey');
     const apiKeySpan = query('.span-apikey');
-    const datacenterButton = query('.button-datacenter');
-    const datacenterSpan = query('.span-datacenter');
+    const datacenterButton = query(".button-datacenter");
+    const datacenterSpan = query(".span-datacenter");
 
     for (const siteTitle of siteTitles) {
         siteTitle.innerText = siteTitle.innerText.replaceAll('{{Title}}', config.site_title);
@@ -211,7 +212,6 @@ function renderMainSiteData(config) {
 
     /* SET MAIN LINK */
     query('.navbar-item').href = config.main_url;
-
 }
 
 /**
@@ -273,7 +273,7 @@ function includeConfigCss(config) {
     css += `.navbar .navbar-brand, .navbar .navbar-menu {background: ${config.menu_bg_color} !important;}`;
     css += `.navbar .navbar-brand .menu-description {color: ${config.menu_text_color} !important;}`;
     css += `.mobile-navbar .navbar-burger span {background-color: ${config.menu_text_color} !important;}`;
-    css += `.navbar .icon-link ion-icon, .navbar .span-datacenter,  .navbar .span-apikey,  .navbar .span-providers, .navbar .button-datacenter ion-icon, .navbar .button-apikey ion-icon, .navbar .is-separator {color: ${config.menu_text_color} !important;}`;
+    css += `.navbar .icon-link ion-icon, .navbar .span-datacenter, .navbar .span-previous-logins,  .navbar .span-apikey,  .navbar .span-providers, .navbar .button-datacenter ion-icon, .navbar .button-apikey ion-icon, .navbar .is-separator {color: ${config.menu_text_color} !important;}`;
 
     /* SET BACKGROUND & FONT COLORS FOR WEBSITE */
     css += `body {background: ${config.background_color} !important;}`;
@@ -296,55 +296,61 @@ function includeConfigCss(config) {
  * @param  {object} user User info object
  */
 function showLoggedHTML(user) {
-
+    // debugger;
     /* Hide Registration Screenset */
-    hideScreenset('not_logged_placeholder');
+    hideScreenset("not_logged_placeholder");
 
     /* Taking relevant info for user */
     var provider = user.loginProvider;
     var uid = user.UID;
     var email = user.profile.email;
     var username = user.profile.firstName;
-    username = typeof username !== 'undefined' ? username : '(NO NAME)';
+    username = typeof username !== "undefined" ? username : "(NO NAME)";
 
     /* Change the username in the web */
-    const siteTitles = queryAll('.site-title');
-    const siteDescriptions = queryAll('.site-description');
+    const siteTitles = queryAll(".site-title");
+    const siteDescriptions = queryAll(".site-description");
     const lastLoginUserFriendlyDate = prettyDate(user.lastLogin);
 
     for (const siteTitle of siteTitles) {
-        siteTitle.innerText = siteTitle.innerText.replaceAll('{{Username}}', username);
+        siteTitle.innerText = siteTitle.innerText.replaceAll(
+            "{{Username}}",
+            username
+        );
     }
 
     for (const siteDescription of siteDescriptions) {
-        siteDescription.innerText = siteDescription.innerText.replaceAll('{{Last Login}}', lastLoginUserFriendlyDate);
+        siteDescription.innerText = siteDescription.innerText.replaceAll(
+            "{{Last Login}}",
+            lastLoginUserFriendlyDate
+        );
     }
 
     /* Switch Menu settings */
-    const notLoggedElements = queryAll('.not-logged');
+    const notLoggedElements = queryAll(".not-logged");
     for (const notLoggedElement of notLoggedElements) {
-        notLoggedElement.classList.add('hidden');
+        notLoggedElement.classList.add("is-hidden");
     }
-    const loggedElements = queryAll('.logged');
+    const loggedElements = queryAll(".logged");
     for (const loggedElement of loggedElements) {
-        loggedElement.classList.remove('hidden');
+        loggedElement.classList.remove("is-hidden");
     }
 
     /* Look for user image */
-    const profileUserImage = user.profile.photoURL ? user.profile.photoURL : '';
-    if (profileUserImage !== '') {
-        const imageTag = query('.user-image img');
-        const iconTag = query('.user-image ion-icon');
-        imageTag.classList.remove('hidden');
-        iconTag.classList.add('hidden');
-        imageTag.setAttribute('src', profileUserImage);
+    const profileUserImage = user.profile.photoURL ? user.profile.photoURL : "";
+    if (profileUserImage !== "") {
+        const imageTag = query(".user-image img");
+        const iconTag = query(".user-image ion-icon");
+        imageTag.classList.remove("is-hidden");
+        iconTag.classList.add("is-hidden");
+        imageTag.setAttribute("src", profileUserImage);
     }
 
     // Paint Providers
-    const providersButton = query('.button-providers');
-    const providersButtonIcons = queryAll('.button-providers ion-icon');
-    const providersSpan = query('.span-providers');
-    var socialProvidersAsArray = user.socialProviders.split(',');
+    const providersButton = query(".button-providers");
+    const providersButtonIcons = queryAll(".button-providers ion-icon");
+    const providersSpan = query(".span-providers");
+    var socialProvidersAsArray = user.socialProviders.split(",");
     var socialProvidersAsArraySanitized = [];
 
     // Get all providers and clean them separately
@@ -353,28 +359,37 @@ function showLoggedHTML(user) {
         providersButton.removeChild(oneProvidersButtonIcon);
     }
 
-
     // Get all providers and clean them separately
     for (var j = 0; j < socialProvidersAsArray.length; j++) {
         const oneSocialProvider = socialProvidersAsArray[j];
         const oneSocialProviderSanitized = sanitizeSocial(oneSocialProvider);
         socialProvidersAsArraySanitized.push(oneSocialProviderSanitized);
-        const newSocialIconChild = document.createElement('ion-icon');
-        var iconName = 'logo-' + oneSocialProviderSanitized.toLowerCase();
+        const newSocialIconChild = document.createElement("ion-icon");
+        var iconName = "logo-" + oneSocialProviderSanitized.toLowerCase();
 
         // SAML Case
-        if (oneSocialProviderSanitized.indexOf('saml-') === 0) {
-            iconName = 'key';
+        if (oneSocialProviderSanitized.indexOf("saml-") === 0) {
+            iconName = "key";
         }
-        iconName = iconName === 'logo-site' ? 'browsers-outline' : iconName;
-        newSocialIconChild.setAttribute('name', iconName);
-        newSocialIconChild.classList.add('social-provider-icon');
-        newSocialIconChild.classList.add('is-' + oneSocialProviderSanitized.toLowerCase());
+        iconName = iconName === "logo-site" ? "browsers-outline" : iconName;
+        newSocialIconChild.setAttribute("name", iconName);
+        newSocialIconChild.classList.add("social-provider-icon");
+        newSocialIconChild.classList.add(
+            "is-" + oneSocialProviderSanitized.toLowerCase()
+        );
         providersButton.appendChild(newSocialIconChild);
     }
 
     // Show all providers label
-    providersButton.setAttribute('aria-label', socialProvidersAsArraySanitized.join(', '));
+    providersButton.setAttribute(
+        "aria-label",
+        socialProvidersAsArraySanitized.join(", ")
+    );
+
+    // Make a call to get the current user (if data.previousLogins is defined)
+    if (user.data && user.data.previousLogins) {
+        renderPreviousLoginsIfDefined(user.data.previousLogins);
+    }
 }
 
 /**
@@ -390,11 +405,11 @@ function showUnloggedHTML() {
     /* Switch Menu settings */
     const notLoggedElements = queryAll('.not-logged');
     for (const notLoggedElement of notLoggedElements) {
-        notLoggedElement.classList.remove('hidden');
+        notLoggedElement.classList.remove('is-hidden');
     }
     const loggedElements = queryAll('.logged');
     for (const loggedElement of loggedElements) {
-        loggedElement.classList.add('hidden');
+        loggedElement.classList.add('is-hidden');
     }
 }
 
@@ -653,4 +668,187 @@ function sanitizeSocial(provider) {
         return identityProviderSanitized;
     }
     return identityProviderSanitizedAndCapitalized;
+}
+
+
+/** PROGRESSIVE PROFILING AND PREVIOUS LOGIN FUNCTIONS */
+function stringToHex(string) {
+    var hash = 0;
+    if (string.length === 0) return hash;
+    for (var i = 0; i < string.length; i++) {
+        hash = string.charCodeAt(i) + ((hash << 5) - hash);
+        hash = hash & hash;
+    }
+    var color = "#";
+    for (var i = 0; i < 3; i++) {
+        var value = (hash >> (i * 8)) & 255;
+        color += ("00" + value.toString(16)).substr(-2);
+    }
+    // console.log('color :>> %s --> %s', string, color);
+    return color;
+}
+
+function stringToHexSoft(string) {
+    return stringToHex(string) + "33";
+}
+
+function logEvents(eventName, methodName, logEvents) {
+
+    if (methodName && methodName === "gscounters.sendReport") {
+        return;
+    }
+
+    if (logEvents) {
+
+        const title = window.config.menu_description;
+        // debugger;
+        var backgroundColor = window.config.menu_bg_color_hover;
+        // backgroundColor = "transparent";
+        if (methodName) {
+            console.info(
+                `%c ${title} %c - Event: %c` +
+                eventName +
+                "%c, Method: %c" +
+                methodName,
+                `font-weight: bold;color: #333;background-color:${backgroundColor};`,
+                "font-weight: normal;color:#aaa",
+                `font-weight:bold;color:#f14668;`,
+                "font-weight: normal;color:#aaa;",
+                "font-weight: bold; color: #428bca"
+            );
+        } else {
+            console.info(
+                `%c ${title} %c - Event: %c` + eventName,
+                `font-weight: bold; color: #333;background-color:${backgroundColor};`,
+                "font-weight: normal;color:#aaa",
+                `font-weight:bold; color:#f14668;`
+            );
+        }
+    }
+}
+
+function renderPreviousLoginsIfDefined(previousLogins) {
+
+    console.log('rendering previous login inf if enabled for this api key... %o', previousLogins);
+    const previousLoginsButton = query(".button-previous-logins");
+    if (previousLogins) {
+        if (previousLoginsButton) {
+            previousLoginsButton.parentElement.classList.remove("is-hidden");
+            previousLoginsButton.setAttribute(
+                "aria-label",
+                "Previous Logins: " + previousLogins
+            );
+        }
+        const previousLoginsSpan = query(".span-previous-logins");
+        previousLoginsSpan.innerText = previousLogins;
+
+        // return gigya.dataCenter;
+    } else {
+        previousLoginsButton.parentElement.classList.add("is-hidden");
+        console.log("no data.previousLogins field was declared for this api key");
+    }
+}
+
+function increasePreviousLogins(response) {
+    // debugger;
+    gigya.accounts.getAccountInfo({
+        include: 'emails, profile, data',
+        callback: function(user) {
+
+            console.log('user :>> %o', user);
+
+            if (user.status !== "FAIL" && user.data.previousLogins) {
+                // Increment number of logins count.
+                const previousLogins = (user.data.previousLogins || 0) + 1;
+                gigya.accounts.setAccountInfo({
+                    data: {
+
+                        // This integer field must have been previously added to the site's schema via the UI Builder or accounts.setSchema API
+                        previousLogins
+
+                    },
+                    callback: (event2) => {
+
+                        // Check if we must show or not the progressive profile screenset
+                        checkIfShowConsentsPopup(event2, previousLogins);
+
+                        // Re-render the counter after this increase
+                        renderPreviousLoginsIfDefined(previousLogins);
+
+                    },
+                });
+            }
+        }
+    });
+}
+
+function checkIfShowConsentsPopup(event, previousLogins) {
+    // debugger;
+    console.log('event & previous Logings:>> %o & %o', event, previousLogins);
+
+    if (event.status !== "FAIL") {
+        if (previousLogins % 3 === 0) {
+            console.log('sale');
+            /* Launch Screenset */
+            gigya.accounts.showScreenSet({
+                screenSet: "Default-ProfileUpdate",
+                startScreen: "gigya-update-consents-screen",
+                lang: window.config.lang,
+                // containerID,
+                // onAfterSubmit: gotoHome,
+            });
+        } else {
+            console.log("no sale");
+        }
+    }
+}
+
+
+function showDeletionModal() {
+
+    // Showing deletion Modal
+    const deletionModal = query("#deletion_modal");
+
+    if (deletionModal) {
+        console.log('showing deletion modal...');
+        deletionModal.classList.add('is-active');
+    }
+
+    // Triggering close action for button
+
+}
+
+function closeDeleteModal() {
+    // Showing deletion Modal
+    const deletionModal = query("#deletion_modal");
+
+    if (deletionModal) {
+        console.log("closing deletion modal...");
+        deletionModal.classList.remove("is-active");
+    }
+
+    // Triggering close action for button
+}
+
+function deleteCurrentAccount() {
+    gigya.accounts.getAccountInfo({
+        callback: function(user) {
+
+            if (user.status !== "FAIL") {
+                console.log("user to delete:>> %o", user);
+                const uid = user.UID;
+                const id_token = 'whatever';
+
+                const deleteUrl = `https://juan.gigya-cs.com/api/accounts/delete-from-cdc-starter-kit.php?UID=${uid}&id_token=${id_token}`;
+                fetch(deleteUrl)
+                    .then((res) => { return res.json(); })
+                    .then((out) => {
+                        console.log('delete out :>> %o', out);
+
+                    }).catch((err) => { return console.error(err); });
+            }
+
+            // Increment number of logins count.
+        }
+    });
 }

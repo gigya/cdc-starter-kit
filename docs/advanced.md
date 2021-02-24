@@ -102,7 +102,7 @@ Located in ```html/skeleton.navbar.html```. It contains all the html related to 
                 <!-- NOT LOGGED SECTION -->
             </div>
 
-            <div class="navbar-start logged hidden">
+            <div class="navbar-start logged is-hidden">
                 <!-- LOGGED SECTION -->
             </div>
 
@@ -118,7 +118,7 @@ Located in ```html/skeleton.navbar.html```. It contains all the html related to 
                     <!-- NOT LOGGED SECTION -->
                 </div>
 
-                <div class="navbar-item logged hidden">
+                <div class="navbar-item logged is-hidden">
                     <!-- LOGGED SECTION -->
                 </div>
 
@@ -176,7 +176,7 @@ The navigation bar and the sample content are _injected_ using the [handlebars](
 
                             </section>
 
-                            <section class="header logged hidden">
+                            <section class="header logged is-hidden">
 
                                 <!-- HTML Content for Site Title logged ... -->
 
@@ -190,7 +190,7 @@ The navigation bar and the sample content are _injected_ using the [handlebars](
 
                             </div>
 
-                            <div class="sample-content logged hidden">
+                            <div class="sample-content logged is-hidden">
 
                                 <!-- HTML Content for Site Title logged ... -->
 

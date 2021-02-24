@@ -203,7 +203,7 @@ function onLogin(response) {
 
     // Get the user information, redirecting if needed to the logged in page
     if (response.profile !== null) {
-        gigya.accounts.getAccountInfo({ include: 'emails, profile', callback: redirectIfLogged });
+        gigya.accounts.getAccountInfo({ include: 'emails, profile, data', callback: redirectIfLogged });
     }
 }
 

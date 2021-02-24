@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hint.css/2.6.0/hint.min.css" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-extensions@6.2.7/dist/css/bulma-extensions.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bulma-extensions@6.2.7/dist/js/bulma-extensions.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="css/lib/bulma-social.min.css" />
     <link rel="stylesheet" type="text/css" href="css/lib/core.min.css" />
@@ -49,7 +51,7 @@
                     <!-- Site Info -->
 
                     <!-- LOGGED -->
-                    <section class="header logged hidden">
+                    <section class="header logged is-hidden">
                         <h3 class="title site-title has-text-grey is-hidden">
                             <!-- Main Background image -->
                             <img class="body-img site-logo" src="img/logos/loading.png" alt="{{Title}}" onerror="showErrorLogo(this)" /> Welcome again, {{Username}}
@@ -83,7 +85,33 @@
 
     </section>
 
+    <!-- Deletion modal -->
+    <div id="deletion_modal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">
+                    <ion-icon class="delete-icon has-text-danger" name="warning-outline"></ion-icon>
+                    <b>
+                        Warning Zone
+                    </b>
+                </p>
+                <button class="delete" aria-label="close" onclick="closeDeleteModal()"></button>
+            </header>
+            <section class="modal-card-body">
+                Do you really want to delete the user?
+                <br>
+                <br>
+
+                <b>NOTE : </b><span class="has-text-danger">This action is not reversible.</span>
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button is-danger" onclick="deleteCurrentAccount()">Delete User</button>
+                <button class="button" onclick="closeDeleteModal()">Cancel</button>
+            </footer>
+        </div>
     </div>
+
 
     <!-- Gigya EXAMPLE!!. Remove with after setting your __API_KEY__  -->
     <script type="text/javascript" lang="javascript" src="https://cdns.gigya.com/js/gigya.js?apikey=3_gRq1MaCq77LfHT2SITkHpxCK-_7WJi_H2yVkhha9yZaIKLxY2t5u37JRIC4W3m0s"></script>
