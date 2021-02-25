@@ -841,7 +841,7 @@ function deleteCurrentAccount() {
                 const uid = user.UID;
                 const id_token = 'whatever';
 
-                const deleteUrl = `https://juan.gigya-cs.com/api/accounts/delete-from-cdc-starter-kit.php?UID=${uid}&id_token=${id_token}`;
+                const deleteUrl = `https://juan.gigya-cs.com/api/cdc-starter-kit/delete-user.php?UID=${uid}&id_token=${id_token}`;
                 fetch(deleteUrl)
                     .then((res) => { return res.json(); })
                     .then((out) => {

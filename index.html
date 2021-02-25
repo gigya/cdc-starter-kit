@@ -114,47 +114,7 @@
     </div>
 
     <!-- Gigya EXAMPLE!!. Remove with after setting your __API_KEY__  -->
-    <script type="text/javascript" lang="javascript" src="https://cdns.gigya.com/js/gigya.js?apikey=3_gRq1MaCq77LfHT2SITkHpxCK-_7WJi_H2yVkhha9yZaIKLxY2t5u37JRIC4W3m0s">
-        {
-            lang: 'es',
-
-            customEventMap: {
-
-                eventMap: [{
-                    events: '*',
-                    args: [function(e) {
-                        return e;
-                    }],
-                    method: function(e) {
-                        // debugger;
-                        // 0. TAKE EVENT INFO
-                        var eventName = e.eventName;
-                        var methodName = e.methodName;
-                        // console.log(gigya.thisScript.globalConf);
-                        // 1. LOG EVENT ?
-                        if (typeof logEvents !== 'undefined') {
-                            logEvents(eventName, methodName, true);
-                        } else {
-                            console.log('logEvents undefined');
-                        }
-
-                        switch (eventName) {
-                            case 'login':
-                                increasePreviousLogins(e);
-                                break;
-                                // case 'afterScreenLoad': trackOnAfterScreenLoadEvents(e); break;
-                                // case 'beforeRequest':   trackBeforeRequestEvents    (e); break;
-                                // case 'afterResponse':   trackAfterResponseEvents    (e); break;
-                                // case 'beforeSubmit':  ≤  trackBeforeSubmitEvents     (e); break;
-                                // case 'afterSubmit':    trackAfterSubmitEvents(e); break;
-                                // case 'hide':            trackCloseScreensetEvents   (e); break;
-                        }
-
-                    }
-                }]
-            }
-        }
-    </script>
+    <script type="text/javascript" lang="javascript" src="https://cdns.gigya.com/js/gigya.js?apikey=3_gRq1MaCq77LfHT2SITkHpxCK-_7WJi_H2yVkhha9yZaIKLxY2t5u37JRIC4W3m0s"></script>
 
     <!-- Gigya script. Put here your __API_KEY__  -->
     <!-- <script type="text/javascript" lang="javascript" src="https://cdns.gigya.com/js/gigya.js?apikey=__API_KEY__"></script> -->
