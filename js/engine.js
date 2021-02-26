@@ -15,8 +15,9 @@
 // -- 0. window.document Shorthands
 const query = document.querySelector.bind(document);
 const queryAll = document.querySelectorAll.bind(document);
-const logConfigFile = true; // Shows/hides config file into the console
-
+const logConfigFile = false; // Shows/hides config file into the console
+const showLog = true;
+const showEventsLog = true;
 /** *****************************************************/
 //                 1. DEMO CORE FUNCTIONS
 /** *****************************************************/
@@ -24,7 +25,7 @@ const logConfigFile = true; // Shows/hides config file into the console
  * Loads the configuration file into the window object to be used later on to customize the UI
  */
 function initDemoSite() {
-
+    // log('0. Init Demo site');
     // Read configuration file and load it
     fetch('./config/config.json')
         .then((res) => { return res.json(); })
@@ -41,10 +42,8 @@ function initDemoSite() {
  * @param  {object} out the config from the file
  */
 function loadConfigFromFile(out) {
-
     // Store config in window global (:-s)
-    if (logConfigFile) {
-        console.log('Config file: ');
+    if (logConfigFile === true) {
         console.table(out);
     }
 
@@ -54,43 +53,10 @@ function loadConfigFromFile(out) {
         out.lang = storedLanguage;
     }
     window.config = out;
-
-    // Start UI;
-    renderUI(out);
+    log("1. Load Configuration from file ", "GET ACCOUNT INFO");
 
     // Check if user is logged in or not
-    gigya.accounts.getAccountInfo({ include: 'emails, profile, data', callback: redirectIfLogged });
-}
-
-/**
- * Check Gigya session Functions
- *
- * @param  {object} user User info object
- */
-function redirectIfLogged(user) {
-
-    /* If not logged, show login form */
-    if (!user.UID) {
-
-        console.log('You are not logged in.');
-
-        /* In function of the page, show or show login page, or redirect to home */
-        gotoUnloggedPage();
-
-    } else {
-
-        /* If logged, show user HTML */
-        showLoggedHTML(user);
-
-
-        /* In function of the page, show or sample content, or edit profile */
-        const url = window.location.href;
-        if (url.indexOf('edit-profile') <= 0) {
-            loadSampleContent(user);
-        } else {
-            editProfileWithRaaS('edit_profile_placeholder');
-        }
-    }
+    gigya.accounts.getAccountInfo({ include: 'emails, profile, data', callback: renderUI });
 }
 
 /**
@@ -116,7 +82,6 @@ function gotoHome() {
     window.location.href = window.config.main_url;
 }
 
-
 /** *****************************************************/
 //                    2. UI FUNCTIONS
 /** *****************************************************/
@@ -124,14 +89,14 @@ function gotoHome() {
  * Set all UI conponents using the configuration object and the state of the user
  * @param {object} config Configuration object
  */
-function renderUI(config) {
+function renderUI(user) {
 
     // First, we render the navbar from file, and once loaded, we start with all the rest of the renders
+    log("2. Render UI.");
     const path = './html/skeleton/navbar.html';
     fetch(path)
         .then((res) => { return res.text(); })
         .then((out) => {
-
             // With the html of the nabvar loaded, we start rendering all elements
 
             // 1. Render Navbar
@@ -146,6 +111,26 @@ function renderUI(config) {
             // 4. CSS from the config file
             includeConfigCss(config);
 
+            /* If not logged, show login form */
+            if (!user.UID) {
+
+                log("3. You are not logged in.");
+
+                /* In function of the page, show or show login page, or redirect to home */
+                gotoUnloggedPage();
+
+            } else {
+                /* If logged, show user HTML */
+                showLoggedHTML(user);
+
+                /* In function of the page, show or sample content, or edit profile */
+                const url = window.location.href;
+                if (url.indexOf("edit-profile") <= 0) {
+                    loadSampleContent(user);
+                } else {
+                    editProfileWithRaaS("edit_profile_placeholder");
+                }
+            }
         }).catch((err) => { return console.error(err); });
 }
 
@@ -411,6 +396,9 @@ function showUnloggedHTML() {
     for (const loggedElement of loggedElements) {
         loggedElement.classList.add('is-hidden');
     }
+
+    /* Hide previous logged navbar element if shown */
+    query(".previous-logins-navbar-item").classList.add("is-hidden");
 }
 
 /**
@@ -670,8 +658,6 @@ function sanitizeSocial(provider) {
     return identityProviderSanitizedAndCapitalized;
 }
 
-
-/** PROGRESSIVE PROFILING AND PREVIOUS LOGIN FUNCTIONS */
 function stringToHex(string) {
     var hash = 0;
     if (string.length === 0) return hash;
@@ -692,13 +678,32 @@ function stringToHexSoft(string) {
     return stringToHex(string) + "33";
 }
 
+function log(text, operation) {
+    if (showLog) {
+        const title = window.config.menu_description;
+        var backgroundColor = window.config.menu_bg_color_hover;
+        console.info(
+            `%c ${title} %c--> ` + text + '%c%s',
+            `font-weight: bold; color: #333;background-color:${backgroundColor};`,
+            "font-weight: normal;color:#aaa",
+            "font-weight: bold;color:#f14668",
+            operation ? ' --> ' + operation : ''
+        );
+
+    }
+}
+
+/** ***********************************************************/
+//  5. PROGRESSIVE PROFILING AND PREVIOUS LOGINS FUNCTIONS
+/** ***********************************************************/
+
 function logEvents(eventName, methodName, logEvents) {
 
     if (methodName && methodName === "gscounters.sendReport") {
         return;
     }
 
-    if (logEvents) {
+    if (showEventsLog === true) {
 
         const title = window.config.menu_description;
         // debugger;
@@ -729,7 +734,7 @@ function logEvents(eventName, methodName, logEvents) {
 
 function renderPreviousLoginsIfDefined(previousLogins) {
 
-    console.log('rendering previous login inf if enabled for this api key... %o', previousLogins);
+    log('rendering previous login inf if enabled for this api key... %o' + previousLogins);
     const previousLoginsButton = query(".button-previous-logins");
     if (previousLogins) {
         if (previousLoginsButton) {
@@ -750,7 +755,10 @@ function renderPreviousLoginsIfDefined(previousLogins) {
 }
 
 function increasePreviousLogins(response) {
-    // debugger;
+
+    // 
+    log("X. - Increase Previouse logins...", "GET ACCOUNT INFO");
+
     gigya.accounts.getAccountInfo({
         include: 'emails, profile, data',
         callback: function(user) {
@@ -787,7 +795,7 @@ function checkIfShowConsentsPopup(event, previousLogins, recieveOfferAlerts) {
     console.log('event & previous Logings:>> %o & %o', event, previousLogins);
 
     if (event.status !== "FAIL") {
-        if (previousLogins % 2 === 0 && recieveOfferAlerts === true) {
+        if (previousLogins % 3 === 0 && recieveOfferAlerts === true) {
             console.log('sale');
             /* Launch Screenset */
             gigya.accounts.showScreenSet({
@@ -803,25 +811,69 @@ function checkIfShowConsentsPopup(event, previousLogins, recieveOfferAlerts) {
     }
 }
 
+/** *****************************************************/
+//               6. PURCHASE FUNCTIONS
+/** *****************************************************/
 
-/** DELETION */
+function showPurchaseModal() {
 
-function showDeletionModal() {
+    // Showing purchase Modal
+    const purchaseModal = query("#purchase_modal");
 
-    // Showing deletion Modal
-    const deletionModal = query("#deletion_modal");
-
-    if (deletionModal) {
-        console.log('showing deletion modal...');
-        deletionModal.classList.add('is-active');
+    if (purchaseModal) {
+        console.log('showing purchase modal...');
+        purchaseModal.classList.add('is-active');
     }
 
     // Triggering close action for button
 
 }
 
-function closeDeleteModal() {
+function closePurchaseModal() {
+    // Hiding purchase Modal
+    const purchaseModal = query("#purchase_modal");
+
+    if (purchaseModal) {
+        console.log("closing purchase modal...");
+        purchaseModal.classList.remove("is-active");
+    }
+
+    // Triggering close action for button
+}
+
+function purchaseElement(user, element) {
+
+    console.log("user: %o , element to purchase:>> %o", user, element);
+    const uid = user.UID;
+    const id_token = "whatever";
+
+    const purchaseUrl = `https://juan.gigya-cs.com/api/cdc-starter-kit/purchase-element.php?UID=${uid}&id_token=${id_token}`;
+    fetch(purchaseUrl)
+        .then((res) => { return res.json(); })
+        .then((out) => {
+            console.log('delete out :>> %o', out);
+
+        }).catch((err) => { return console.error(err); });
+}
+
+/** *****************************************************/
+//               7. DELETION FUNCTIONS
+/** *****************************************************/
+
+function showDeletionModal() {
     // Showing deletion Modal
+    const deletionModal = query("#deletion_modal");
+
+    if (deletionModal) {
+        console.log("showing deletion modal...");
+        deletionModal.classList.add("is-active");
+    }
+
+    // Triggering close action for button
+}
+
+function closeDeleteModal() {
+    // Hiding deletion Modal
     const deletionModal = query("#deletion_modal");
 
     if (deletionModal) {
@@ -833,24 +885,31 @@ function closeDeleteModal() {
 }
 
 function deleteCurrentAccount() {
+
+    // 
+    log("X. - Deleting account.... ", "GET ACCOUNT INFO");
+
     gigya.accounts.getAccountInfo({
         callback: function(user) {
-
             if (user.status !== "FAIL") {
                 console.log("user to delete:>> %o", user);
                 const uid = user.UID;
-                const id_token = 'whatever';
+                const id_token = "whatever";
 
                 const deleteUrl = `https://juan.gigya-cs.com/api/cdc-starter-kit/delete-user.php?UID=${uid}&id_token=${id_token}`;
                 fetch(deleteUrl)
-                    .then((res) => { return res.json(); })
+                    .then((res) => {
+                        return res.json();
+                    })
                     .then((out) => {
-                        console.log('delete out :>> %o', out);
-
-                    }).catch((err) => { return console.error(err); });
+                        console.log("delete out :>> %o", out);
+                    })
+                    .catch((err) => {
+                        return console.error(err);
+                    });
             }
 
             // Increment number of logins count.
-        }
+        },
     });
 }

@@ -200,10 +200,10 @@ function onSubmit(event) {}
  * @param  {object} response Gigya response with the results of the login operation
  */
 function onLogin(response) {
-
+    log("X - On Login!", "GET ACCOUNT INFO");
     // Get the user information, redirecting if needed to the logged in page
     if (response.profile !== null) {
-        gigya.accounts.getAccountInfo({ include: 'emails, profile, data', callback: redirectIfLogged });
+        gigya.accounts.getAccountInfo({ include: 'emails, profile, data', callback: renderUI });
     }
 }
 
@@ -215,7 +215,7 @@ function onLogout(response) {
 
     // Shows the unlogged HTML of the page
     if (response.eventName === 'logout') {
-        console.log('User has logged out');
+        log('X. User has logged out', "LOG OUT");
         showUnloggedHTML();
     } else {
         alert('Error :' + response.errorMessage);

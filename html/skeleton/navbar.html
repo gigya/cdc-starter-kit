@@ -94,14 +94,15 @@
     <div class="navbar-menu">
         <div class="navbar-end both-logged">
 
-            <!-- System Info (Datacerner and API Key) -->
             <div class="navbar-start">
-                <div class="navbar-item logged is-hidden">
+                <!-- Logged times (for progressive profiling) -->
+                <div class="navbar-item is-hidden previous-logins-navbar-item">
                     <button class="button-previous-logins hint--bottom hint--bounce hint--infoo hint--mediumm hint--rounded button button is-white is-hovered" aria-label="Previous Logins">
                         <ion-icon name="lock-open-outline"></ion-icon>
                         <span class="span-previous-logins has-text-grey"></span>
                     </button>
                 </div>
+                <!-- System Info (Datacerner and API Key) -->
                 <div class="navbar-item">
                     <button class="button-datacenter hint--bottom hint--bounce hint--infoo hint--mediumm hint--rounded button button is-white is-hovered" aria-label="Datacenter">
                         <ion-icon name="server-outline"></ion-icon>
@@ -168,4 +169,17 @@
         <div class="navbar-item is-icon drop-trigger is-separator">|</div>
 
     </div>
+
+    <!-- Logout Modal -->
+    <div class="modal is-activeeee">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <!-- Any other Bulma elements you want -->
+            <div class="block">
+                Logging out...
+            </div>
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+    </div>
+
 </template>
