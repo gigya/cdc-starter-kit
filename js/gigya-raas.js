@@ -200,7 +200,7 @@ function onSubmit(event) {}
  * @param  {object} response Gigya response with the results of the login operation
  */
 function onLogin(response) {
-    log("X - On Login!", "GET ACCOUNT INFO");
+    log("4 - On Login!", "GET ACCOUNT INFO");
     // Get the user information, redirecting if needed to the logged in page
     if (response.profile !== null) {
         gigya.accounts.getAccountInfo({ include: 'emails, profile, data', callback: renderUI });

@@ -460,7 +460,7 @@ function showOrHighlightLoginScreen() {
 
     // If yes, highlight the first field once (UX improvement)
     if (loginScreenset !== null) {
-        console.log('highlignthing only...');
+        // console.log('highlignthing only...');
         const input = loginScreenset.querySelector('input[name="username"]');
         input.focus(); // sets focus to element
 
