@@ -16,8 +16,9 @@
 const query = document.querySelector.bind(document);
 const queryAll = document.querySelectorAll.bind(document);
 const logConfigFile = false; // Shows/hides config file into the console
-const showLog = true;
-const showEventsLog = true;
+var showLog = false;
+var showEventsLog = false;
+var currentUser = null;
 /** *****************************************************/
 //                 1. DEMO CORE FUNCTIONS
 /** *****************************************************/
@@ -56,7 +57,7 @@ function loadConfigFromFile(out) {
     log("1. Load Configuration from file ", "GET ACCOUNT INFO");
 
     // Check if user is logged in or not
-    gigya.accounts.getAccountInfo({ include: 'emails, profile, data', callback: renderUI });
+    gigya.accounts.getAccountInfo({ include: 'emails, profile, data, preferences', callback: renderUI });
 }
 
 /**
@@ -69,6 +70,7 @@ function gotoUnloggedPage() {
     if (editPlaceholder) {
         gotoHome();
     } else {
+        hideLoggingOutModal();
         showUnloggedHTML();
         loginWithRaaS('not_logged_placeholder');
     }
@@ -93,6 +95,9 @@ function renderUI(user) {
 
     // First, we render the navbar from file, and once loaded, we start with all the rest of the renders
     log("2. Render UI.");
+
+    showLoadingModal();
+    currentUser = user;
     const path = './html/skeleton/navbar.html';
     fetch(path)
         .then((res) => { return res.text(); })
@@ -112,21 +117,28 @@ function renderUI(user) {
             includeConfigCss(config);
 
             /* If not logged, show login form */
-            if (!user.UID) {
 
+            // Show the loading modal
+            hideLoadingModal();
+
+            if (!user || !user.UID) {
                 log("3. You are not logged in.");
 
                 /* In function of the page, show or show login page, or redirect to home */
                 gotoUnloggedPage();
-
             } else {
+
                 /* If logged, show user HTML */
                 showLoggedHTML(user);
 
                 /* In function of the page, show or sample content, or edit profile */
                 const url = window.location.href;
                 if (url.indexOf("edit-profile") <= 0) {
+
+                    user.data.memberType = user.data.purchasedProducts && user.data.purchasedProducts < 5 ? "Standard" : "Golden";
+                    user.data.since = user.created.substr(0, 10);
                     loadSampleContent(user);
+
                 } else {
                     editProfileWithRaaS("edit_profile_placeholder");
                 }
@@ -281,6 +293,18 @@ function includeConfigCss(config) {
  * @param  {object} user User info object
  */
 function showLoggedHTML(user) {
+
+    // Put some dummy data if this does not exist
+    if (!user.data.purchasedProducts) {
+        user.data.purchasedProducts = 4;
+    }
+
+    if (!user.data.credits) {
+        user.data.credits = 165;
+    }
+
+
+
     // debugger;
     /* Hide Registration Screenset */
     hideScreenset("not_logged_placeholder");
@@ -384,9 +408,6 @@ function showLoggedHTML(user) {
  */
 function showUnloggedHTML() {
 
-    /* Unblur the body */
-    unBlurBody();
-
     /* Switch Menu settings */
     const notLoggedElements = queryAll('.not-logged');
     for (const notLoggedElement of notLoggedElements) {
@@ -446,6 +467,10 @@ function loadSampleContent(user) {
                 const compiled = template(user);
                 // console.log(compiled);
                 sampleContent.innerHTML = compiled;
+
+                // Init the product buttons once content is loaded
+                initProductButtons();
+
             }).catch((err) => { return console.error(err); });
     }
 }
@@ -468,7 +493,7 @@ function showOrHighlightLoginScreen() {
         // Showing login screen
         loginWithRaaS('not_logged_placeholder');
         // Continue as usual
-        console.log('show login screen');
+        // console.log('show login screen');
     }
 }
 /**
@@ -476,32 +501,16 @@ function showOrHighlightLoginScreen() {
  */
 function logoutFromSite() {
 
-    // Blur the body while logging out
-    blurBody();
+    // Clean user state
+    currentUser = null;
 
+    // Remove content from div (if we need to come back again)
+    cleanSampleContent();
+
+    // blurBody();
+    showLoggingOutModal();
     // Call the logout function with the callback function
     logoutWithRaaS(gotoUnloggedPage);
-}
-
-function blurBody() {
-
-    // console.log('blurring body...');
-    // Take the body and blurry it while logging out
-    // const transitionStyle = 'filter: blur(10px);';
-    // query('.hero-body').setAttribute("style", transitionStyle);
-
-    // query('.hero-body').classList.add('blurred');
-}
-
-function unBlurBody() {
-
-    // console.log('unblurring body...');
-    // Take the body and blurry it while logging out
-    // const transitionStyle = 'filter: blur(0px);';
-    // query('.hero-body').setAttribute("style", transitionStyle);
-
-    // query('.hero-body').classList.remove('blurred');
-
 }
 
 
@@ -681,7 +690,7 @@ function stringToHexSoft(string) {
 function log(text, operation) {
     if (showLog) {
         const title = window.config.menu_description;
-        var backgroundColor = window.config.menu_bg_color_hover;
+        var backgroundColor = !operation ? "#00800033" : "#ff000033";
         console.info(
             `%c ${title} %c--> ` + text + '%c%s',
             `font-weight: bold; color: #333;background-color:${backgroundColor};`,
@@ -707,7 +716,8 @@ function logEvents(eventName, methodName, logEvents) {
 
         const title = window.config.menu_description;
         // debugger;
-        var backgroundColor = window.config.menu_bg_color_hover;
+        // var backgroundColor = window.config.menu_bg_color_hover;
+        var backgroundColor = "#0089ff33";
         // backgroundColor = "transparent";
         if (methodName) {
             console.info(
@@ -717,16 +727,16 @@ function logEvents(eventName, methodName, logEvents) {
                 methodName,
                 `font-weight: bold;color: #333;background-color:${backgroundColor};`,
                 "font-weight: normal;color:#aaa",
-                `font-weight:bold;color:#f14668;`,
+                `font-weight:bold;color:#428bca;`,
                 "font-weight: normal;color:#aaa;",
-                "font-weight: bold; color: #428bca"
+                "font-weight: bold; color: #f14668"
             );
         } else {
             console.info(
                 `%c ${title} %c - Event: %c` + eventName,
                 `font-weight: bold; color: #333;background-color:${backgroundColor};`,
                 "font-weight: normal;color:#aaa",
-                `font-weight:bold; color:#f14668;`
+                `font-weight:bold; color:#428bca;`
             );
         }
     }
@@ -734,7 +744,7 @@ function logEvents(eventName, methodName, logEvents) {
 
 function renderPreviousLoginsIfDefined(previousLogins) {
 
-    log('rendering previous login inf if enabled for this api key... %o' + previousLogins);
+    // log('Previous logins (if enabled for this api key) : ' + previousLogins);
     const previousLoginsButton = query(".button-previous-logins");
     if (previousLogins) {
         if (previousLoginsButton) {
@@ -750,53 +760,54 @@ function renderPreviousLoginsIfDefined(previousLogins) {
         // return gigya.dataCenter;
     } else {
         previousLoginsButton.parentElement.classList.add("is-hidden");
-        console.log("no data.previousLogins field was declared for this api key");
+        // console.log("no data.previousLogins field was declared for this api key");
     }
 }
 
-function increasePreviousLogins(response) {
+function increasePreviousLogins(user) {
 
-    // 
-    log("X. - Increase Previouse logins...", "GET ACCOUNT INFO");
+    // console.log('user :>> %o', user);
 
-    gigya.accounts.getAccountInfo({
-        include: 'emails, profile, data',
-        callback: function(user) {
+    if (user.status !== "FAIL") {
+        // Increment number of logins count.
+        const previousLogins = (user.data.previousLogins || 0) + 1;
+        const recieveOfferAlerts = user.data.recieveOfferAlerts ? user.data.recieveOfferAlerts : false;
 
-            console.log('user :>> %o', user);
+        // 
+        log("X. - Increase Previous logins...", "SET ACCOUNT INFO");
 
-            if (user.status !== "FAIL") {
-                // Increment number of logins count.
-                const previousLogins = (user.data.previousLogins || 0) + 1;
-                const recieveOfferAlerts = user.data.recieveOfferAlerts ? user.data.recieveOfferAlerts : false;
-                gigya.accounts.setAccountInfo({
-                    data: {
+        gigya.accounts.setAccountInfo({
+            data: {
 
-                        // This integer field must have been previously added to the site's schema via the UI Builder or accounts.setSchema API
-                        previousLogins
+                // This integer field must have been previously added to the site's schema via the UI Builder or accounts.setSchema API
+                previousLogins
 
-                    },
-                    callback: (event2) => {
-                        // Check if we must show or not the progressive profile screenset
-                        checkIfShowConsentsPopup(event2, previousLogins, recieveOfferAlerts);
+            },
+            callback: (event2) => {
+                // Check if we must show or not the progressive profile screenset
+                checkIfShowConsentsPopup(event2, previousLogins, recieveOfferAlerts);
 
-                        // Re-render the counter after this increase
-                        renderPreviousLoginsIfDefined(previousLogins);
+                // Re-render the counter after this increase
+                renderPreviousLoginsIfDefined(previousLogins);
 
-                    },
-                });
-            }
-        }
-    });
+            },
+        });
+    }
+
 }
 
 function checkIfShowConsentsPopup(event, previousLogins, recieveOfferAlerts) {
-    // debugger;
-    console.log('event & previous Logings:>> %o & %o', event, previousLogins);
 
+    // debugger;
     if (event.status !== "FAIL") {
-        if (previousLogins % 3 === 0 && recieveOfferAlerts === true) {
-            console.log('sale');
+        const hasPendingAlerts =
+            currentUser.preferences.offer_products_1.isConsentGranted !== true ||
+            currentUser.preferences.offer_services_1.isConsentGranted !== true ||
+            currentUser.preferences.offer_products_2.isConsentGranted !== true ||
+            currentUser.preferences.offer_services_2.isConsentGranted !== true;
+        // debugger;
+        if (hasPendingAlerts && previousLogins % 1 === 0 && (recieveOfferAlerts === true || recieveOfferAlerts === "true")) {
+            // console.log("sale");
             /* Launch Screenset */
             gigya.accounts.showScreenSet({
                 screenSet: "Default-ProfileUpdate",
@@ -806,7 +817,7 @@ function checkIfShowConsentsPopup(event, previousLogins, recieveOfferAlerts) {
                 // onAfterSubmit: gotoHome,
             });
         } else {
-            console.log("no sale");
+            // console.log("no sale");
         }
     }
 }
@@ -815,45 +826,68 @@ function checkIfShowConsentsPopup(event, previousLogins, recieveOfferAlerts) {
 //               6. PURCHASE FUNCTIONS
 /** *****************************************************/
 
-function showPurchaseModal() {
+function showPurchaseModal(element) {
 
     // Showing purchase Modal
     const purchaseModal = query("#purchase_modal");
 
     if (purchaseModal) {
-        console.log('showing purchase modal...');
+        // console.log('showing purchase modal...');
         purchaseModal.classList.add('is-active');
+        purchaseModal.querySelector(".modal-card-body").innerHTML = element.currentTarget.parentElement.parentElement.parentElement.innerHTML;
+        purchaseModal.querySelector(".modal-card-foot .purchase-button").innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Buy product for &nbsp;" + element.currentTarget.innerHTML;
     }
 
     // Triggering close action for button
 
 }
 
-function closePurchaseModal() {
+function closePurchaseModal(product) {
     // Hiding purchase Modal
     const purchaseModal = query("#purchase_modal");
 
     if (purchaseModal) {
-        console.log("closing purchase modal...");
+        // console.log("closing purchase modal...");
         purchaseModal.classList.remove("is-active");
     }
 
     // Triggering close action for button
 }
 
-function purchaseElement(user, element) {
+function purchaseProduct(element) {
 
-    console.log("user: %o , element to purchase:>> %o", user, element);
-    const uid = user.UID;
+    const purchaseModalButton = query("#purchase_modal .modal-card-foot .purchase-button");
+    purchaseModalButton.classList.add('is-loading');
+
+    // console.log("user: %o , element to purchase:>> %o", currentUser, element);
+    const uid = currentUser.UID;
+
+    // Get the price from the element
+    const price = Number(element.parentElement.parentElement.querySelector(".product-actions .right a").innerText.trim().substr(1))
     const id_token = "whatever";
 
-    const purchaseUrl = `https://juan.gigya-cs.com/api/cdc-starter-kit/purchase-element.php?UID=${uid}&id_token=${id_token}`;
-    fetch(purchaseUrl)
-        .then((res) => { return res.json(); })
-        .then((out) => {
-            console.log('delete out :>> %o', out);
+    // const purchaseUrl = `https://juan.gigya-cs.com/api/cdc-starter-kit/purchase-element.php?UID=${uid}&price=${price}&id_token=${id_token}`;
+    // fetch(purchaseUrl)
+    //     .then((res) => { return res.json(); })
+    //     .then((out) => {
+    //         console.log('product purchased out :>> %o', out);
 
-        }).catch((err) => { return console.error(err); });
+    //     }).catch((err) => { return console.error(err); });
+    const purchasedProducts = Number(currentUser.data.purchasedProducts + 1);
+    const credits = Number(currentUser.data.credits - price);
+    gigya.accounts.setAccountInfo({
+
+        data: { purchasedProducts, credits },
+        callback: function(event) {
+            log("Product bought", "SET ACCOUNT INFO");
+            purchaseModalButton.classList.remove("is-loading");
+            closePurchaseModal();
+            // We update the session currentUser and then send it to
+            currentUser.data.purchasedProducts = purchasedProducts;
+            currentUser.data.credits = credits;
+            renderUI(currentUser);
+        }
+    });
 }
 
 /** *****************************************************/
@@ -865,7 +899,7 @@ function showDeletionModal() {
     const deletionModal = query("#deletion_modal");
 
     if (deletionModal) {
-        console.log("showing deletion modal...");
+        // console.log("showing deletion modal...");
         deletionModal.classList.add("is-active");
     }
 
@@ -877,7 +911,7 @@ function closeDeleteModal() {
     const deletionModal = query("#deletion_modal");
 
     if (deletionModal) {
-        console.log("closing deletion modal...");
+        // console.log("closing deletion modal...");
         deletionModal.classList.remove("is-active");
     }
 
@@ -892,7 +926,7 @@ function deleteCurrentAccount() {
     gigya.accounts.getAccountInfo({
         callback: function(user) {
             if (user.status !== "FAIL") {
-                console.log("user to delete:>> %o", user);
+                log("user to delete: " + user.profile.email, "DELETE ACCOUNT");
                 const uid = user.UID;
                 const id_token = "whatever";
 
@@ -902,7 +936,8 @@ function deleteCurrentAccount() {
                         return res.json();
                     })
                     .then((out) => {
-                        console.log("delete out :>> %o", out);
+                        log("User Delete OK : " + JSON.stringify(out));
+                        logoutFromSite();
                     })
                     .catch((err) => {
                         return console.error(err);
@@ -912,4 +947,48 @@ function deleteCurrentAccount() {
             // Increment number of logins count.
         },
     });
+}
+
+// Show / Hide Modals
+function showLoadingModal() {
+    query('.loading-modal').classList.add('is-active');
+}
+
+function hideLoadingModal() {
+    query(".loading-modal").classList.remove("is-active");
+}
+
+function showLoggingOutModal() {
+    var loggingOutModal = query(".logging-out-modal");
+
+    if (loggingOutModal) {
+        loggingOutModal.classList.add("is-active");
+    }
+}
+
+function hideLoggingOutModal() {
+
+    var loggingOutModal = query(".logging-out-modal");
+
+    if (loggingOutModal) {
+        loggingOutModal.classList.remove("is-active");
+    }
+}
+
+function cleanSampleContent() {
+    var sampleContentDiv = query(".sample-content");
+
+    if (sampleContentDiv) {
+        sampleContentDiv.innerHTML = "";
+    }
+
+}
+
+function initProductButtons() {
+    // Init all product buttons
+    const productButtons = queryAll(".product-actions .button");
+    for (var k = 0; k < productButtons.length; k++) {
+        const oneProductButton = productButtons[k];
+        oneProductButton.addEventListener("click", showPurchaseModal);
+    }
 }

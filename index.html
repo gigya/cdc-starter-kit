@@ -97,7 +97,50 @@
 
     </section>
 
+    <!-- Loading Modal -->
+    <div class="modal loading-modal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <!-- Any other Bulma elements you want -->
+            <div class="block has-text-centered subtitle">
+                <ion-icon class="has-text-grey-light" name="cloud-outline"></ion-icon>
+                <br />
+                <div class="has-text-grey-lighter ">Loading
+                    <div>
+                    </div>
+                </div>
+                <!-- <button class="modal-close is-large" aria-label="close"></button> -->
+            </div>
+        </div>
     </div>
+
+
+    <!-- Purchase modal -->
+    <div id="purchase_modal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">
+                    <ion-icon class="purchase-icon has-text-warning" name="warning-outline"></ion-icon>
+                    <b>
+                        Purchase Product
+                    </b>
+                </p>
+                <button class="delete" aria-label="close" onclick="closePurchaseModal()"></button>
+            </header>
+            <section class="modal-card-body">
+                Do you want to adquire this product?
+                <br>
+                <br>
+
+            </section>
+            <footer class="modal-card-foot">
+                <button class="purchase-button button is-warning" onclick="purchaseProduct(this)">Buy Product</button>
+                <button class="button" onclick="closePurchaseModal()">Cancel</button>
+            </footer>
+        </div>
+    </div>
+
 
     <!-- Gigya EXAMPLE!!. Remove with after setting your __API_KEY__  -->
     <script type="text/javascript" lang="javascript" src="https://cdns.gigya.com/js/gigya.js?apikey=3_gRq1MaCq77LfHT2SITkHpxCK-_7WJi_H2yVkhha9yZaIKLxY2t5u37JRIC4W3m0s"></script>

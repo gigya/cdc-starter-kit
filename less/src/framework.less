@@ -52,41 +52,6 @@
         background: white!important;
     }
 
-    // Ion Icons
-    ion-icon {
-        font-size: 24px;
-        color: #999;
-        pointer-events: none;
-
-        &.social-provider-icon {
-            padding: 5px;
-            color: whitesmoke!important;
-            margin-left: 10px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 5px #ccc;
-        }
-        &.is-site {
-            background: #f1ab2b!important;
-        }
-        &.is-apple {
-            background: #333!important;
-        }
-        &.is-amazon {
-            background: #333!important;
-            color: #febd69!important;
-        }
-        &[class*='is-saml'] {
-            // background:whitesmoke !important;
-            color: #f1ab2b !important;
-        }
-    }
-    .icon-link:hover ion-icon {
-        color: whitesmoke!important;
-    }
-    .icon-link.is-active ion-icon {
-        color: whitesmoke!important;
-    }
-
     .navbar-item {
 
         // Social account image
@@ -204,6 +169,7 @@
         transition: filter 1.0s;
 
         &.blurred {
+            display: none;
             -webkit-transition: filter 1.0s;
             transition: filter 1.0s;
             filter: blur(1px);
@@ -339,3 +305,118 @@
         margin-right: 7px;
         font-size: 1.5rem;
 }
+
+// Loading elements
+.loading-modal,
+.logging-out-modal {
+    z-index: 20!important;
+    // To see the navbar all time
+    top: 57px;
+
+    .modal-background {
+        background-color: #f4f4f4;
+    }
+    
+    .modal-content {
+        .blink_me();
+        ion-icon {
+            // border: 2px solid red;
+        }
+    }
+
+}
+
+// IonIcons
+  // Ion Icons
+  ion-icon {
+      font-size: 24px;
+      color: #999;
+      pointer-events: none;
+
+      &.social-provider-icon {
+          padding: 5px;
+          color: whitesmoke !important;
+          margin-left: 10px;
+          border-radius: 5px;
+          box-shadow: 0px 0px 5px #ccc;
+      }
+
+      &.is-site {
+          background: #f1ab2b !important;
+      }
+
+      &.is-apple {
+          background: #333 !important;
+      }
+
+      &.is-amazon {
+          background: #333 !important;
+          color: #febd69 !important;
+      }
+
+      &[class*='is-saml'] {
+          // background:whitesmoke !important;
+          color: #f1ab2b !important;
+      }
+  }
+
+  .icon-link:hover ion-icon {
+      color: whitesmoke !important;
+  }
+
+  .icon-link.is-active ion-icon {
+      color: whitesmoke !important;
+  }
+
+  // List of products
+  .product-actions {
+      
+      .button {
+          text-decoration: none!important;
+      }
+  }
+
+  // Product modal
+  #purchase_modal {
+      .modal-card-body {
+            // border: 2px solid red!important;
+            .quickview-trigger {
+                display: none;
+            }
+            .product-image img {
+                
+                // width: 70%;
+                // border: 2px solid red;;
+                display: block;
+                margin: 0 auto;
+            }
+            .product-info {
+                h3 {
+                    font-weight: bold;
+                }
+            }
+            .left {
+                position: absolute;
+                right: 28px;
+                bottom: 110px;
+                svg {
+
+                    // color: red;
+                }
+            }
+            .right {
+                float: right;
+                a {display: none;}
+            }
+        }
+    .modal-card-foot {
+        button {
+            svg {
+                border: 0px solid red;
+                float: left;
+                position: absolute;
+                left: 0;
+                margin-left: 10px;            }
+            }
+    }
+  }

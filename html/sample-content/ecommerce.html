@@ -261,7 +261,7 @@
                         </div>
                         <div class="store-meta">
                             <h3>{{profile.firstName}}&nbsp;{{profile.lastName}}</h3>
-                            <span><b class="has-color-info">Golden Member since: </b>2019</span>
+                            <span><b class="has-color-info">{{data.memberType}} Member since: </b>2019</span>
                         </div>
                     </div>
 
@@ -270,15 +270,15 @@
 
                         <div class="inner-wrap">
                             <div class="stat-block">
-                                <div class="stat-number">{{data.boughtItems}}</div>
+                                <div class="stat-number">{{data.purchasedProducts}}</div>
                                 <span>Adquired Products</span>
                             </div>
                             <div class="stat-block is-bordered">
-                                <div class="stat-number">{{data.credit}}</div>
-                                <span>Credit</span>
+                                <div class="stat-number">${{data.credits}}</div>
+                                <span>Remaining Credit</span>
                             </div>
                             <div class="stat-block">
-                                <div class="stat-number">{{created}}</div>
+                                <div class="stat-number">{{data.since}}</div>
                                 <span>Member since</span>
                             </div>
                         </div>

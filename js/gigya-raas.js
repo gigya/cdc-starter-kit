@@ -203,7 +203,7 @@ function onLogin(response) {
     log("4 - On Login!", "GET ACCOUNT INFO");
     // Get the user information, redirecting if needed to the logged in page
     if (response.profile !== null) {
-        gigya.accounts.getAccountInfo({ include: 'emails, profile, data', callback: renderUI });
+        gigya.accounts.getAccountInfo({ include: 'emails, profile, data, preferences', callback: renderUI });
     }
 }
 
@@ -216,7 +216,7 @@ function onLogout(response) {
     // Shows the unlogged HTML of the page
     if (response.eventName === 'logout') {
         log('X. User has logged out', "LOG OUT");
-        showUnloggedHTML();
+        // gotoHome();
     } else {
         alert('Error :' + response.errorMessage);
     }

@@ -29,6 +29,14 @@
 .is-fullwidth {
   width: 100%!important;
 }
+.blink_me {
+  animation: blinker 1.5s ease-in-out infinite;
+}
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
 html {
   background: #F2F6FA;
   background-repeat: no-repeat;
@@ -126,37 +134,6 @@ button {
 .navbar .navbar-menu {
   background: white!important;
 }
-.navbar ion-icon {
-  font-size: 24px;
-  color: #999;
-  pointer-events: none;
-}
-.navbar ion-icon.social-provider-icon {
-  padding: 5px;
-  color: whitesmoke!important;
-  margin-left: 10px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 5px #ccc;
-}
-.navbar ion-icon.is-site {
-  background: #f1ab2b !important;
-}
-.navbar ion-icon.is-apple {
-  background: #333 !important;
-}
-.navbar ion-icon.is-amazon {
-  background: #333 !important;
-  color: #febd69 !important;
-}
-.navbar ion-icon[class*='is-saml'] {
-  color: #f1ab2b !important;
-}
-.navbar .icon-link:hover ion-icon {
-  color: whitesmoke!important;
-}
-.navbar .icon-link.is-active ion-icon {
-  color: whitesmoke!important;
-}
 .navbar .navbar-item.is-account img {
   height: 20px;
   width: 20px;
@@ -252,6 +229,7 @@ button {
   transition: filter 1s;
 }
 .hero .hero-body.blurred {
+  display: none;
   -webkit-transition: filter 1s;
   transition: filter 1s;
   filter: blur(1px);
@@ -351,4 +329,79 @@ button {
   font-weight: bold;
   margin-right: 7px;
   font-size: 1.5rem;
+}
+.loading-modal,
+.logging-out-modal {
+  z-index: 20!important;
+  top: 57px;
+}
+.loading-modal .modal-background,
+.logging-out-modal .modal-background {
+  background-color: #f4f4f4;
+}
+.loading-modal .modal-content,
+.logging-out-modal .modal-content {
+  animation: blinker 1.5s ease-in-out infinite;
+}
+ion-icon {
+  font-size: 24px;
+  color: #999;
+  pointer-events: none;
+}
+ion-icon.social-provider-icon {
+  padding: 5px;
+  color: whitesmoke !important;
+  margin-left: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px #ccc;
+}
+ion-icon.is-site {
+  background: #f1ab2b !important;
+}
+ion-icon.is-apple {
+  background: #333 !important;
+}
+ion-icon.is-amazon {
+  background: #333 !important;
+  color: #febd69 !important;
+}
+ion-icon[class*='is-saml'] {
+  color: #f1ab2b !important;
+}
+.icon-link:hover ion-icon {
+  color: whitesmoke !important;
+}
+.icon-link.is-active ion-icon {
+  color: whitesmoke !important;
+}
+.product-actions .button {
+  text-decoration: none!important;
+}
+#purchase_modal .modal-card-body .quickview-trigger {
+  display: none;
+}
+#purchase_modal .modal-card-body .product-image img {
+  display: block;
+  margin: 0 auto;
+}
+#purchase_modal .modal-card-body .product-info h3 {
+  font-weight: bold;
+}
+#purchase_modal .modal-card-body .left {
+  position: absolute;
+  right: 28px;
+  bottom: 110px;
+}
+#purchase_modal .modal-card-body .right {
+  float: right;
+}
+#purchase_modal .modal-card-body .right a {
+  display: none;
+}
+#purchase_modal .modal-card-foot button svg {
+  border: 0px solid red;
+  float: left;
+  position: absolute;
+  left: 0;
+  margin-left: 10px;
 }
