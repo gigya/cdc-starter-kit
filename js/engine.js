@@ -788,7 +788,7 @@ function increasePreviousLogins(user) {
                 checkIfShowConsentsPopup(event2, previousLogins, recieveOfferAlerts);
 
                 // Re-render the counter after this increase
-                renderPreviousLoginsIfDefined(previousLogins);
+                // renderPreviousLoginsIfDefined(previousLogins);
 
             },
         });
