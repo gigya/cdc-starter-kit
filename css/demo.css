@@ -405,3 +405,8 @@ ion-icon[class*='is-saml'] {
   left: 0;
   margin-left: 10px;
 }
+.store-block img {
+  border: 2px solid #AAA;
+  background: white;
+  box-shadow: 1px 1px 10px #ddd;
+}

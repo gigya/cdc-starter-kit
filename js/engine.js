@@ -137,6 +137,7 @@ function renderUI(user) {
 
                     user.data.memberType = user.data.purchasedProducts && user.data.purchasedProducts < 5 ? "Standard" : "Golden";
                     user.data.since = user.created.substr(0, 10);
+                    user.data.memberTypeIcon = user.data.memberType.toLowerCase();
                     loadSampleContent(user);
 
                 } else {
