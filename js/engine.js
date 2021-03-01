@@ -70,7 +70,7 @@ function gotoUnloggedPage() {
     if (editPlaceholder) {
         gotoHome();
     } else {
-        hideLoggingOutModal();
+        hideModal('logging-out');
         showUnloggedHTML();
         loginWithRaaS('not_logged_placeholder');
     }
@@ -93,11 +93,16 @@ function gotoHome() {
  */
 function renderUI(user) {
 
-    // First, we render the navbar from file, and once loaded, we start with all the rest of the renders
-    log("2. Render UI.");
-
-    showLoadingModal();
+    // Store user as global variable to be user later (not ideal :S)
     currentUser = user;
+
+    // First, we render the navbar from file, and once loaded, we start with all the rest of the renders
+    log('2. Render UI.');
+
+    // Show the loading modal
+    showModal('loading');
+
+
     const path = './html/skeleton/navbar.html';
     fetch(path)
         .then((res) => { return res.text(); })
@@ -119,7 +124,8 @@ function renderUI(user) {
             /* If not logged, show login form */
 
             // Show the loading modal
-            hideLoadingModal();
+            // debugger;
+            hideModal('loading');
 
             if (!user || !user.UID) {
                 log("3. You are not logged in.");
@@ -138,7 +144,6 @@ function renderUI(user) {
                     user.data.memberType = user.data.purchasedProducts && user.data.purchasedProducts < 5 ? "Standard" : "Golden";
                     user.data.since = user.created.substr(0, 10);
                     user.data.memberTypeIcon = user.data.memberType.toLowerCase();
-                    loadSampleContent(user);
 
                 } else {
                     editProfileWithRaaS("edit_profile_placeholder");
@@ -400,6 +405,9 @@ function showLoggedHTML(user) {
     if (user.data && user.data.previousLogins) {
         renderPreviousLoginsIfDefined(user.data.previousLogins);
     }
+
+    // Load logged sample content
+    loadSampleContent(user);
 }
 
 /**
@@ -408,19 +416,21 @@ function showLoggedHTML(user) {
  * @param  {object} user User info object
  */
 function showUnloggedHTML() {
-
     /* Switch Menu settings */
-    const notLoggedElements = queryAll('.not-logged');
+    const notLoggedElements = queryAll(".not-logged");
     for (const notLoggedElement of notLoggedElements) {
-        notLoggedElement.classList.remove('is-hidden');
+        notLoggedElement.classList.remove("is-hidden");
     }
-    const loggedElements = queryAll('.logged');
+    const loggedElements = queryAll(".logged");
     for (const loggedElement of loggedElements) {
-        loggedElement.classList.add('is-hidden');
+        loggedElement.classList.add("is-hidden");
     }
 
     /* Hide previous logged navbar element if shown */
     query(".previous-logins-navbar-item").classList.add("is-hidden");
+
+    // Load unlogged sample content
+    loadSampleContent(null);
 }
 
 /**
@@ -454,8 +464,10 @@ function loadSampleContent(user) {
     const sampleContent = query('.sample-content');
 
     if (sampleContent) {
-        const path = './html/sample-content/ecommerce.html';
-        //
+        const isLogged = user ? true : false;
+        const path = isLogged ? './html/sample-content/ecommerce.html' : './html/sample-content/ecommerce-not-logged.html';
+
+        // Load template
         fetch(path)
             .then((res) => { return res.text(); })
             .then((out) => {
@@ -465,12 +477,18 @@ function loadSampleContent(user) {
                 var template = Handlebars.compile(out);
                 // execute the compiled template and print the output to the console
 
+                // Add config to the user element prior to compile (it will be used by the template) and compile
+                const user = currentUser.status === "OK" ? currentUser : {};
+                user.config = config;
+                // debugger;
                 const compiled = template(user);
-                // console.log(compiled);
                 sampleContent.innerHTML = compiled;
 
                 // Init the product buttons once content is loaded
                 initProductButtons();
+
+                // Init tabs
+                initTabButtons();
 
             }).catch((err) => { return console.error(err); });
     }
@@ -505,13 +523,76 @@ function logoutFromSite() {
     // Clean user state
     currentUser = null;
 
+    // Show Logging out modal
+    showModal('logging-out');
+
     // Remove content from div (if we need to come back again)
     cleanSampleContent();
 
-    // blurBody();
-    showLoggingOutModal();
     // Call the logout function with the callback function
     logoutWithRaaS(gotoUnloggedPage);
+}
+
+// Show / Hide Modals
+function showModal(modal, callback) {
+
+    console.log('Showing ' + capitalize(modal) + ' Modal ...')
+
+    const path = `./html/modals/${modal}-modal.html`;
+
+    // Load template
+    fetch(path)
+        .then((res) => {
+            return res.text();
+        })
+        .then((out) => {
+            // execute the compiled template and print the output to the console
+            var template = Handlebars.compile(out);
+
+            const compiled = template();
+
+            // Include the modal in the HTML
+            query('body').insertAdjacentHTML('beforeend', compiled);
+
+            // Finally, show the modal
+            // debugger;
+            query(`.${modal}-modal`).classList.add('is-active');
+
+            // If there is a callback function, execute it now.
+            if (callback) {
+                setTimeout(callback, 300);
+                // callback();
+            }
+        })
+        .catch((err) => {
+            return console.error(err);
+        });
+
+
+}
+
+function hideModal(modal) {
+
+
+    console.log("Hiding " + capitalize(modal) + " Modal ...");
+
+    const modalElement = query(`.${modal}-modal`);
+
+    if (modalElement) {
+        setTimeout(function() {
+
+            modalElement.classList.remove("is-active");
+        }, 100);
+    }
+}
+
+function cleanSampleContent() {
+    var sampleContentDiv = query('.sample-content');
+
+    if (sampleContentDiv) {
+        sampleContentDiv.innerHTML = '';
+    }
+
 }
 
 
@@ -703,6 +784,7 @@ function log(text, operation) {
     }
 }
 
+
 /** ***********************************************************/
 //  5. PROGRESSIVE PROFILING AND PREVIOUS LOGINS FUNCTIONS
 /** ***********************************************************/
@@ -828,45 +910,47 @@ function checkIfShowConsentsPopup(event, previousLogins, recieveOfferAlerts) {
 /** *****************************************************/
 
 function showPurchaseModal(element) {
-
-    // Showing purchase Modal
-    const purchaseModal = query("#purchase_modal");
-
+    // debugger;
+    // We detect if the click was over the link or over the span
+    const sourceElement = element.srcElement.hasChildNodes() ? element : element.parent;
+    const content = sourceElement.srcElement.parentElement.parentElement.parentElement.parentElement.innerHTML;
+    const buttonText = sourceElement.srcElement.innerHTML;
+    // Showing purchase Modal, and once shown, load dynamic content for that card
+    const purchaseModal = query(".purchase-modal");
     if (purchaseModal) {
-        // console.log('showing purchase modal...');
-        purchaseModal.classList.add('is-active');
-        purchaseModal.querySelector(".modal-card-body").innerHTML = element.currentTarget.parentElement.parentElement.parentElement.innerHTML;
-        purchaseModal.querySelector(".modal-card-foot .purchase-button").innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Buy product for &nbsp;" + element.currentTarget.innerHTML;
+        purchaseModal.querySelector(".modal-card-body").innerHTML = "";
     }
+    showModal('purchase', function() {
 
-    // Triggering close action for button
 
-}
+        // Show the purchase button 
+        const textForButton = currentUser ? '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Buy product for &nbsp;' + buttonText : 'LOGIN to buy this product';
+        const classForButton = currentUser ? 'purchase-button' : 'login-button';
 
-function closePurchaseModal(product) {
-    // Hiding purchase Modal
-    const purchaseModal = query("#purchase_modal");
+        // inject the card content into the modal
+        const purchaseModal = query('.purchase-modal');
+        purchaseModal.querySelector(".modal-card-body").innerHTML = content;
 
-    if (purchaseModal) {
-        // console.log("closing purchase modal...");
-        purchaseModal.classList.remove("is-active");
-    }
-
-    // Triggering close action for button
+        purchaseModal.querySelector(`.modal-card-foot .${classForButton}`).innerHTML = textForButton;
+        purchaseModal.classList.remove('is-hidden');
+    });
 }
 
 function purchaseProduct(element) {
 
-    const purchaseModalButton = query("#purchase_modal .modal-card-foot .purchase-button");
+    // Show the loading button
+    const purchaseModalButton = query('.purchase-modal .modal-card-foot .purchase-button');
     purchaseModalButton.classList.add('is-loading');
 
-    // console.log("user: %o , element to purchase:>> %o", currentUser, element);
+    // Get the data from the element
+    const purchasedProducts = Number(currentUser.data.purchasedProducts + 1);
+    const price = Number(element.parentElement.parentElement.querySelector('.product-actions .right a').innerText.trim().substr(1))
+    const credits = Number(currentUser.data.credits - price);
     const uid = currentUser.UID;
 
-    // Get the price from the element
-    const price = Number(element.parentElement.parentElement.querySelector(".product-actions .right a").innerText.trim().substr(1))
-    const id_token = "whatever";
 
+    // THIS IS THE GOOD WAY!!! BACKEND
+    // const id_token = 'whatever'; // generate a token with getJWT
     // const purchaseUrl = `https://juan.gigya-cs.com/api/cdc-starter-kit/purchase-element.php?UID=${uid}&price=${price}&id_token=${id_token}`;
     // fetch(purchaseUrl)
     //     .then((res) => { return res.json(); })
@@ -874,15 +958,14 @@ function purchaseProduct(element) {
     //         console.log('product purchased out :>> %o', out);
 
     //     }).catch((err) => { return console.error(err); });
-    const purchasedProducts = Number(currentUser.data.purchasedProducts + 1);
-    const credits = Number(currentUser.data.credits - price);
+
     gigya.accounts.setAccountInfo({
 
         data: { purchasedProducts, credits },
         callback: function(event) {
-            log("Product bought", "SET ACCOUNT INFO");
-            purchaseModalButton.classList.remove("is-loading");
-            closePurchaseModal();
+            log('Product bought', 'SET ACCOUNT INFO');
+            purchaseModalButton.classList.remove('is-loading');
+            hideModal('purchase');
             // We update the session currentUser and then send it to
             currentUser.data.purchasedProducts = purchasedProducts;
             currentUser.data.credits = credits;
@@ -891,45 +974,67 @@ function purchaseProduct(element) {
     });
 }
 
+function initProductButtons() {
+
+    // Init all product buttons
+    const productButtons = queryAll('.product-actions .button');
+
+    for (var k = 0; k < productButtons.length; k++) {
+        const oneProductButton = productButtons[k];
+        oneProductButton.addEventListener('click', showPurchaseModal);
+    }
+}
+
+function initTabButtons() {
+
+    // Init page tabs
+    const tabs = queryAll('.store-tabs a');
+
+    for (var k = 0; k < tabs.length; k++) {
+        const oneTab = tabs[k];
+        oneTab.addEventListener('click', function(event) {
+            const element = event.srcElement;
+            // debugger;
+            if (element) {
+
+                // Update tabs
+                const elementToDeactivate = event.srcElement.parentElement.querySelector("a.is-active");
+                elementToDeactivate.classList.remove('is-active');
+                element.classList.add('is-active');
+
+                // Active content for that tab
+                const tabDataElement = element.getAttribute('data-tab');
+                query('#' + tabDataElement).classList.add('is-active');
+
+                // Hide current content and deactivate old tab
+                const dataTabElementToDeactivate = elementToDeactivate.getAttribute('data-tab');
+                query("#" + dataTabElementToDeactivate).classList.remove("is-active");
+
+            }
+        });
+    }
+}
+
 /** *****************************************************/
 //               7. DELETION FUNCTIONS
 /** *****************************************************/
 
-function showDeletionModal() {
-    // Showing deletion Modal
-    const deletionModal = query("#deletion_modal");
-
-    if (deletionModal) {
-        // console.log("showing deletion modal...");
-        deletionModal.classList.add("is-active");
-    }
-
-    // Triggering close action for button
-}
-
-function closeDeleteModal() {
-    // Hiding deletion Modal
-    const deletionModal = query("#deletion_modal");
-
-    if (deletionModal) {
-        // console.log("closing deletion modal...");
-        deletionModal.classList.remove("is-active");
-    }
-
-    // Triggering close action for button
-}
-
 function deleteCurrentAccount() {
 
     // 
-    log("X. - Deleting account.... ", "GET ACCOUNT INFO");
+    log('X. - Deleting account.... ', 'GET ACCOUNT INFO');
+
+    // Show the loading button
+    const deleteButton = query('.deletion-modal .modal-card-foot .delete-button');
+    deleteButton.classList.add('is-loading');
+
 
     gigya.accounts.getAccountInfo({
         callback: function(user) {
-            if (user.status !== "FAIL") {
-                log("user to delete: " + user.profile.email, "DELETE ACCOUNT");
+            if (user.status !== 'FAIL') {
+                log('user to delete: ' + user.profile.email, 'DELETE ACCOUNT');
                 const uid = user.UID;
-                const id_token = "whatever";
+                const id_token = 'whatever';
 
                 const deleteUrl = `https://juan.gigya-cs.com/api/cdc-starter-kit/delete-user.php?UID=${uid}&id_token=${id_token}`;
                 fetch(deleteUrl)
@@ -944,52 +1049,6 @@ function deleteCurrentAccount() {
                         return console.error(err);
                     });
             }
-
-            // Increment number of logins count.
         },
     });
-}
-
-// Show / Hide Modals
-function showLoadingModal() {
-    query('.loading-modal').classList.add('is-active');
-}
-
-function hideLoadingModal() {
-    query(".loading-modal").classList.remove("is-active");
-}
-
-function showLoggingOutModal() {
-    var loggingOutModal = query(".logging-out-modal");
-
-    if (loggingOutModal) {
-        loggingOutModal.classList.add("is-active");
-    }
-}
-
-function hideLoggingOutModal() {
-
-    var loggingOutModal = query(".logging-out-modal");
-
-    if (loggingOutModal) {
-        loggingOutModal.classList.remove("is-active");
-    }
-}
-
-function cleanSampleContent() {
-    var sampleContentDiv = query(".sample-content");
-
-    if (sampleContentDiv) {
-        sampleContentDiv.innerHTML = "";
-    }
-
-}
-
-function initProductButtons() {
-    // Init all product buttons
-    const productButtons = queryAll(".product-actions .button");
-    for (var k = 0; k < productButtons.length; k++) {
-        const oneProductButton = productButtons[k];
-        oneProductButton.addEventListener("click", showPurchaseModal);
-    }
 }

@@ -377,28 +377,31 @@ ion-icon[class*='is-saml'] {
 .product-actions .button {
   text-decoration: none!important;
 }
-#purchase_modal .modal-card-body .quickview-trigger {
+.purchase-modal .modal-card-body {
+  min-height: 200px;
+}
+.purchase-modal .modal-card-body .quickview-trigger {
   display: none;
 }
-#purchase_modal .modal-card-body .product-image img {
+.purchase-modal .modal-card-body .product-image img {
   display: block;
   margin: 0 auto;
 }
-#purchase_modal .modal-card-body .product-info h3 {
+.purchase-modal .modal-card-body .product-info h3 {
   font-weight: bold;
 }
-#purchase_modal .modal-card-body .left {
+.purchase-modal .modal-card-body .left {
   position: absolute;
   right: 28px;
   bottom: 110px;
 }
-#purchase_modal .modal-card-body .right {
+.purchase-modal .modal-card-body .right {
   float: right;
 }
-#purchase_modal .modal-card-body .right a {
+.purchase-modal .modal-card-body .right a {
   display: none;
 }
-#purchase_modal .modal-card-foot button svg {
+.purchase-modal .modal-card-foot button svg {
   border: 0px solid red;
   float: left;
   position: absolute;
@@ -409,4 +412,35 @@ ion-icon[class*='is-saml'] {
   border: 2px solid #AAA;
   background: white;
   box-shadow: 1px 1px 10px #ddd;
+  padding: 10px;
+}
+.overlay-products {
+  border: 1px solid red;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to bottom, #F5F5F500, #F5F5F5 90%);
+  opacity: 1.5;
+}
+.store-block .store-meta h3 {
+  color: #7a7a7a !important;
+}
+.store-block .store-meta .has-golden-color {
+  color: #dcba01;
+}
+.store-block .store-meta .has-standard-color {
+  color: #428bca;
+}
+.activity-block .stat-number {
+  color: #7a7a7a !important;
+}
+.is-divider[data-content="GOLDEN BENEFITS"]:after {
+  font-weight: bold;
+  color: #dcba01 !important;
+}
+.is-divider[data-content="STANDARD BENEFITS"]:after {
+  font-weight: bold;
+  color: #428bca !important;
 }

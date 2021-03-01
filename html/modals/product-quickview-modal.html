@@ -1,0 +1,132 @@
+<div id="product-quickview" class="modal product-quickview is-large has-light-bg">
+    <div class="modal-background quickview-background"></div>
+    <div class="modal-content">
+
+        <div class="card">
+            <div class="quickview-loader is-active">
+                <div class="loader is-loading"></div>
+            </div>
+            <div class="left">
+                <div class="product-image is-active">
+                    <img src="img/assets/products/1.svg" alt="">
+                </div>
+            </div>
+            <div class="right">
+                <div class="header">
+                    <div class="product-info">
+                        <h3 id="quickview-name">Product Name</h3>
+                        <p>Product tagline text</p>
+                    </div>
+                    <div id="quickview-price" class="price">
+                        27.00
+                    </div>
+                </div>
+                <div class="properties">
+                    <!--Colors-->
+                    <div id="color-properties" class="property-group is-hidden">
+                        <h4>Colors</h4>
+                        <div class="property-box is-colors">
+                            <!--item-->
+                            <div class="property-item">
+                                <input type="radio" name="quickview_colors" id="red">
+                                <div class="item-inner">
+                                    <div class="color-dot">
+                                        <div class="dot-inner is-red"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--item-->
+                            <div class="property-item">
+                                <input type="radio" name="quickview_colors" id="blue">
+                                <div class="item-inner">
+                                    <div class="color-dot">
+                                        <div class="dot-inner is-blue"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--item-->
+                            <div class="property-item">
+                                <input type="radio" name="quickview_colors" id="green">
+                                <div class="item-inner">
+                                    <div class="color-dot">
+                                        <div class="dot-inner is-green"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--item-->
+                            <div class="property-item">
+                                <input type="radio" name="quickview_colors" id="yellow">
+                                <div class="item-inner">
+                                    <div class="color-dot">
+                                        <div class="dot-inner is-yellow"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Colors-->
+                    <div id="size-properties" class="property-group">
+                        <h4>Sizes</h4>
+                        <div class="property-box is-sizes">
+                            <!--item-->
+                            <div class="property-item">
+                                <input type="radio" name="quickview_sizes" id="S">
+                                <div class="item-inner">
+                                    <span class="size-label">S</span>
+                                </div>
+                            </div>
+                            <!--item-->
+                            <div class="property-item">
+                                <input type="radio" name="quickview_sizes" id="M" checked="">
+                                <div class="item-inner">
+                                    <span class="size-label">M</span>
+                                </div>
+                            </div>
+                            <!--item-->
+                            <div class="property-item">
+                                <input type="radio" name="quickview_sizes" id="L">
+                                <div class="item-inner">
+                                    <span class="size-label">L</span>
+                                </div>
+                            </div>
+                            <!--item-->
+                            <div class="property-item">
+                                <input type="radio" name="quickview_sizes" id="XL">
+                                <div class="item-inner">
+                                    <span class="size-label">XL</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Description-->
+                <div class="quickview-description content has-slimscroll">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Scrupulum, inquam, abeunti; Ubi ut eam caperet aut quando? Erat enim Polemonis. Utram tandem linguam nescio? Duo Reges: constructio interrete. </p>
+
+                    <p>Alio modo Non est igitur voluptas bonum. Estne, quaeso, inquam, sitienti in bibendo voluptas? Erat enim Polemonis. Minime vero, inquit ille, consentit. Hic ambiguo ludimur. Numquam facies. Ea possunt paria non esse. </p>
+
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Scrupulum, inquam, abeunti; Ubi ut eam caperet aut quando? Erat enim Polemonis. Utram tandem linguam nescio? Duo Reges: constructio interrete.</p>
+                </div>
+
+                <div class="quickview-controls">
+                    <div class="spinner">
+                        <button class="remove">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                    </button>
+                        <span class="value">1</span>
+                        <button class="add">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                    </button>
+                        <input class="spinner-input" type="hidden" value="1">
+                    </div>
+                    <a class="button is-solid accent-button raised">
+                        <span>Add To Cart</span>
+                        <var id="quickview-button-price">27.00</var>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
