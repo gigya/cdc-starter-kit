@@ -21,7 +21,8 @@ Can't wait? Check out our [demo site](https://juan.gigya-cs.com/cdc-starter-kit/
  <!-- [![Demo Site](docs/img/basic/0-not-logged-with-language.png)](https://juan.gigya-cs.com/cdc-starter-kit/) -->
 
 
- [![Demo Site](docs/img/basic/0-not-logged-with-language.png)](https://juan.gigya-cs.com/cdc-starter-kit/)
+ [![Demo Site](docs/img/basic/0-not-logged-with-language-and-sample-content.png)](https://juan.gigya-cs.com/cdc-starter-kit/)
+ [![Demo Site](docs/img/basic/0-not-logged-with-language-and-sample-content-ii.png)](https://juan.gigya-cs.com/cdc-starter-kit/)
 
 
 ## Included Flows
