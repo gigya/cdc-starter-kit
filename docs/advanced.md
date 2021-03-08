@@ -10,7 +10,7 @@ This section shows the project file structure with a brief explanation of the ma
 
 ```
 ├── config
-│   ├── config.json
+│   ├── site.json
 │   └── languages.json
 |
 ├── css
@@ -128,7 +128,7 @@ Located in ```html/skeleton.navbar.html```. It contains all the html related to 
 ```
 
 
-1. *Logo and Site Description*: Configured in ```'./config/config.json'```. It shows the info of the site.
+1. *Logo and Site Description*: Configured in ```'./config/site.json'```. It shows the info of the site.
 
 2. *Action items*: Some links with actions, like register, subscribe to newsletter, etc.
 3. *Site info*: Datacenter and API Key of the site.
@@ -231,14 +231,14 @@ function onGigyaServiceReady() {
         alert('Gigya is not loaded on this page :(');
     } else {
 
-        /* Load Configuration from setup/config.json */
+        /* Load Configuration from setup/site.json */
         initDemoSite();
     }
 }
 
 ````
 
-The```initDemoSite``` function (inside ```js/engine.js```), reads the configuration file placed into (```config/config.json```) and take the values to initialize the site.
+The```initDemoSite``` function (inside ```js/engine.js```), reads the configuration file placed into (```config/site.json```) and take the values to initialize the site.
 
 > **DISCLAIMER**: This framework doesn't pretend to be a good example / good practice for a real website. The objective here is to learn how Gigya works. Therefore aspects like security, UX, speed, responsivity, etc., are far from ideal.
 >

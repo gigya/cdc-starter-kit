@@ -51,7 +51,7 @@
  * This function shows the registration form inside 'not_logged_placeholder' div.
  * @param  {string} containerID The container ID for the register page
  */
-function registerWithRaaS(containerID) {
+function registerWithRaaS(containerID, onAfterScreenLoadIfDefined) {
 
     /* Launch Screenset */
     gigya.accounts.showScreenSet({
@@ -63,7 +63,7 @@ function registerWithRaaS(containerID) {
         // Some sample events..
         onBeforeSubmit,
         onSubmit,
-        onAfterScreenLoad
+        onAfterScreenLoad: onAfterScreenLoadIfDefined
     });
 
     /* Actions associated to events. - If autologin enabled -  */
@@ -78,17 +78,17 @@ function registerWithRaaS(containerID) {
  * This function shows the login form in a popup.
  * @param  {string} containerID The container ID for the login page
  */
-function loginWithRaaS(containerID) {
+function loginWithRaaS(containerID, onAfterScreenLoadIfDefined) {
 
     /* Launch Screenset */
     gigya.accounts.showScreenSet({
-        screenSet: 'Default-RegistrationLogin',
-        startScreen: 'gigya-login-screen',
+        screenSet: "Default-RegistrationLogin",
+        startScreen: "gigya-login-screen",
         lang: window.config.lang,
         containerID,
 
         // Events..
-        // onAfterScreenLoad
+        onAfterScreenLoad: onAfterScreenLoadIfDefined,
     });
 
     /* Actions associated to events */

@@ -1,57 +1,6 @@
-<div class="view-wrapper sample-content-not-logged">
+<div class="view-wrapper">
 
     <div id="shop-page" class="shop-wrapper">
-
-        <div class="shop-header">
-            <div class="container">
-                <div class="header-inner">
-                    <div class="store-block not-hidden">
-                        <div class="img-container">
-                            <img src='img/logos/{{config.main_pic}}' alt="">
-                            <div class="follow-badge is-hidden">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            </div>
-                        </div>
-                        <div class="store-meta">
-                            <h3>Status</h3>
-                            <span><b><span class="has-danger-color">
-                                {{data.memberType}}</span>Not logged user</b>
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="activity-block is-hidden">
-                        <h3>Overview</h3>
-
-                        <div class="inner-wrap">
-                            <div class="stat-block">
-                                <div class="stat-number">-</div>
-                                <span>Adquired Products</span>
-                            </div>
-                            <div class="stat-block is-bordered">
-                                <div class="stat-number">-</div>
-                                <span>Remaining Credit</span>
-                            </div>
-                            <div class="stat-block">
-                                <div class="stat-number">-</div>
-                                <span>Member since</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="about-block">
-                        <h3>About Us</h3>
-                        <div class="ellipse-text">We are an independent fashion store and we sale finely designed and handcrafted outfits for the best price. Browse our collection and discover our products.</div>
-                    </div>
-                </div>
-                <div class="store-tabs">
-                    <a data-tab="products-tab" class="tab-control is-active">Products</a>
-                    <div class="store-naver"></div>
-                </div>
-            </div>
-        </div>
-
-
 
         <div class="store-sections">
             <div class="container">
@@ -466,18 +415,20 @@
 
                     </div>
                 </div>
-
-
-
                 <div class="overlay-products">
 
-                    <div class="columns is-hidden">
-                        <div class="column is-2 is-full">
-
-                            Want to see all products? Login! or Register
-
+                    <div class="columns">
+                        <div class="column">Column 1</div>
+                        <div class="is-divider-vertical" data-content="OR"></div>
+                        <div class="column">
+                            Column 2 <br/> Note: divider stretches to parent's height.
                         </div>
                     </div>
+
+
+                    <div class="is-divider" data-content="OR"></div>
+
+                    Want to see all products? Login! or Register
                 </div>
             </div>
         </div>

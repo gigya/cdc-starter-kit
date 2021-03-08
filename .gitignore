@@ -1,6 +1,6 @@
 # Compiled binary addons (http://nodejs.org/api/addons.html)
-config/config.json
-# config.json
+config/site.json
+# site.json
 
 # Atom FTP Plugin
 .ftpconfig

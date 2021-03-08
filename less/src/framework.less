@@ -12,6 +12,11 @@
 // background:#383838;color:#fff; border-color: blue;
 // }
 
+html {
+    scroll-behavior: smooth;
+}
+
+
 /* NAVBAR */
 // Fixing default navbar behaviour and preparing it to use the burger button
 .navbar, .navbar-end, .navbar-menu, .navbar-start {
@@ -238,8 +243,11 @@
 
       border-radius: 15px;
 
+                    position: relative;
+                    z-index: 1;
       .gigya-placeholder {
           overflow-x: auto;
+
       }
       // Avatar
       .avatar {
@@ -431,16 +439,25 @@
 
   // Overlay products
   .overlay-products {
-      border: 1px solid red;
+    //   border: 1px solid red;
+      z-index: 0;
+      display: block;
       position: absolute;
       bottom: 0;
       left: 0;
       width: 100%;
-    //   height: 800px;
-    height: 100%;
-    //   background-color: whitesmoke;
+      height: 100%;
+    //  background-color: whitesmoke;
     background-image: linear-gradient(to bottom, #F5F5F500, #F5F5F5 90%);
       opacity: 1.5;
+        pointer-events: none; // To access links below!!
+      .columns {
+        border: 2px solid red;
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          text-align: center;
+      }
   }
 
   // Main page product navbar
@@ -486,4 +503,10 @@
                 font-weight: bold;
                 color: #428bca !important;
             }
+        }
+
+
+        .sample-content-not-logged {
+            // border: 2px solid red;
+            margin-bottom: -150px;
         }

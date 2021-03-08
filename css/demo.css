@@ -97,6 +97,9 @@ button {
   font-size: 14px;
   padding: 12px;
 }
+html {
+  scroll-behavior: smooth;
+}
 /* NAVBAR */
 .navbar,
 .navbar-end,
@@ -275,6 +278,8 @@ button {
   min-height: 200px;
   transition: max-height 1.35s ease-out;
   border-radius: 15px;
+  position: relative;
+  z-index: 1;
 }
 .hero .box .gigya-placeholder {
   overflow-x: auto;
@@ -415,7 +420,8 @@ ion-icon[class*='is-saml'] {
   padding: 10px;
 }
 .overlay-products {
-  border: 1px solid red;
+  z-index: 0;
+  display: block;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -423,6 +429,14 @@ ion-icon[class*='is-saml'] {
   height: 100%;
   background-image: linear-gradient(to bottom, #F5F5F500, #F5F5F5 90%);
   opacity: 1.5;
+  pointer-events: none;
+}
+.overlay-products .columns {
+  border: 2px solid red;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
 }
 .store-block .store-meta h3 {
   color: #7a7a7a !important;
@@ -443,4 +457,7 @@ ion-icon[class*='is-saml'] {
 .is-divider[data-content="STANDARD BENEFITS"]:after {
   font-weight: bold;
   color: #428bca !important;
+}
+.sample-content-not-logged {
+  margin-bottom: -150px;
 }

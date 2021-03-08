@@ -16,7 +16,7 @@
 const query = document.querySelector.bind(document);
 const queryAll = document.querySelectorAll.bind(document);
 const logConfigFile = false; // Shows/hides config file into the console
-var showLog = false;
+var showLog = true;
 var showEventsLog = false;
 var currentUser = null;
 /** *****************************************************/
@@ -28,7 +28,7 @@ var currentUser = null;
 function initDemoSite() {
     // log('0. Init Demo site');
     // Read configuration file and load it
-    fetch('./config/config.json')
+    fetch('./config/site.json')
         .then((res) => { return res.json(); })
         .then((out) => {
 
@@ -77,7 +77,7 @@ function gotoUnloggedPage() {
 }
 
 /**
- * Goes to the home page (defined in parameter 'main_url' inside config/config.json)
+ * Goes to the home page (defined in parameter 'main_url' inside config/site.json)
  */
 function gotoHome() {
     // window.location.href = window.config.main_url.replace('http://', 'https://');
@@ -239,8 +239,6 @@ function setActiveLanguageFlag(config) {
         .then((out) => {
 
             // Start demo page
-            // console.log(out);
-            // debugger;
             queryAll('.language-dropdown .dropdown-content').forEach((flagsContainer, i) => {
                 for (var j = 0; j < out.languages.length; j++) {
                     const oneLanguage = out.languages[j];
@@ -265,7 +263,7 @@ function setActiveLanguageFlag(config) {
 }
 
 /**
- * Sets the css to adapt to the configuration of the site (config/config.json)
+ * Sets the css to adapt to the configuration of the site (config/site.json)
  * @param {object} config The configuration object
  */
 function includeConfigCss(config) {
@@ -471,21 +469,20 @@ function loadSampleContent(user) {
         fetch(path)
             .then((res) => { return res.text(); })
             .then((out) => {
-                // console.log('HTML Content: %s', out);
-                // compile the template
-                // debugger;
-                var template = Handlebars.compile(out);
-                // execute the compiled template and print the output to the console
 
+                // compile the template
+                var template = Handlebars.compile(out);
+
+                // execute the compiled template and print the output to the console
                 // Add config to the user element prior to compile (it will be used by the template) and compile
                 const user = currentUser.status === "OK" ? currentUser : {};
                 user.config = config;
-                // debugger;
+
                 const compiled = template(user);
                 sampleContent.innerHTML = compiled;
 
                 // Init the product buttons once content is loaded
-                initProductButtons();
+                initProductButtons(isLogged);
 
                 // Init tabs
                 initTabButtons();
@@ -504,15 +501,64 @@ function showOrHighlightLoginScreen() {
 
     // If yes, highlight the first field once (UX improvement)
     if (loginScreenset !== null) {
-        // console.log('highlignthing only...');
-        const input = loginScreenset.querySelector('input[name="username"]');
-        input.focus(); // sets focus to element
+
+        highlightLoginBox();
 
     } else {
         // Showing login screen
-        loginWithRaaS('not_logged_placeholder');
+        loginWithRaaS('not_logged_placeholder', highlightLoginBox);
+
         // Continue as usual
-        // console.log('show login screen');
+    }
+}
+/**
+ * Shows the login screen, or focus the email field if the screen is already present
+ */
+function showOrHighlightRegisterScreen() {
+
+    // Look if the screenset was already shown
+    const registerScreenset = query('#not_logged_placeholder .gigya-register-form');
+
+    // If yes, highlight the first field once (UX improvement)
+    if (registerScreenset !== null) {
+
+        highlightRegisterBox();
+
+    } else {
+        // Showing register screen
+        registerWithRaaS('not_logged_placeholder', highlightRegisterBox);
+
+        // Continue as usual
+    }
+}
+
+function highlightLoginBox() {
+    // Look if the screenset was already shown
+    const loginScreenset = query('#not_logged_placeholder .gigya-login-form');
+
+    // If yes, highlight the first field once (UX improvement)
+    if (loginScreenset !== null) {
+
+        const input = loginScreenset.querySelector('input[name="username"]');
+
+        if (input) {
+            input.focus(); // sets focus to element
+        }
+
+    }
+}
+
+function highlightRegisterBox() {
+    // Look if the screenset was already shown
+    const registerScreenset = query('#not_logged_placeholder .gigya-register-form');
+
+    // If yes, highlight the first field once (UX improvement)
+    if (registerScreenset !== null) {
+
+        const input = registerScreenset.querySelector('input[name="email"]');
+        if (input) {
+            input.focus(); // sets focus to element
+        }
     }
 }
 /**
@@ -536,7 +582,7 @@ function logoutFromSite() {
 // Show / Hide Modals
 function showModal(modal, callback) {
 
-    console.log('Showing ' + capitalize(modal) + ' Modal ...')
+    log('Showing ' + capitalize(modal) + ' Modal ...')
 
     const path = `./html/modals/${modal}-modal.html`;
 
@@ -574,7 +620,7 @@ function showModal(modal, callback) {
 function hideModal(modal) {
 
 
-    console.log("Hiding " + capitalize(modal) + " Modal ...");
+    // log("Hiding " + capitalize(modal) + " Modal ...");
 
     const modalElement = query(`.${modal}-modal`);
 
@@ -703,13 +749,8 @@ function prettyDate(time) {
     var now = new Date();
     var diff = (now.getTime() - date.getTime()) / 1000;
     dayDiff = Math.floor(diff / 86400);
-    // console.log('date: %s', date);
-    // console.log('now: %s', now);
-    // console.log('diff: %s', diff);
 
     if (isNaN(dayDiff) || dayDiff < 0 || dayDiff >= 31) { return ''; }
-
-    // debugger;
 
     const prettifiedDate = dayDiff === 0 && (diff < 60 && 'just now' || diff < 120 && '1 minute ago' || diff < 3600 && Math.floor(diff / 60) + ' minutes ago' || diff < 7200 && '1 hour ago' || diff < 86400 && Math.floor(diff / 3600) + ' hours ago') || dayDiff === 1 && 'Yesterday' || dayDiff < 7 && dayDiff + ' days ago' || dayDiff < 31 && Math.ceil(dayDiff / 7) + ' weeks ago';
     return prettifiedDate;
@@ -761,7 +802,6 @@ function stringToHex(string) {
         var value = (hash >> (i * 8)) & 255;
         color += ("00" + value.toString(16)).substr(-2);
     }
-    // console.log('color :>> %s --> %s', string, color);
     return color;
 }
 
@@ -843,13 +883,10 @@ function renderPreviousLoginsIfDefined(previousLogins) {
         // return gigya.dataCenter;
     } else {
         previousLoginsButton.parentElement.classList.add("is-hidden");
-        // console.log("no data.previousLogins field was declared for this api key");
     }
 }
 
 function increasePreviousLogins(user) {
-
-    // console.log('user :>> %o', user);
 
     if (user.status !== "FAIL") {
         // Increment number of logins count.
@@ -890,7 +927,6 @@ function checkIfShowConsentsPopup(event, previousLogins, recieveOfferAlerts) {
             currentUser.preferences.offer_services_2.isConsentGranted !== true;
         // debugger;
         if (hasPendingAlerts && previousLogins % 3 === 0 && (recieveOfferAlerts === true || recieveOfferAlerts === "true")) {
-            // console.log("sale");
             /* Launch Screenset */
             gigya.accounts.showScreenSet({
                 screenSet: "Default-ProfileUpdate",
@@ -900,7 +936,7 @@ function checkIfShowConsentsPopup(event, previousLogins, recieveOfferAlerts) {
                 // onAfterSubmit: gotoHome,
             });
         } else {
-            // console.log("no sale");
+
         }
     }
 }
@@ -924,54 +960,61 @@ function showPurchaseModal(element) {
 
 
         // Show the purchase button 
-        const textForButton = currentUser ? '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Buy product for &nbsp;' + buttonText : 'LOGIN to buy this product';
-        const classForButton = currentUser ? 'purchase-button' : 'login-button';
-
+        const isLogged = currentUser && currentUser.status !== "FAIL";
+        const textForButton = isLogged ? '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Buy product for &nbsp;' + buttonText : 'LOGIN to buy this product';
         // inject the card content into the modal
         const purchaseModal = query('.purchase-modal');
         purchaseModal.querySelector(".modal-card-body").innerHTML = content;
 
-        purchaseModal.querySelector(`.modal-card-foot .${classForButton}`).innerHTML = textForButton;
+        purchaseModal.querySelector('.modal-card-foot .purchase-button').innerHTML = textForButton;
         purchaseModal.classList.remove('is-hidden');
     });
 }
 
 function purchaseProduct(element) {
 
-    // Show the loading button
-    const purchaseModalButton = query('.purchase-modal .modal-card-foot .purchase-button');
-    purchaseModalButton.classList.add('is-loading');
-
     // Get the data from the element
-    const purchasedProducts = Number(currentUser.data.purchasedProducts + 1);
-    const price = Number(element.parentElement.parentElement.querySelector('.product-actions .right a').innerText.trim().substr(1))
-    const credits = Number(currentUser.data.credits - price);
-    const uid = currentUser.UID;
+    const isLogged = currentUser && currentUser.status !== "FAIL";
+
+    if (isLogged) {
+        // Show the loading button
+        const purchaseModalButton = query('.purchase-modal .modal-card-foot .purchase-button');
+        purchaseModalButton.classList.add('is-loading');
+
+        const purchasedProducts = Number(currentUser.data.purchasedProducts + 1);
+        const price = Number(element.parentElement.parentElement.querySelector('.product-actions .right a').innerText.trim().substr(1))
+        const credits = Number(currentUser.data.credits - price);
+        const uid = currentUser.UID;
+
+        gigya.accounts.setAccountInfo({
+
+            data: { purchasedProducts, credits },
+            callback: function(event) {
+                log('Product bought', 'SET ACCOUNT INFO');
+                purchaseModalButton.classList.remove('is-loading');
+                hideModal('purchase');
+                // We update the session currentUser and then send it to
+                currentUser.data.purchasedProducts = purchasedProducts;
+                currentUser.data.credits = credits;
+                renderUI(currentUser);
+            }
+        });
 
 
-    // THIS IS THE GOOD WAY!!! BACKEND
-    // const id_token = 'whatever'; // generate a token with getJWT
-    // const purchaseUrl = `https://juan.gigya-cs.com/api/cdc-starter-kit/purchase-element.php?UID=${uid}&price=${price}&id_token=${id_token}`;
-    // fetch(purchaseUrl)
-    //     .then((res) => { return res.json(); })
-    //     .then((out) => {
-    //         console.log('product purchased out :>> %o', out);
+        // THIS IS THE GOOD WAY!!! BACKEND
+        // const id_token = 'whatever'; // generate a token with getJWT
+        // const purchaseUrl = `https://juan.gigya-cs.com/api/cdc-starter-kit/purchase-element.php?UID=${uid}&price=${price}&id_token=${id_token}`;
+        // fetch(purchaseUrl)
+        //     .then((res) => { return res.json(); })
+        //     .then((out) => {
+        //         console.log('product purchased out :>> %o', out);
 
-    //     }).catch((err) => { return console.error(err); });
+        //     }).catch((err) => { return console.error(err); });
 
-    gigya.accounts.setAccountInfo({
-
-        data: { purchasedProducts, credits },
-        callback: function(event) {
-            log('Product bought', 'SET ACCOUNT INFO');
-            purchaseModalButton.classList.remove('is-loading');
-            hideModal('purchase');
-            // We update the session currentUser and then send it to
-            currentUser.data.purchasedProducts = purchasedProducts;
-            currentUser.data.credits = credits;
-            renderUI(currentUser);
-        }
-    });
+    } else {
+        hideModal('purchase');
+        showOrHighlightLoginScreen();
+    }
 }
 
 function initProductButtons() {

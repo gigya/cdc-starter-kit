@@ -18,7 +18,7 @@ function onGigyaServiceReady() {
         alert('Gigya is not loaded on this page :(');
     } else {
 
-        /* Load Configuration from setup/config.json and starts the site UI */
+        /* Load Configuration from setup/site.json and starts the site UI */
         initDemoSite();
     }
 }

@@ -21,7 +21,7 @@ All Gigya related links are fully functional, allowing us to register, login, ed
 
 ## 2. Configuration of the project
 
-The title, logo, and descriptions for the website are set, modifying the ```config/config.json``` and refreshing the page.
+The title, logo, and descriptions for the website are set, modifying the ```config/site.json``` and refreshing the page.
 
 You can also customize some basic aspects of your website's look and feel, like the background, the colors of the links, text colors, and background for the navigation bar.
 
