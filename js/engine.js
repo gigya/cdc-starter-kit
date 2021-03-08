@@ -16,7 +16,7 @@
 const query = document.querySelector.bind(document);
 const queryAll = document.querySelectorAll.bind(document);
 const logConfigFile = false; // Shows/hides config file into the console
-var showLog = true;
+var showLog = false;
 var showEventsLog = false;
 var currentUser = null;
 /** *****************************************************/
@@ -475,7 +475,7 @@ function loadSampleContent(user) {
 
                 // execute the compiled template and print the output to the console
                 // Add config to the user element prior to compile (it will be used by the template) and compile
-                const user = currentUser.status === "OK" ? currentUser : {};
+                const user = currentUser && currentUser.status === "OK" ? currentUser : {};
                 user.config = config;
 
                 const compiled = template(user);
@@ -486,6 +486,9 @@ function loadSampleContent(user) {
 
                 // Init tabs
                 initTabButtons();
+
+                // Focus the body on the top
+                focusBody();
 
             }).catch((err) => { return console.error(err); });
     }
@@ -502,11 +505,11 @@ function showOrHighlightLoginScreen() {
     // If yes, highlight the first field once (UX improvement)
     if (loginScreenset !== null) {
 
-        highlightLoginBox();
+        focusLoginBox();
 
     } else {
         // Showing login screen
-        loginWithRaaS('not_logged_placeholder', highlightLoginBox);
+        loginWithRaaS('not_logged_placeholder', focusLoginBox);
 
         // Continue as usual
     }
@@ -522,17 +525,17 @@ function showOrHighlightRegisterScreen() {
     // If yes, highlight the first field once (UX improvement)
     if (registerScreenset !== null) {
 
-        highlightRegisterBox();
+        focusRegisterBox();
 
     } else {
         // Showing register screen
-        registerWithRaaS('not_logged_placeholder', highlightRegisterBox);
+        registerWithRaaS('not_logged_placeholder', focusRegisterBox);
 
         // Continue as usual
     }
 }
 
-function highlightLoginBox() {
+function focusLoginBox() {
     // Look if the screenset was already shown
     const loginScreenset = query('#not_logged_placeholder .gigya-login-form');
 
@@ -548,7 +551,7 @@ function highlightLoginBox() {
     }
 }
 
-function highlightRegisterBox() {
+function focusRegisterBox() {
     // Look if the screenset was already shown
     const registerScreenset = query('#not_logged_placeholder .gigya-register-form');
 
@@ -559,6 +562,16 @@ function highlightRegisterBox() {
         if (input) {
             input.focus(); // sets focus to element
         }
+    }
+}
+
+
+function focusBody() {
+    // Look if the screenset was already shown
+    const navbar = query("body");
+
+    if (navbar) {
+        navbar.scrollIntoView(); // sets focus to element
     }
 }
 /**
