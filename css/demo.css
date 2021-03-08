@@ -447,7 +447,7 @@ ion-icon[class*='is-saml'] {
   color: #428bca;
 }
 .activity-block .stat-number {
-  color: #7a7a7a !important;
+  color: #7a7a7a;
 }
 .is-divider[data-content="GOLDEN BENEFITS"]:after {
   font-weight: bold;

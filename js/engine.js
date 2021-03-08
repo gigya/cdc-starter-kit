@@ -478,6 +478,20 @@ function loadSampleContent(user) {
                 const user = currentUser && currentUser.status === "OK" ? currentUser : {};
                 user.config = config;
 
+                // Get price and fix currency if needed
+                let fixedCurrency = "$10000";
+                let classCurrency = "";
+                if (user.data && user.data.credits) {
+                    fixedCurrency = user.data.credits > 0 ? "$" + user.data.credits : "-$" + (user.data.credits * -1);
+                    classCurrency = user.data.credits > 0 ? "" : "has-text-danger";
+
+                }
+                if (!user.data) {
+                    user.data = {};
+                }
+                user.data.fixedCurrency = fixedCurrency;
+                user.data.classCurrency = classCurrency;
+
                 const compiled = template(user);
                 sampleContent.innerHTML = compiled;
 
