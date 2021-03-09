@@ -226,7 +226,9 @@ function increasePreviousLogins(user) {
 
                 // 
                 // console.log('object :>> ', object);
-                initPage(currentUser);
+                // debugger;
+                setTimeout(function() { initPage(event2); }, 300);
+
             },
         });
     }
