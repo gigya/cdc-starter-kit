@@ -223,6 +223,9 @@ function increasePreviousLogins(user) {
 
                 // Re-render the counter after this increase
                 renderPreviousLoginsIfDefined(previousLogins);
+
+                // 
+                initPage(currentUser);
             },
         });
     }
