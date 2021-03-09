@@ -225,7 +225,7 @@ function increasePreviousLogins(user) {
                 renderPreviousLoginsIfDefined(previousLogins);
 
                 // 
-                console.log('object :>> ', object);
+                // console.log('object :>> ', object);
                 initPage(currentUser);
             },
         });
