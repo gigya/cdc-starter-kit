@@ -223,12 +223,6 @@ function increasePreviousLogins(user) {
 
                 // Re-render the counter after this increase
                 renderPreviousLoginsIfDefined(previousLogins);
-
-                // 
-                // console.log('object :>> ', object);
-                // debugger;
-                setTimeout(function() { gotoHome(); }, 500);
-
             },
         });
     }
