@@ -42,6 +42,8 @@ This section shows the project file structure with a brief explanation of the ma
 |
 ├── js
 │   ├── engine.js
+│   ├── ui.js
+│   ├── utils.js
 │   ├── gigya-raas.js
 │   └── main.js
 |
@@ -219,7 +221,11 @@ The project uses vanilla javascript  for all their interactions, although it use
 
 1. **gigya-raas.js**: This file contains all typical gigya functions in a RaaS process. You will find here the triggers for the login, the registration, or the reset password process. __This is the file you want to copy in your project to have a set of default gigya functions__.
 
-1. **engine.js**: This file contains all the logic needed to make the site work. All these core functions, like managing the sessions, re-painting the screen, dealing with dates, etc., are included in this file.
+1. **ui.js**: This file contains all the logic related to the UI stuff, like re-painting the screen, dealing with popups, etc.
+
+1. **utils.js**: This file contains several standard util functions.
+
+1. **engine.js**: This file contains all the logic needed to make the site work. All these core functions, like managing the sessions, dealing with products, etc., are included in this file.
 
 1. **main.js**: This file contains the main Gigya trigger ```onGigyaServiceReady```. When present, this function is triggered automatically once Gigya it's fully loaded (in ```index.html```). This is the content of the file:
 
