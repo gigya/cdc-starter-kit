@@ -216,6 +216,7 @@ function onLogout(response) {
     // Shows the unlogged HTML of the page
     if (response.eventName === 'logout') {
         log('X. User has logged out', "LOG OUT");
+        hideModal("logging-out");
         // gotoHome();
     } else {
         alert('Error :' + response.errorMessage);
