@@ -1,3 +1,16 @@
+/**
+ * ----------------
+ *  # Demo UI JS File
+ * ----------------
+ *
+ * This file includes some functions to interact with the site and to manage the UI.
+ *
+ * @link   https://github.com/gigya/cdc-starter-kit/blob/master/js/engine.js
+ * @file   This file defines the main functions to make the demo site work.
+ * @author juan.andres.moreno@sap.com
+ * @since  1.0.0
+ */
+
 /** *****************************************************/
 //                    2. UI FUNCTIONS
 /** *****************************************************/

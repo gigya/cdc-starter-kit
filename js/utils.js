@@ -1,3 +1,16 @@
+/**
+ * ----------------
+ *  # Utils JS File
+ * ----------------
+ *
+ * This file includes some util and standard JS functions to help with the implementation of the site.
+ *
+ * @link   https://github.com/gigya/cdc-starter-kit/blob/master/js/engine.js
+ * @file   This file defines the main functions to make the demo site work.
+ * @author juan.andres.moreno@sap.com
+ * @since  1.0.0
+ */
+
 /** *****************************************************/
 //                      4. UTILS
 /** *****************************************************/
