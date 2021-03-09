@@ -98,7 +98,6 @@ function initPage(user) {
             /* If not logged, show login form */
 
             // Show the loading modal
-            // debugger;
             hideModal("loading");
 
             if (!user || !user.UID) {
@@ -230,7 +229,6 @@ function increasePreviousLogins(user) {
 }
 
 function checkIfShowConsentsPopup(event, previousLogins, recieveOfferAlerts) {
-    // debugger;
     if (event.status !== "FAIL" && currentUser && currentUser.preferences) {
         const hasPendingAlerts =
             (currentUser.preferences.offer_products_1 &&
@@ -241,7 +239,6 @@ function checkIfShowConsentsPopup(event, previousLogins, recieveOfferAlerts) {
                 currentUser.preferences.offer_products_2.isConsentGranted !== true) ||
             (currentUser.preferences.offer_services_2 &&
                 currentUser.preferences.offer_services_2.isConsentGranted !== true);
-        // debugger;
         if (
             hasPendingAlerts &&
             previousLogins % 3 === 0 &&

@@ -132,7 +132,6 @@ function showLoggedHTML(user) {
         user.data.credits = 165;
     }
 
-    // debugger;
     /* Hide Registration Screenset */
     hideModal("logging-out");
     hideScreenset("not_logged_placeholder");
@@ -146,7 +145,6 @@ function showLoggedHTML(user) {
 
     // Check if it's first login
     var again = user.lastLoginTimestamp - user.createdTimestamp < 10000 ? "" : " again";
-    // debugger;
     // console.log("again :>> %o", user.lastLoginTimestamp - user.createdTimestamp);
 
     /* Change the username in the web */
@@ -276,7 +274,6 @@ function showErrorLogo(element) {
  * Shows/Hides the right part of the navbar menu for small screen sizes
  */
 function toggleBurgerMenu() {
-    // debugger;
     var navbarMenu = query(".navbar-menu");
     if (navbarMenu.classList.contains("is-opened")) {
         navbarMenu.classList.remove("is-opened");
@@ -497,7 +494,6 @@ function showModal(modal, callback) {
                 query("body").insertAdjacentHTML("beforeend", compiled);
 
                 // Finally, show the modal
-                // debugger;
                 query(`.${modal}-modal`).classList.add("is-active");
 
                 // If there is a callback function, execute it now.
@@ -645,7 +641,6 @@ function createEntryFor(language) {
 function toggleLanguageDropDown() {
     queryAll(".language-dropdown").forEach((langDropdown, i) => {
         const isActive = langDropdown.classList.contains("is-active");
-        // debugger;
         if (isActive) {
             langDropdown.classList.remove("is-active");
         } else {
@@ -660,7 +655,6 @@ function toggleLanguageDropDown() {
 /** *****************************************************/
 
 function showPurchaseModal(element) {
-    // debugger;
     // We detect if the click was over the link or over the span
     const sourceElement = element.srcElement.hasChildNodes() ?
         element :
@@ -710,7 +704,6 @@ function initTabButtons() {
         const oneTab = tabs[k];
         oneTab.addEventListener("click", function(event) {
             const element = event.srcElement;
-            // debugger;
             if (element) {
                 // Update tabs
                 const elementToDeactivate = event.srcElement.parentElement.querySelector(

@@ -136,7 +136,6 @@ function logEvents(eventName, methodName, logEvents) {
 
     if (showEventsLog === true) {
         const title = window.config.menu_description;
-        // debugger;
         // var backgroundColor = window.config.menu_bg_color_hover;
         var backgroundColor = "#0089ff33";
         // backgroundColor = "transparent";
