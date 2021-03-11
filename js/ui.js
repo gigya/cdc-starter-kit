@@ -124,12 +124,11 @@ function includeConfigCss(config) {
  */
 function showLoggedHTML(user) {
     // Put some dummy data if this does not exist
-    if (!user.data.wallet.purchasedProducts) {
-        user.data.wallet.purchasedProducts = 4;
-    }
-
-    if (!user.data.wallet.credits) {
-        user.data.wallet.credits = 165;
+    if (!user.data.wallet) {
+        user.data.wallet = {
+            credits: 250,
+            purchasedProducts: 2
+        }
     }
 
     /* Hide Registration Screenset */
@@ -676,8 +675,7 @@ function showPurchaseModal(element) {
         const enabledButton = !isLogged || hasCredits;
         const priceClass = enabledButton ? "accent-button" : "red-button";
         if (!imagePath || !title || !description || !buttonText) {
-
-            debugger;
+            // debugger;
         }
         // Get proper text for button
         const textForButton = isLogged ? "Buy product for &nbsp;" + buttonText : "LOGIN to buy this product";
