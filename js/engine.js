@@ -139,14 +139,14 @@ function purchaseProduct(element) {
     if (isLogged) {
         // Show the loading button
         const purchaseModalButton = query(
-            ".purchase-modal .modal-card-foot .purchase-button"
+            ".purchase-modal .purchase-button"
         );
         purchaseModalButton.classList.add("is-loading");
 
         const purchasedProducts = Number(currentUser.data.purchasedProducts + 1);
         const price = Number(
             element.parentElement.parentElement
-            .querySelector(".product-actions .right a")
+            .querySelector("#quickview-price")
             .innerText.trim()
             .substr(1)
         );

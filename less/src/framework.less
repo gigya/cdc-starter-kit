@@ -327,9 +327,6 @@ html {
     
     .modal-content {
         .blink_me();
-        ion-icon {
-            // border: 2px solid red;
-        }
     }
 
 }
@@ -386,6 +383,21 @@ html {
 
   // Product modal
   .purchase-modal {
+        // For price in purchase popups
+        .header .price {
+            &::before {
+                content: '' !important;
+            }
+        }
+
+        .button {
+            // border: 2px solid red;
+            text-decoration: none !important;
+            span {
+                margin-right: 0!important;
+            }
+        }
+
       .modal-card-body {
             // border: 2px solid red!important;
             min-height: 200px;
@@ -408,10 +420,10 @@ html {
                 position: absolute;
                 right: 28px;
                 bottom: 110px;
-                svg {
+                // svg {
 
-                    // color: red;
-                }
+                //     // color: red;
+                // }
             }
             .right {
                 float: right;
@@ -475,6 +487,7 @@ html {
         .has-standard-color {
 
             color: #428bca;
+            line-height: 1.2 rem;
         }
 
     }
@@ -505,13 +518,35 @@ html {
         }
     }
 
+    // Purchase Popups (Inside sample content)
+    .sample-content {
 
-    .sample-content-not-logged {
-        // border: 2px solid red;
-        margin-bottom: -150px;
+        &.sample-content-not-logged {
+            // border: 2px solid red;
+            margin-bottom: -150px;
+    
+            // For the "Not logged" message on the sample content template in the home page
+    
+                .has-text-danger-dark {
+                    opacity: .5;
+                    line-height: 1.2rem;
+                    position: relative;
+                    // top: 4px;
+                }
+                .store-meta h3 {
+                    margin-bottom: 4px;
+                }
+        }
+        &.sample-content-logged {
+            .store-meta {
+    
+                h3 {
+                    margin-bottom: 4px;
+                }
+                span {
+                    line-height: 1.2rem;
+                }
+            } 
+        }
     }
 
-    // For the "Not logged" message on the sample content template in the home page
-     .store-meta .has-text-danger-dark {
-         opacity: .5;
-     }

@@ -474,8 +474,12 @@ function showModal(modal, callback) {
         // If there is a callback function, execute it now.
         if (callback) {
             setTimeout(callback, 300);
-            // callback();
+            callback();
         }
+
+        // Finally, show the modal
+        query(`.${modal}-modal`).classList.add("is-active");
+
     } else {
         const path = `./html/modals/${modal}-modal.html`;
 
@@ -655,34 +659,30 @@ function toggleLanguageDropDown() {
 /** *****************************************************/
 
 function showPurchaseModal(element) {
-    // We detect if the click was over the link or over the span
-    const sourceElement = element.srcElement.hasChildNodes() ?
-        element :
-        element.parent;
-    const content =
-        sourceElement.srcElement.parentElement.parentElement.parentElement
-        .parentElement.innerHTML;
-    const buttonText = sourceElement.srcElement.innerHTML;
+
     // Showing purchase Modal, and once shown, load dynamic content for that card
-    const purchaseModal = query(".purchase-modal");
-    if (purchaseModal) {
-        purchaseModal.querySelector(".modal-card-body").innerHTML = "";
-    }
     showModal("purchase", function() {
-        // Show the purchase button
+
+        // We detect if the click was over the link or over the span
+        const sourceElement = element.srcElement.hasChildNodes() ? element : element.parent;
+        const content = sourceElement && sourceElement.srcElement.parentElement.parentElement.parentElement.parentElement;
+        const imagePath = content && content.querySelector('img').getAttribute('src');
+        const title = content && content.querySelector(".product-info h3").innerText;
+        const description = content && content.querySelector(".product-info p").innerText;
+        const buttonText = sourceElement.srcElement.innerText;
+
+        // Get proper text for button
         const isLogged = currentUser && currentUser.status !== "FAIL";
-        const textForButton = isLogged ?
-            "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Buy product for &nbsp;" +
-            buttonText :
-            "LOGIN to buy this product";
+        const textForButton = isLogged ? "Buy product for &nbsp;" + buttonText : "LOGIN to buy this product";
+
         // inject the card content into the modal
         const purchaseModal = query(".purchase-modal");
-        purchaseModal.querySelector(".modal-card-body").innerHTML = content;
+        purchaseModal.querySelector(".product-info h3").innerText = title;
+        purchaseModal.querySelector(".product-info p").innerText = description;
+        purchaseModal.querySelector("#quickview-price").innerText = buttonText;
+        purchaseModal.querySelector(".product-image img").src = imagePath;
 
-        purchaseModal.querySelector(
-            ".modal-card-foot .purchase-button"
-        ).innerHTML = textForButton;
-        purchaseModal.classList.remove("is-hidden");
+        purchaseModal.querySelector(".purchase-button span").innerHTML = textForButton;
     });
 }
 
@@ -702,26 +702,28 @@ function initTabButtons() {
 
     for (var k = 0; k < tabs.length; k++) {
         const oneTab = tabs[k];
-        oneTab.addEventListener("click", function(event) {
-            const element = event.srcElement;
-            if (element) {
-                // Update tabs
-                const elementToDeactivate = event.srcElement.parentElement.querySelector(
-                    "a.is-active"
-                );
-                elementToDeactivate.classList.remove("is-active");
-                element.classList.add("is-active");
+        oneTab.addEventListener("click", activateTabButtons);
+    }
+}
 
-                // Active content for that tab
-                const tabDataElement = element.getAttribute("data-tab");
-                query("#" + tabDataElement).classList.add("is-active");
+function activateTabButtons(event) {
+    const element = event.srcElement;
+    if (element) {
+        // Update tabs
+        const elementToDeactivate = event.srcElement.parentElement.querySelector(
+            "a.is-active"
+        );
+        elementToDeactivate.classList.remove("is-active");
+        element.classList.add("is-active");
 
-                // Hide current content and deactivate old tab
-                const dataTabElementToDeactivate = elementToDeactivate.getAttribute(
-                    "data-tab"
-                );
-                query("#" + dataTabElementToDeactivate).classList.remove("is-active");
-            }
-        });
+        // Active content for that tab
+        const tabDataElement = element.getAttribute("data-tab");
+        query("#" + tabDataElement).classList.add("is-active");
+
+        // Hide current content and deactivate old tab
+        const dataTabElementToDeactivate = elementToDeactivate.getAttribute(
+            "data-tab"
+        );
+        query("#" + dataTabElementToDeactivate).classList.remove("is-active");
     }
 }
