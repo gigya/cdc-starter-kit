@@ -16,8 +16,9 @@
 const query = document.querySelector.bind(document);
 const queryAll = document.querySelectorAll.bind(document);
 const logConfigFile = false; // Shows/hides config file into the console
-var showLog = false;
-var showEventsLog = false;
+var LOGS = true;
+var showLog = LOGS;
+var showEventsLog = LOGS;
 var currentUser = null;
 
 /** *****************************************************/
@@ -113,7 +114,7 @@ function initPage(user) {
                 const url = window.location.href;
                 if (url.indexOf("edit-profile") <= 0) {
                     user.data.memberType =
-                        user.data.purchasedProducts && user.data.purchasedProducts < 5 ?
+                        user.data.wallet.purchasedProducts && user.data.wallet.purchasedProducts < 5 ?
                         "Standard" :
                         "Golden";
                     user.data.since = user.created.substr(0, 10);
@@ -143,28 +144,31 @@ function purchaseProduct(element) {
         );
         purchaseModalButton.classList.add("is-loading");
 
-        const purchasedProducts = Number(currentUser.data.purchasedProducts + 1);
+        const purchasedProducts = Number(currentUser.data.wallet.purchasedProducts + 1);
         const price = Number(
             element.parentElement.parentElement
             .querySelector("#quickview-price")
             .innerText.trim()
             .substr(1)
         );
-        const credits = Number(currentUser.data.credits - price);
+        const credits = Number(currentUser.data.wallet.credits - price);
         const uid = currentUser.UID;
 
-        gigya.accounts.setAccountInfo({
-            data: { purchasedProducts, credits },
-            callback: function(event) {
-                log("Product bought", "SET ACCOUNT INFO");
-                purchaseModalButton.classList.remove("is-loading");
-                hideModal("purchase");
-                // We update the session currentUser and then send it to
-                currentUser.data.purchasedProducts = purchasedProducts;
-                currentUser.data.credits = credits;
-                initPage(currentUser);
-            },
-        });
+        // Checking from frontend. BAD    
+        if (credits && purchasedProducts) {
+            gigya.accounts.setAccountInfo({
+                data: { "wallet": { purchasedProducts, credits } },
+                callback: function(event) {
+                    log("Product bought", "SET ACCOUNT INFO");
+                    purchaseModalButton.classList.remove("is-loading");
+                    hideModal("purchase");
+                    // We update the session currentUser and then send it to
+                    currentUser.data.wallet.purchasedProducts = purchasedProducts;
+                    currentUser.data.wallet.credits = credits;
+                    initPage(currentUser);
+                },
+            });
+        }
 
         // THIS IS THE GOOD WAY!!! BACKEND
         // const id_token = 'whatever'; // generate a token with getJWT

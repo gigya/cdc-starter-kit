@@ -124,12 +124,12 @@ function includeConfigCss(config) {
  */
 function showLoggedHTML(user) {
     // Put some dummy data if this does not exist
-    if (!user.data.purchasedProducts) {
-        user.data.purchasedProducts = 4;
+    if (!user.data.wallet.purchasedProducts) {
+        user.data.wallet.purchasedProducts = 4;
     }
 
-    if (!user.data.credits) {
-        user.data.credits = 165;
+    if (!user.data.wallet.credits) {
+        user.data.wallet.credits = 165;
     }
 
     /* Hide Registration Screenset */
@@ -313,12 +313,12 @@ function loadSampleContent(user) {
                 // Get price and fix currency if needed
                 let fixedCurrency = "$10000";
                 let classCurrency = "";
-                if (user.data && user.data.credits) {
+                if (user.data && user.data.wallet.credits) {
                     fixedCurrency =
-                        user.data.credits > 0 ?
-                        "$" + user.data.credits :
-                        "-$" + user.data.credits * -1;
-                    classCurrency = user.data.credits > 0 ? "" : "has-text-danger";
+                        user.data.wallet.credits > 0 ?
+                        "$" + user.data.wallet.credits :
+                        "-$" + user.data.wallet.credits * -1;
+                    classCurrency = user.data.wallet.credits > 0 ? "" : "has-text-danger";
                 }
                 if (!user.data) {
                     user.data = {};
@@ -669,10 +669,17 @@ function showPurchaseModal(element) {
         const imagePath = content && content.querySelector('img').getAttribute('src');
         const title = content && content.querySelector(".product-info h3").innerText;
         const description = content && content.querySelector(".product-info p").innerText;
-        const buttonText = sourceElement.srcElement.innerText;
-
-        // Get proper text for button
+        const buttonText = sourceElement && sourceElement.srcElement.parentElement.innerText;
+        const price = buttonText ? Number(buttonText.substr(1)) : "-";
+        const hasCredits = currentUser && currentUser.data && currentUser.data.wallet && currentUser.data.wallet.credits - price > 0;
         const isLogged = currentUser && currentUser.status !== "FAIL";
+        const enabledButton = !isLogged || hasCredits;
+        const priceClass = enabledButton ? "accent-button" : "red-button";
+        if (!imagePath || !title || !description || !buttonText) {
+
+            debugger;
+        }
+        // Get proper text for button
         const textForButton = isLogged ? "Buy product for &nbsp;" + buttonText : "LOGIN to buy this product";
 
         // inject the card content into the modal
@@ -682,7 +689,17 @@ function showPurchaseModal(element) {
         purchaseModal.querySelector("#quickview-price").innerText = buttonText;
         purchaseModal.querySelector(".product-image img").src = imagePath;
 
-        purchaseModal.querySelector(".purchase-button span").innerHTML = textForButton;
+        const purchaseButton = purchaseModal.querySelector(".purchase-button");
+        purchaseButton.querySelector("span").innerHTML = textForButton;
+        purchaseButton.classList.remove("is-loading");
+
+        // Check the status of the button (first we clean it from previous state)
+        purchaseButton.classList.remove("is-disabled", "red-button", "accent-button");
+        purchaseButton.classList.add(priceClass);
+        if (!enabledButton) {
+            purchaseButton.classList.add('is-disabled');
+        }
+
     });
 }
 
