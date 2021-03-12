@@ -1,4 +1,4 @@
-[![Demo Site](docs/img/readme/0-gigya-starter-kit-v5.png)](https://juan.gigya-cs.com/cdc-starter-kit/)
+[![Demo Site](docs/img/readme/0-gigya-starter-kit-v5.png)](https://dev.gigyademo.com/cdc-starter-kit/)
 
 # **SAP Customer Data Cloud Starter Kit**
 #### **{**HTML + CSS + JS**}**
@@ -16,13 +16,13 @@ The project includes a demo website with the most common user flows, like regist
 
 Follow the [Installation Guide](docs/install.md) to have this demo running in less than 10 minutes.
 
-Can't wait? Check out our [demo site](https://juan.gigya-cs.com/cdc-starter-kit/)!
+Can't wait? Check out our [demo site](https://dev.gigyademo.com/cdc-starter-kit/)!
 
- <!-- [![Demo Site](docs/img/basic/0-not-logged-with-language.png)](https://juan.gigya-cs.com/cdc-starter-kit/) -->
+ <!-- [![Demo Site](docs/img/basic/0-not-logged-with-language.png)](https://dev.gigyademo.com/cdc-starter-kit/) -->
 
 
- [![Demo Site](docs/img/basic/0-not-logged-with-language-and-sample-content.png)](https://juan.gigya-cs.com/cdc-starter-kit/)
- [![Demo Site](docs/img/basic/0-not-logged-with-language-and-sample-content-ii.png)](https://juan.gigya-cs.com/cdc-starter-kit/)
+ [![Demo Site](docs/img/basic/0-not-logged-with-language-and-sample-content.png)](https://dev.gigyademo.com/cdc-starter-kit/)
+ [![Demo Site](docs/img/basic/0-not-logged-with-language-and-sample-content-ii.png)](https://dev.gigyademo.com/cdc-starter-kit/)
 
 
 ## Included Flows

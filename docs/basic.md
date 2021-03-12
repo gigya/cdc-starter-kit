@@ -58,7 +58,7 @@ Here you can find an example of this file:
     "text_color": "#7a7a7a",
     "background_color": "#f4f4f4",
     "menu_pic": "sap.png",
-    "main_url": "https://juan.gigya-cs.com/cdc-starter-kit/",
+    "main_url": "https://dev.gigyademo.com/cdc-starter-kit/",
     "main_pic": "sap.png",
     "raas_prefix": "Default",
     "lang": "en"
