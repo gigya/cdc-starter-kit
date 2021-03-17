@@ -60,7 +60,7 @@ a:hover {
 /* 1. Layout */
 /* 1. Main Gigya Screensets Container */
 button {
-  font-size: 18px!important;
+  font-size: 16px!important;
   font-family: 'Questrial', sans-serif;
 }
 /* 2. Header & Footer */
@@ -190,6 +190,10 @@ html {
 .navbar .navbar-item .button-apikey:hover,
 .navbar .navbar-item .button-previous-logins:hover {
   opacity: 1;
+}
+.navbar .navbar-item .button-apikey.dynamic-apikey {
+  background-color: #e6f9e6;
+  padding: 21px;
 }
 .navbar .provider-img {
   border: 2px solid #333;
@@ -334,6 +338,59 @@ html {
   font-weight: bold;
   margin-right: 7px;
   font-size: 1.5rem;
+}
+.change-api-key-modal .change-apikey-icon {
+  position: relative;
+  top: 4px;
+  margin-right: 7px;
+  font-size: 1.7rem;
+  margin-bottom: -4px;
+}
+.change-api-key-modal .api-key-input {
+  display: inline-block;
+  width: 471px;
+  font-family: monospace;
+  text-size-adjust: auto;
+  padding: 0 0px 0 8px;
+}
+.change-api-key-modal .api-key-input.active {
+  width: 513px;
+}
+.change-api-key-modal .config-api-key-input {
+  color: #49a949;
+}
+.change-api-key-modal .config-api-key-input.is-disabled {
+  color: #666 !important;
+}
+.change-api-key-modal .api-key-input-tag,
+.change-api-key-modal .api-key-input-tag-disabled {
+  margin-top: 7px;
+  margin-left: 4px;
+}
+.change-api-key-modal .modal-card-foot {
+  justify-content: space-between;
+}
+.change-api-key-modal .reset-api-key-button {
+  font-size: 1rem !important;
+  padding: 0 5px 0;
+  margin: 0 12px;
+  color: #cc0f35 !important;
+  margin-top: 10px;
+  display: block;
+}
+.change-api-key-modal .reset-api-key-button:hover {
+  color: whitesmoke !important;
+}
+.change-api-key-modal .content blockquote {
+  background-color: transparent !important;
+}
+.change-api-key-modal .field .control {
+  text-align: center;
+}
+.change-api-key-modal .field label {
+  margin: 5px 20px;
+  display: block;
+  font-weight: bold;
 }
 .loading-modal,
 .logging-out-modal {

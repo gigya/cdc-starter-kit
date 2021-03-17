@@ -22,8 +22,16 @@
 function renderNavbar(out) {
     // Adding Nabvar
     var outAsElement = htmlToElement(out);
-    document.querySelector("#main-navbar .container").innerHTML =
-        outAsElement.innerHTML;
+    document.querySelector("#main-navbar .container").innerHTML = outAsElement.innerHTML;
+
+    setTimeout(function() {
+        // Adding the colored background to the api key section if dinamically loaded
+        const apiKeyFromLocalStorage = localStorage.getItem("reload-with-apikey");
+        if (apiKeyFromLocalStorage && apiKeyFromLocalStorage !== null && apiKeyFromLocalStorage !== '') {
+            const apiKeyButtonInNavbar = query(".button-apikey");
+            apiKeyButtonInNavbar.classList.add("dynamic-apikey");
+        }
+    }, 300);
 }
 
 /**

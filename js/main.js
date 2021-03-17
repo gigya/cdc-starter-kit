@@ -18,7 +18,17 @@ function onGigyaServiceReady() {
         alert('Gigya is not loaded on this page :(');
     } else {
 
-        /* Load Configuration from setup/site.json and starts the site UI */
-        initDemoSite();
+        checkIfGigyaLoaded();
+
+        // Check if user is logged in or not
+        gigya.accounts.getAccountInfo({ include: 'emails, profile, data, preferences', callback: initPage });
+
     }
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    /* Load Configuration from setup/site.json and starts the site UI */
+    initDemoSite();
+
+});

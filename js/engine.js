@@ -58,8 +58,16 @@ function loadConfigFromFile(out) {
     window.config = out;
     log("1. Load Configuration from file ", "GET ACCOUNT INFO");
 
-    // Check if user is logged in or not
-    gigya.accounts.getAccountInfo({ include: 'emails, profile, data, preferences', callback: initPage });
+    // Checking if we have api key in local storage
+    const apiKeyFromLocalStorage = localStorage.getItem("reload-with-apikey");
+    var apiKey = out.apiKey;
+
+    // Loading api key from file
+    if (apiKeyFromLocalStorage && apiKeyFromLocalStorage !== null && apiKeyFromLocalStorage !== '') {
+        apiKey = apiKeyFromLocalStorage;
+    }
+    loadGigyaForApiKey(apiKey);
+
 }
 
 /**
@@ -293,4 +301,106 @@ function deleteCurrentAccount() {
             }
         },
     });
+}
+
+function showChangeApiKeyModal() {
+    showModal("change-api-key", initChangeApiKeyModal);
+}
+
+function changeAPIKey() {
+    //
+    log("X. - Changing API KEy.... ", "RELOAD ALL PAGE");
+
+    // Show the loading button
+    const changeAPIKeyButton = query(".change-api-key-modal .modal-card-foot .change-api-key-button");
+    changeAPIKeyButton.classList.add("is-loading");
+
+    // Take the api key
+    const apiKey = query(".change-api-key-modal .api-key-input").value;
+
+    // Store api key in local storage and reload the page (it will load the new api key)
+    localStorage.setItem("reload-with-apikey", apiKey);
+
+    // Reload page
+    window.location.href = window.location.href;
+
+
+}
+
+function loadGigyaForApiKey(apiKey) {
+
+    // Adding new Gigya script from parameters
+    log("2. Load Gigya File with apiKey " + apiKey, "LOAD GIGYA FILE");
+
+    var newScript = document.createElement('script');
+    newScript.setAttribute('src', 'https://cdns.gigya.com/js/gigya.js?apikey=' + apiKey);
+    document.body.appendChild(newScript);
+
+    // Check if loaded properly, if don't, delete the localstorage param and reload the page again
+    setTimeout(checkIfGigyaLoaded, 1000);
+}
+
+function clearCustomApiKey() {
+
+    // Show the loading button
+    const resetAPIKeyButton = query(".change-api-key-modal .reset-api-key-button");
+    if (resetAPIKeyButton) {
+        resetAPIKeyButton.classList.add("is-loading");
+    }
+
+    localStorage.removeItem("reload-with-apikey");
+    window.location.href = window.location.href;
+}
+
+function initChangeApiKeyModal() {
+
+    // Set the values for the modals
+    const configApiKeyInput = query(".change-api-key-modal .config-api-key-input");
+    const configApiKeyInputTag = query(".change-api-key-modal .config-api-key-input-tag");
+    const configApiKeyInputTagDisabled = query(".change-api-key-modal .config-api-key-input-tag-disabled");
+    const apiKeyInput = query(".change-api-key-modal .api-key-input");
+    const apiKeyInputTag = query(".change-api-key-modal .api-key-input-tag");
+    const apiKeyInputTagDisabled = query(".change-api-key-modal .api-key-input-tag-disabled");
+    const defaultApiKeyField = query(".change-api-key-modal .default-api-key-field");
+    const apiKeyValidityNotification = query(".change-api-key-modal .api-key-validity-notification");
+
+    const changeApiKeyButton = query(".change-api-key-modal .change-api-key-button");
+    const resetApiKeyButton = query(".change-api-key-modal .reset-api-key-button");
+
+    const apiKeyFromLocalStorage = localStorage.getItem("reload-with-apikey");
+    apiKeyInput.value = apiKeyFromLocalStorage;
+    configApiKeyInput.innerText = config.apiKey;
+
+    // Dynamic
+    if (apiKeyFromLocalStorage && apiKeyFromLocalStorage !== null && apiKeyFromLocalStorage !== '') {
+        apiKeyInput.classList.add("has-text-success-dark");
+        apiKeyInput.classList.add("active");
+        apiKeyInputTag.classList.remove("is-hidden");
+        configApiKeyInput.classList.add("is-disabled");
+        configApiKeyInputTagDisabled.classList.remove("is-hidden");
+        resetApiKeyButton.classList.remove("is-hidden");
+        defaultApiKeyField.classList.remove("is-hidden");
+    } else {
+        defaultApiKeyField.classList.remove("is-hidden");
+        // From file
+        // changeApiKeyButton.classList.remove("is-hidden");
+        configApiKeyInputTag.classList.remove('is-hidden');
+        // apiKeyInput.classList.add("is-disabled");
+        apiKeyInputTagDisabled.classList.remove("is-hidden");
+        apiKeyValidityNotification.classList.remove("is-hidden");
+    }
+}
+
+// Check if loaded properly, if don't, delete the localstorage param and reload the page again
+function checkIfGigyaLoaded() {
+    if (typeof gigya === 'undefined' || gigya.isReady === false) {
+
+        // Clear wrong api key
+        const apiKeyFromLocalStorage = localStorage.getItem("reload-with-apikey");
+        if (apiKeyFromLocalStorage && apiKeyFromLocalStorage !== null && apiKeyFromLocalStorage !== '') {
+            console.error('Invalid Api Key %c%s %c ... resetting to original state with api key %c%s', 'font-weight: bold;', apiKeyFromLocalStorage, 'font-weight: normal', 'font-weight: bold; color: #257942', config.apiKey);
+            clearCustomApiKey();
+        }
+
+    }
 }
