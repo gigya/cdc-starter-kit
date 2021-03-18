@@ -16,9 +16,9 @@
 const query = document.querySelector.bind(document);
 const queryAll = document.querySelectorAll.bind(document);
 const logConfigFile = false; // Shows/hides config file into the console
-var LOGS = true;
+var LOGS = false;
 var showLog = LOGS;
-var showEventsLog = false;
+var showEventsLog = LOGS;
 var currentUser = null;
 
 /** *****************************************************/
@@ -410,14 +410,14 @@ function initChangeApiKeyModal() {
     }
 
     // Adding the change events to the button
-    apiKeyInput.addEventListener("change", updateChangeApiKeyElementsStatus);
+    apiKeyInput.addEventListener("input", updateChangeApiKeyElementsStatus);
 }
 
 function updateChangeApiKeyElementsStatus(event) {
 
     // Get the value from the form...
     const apiKeyFromForm = event.target.value;
-    console.log('Value Inserted: %s', apiKeyFromForm);
+    // console.log('Value Inserted: %s', apiKeyFromForm);
 
     // Getting the button element
     const changeApiKeyButton = query(".change-api-key-modal .change-api-key-button");
