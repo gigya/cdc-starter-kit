@@ -284,6 +284,8 @@ function deleteCurrentAccount() {
             if (user.status !== "FAIL") {
                 log("user to delete: " + user.profile.email, "DELETE ACCOUNT");
                 const uid = user.UID;
+
+                // TODO: Include this as part of the call
                 const id_token = "whatever";
 
                 const deleteUrl = `https://juan.gigya-cs.com/api/cdc-starter-kit/delete-user.php?UID=${uid}&id_token=${id_token}`;
@@ -381,8 +383,9 @@ function initChangeApiKeyModal() {
         resetApiKeyButton.classList.remove("is-hidden");
         defaultApiKeyField.classList.remove("is-hidden");
     } else {
-        defaultApiKeyField.classList.remove("is-hidden");
         // From file
+        changeApiKeyButton.classList.add("is-disabled");
+        defaultApiKeyField.classList.remove("is-hidden");
         // changeApiKeyButton.classList.remove("is-hidden");
         configApiKeyInputTag.classList.remove('is-hidden');
         // apiKeyInput.classList.add("is-disabled");
@@ -403,4 +406,36 @@ function checkIfGigyaLoaded() {
         }
 
     }
+}
+
+function validateAPIKey(apiKey) {
+
+    var validAPIKey = true;
+    //
+    log("X. - Validating api key " + apiKey + "... ", "BACKEND CALL");
+
+    // TODO Include this as part of the call!
+    const id_token = '';
+
+    // We make a SYNCHRONOUS url call (only few millis)
+    const validateAPIKeyUrl = `https://juan.gigya-cs.com/api/cdc-starter-kit/validate-apikey.php?apikey=${apiKey}&id_token=${id_token}`;
+    var request = new XMLHttpRequest();
+    request.open("GET", validateAPIKeyUrl, false); // `false` makes the request synchronous
+
+    try {
+        request.send(null);
+    } catch (error) {
+        // console.log('isInvalid URL');
+    }
+
+    if (request.status === 200) {
+        isValidApiKey = request.responseText === "true";
+        // console.log(isValidApiKey);
+        log("This is a valid api key OK : " + JSON.stringify(isValidApiKey));
+    } else {
+
+        // If for whatever reason is broken, we send true (no backend validation)
+        isValidApiKey = true;
+    }
+    return isValidApiKey;
 }

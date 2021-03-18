@@ -264,6 +264,20 @@ Apart from that, the project uses some external CSS libraries to enhance/improve
 1. **IonIcons**: Premium designed icons for use in web, iOS, Android, and desktop apps. [Link](https://ionicons.com/v4/).
 1. **Fonts**: _Roboto_ and _Questrial_ fonts added.
 
-## 3. What else.
+## 3. Use your own API key in the demo site.
+
+If you want to enable your API key to be used into the demo Gigya site (loading dinamically the API key), you need to enable this API key.
+
+To do that, go to your Settings inside Gigya Console, and add these trusted urls:
+
+- ````gigyademo.com/*	```
+- ````*.gigyademo.com/*	```
+
+and wait few minutes (between 5-20 mins) to have these changes available for that API key.
+
+From that moment, this API key will be elligible to be used inside the https://gigyademo.com/cdc-starter-kit, using the Dynamic load capability (Clicking over the API key Icon in the Navigation bar).
+
+
+## 4. What else.
 
 Although the site it's fully functional, there is still much more content to cover. If you want to know how to enhance/ extend the capabilities of this site, with elements like Captcha, Events, Registration Completion, Extensions, to understand how to integrate consents, etc., take a look at the [Links Page](links.md), where you will find how to implement many of these improvements.
