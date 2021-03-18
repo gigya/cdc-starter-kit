@@ -270,12 +270,12 @@ If you want to enable your API key to be used into the demo Gigya site (loading 
 
 To do that, go to your Settings inside Gigya Console, and add these trusted urls:
 
-- ````gigyademo.com/*	```
-- ````*.gigyademo.com/*	```
+- ```gigyademo.com/*```
+- ```*.gigyademo.com/*```
 
 and wait few minutes (between 5-20 mins) to have these changes available for that API key.
 
-From that moment, this API key will be elligible to be used inside the https://gigyademo.com/cdc-starter-kit, using the Dynamic load capability (Clicking over the API key Icon in the Navigation bar).
+From that moment, this API key will be elligible to be used inside the https://dev.gigyademo.com/cdc-starter-kit, using the Dynamic load capability (Clicking over the API key Icon in the Navigation bar).
 
 
 ## 4. What else.
