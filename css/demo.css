@@ -392,6 +392,17 @@ html {
   display: block;
   font-weight: bold;
 }
+.change-api-key-modal .control.has-validation.has-success input {
+  border-color: #49a949 !important;
+}
+.change-api-key-modal .api-key-error-label {
+  color: #EF6565;
+  font-size: 0.8rem !important;
+  text-align: left;
+  margin-top: 10px;
+  margin-left: 25px;
+  font-weight: normal;
+}
 .loading-modal,
 .logging-out-modal {
   z-index: 20!important;

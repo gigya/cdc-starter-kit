@@ -16,9 +16,9 @@
 const query = document.querySelector.bind(document);
 const queryAll = document.querySelectorAll.bind(document);
 const logConfigFile = false; // Shows/hides config file into the console
-var LOGS = false;
+var LOGS = true;
 var showLog = LOGS;
-var showEventsLog = LOGS;
+var showEventsLog = false;
 var currentUser = null;
 
 /** *****************************************************/
@@ -356,6 +356,7 @@ function clearCustomApiKey() {
 
 function initChangeApiKeyModal() {
 
+    log('Initializing change api key modal....');
     // Set the values for the modals
     const configApiKeyInput = query(".change-api-key-modal .config-api-key-input");
     const configApiKeyInputTag = query(".change-api-key-modal .config-api-key-input-tag");
@@ -368,13 +369,21 @@ function initChangeApiKeyModal() {
 
     const changeApiKeyButton = query(".change-api-key-modal .change-api-key-button");
     const resetApiKeyButton = query(".change-api-key-modal .reset-api-key-button");
+    const apiKeyErrorLabel = query(".change-api-key-modal .api-key-error-label");
 
     const apiKeyFromLocalStorage = localStorage.getItem("reload-with-apikey");
     apiKeyInput.value = apiKeyFromLocalStorage;
     configApiKeyInput.innerText = config.apiKey;
 
-    // Dynamic
+    // Hide the previous errors
+    apiKeyErrorLabel.classList.add('is-hidden');
+
+
+    // Modify the UI accordingly
     if (apiKeyFromLocalStorage && apiKeyFromLocalStorage !== null && apiKeyFromLocalStorage !== '') {
+
+        // Dynamic Loaded
+
         apiKeyInput.classList.add("has-text-success-dark");
         apiKeyInput.classList.add("active");
         apiKeyInputTag.classList.remove("is-hidden");
@@ -383,14 +392,80 @@ function initChangeApiKeyModal() {
         resetApiKeyButton.classList.remove("is-hidden");
         defaultApiKeyField.classList.remove("is-hidden");
     } else {
-        // From file
+
+        // FROM FILE !!
+
+        // Disable change button until having a good api key
         changeApiKeyButton.classList.add("is-disabled");
+
+        // Show file api key
         defaultApiKeyField.classList.remove("is-hidden");
-        // changeApiKeyButton.classList.remove("is-hidden");
+
+        // Show Is Active tab for this default api key
         configApiKeyInputTag.classList.remove('is-hidden');
-        // apiKeyInput.classList.add("is-disabled");
+
+        // Show Tags and validity message
         apiKeyInputTagDisabled.classList.remove("is-hidden");
         apiKeyValidityNotification.classList.remove("is-hidden");
+    }
+
+    // Adding the change events to the button
+    apiKeyInput.addEventListener("change", updateChangeApiKeyElementsStatus);
+}
+
+function updateChangeApiKeyElementsStatus(event) {
+
+    // Get the value from the form...
+    const apiKeyFromForm = event.target.value;
+    console.log('Value Inserted: %s', apiKeyFromForm);
+
+    // Getting the button element
+    const changeApiKeyButton = query(".change-api-key-modal .change-api-key-button");
+    const apiKeyInputControl = query(".change-api-key-modal .api-key-input").parentElement;
+    const apiKeyErrorLabel = query(".change-api-key-modal .api-key-error-label");
+
+    // Restart initial components
+    apiKeyInputControl.classList.remove("has-success");
+    apiKeyInputControl.classList.remove("has-error");
+    apiKeyErrorLabel.classList.add("is-hidden");
+
+    // Compare with existing api keys and check if we must validate the incoming api key
+    const apiKeyFromLocalStorage = localStorage.getItem("reload-with-apikey");
+    if (apiKeyFromForm && apiKeyFromForm !== '' && apiKeyFromForm !== apiKeyFromLocalStorage && apiKeyFromForm !== config.apiKey) {
+
+        log("Checking API Key validity against backend...", "BACKEND CALL");
+        const isValidApiKey = validateAPIKey(apiKeyFromForm);
+        log("VALID API Key ?" + isValidApiKey + "...", "BACKEND CALL RESPONSE");
+
+        // Checking validity status and modify the change api key button accordingly.
+        if (isValidApiKey === "OK") {
+
+            // Enable the button and show the proper class for the input text
+            changeApiKeyButton.classList.remove("is-disabled");
+            apiKeyInputControl.classList.add("has-success");
+            apiKeyInputControl.classList.remove("has-error");
+
+            // Updating error label
+            apiKeyErrorLabel.classList.add("is-hidden");
+            apiKeyErrorLabel.querySelector('.error-reason').innerText = "";
+
+        } else {
+            // Disable the send button and show the proper class for the input text
+            changeApiKeyButton.classList.add("is-disabled");
+            apiKeyInputControl.classList.remove("has-success");
+            apiKeyInputControl.classList.add("has-error");
+
+            // Updating error label
+            apiKeyErrorLabel.classList.remove("is-hidden");
+            apiKeyErrorLabel.querySelector('.error-reason').innerText = isValidApiKey;
+        }
+
+    }
+
+
+    if (apiKeyFromLocalStorage && apiKeyFromLocalStorage !== null && apiKeyFromLocalStorage !== '') {
+        console.error('Invalid Api Key %c%s %c ... resetting to original state with api key %c%s', 'font-weight: bold;', apiKeyFromLocalStorage, 'font-weight: normal', 'font-weight: bold; color: #257942', config.apiKey);
+        clearCustomApiKey();
     }
 }
 
@@ -410,7 +485,7 @@ function checkIfGigyaLoaded() {
 
 function validateAPIKey(apiKey) {
 
-    var validAPIKey = true;
+    var validApiKeyResponse = "";
     //
     log("X. - Validating api key " + apiKey + "... ", "BACKEND CALL");
 
@@ -418,7 +493,8 @@ function validateAPIKey(apiKey) {
     const id_token = '';
 
     // We make a SYNCHRONOUS url call (only few millis)
-    const validateAPIKeyUrl = `https://juan.gigya-cs.com/api/cdc-starter-kit/validate-apikey.php?apikey=${apiKey}&id_token=${id_token}`;
+    const baseDomainsForApiKey = gigya.partnerSettings.baseDomains;
+    const validateAPIKeyUrl = `https://juan.gigya-cs.com/api/cdc-starter-kit/validate-apikey.php?apikey=${apiKey}&baseDomains=${baseDomainsForApiKey}&id_token=${id_token}`;
     var request = new XMLHttpRequest();
     request.open("GET", validateAPIKeyUrl, false); // `false` makes the request synchronous
 
@@ -429,13 +505,14 @@ function validateAPIKey(apiKey) {
     }
 
     if (request.status === 200) {
-        isValidApiKey = request.responseText === "true";
-        // console.log(isValidApiKey);
-        log("This is a valid api key OK : " + JSON.stringify(isValidApiKey));
+        validApiKeyResponse = request.responseText;
+        // console.log(validApiKeyResponse);
+        log("Is this a valid api key ? : " + validApiKeyResponse);
+
     } else {
 
         // If for whatever reason is broken, we send true (no backend validation)
-        isValidApiKey = true;
+        validApiKeyResponse = "OK";
     }
-    return isValidApiKey;
+    return validApiKeyResponse;
 }
