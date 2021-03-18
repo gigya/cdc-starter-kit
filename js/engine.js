@@ -463,10 +463,10 @@ function updateChangeApiKeyElementsStatus(event) {
     }
 
 
-    if (apiKeyFromLocalStorage && apiKeyFromLocalStorage !== null && apiKeyFromLocalStorage !== '') {
-        console.error('Invalid Api Key %c%s %c ... resetting to original state with api key %c%s', 'font-weight: bold;', apiKeyFromLocalStorage, 'font-weight: normal', 'font-weight: bold; color: #257942', config.apiKey);
-        clearCustomApiKey();
-    }
+    // if (apiKeyFromLocalStorage && apiKeyFromLocalStorage !== null && apiKeyFromLocalStorage !== '') {
+    //     console.error('Invalid Api Key %c%s %c ... resetting to original state with api key %c%s', 'font-weight: bold;', apiKeyFromLocalStorage, 'font-weight: normal', 'font-weight: bold; color: #257942', config.apiKey);
+    //     clearCustomApiKey();
+    // }
 }
 
 // Check if loaded properly, if don't, delete the localstorage param and reload the page again
