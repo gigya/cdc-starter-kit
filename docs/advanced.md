@@ -264,7 +264,7 @@ Apart from that, the project uses some external CSS libraries to enhance/improve
 1. **IonIcons**: Premium designed icons for use in web, iOS, Android, and desktop apps. [Link](https://ionicons.com/v4/).
 1. **Fonts**: _Roboto_ and _Questrial_ fonts added.
 
-## 3. Use your own API key in the demo site.
+## 3. Use your own API key in the online demo site.
 
 If you want to enable your API key to be used into the demo Gigya site (loading dinamically the API key), you need to enable this API key.
 
