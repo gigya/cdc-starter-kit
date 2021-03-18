@@ -140,8 +140,8 @@ function showLoggedHTML(user) {
     }
 
     /* Hide Registration Screenset */
-    hideModal("logging-out");
     hideScreenset("not_logged_placeholder");
+    hideModal("logging-out");
 
     /* Taking relevant info for user */
     var provider = user.loginProvider;
@@ -251,6 +251,10 @@ function showLoggedHTML(user) {
  * @param  {object} user User info object
  */
 function showUnloggedHTML() {
+
+    // Hide logging out modal if present
+    hideModal("logging-out");
+
     /* Switch Menu settings */
     const notLoggedElements = queryAll(".not-logged");
     for (const notLoggedElement of notLoggedElements) {
