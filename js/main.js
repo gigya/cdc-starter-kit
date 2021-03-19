@@ -18,6 +18,7 @@ function onGigyaServiceReady() {
         alert('Gigya is not loaded on this page :(');
     } else {
 
+        // Check if the library is properly loaded or not.
         checkIfGigyaLoaded();
 
         // Check if user is logged in or not

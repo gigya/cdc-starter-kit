@@ -21,11 +21,11 @@ All Gigya related links are fully functional, allowing us to register, login, ed
 
 ## 2. Configuration of the project
 
-The title, logo, and descriptions for the website are set, modifying the ```config/site.json``` and refreshing the page.
+The API key, screensets Id, title, logo, and descriptions for the website are set, modifying the ```config/site.json``` and refreshing the page.
 
 You can also customize some basic aspects of your website's look and feel, like the background, the colors of the links, text colors, and background for the navigation bar.
 
-Note that some properties, like _raas_prefix_, or _lang_, need to be correctly set to have the website properly working. Included properties are:
+Note that some properties, like _apiKey_, _raas_prefix_, or _lang_, need to be correctly set to have the website properly working. Included properties are:
 
 
 | Name | Description |
@@ -43,6 +43,7 @@ Note that some properties, like _raas_prefix_, or _lang_, need to be correctly s
 |```main_pic```|Main picture for the site
 |```raas_prefix```|Gigya Prefix for the screensets
 |```lang```|Default Language
+|```apikey```|API Key of the site (obtained from the console. Read [here](https://github.com/gigya/cdc-starter-kit/blob/master/docs/install.md#1-create-site-in-gigya-console))
 
 
 Here you can find an example of this file:
@@ -58,22 +59,53 @@ Here you can find an example of this file:
     "text_color": "#7a7a7a",
     "background_color": "#f4f4f4",
     "menu_pic": "sap.png",
-    "main_url": "https://dev.gigyademo.com/cdc-starter-kit/",
+    "main_url": "https://gigyademo.com/cdc-starter-kit/",
     "main_pic": "sap.png",
     "raas_prefix": "Default",
-    "lang": "en"
+    "lang": "en",
+    "apiKey":"3_gRq1MaCq77LfHT2SITkHpxCK-_7WJi_H2yVkhha9yZaIKLxY2t5u37JRIC4W3m0s"
 }
 ```
-> If your screensets are called like Default-RegistrationLogin or Default-UpdateProfile, then the file is valid to be used without any modifications.
-
 
 ## 3. Basic behavior
 
-The site loads a function called **initDemoSite()**, which asks for a valid Gigya session in the browser. If the session is valid (we are logged in), we show the protected elements for the user, and some basic information, like the name and the photo (if set).
+The site loads a function called **initDemoSite()**, which reads the configuration file and loads Gigya script dinamically using javascript, using the API Key given in that file.
+
+```javascript
+document.addEventListener("DOMContentLoaded", function() {
+
+    /* Load Configuration from setup/site.json and starts the site UI */
+    initDemoSite();
+
+});
+```
+
+
+After Gigya is fully loaded, the [onGigyaServiceReady](https://developers.gigya.com/display/GD/onGigyaServiceReady+Template) function is triggered automatically. This function asks for a valid Gigya session in the browser. If the session is valid (we are logged in), we show the protected elements for the user, and some basic information, like the name and the photo (if set).
+
+```javascript
+function onGigyaServiceReady() {
+
+    /* Check if the user was previously logged in */
+    if (typeof gigya === 'undefined') {
+        alert('Gigya is not loaded on this page :(');
+    } else {
+
+        // Check if the library is properly loaded or not.
+        checkIfGigyaLoaded();
+
+        // Check if user is logged in or not
+        gigya.accounts.getAccountInfo({ include: 'emails, profile, data, preferences', callback: initPage });
+
+    }
+}
+```
 
 If, on the contrary, the user is not logged in, the screen shows the login form, and remove all the protected elements from the screen.
 
-The trigger for that action is the [onGigyaServiceReady](https://developers.gigya.com/display/GD/onGigyaServiceReady+Template) function, triggered once Gigya is fully loaded and ready to be used. This function is allocated in the file ```js/main.js```.
+The trigger for that action is the [onGigyaServiceReady](https://developers.gigya.com/display/GD/onGigyaServiceReady+Template) function, triggered once Gigya is fully loaded and ready to be used. 
+
+These two functions are implemented in the file ```js/main.js```.
 
 
 ##### Edit profile page
