@@ -256,10 +256,10 @@ Apart from that, the project uses some external CSS libraries to enhance/improve
 
 If you want to enable your API key to be used into the demo Gigya site (loading dinamically the API key), you need to enable this API key.
 
- [![Add Gigya Demo url](img/advanced/1-apikey-not-valid.png)
+ ![Add Gigya Demo url](img/advanced/1-apikey-not-valid.png)
 
 
-To do that, go to your Settings inside Gigya Console, and add this url to your trusted urls:
+In order to do that, go to your Settings inside Gigya Console, and add this url to your *trusted urls* section:
 
 - ```gigyademo.com/*```
 
