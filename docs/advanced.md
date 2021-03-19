@@ -265,7 +265,7 @@ Access the feature clicking over the api key section in the navbar, and then, ad
  ![Add Gigya Demo url](img/advanced/1-apikey-not-valid.png)
 
 
-In order to do that, go to your Settings inside Gigya Console, and add this url to your **trusted urls** section:
+To whitelist your url, go to your Settings inside Gigya Console, and add this url to your **trusted urls** section:
 
 - ```gigyademo.com/*```
 
