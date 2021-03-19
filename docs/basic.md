@@ -86,16 +86,18 @@ After Gigya is fully loaded, the [onGigyaServiceReady](https://developers.gigya.
 ```javascript
 function onGigyaServiceReady() {
 
-    /* Check if the user was previously logged in */
+    // Check if the user was previously logged in
     if (typeof gigya === 'undefined') {
+
         alert('Gigya is not loaded on this page :(');
+
     } else {
 
-        // Check if the library is properly loaded or not.
+        // Check if the library is properly loaded or not (stops the flow if it's bad loaded)
         checkIfGigyaLoaded();
 
-        // Check if user is logged in or not
-        gigya.accounts.getAccountInfo({ include: 'emails, profile, data, preferences', callback: initPage });
+        // Get Information about the user, and start the load of the page elements
+        gigya.accounts.getAccountInfo({ include: 'profile, data, preferences', callback: initPage });
 
     }
 }
