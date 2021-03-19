@@ -93,7 +93,7 @@ function onGigyaServiceReady() {
 
     } else {
 
-        // Check if the library is properly loaded or not (stops the flow if it's bad loaded)
+        // Check if the library is properly loaded or not (stops the all flows if it's bad loaded)
         checkIfGigyaLoaded();
 
         // Get Information about the user, and start the load of the page elements
@@ -104,8 +104,6 @@ function onGigyaServiceReady() {
 ```
 
 If, on the contrary, the user is not logged in, the screen shows the login form, and remove all the protected elements from the screen.
-
-The trigger for that action is the [onGigyaServiceReady](https://developers.gigya.com/display/GD/onGigyaServiceReady+Template) function, triggered once Gigya is fully loaded and ready to be used. 
 
 These two functions are implemented in the file ```js/main.js```.
 
