@@ -16,7 +16,7 @@
 const query = document.querySelector.bind(document);
 const queryAll = document.querySelectorAll.bind(document);
 const logConfigFile = false; // Shows/hides config file into the console
-var LOGS = false;
+var LOGS = true;
 var showLog = LOGS;
 var showEventsLog = LOGS;
 var currentUser = null;
