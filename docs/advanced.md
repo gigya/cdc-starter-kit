@@ -273,7 +273,7 @@ After that, wait few minutes (between 5-120 mins) to have these changes availabl
 
 From that moment, this API key will be valid to be used inside the https://gigyademo.com/cdc-starter-kit, using the Dynamic load capability (Clicking over the API key Icon in the Navigation bar).
 
-![Add Gigya Demo url](img/advanced/3-dynamic-load-on-fullbar.png)
+![Add Gigya Demo url](img/advanced/3-dynamic-load-on-fullbar2.png)
 
 
 ## 4. What else.
