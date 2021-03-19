@@ -227,7 +227,7 @@ The project uses vanilla javascript  for all their interactions, although it use
 
 1. **main.js**: This file contains the main method of the site, initiated by standard Javascript, and the Gigya trigger ```onGigyaServiceReady```. When present, this function is triggered automatically once Gigya it's fully loaded (in ```index.html```). 
 
-The```initDemoSite``` function (inside ```js/engine.js```), reads the configuration file placed into (```config/site.json```) and take the values to initialize the site, *initializing the Gigya WebSDK as part this process*.
+The```initDemoSite``` function (inside ```js/engine.js```), reads the configuration file placed into (```config/site.json```) and take the values to initialize the site, **initializing the Gigya WebSDK as part this process**.
 
 Once Gigya it's fully loaded, it continues with the rendering of the page, showing the proper elements depending on if we are logged in or not.
 
@@ -265,7 +265,7 @@ Access the feature clicking over the api key section in the navbar, and then, ad
  ![Add Gigya Demo url](img/advanced/1-apikey-not-valid.png)
 
 
-In order to do that, go to your Settings inside Gigya Console, and add this url to your *trusted urls* section:
+In order to do that, go to your Settings inside Gigya Console, and add this url to your **trusted urls** section:
 
 - ```gigyademo.com/*```
 
