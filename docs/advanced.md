@@ -203,10 +203,6 @@ The navigation bar and the sample content are _injected_ using the [handlebars](
             </div>
         </section>
 
-
-    <!-- IMPORTANT: Gigya script is not present here as it's loaded dynamically with Javascript.  -->
-    <!-- Read more in https://github.com/gigya/cdc-starter-kit/blob/master/docs/basic.md#3-basic-behavior.  -->
-
         <!-- ...The rest of javascript files...  -->
 
     </body>
@@ -229,24 +225,14 @@ The project uses vanilla javascript  for all their interactions, although it use
 
 1. **engine.js**: This file contains all the logic needed to make the site work. All these core functions, like managing the sessions, dealing with products, etc., are included in this file.
 
-1. **main.js**: This file contains the main Gigya trigger ```onGigyaServiceReady```. When present, this function is triggered automatically once Gigya it's fully loaded (in ```index.html```). This is the content of the file:
+1. **main.js**: This file contains the main method of the site, initiated by standard Javascript, and the Gigya trigger ```onGigyaServiceReady```. When present, this function is triggered automatically once Gigya it's fully loaded (in ```index.html```). 
 
-```javascript
-function onGigyaServiceReady() {
+The```initDemoSite``` function (inside ```js/engine.js```), reads the configuration file placed into (```config/site.json```) and take the values to initialize the site, initializing the Gigya WebSDK in this process.
 
-    /* Check if the user was previously logged in */
-    if (typeof gigya === 'undefined') {
-        alert('Gigya is not loaded on this page :(');
-    } else {
+Once Gigya it's fully loaded, it continues with the rendering of the page, showing the proper elements depending on if we are logged in or not.
 
-        /* Load Configuration from setup/site.json */
-        initDemoSite();
-    }
-}
+You can see the code of these function in the [Basic Guide](https://github.com/gigya/cdc-starter-kit/blob/master/docs/basic.md#3-basic-behavior).
 
-````
-
-The```initDemoSite``` function (inside ```js/engine.js```), reads the configuration file placed into (```config/site.json```) and take the values to initialize the site.
 
 > **DISCLAIMER**: This framework doesn't pretend to be a good example / good practice for a real website. The objective here is to learn how Gigya works. Therefore aspects like security, UX, speed, responsivity, etc., are far from ideal.
 >
