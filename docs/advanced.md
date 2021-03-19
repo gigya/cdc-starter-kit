@@ -254,7 +254,11 @@ Apart from that, the project uses some external CSS libraries to enhance/improve
 
 ## 3. Use your own API key in the online demo site.
 
-If you want to enable your API key to be used into the demo Gigya site (loading dinamically the API key), you need to enable this API key.
+This is a hidden gem!! You can test your own API key in the online demo site without the need of downloading the project and install it locally.
+
+![API Key not valid](img/advanced/0-enable-dynamic-apikey.png)
+
+Isn't that awesome? Yes, but first you need to enable this API key to be used in teh demo site.
 
  ![Add Gigya Demo url](img/advanced/1-apikey-not-valid.png)
 
