@@ -203,7 +203,9 @@ The navigation bar and the sample content are _injected_ using the [handlebars](
             </div>
         </section>
 
-        <!-- <script type="text/javascript" lang="javascript" src="https://cdns.gigya.com/js/gigya.js?apikey=__API_KEY__" ></script> -->
+
+    <!-- IMPORTANT: Gigya script is not present here as it's loaded dynamically with Javascript.  -->
+    <!-- Read more in https://github.com/gigya/cdc-starter-kit/blob/master/docs/basic.md#3-basic-behavior.  -->
 
         <!-- ...The rest of javascript files...  -->
 
