@@ -83,6 +83,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 After Gigya is fully loaded, the [onGigyaServiceReady](https://developers.gigya.com/display/GD/onGigyaServiceReady+Template) function is triggered automatically. This function asks for a valid Gigya session in the browser. If the session is valid (we are logged in), we show the protected elements for the user, and some basic information, like the name and the photo (if set).
 
+If, on the contrary, the user is not logged in, the screen shows the login form, and remove all the protected elements from the screen. All this logic is implemented the **initPage()** method.
+
 ```javascript
 function onGigyaServiceReady() {
 
@@ -103,9 +105,7 @@ function onGigyaServiceReady() {
 }
 ```
 
-If, on the contrary, the user is not logged in, the screen shows the login form, and remove all the protected elements from the screen.
-
-These two functions are implemented in the file ```js/main.js```.
+These two main functions are implemented inside the file ```js/main.js```.
 
 
 ##### Edit profile page
