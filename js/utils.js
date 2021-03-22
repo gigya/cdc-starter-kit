@@ -5,15 +5,49 @@
  *
  * This file includes some util and standard JS functions to help with the implementation of the site.
  *
- * @link   https://github.com/gigya/cdc-starter-kit/blob/master/js/engine.js
- * @file   This file defines the main functions to make the demo site work.
+ * - String / Date Helper Functions: Functions to deal with strings and thier conversions
+ * - Gigya Helper Functions: Gigya related functions, basically to read info from the loaded file
+ * - Log Functions:  Functions to log formatted messages for Gigya events and the main site actions.
+ *
+ *
+ * @link   https://github.com/gigya/cdc-starter-kit/blob/master/js/utils.js
+ * @file   This file defines some utility functions to be used in all the rest of the JS files.
  * @author juan.andres.moreno@sap.com
  * @since  1.0.0
  */
 
+
 /** *****************************************************/
-//                      4. UTILS
+/*          1. STRING/DATE HELPER FUNCTIONS             */
 /** *****************************************************/
+
+/**
+ * Return a Hex Hash to be used later as a color from the incoming string
+ * @param {string} string 
+ * @returns {string} the hex hash for that string
+ */
+function stringToHex(string) {
+    var hash = 0;
+    if (string.length === 0) return hash;
+    for (var i = 0; i < string.length; i++) {
+        hash = string.charCodeAt(i) + ((hash << 5) - hash);
+        hash = hash & hash;
+    }
+    var color = "#";
+    for (var i = 0; i < 3; i++) {
+        var value = (hash >> (i * 8)) & 255;
+        color += ("00" + value.toString(16)).substr(-2);
+    }
+    return color;
+}
+/**
+ * Return a Hex Hash to be used later as a color from the incoming string, but softer a 33%
+ * @param {string} string 
+ * @returns {string} the hex hash for that string
+ */
+function stringToHexSoft(string) {
+    return stringToHex(string) + "33";
+}
 /**
  * Capitalizes a string
  * @param  {string} s The incoming string
@@ -25,7 +59,6 @@ function capitalize(s) {
     }
     return s.charAt(0).toUpperCase() + s.slice(1);
 }
-
 /**
  * Takes an ISO time and returns a string representing how long ago the date represents.
  * @param  {int} time Unix Time
@@ -55,6 +88,10 @@ function prettyDate(time) {
     return prettifiedDate;
 }
 
+/** *****************************************************/
+/*               2. GIGYA HELPER FUNCTIONS              */
+/** *****************************************************/
+
 /**
  * Gets the api key of the site
  * @returns {string} The api key
@@ -62,7 +99,6 @@ function prettyDate(time) {
 function getApiKeyFromSite() {
     return gigya.thisScript.APIKey;
 }
-
 /**
  * Gets the datacenter of the site
  * @returns {string} The datacenter
@@ -70,7 +106,6 @@ function getApiKeyFromSite() {
 function getDatacenterFromSite() {
     return gigya.dataCenter;
 }
-
 /**
  * Standarizes the name for some social networks
  * @param  {string} provider The original provider name
@@ -96,27 +131,17 @@ function sanitizeSocial(provider) {
     return identityProviderSanitizedAndCapitalized;
 }
 
-function stringToHex(string) {
-    var hash = 0;
-    if (string.length === 0) return hash;
-    for (var i = 0; i < string.length; i++) {
-        hash = string.charCodeAt(i) + ((hash << 5) - hash);
-        hash = hash & hash;
-    }
-    var color = "#";
-    for (var i = 0; i < 3; i++) {
-        var value = (hash >> (i * 8)) & 255;
-        color += ("00" + value.toString(16)).substr(-2);
-    }
-    return color;
-}
-
-function stringToHexSoft(string) {
-    return stringToHex(string) + "33";
-}
-
-function log(text, operation) {
-    if (showLog) {
+/** *****************************************************/
+/*                    3. LOG FUNCTIONS                 */
+/** *****************************************************/
+/**
+ * 
+ * @param {string} text The text to log
+ * @param {string} operation the network operation performed. (No network operation if null)
+ * @param {boolean} show Show the log or not
+ */
+function log(text, operation, show) {
+    if (showLog === true || show === true) {
         const title = window.config.menu_description;
         var backgroundColor = !operation ? "#00800033" : "#ff000033";
         console.info(
@@ -128,17 +153,20 @@ function log(text, operation) {
         );
     }
 }
-
-function logEvents(eventName, methodName, logEvents) {
+/**
+ * 
+ * @param {string} eventName The name of the Gigya Event
+ * @param {string} methodName The name of the Gigya Method
+ * @param {boolean} show Show the log or not
+ */
+function logEvents(eventName, methodName, show) {
     if (methodName && methodName === "gscounters.sendReport") {
         return;
     }
 
-    if (showEventsLog === true) {
+    if (logEvents === true || show === true) {
         const title = window.config.menu_description;
-        // var backgroundColor = window.config.menu_bg_color_hover;
         var backgroundColor = "#0089ff33";
-        // backgroundColor = "transparent";
         if (methodName) {
             console.info(
                 `%c ${title} %c - Event: %c` +
@@ -161,3 +189,5 @@ function logEvents(eventName, methodName, logEvents) {
         }
     }
 }
+
+/** *****************************************************/

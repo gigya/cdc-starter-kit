@@ -50,6 +50,7 @@
 /**
  * This function shows the registration form inside 'not_logged_placeholder' div.
  * @param  {string} containerID The container ID for the register page
+ * @param  {function} onAfterScreeLoadIfDefined Function to be executed after a succesful load of the screenset (if defined)
  */
 function registerWithRaaS(containerID, onAfterScreenLoadIfDefined) {
 
@@ -77,6 +78,7 @@ function registerWithRaaS(containerID, onAfterScreenLoadIfDefined) {
  *
  * This function shows the login form in a popup.
  * @param  {string} containerID The container ID for the login page
+ * @param  {function} onAfterScreeLoadIfDefined Function to be executed after a succesful load of the screenset (if defined)
  */
 function loginWithRaaS(containerID, onAfterScreenLoadIfDefined) {
 

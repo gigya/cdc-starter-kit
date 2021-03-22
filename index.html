@@ -11,18 +11,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <link rel="icon" type="image/png" href="img/favicon.ico" />
 
-    <!-- Framework CSS -->
-
-    <!-- Bulma, Bulma extras hints .-->
+    <!-- Bulma & extras, hints, flags.-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hint.css/2.6.0/hint.min.css" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-extensions@6.2.7/dist/css/bulma-extensions.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bulma-extensions@6.2.7/dist/js/bulma-extensions.min.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="css/lib/bulma-social.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/lib/core.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/demo.css" />
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
@@ -31,6 +25,11 @@
     <!-- Ionicons -->
     <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>
+
+    <!-- Framework CSS -->
+    <link rel="stylesheet" type="text/css" href="css/lib/bulma-social.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/lib/core.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/demo.css" />
 </head>
 
 <body>
@@ -52,7 +51,6 @@
 
                     <!-- NOT LOGGED -->
                     <section class="header not-logged is-hidden">
-                        <!-- <img class="site-logo" src="img/logos/loading.png" alt="{{Title}}" onerror="showErrorLogo(this)" /> -->
                         <h3 class="title site-title is-2 has-text-grey">
                             Welcome to <b>{{Title}}</b>
                         </h3>
@@ -68,7 +66,6 @@
                         </h3>
                         <hr class="login-hr" />
                         <p class="site-description subtitle has-text-grey has-text-centered">Your last login was <b>{{Last Login}}</b></p>
-
                     </section>
 
                     <!-- Sample Content Container. -->
@@ -122,9 +119,9 @@
     <!-- Framework files  -->
     <script type="text/javascript" lang="javascript" src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
     <script type="text/javascript" lang="javascript" src="js/gigya-raas.js"></script>
+    <script type="text/javascript" lang="javascript" src="js/engine.js"></script>
     <script type="text/javascript" lang="javascript" src="js/utils.js"></script>
     <script type="text/javascript" lang="javascript" src="js/ui.js"></script>
-    <script type="text/javascript" lang="javascript" src="js/engine.js"></script>
     <script type="text/javascript" lang="javascript" src="js/main.js"></script>
 </body>
 

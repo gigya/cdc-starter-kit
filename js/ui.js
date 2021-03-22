@@ -1,18 +1,27 @@
 /**
  * ----------------
- *  # Demo UI JS File
+ *  # UI JS File
  * ----------------
  *
- * This file includes some functions to interact with the site and to manage the UI.
- *
- * @link   https://github.com/gigya/cdc-starter-kit/blob/master/js/engine.js
- * @file   This file defines the main functions to make the demo site work.
+ * This file includes all the functions to interact with the site elements and to manage the UI. Sections are divided by UI functionality:
+ * 
+ *  - Core UI Functions: Basic functions to make the site work
+ *  - Focus / Toggle Functions: Focus and toggles certain elements functions
+ *  - Goto Functions: Goes to another page functions
+ *  - Modal Functions: Functions to show / hide modal windows
+ *  - Language Functions: Language related functions (and flags)
+ *  - Sample Content Functions: Functions to control the sample content shown
+ *  - Purchase Functions: Functions to simulate a purchase operation
+ *  - Change API Key Functions: Functions to manage the popup for the dynamic API Key load
+ *  
+ * @link   https://github.com/gigya/cdc-starter-kit/blob/master/js/ui.js
+ * @file   This file defines all UI functions to be used in the website.
  * @author juan.andres.moreno@sap.com
  * @since  1.0.0
  */
 
 /** *****************************************************/
-//                    2. UI FUNCTIONS
+//                1. CORE UI FUNCTIONS
 /** *****************************************************/
 
 /**
@@ -281,103 +290,10 @@ function showErrorLogo(element) {
     element.src = "img/skeleton/logo-error.png";
 }
 
-/**
- * Shows/Hides the right part of the navbar menu for small screen sizes
- */
-function toggleBurgerMenu() {
-    var navbarMenu = query(".navbar-menu");
-    if (navbarMenu.classList.contains("is-opened")) {
-        navbarMenu.classList.remove("is-opened");
-    } else {
-        navbarMenu.classList.add("is-opened");
-    }
-}
+/** *****************************************************/
+//                2. FOCUS / TOGGLE FUNCTIONS
+/** *****************************************************/
 
-/**
- * Load some static content inside the page to show that the user is logged
- * @param  {object} user The user object
- */
-function loadSampleContent(user) {
-    const sampleContent = query(".sample-content");
-
-    if (sampleContent) {
-        const isLogged = user ? true : false;
-        const path = isLogged ?
-            "./html/sample-content/ecommerce.html" :
-            "./html/sample-content/ecommerce-not-logged.html";
-
-        // Load template
-        fetch(path)
-            .then((res) => {
-                return res.text();
-            })
-            .then((out) => {
-                // compile the template
-                var template = Handlebars.compile(out);
-
-                // execute the compiled template and print the output to the console
-                // Add config to the user element prior to compile (it will be used by the template) and compile
-                const user =
-                    currentUser && currentUser.status === "OK" ? currentUser : {};
-                user.config = config;
-
-                // Get price and fix currency if needed
-                let fixedCurrency = "$10000";
-                let classCurrency = "";
-                if (user.data && user.data.wallet.credits) {
-                    fixedCurrency =
-                        user.data.wallet.credits > 0 ?
-                        "$" + user.data.wallet.credits :
-                        "-$" + user.data.wallet.credits * -1;
-                    classCurrency = user.data.wallet.credits > 0 ? "" : "has-text-danger";
-                }
-                if (!user.data) {
-                    user.data = {};
-                }
-                user.data.fixedCurrency = fixedCurrency;
-                user.data.classCurrency = classCurrency;
-
-                const compiled = template(user);
-                sampleContent.innerHTML = compiled;
-
-                // Init the product buttons once content is loaded
-                initProductButtons(isLogged);
-
-                // Init tabs
-                initTabButtons();
-
-                // Focus the body on the top
-                focusBody();
-            })
-            .catch((err) => {
-                return console.error(err);
-            });
-    }
-}
-
-function cleanSampleContent() {
-    var sampleContentDiv = query(".sample-content");
-
-    if (sampleContentDiv) {
-        sampleContentDiv.innerHTML = "";
-    }
-}
-/**
- * Blurres the body while the page is logging out
- */
-function logoutFromSite() {
-    // Clean user state
-    currentUser = null;
-
-    // Show Logging out modal
-    showModal("logging-out");
-
-    // Remove content from div (if we need to come back again)
-    cleanSampleContent();
-
-    // Call the logout function with the callback function
-    logoutWithRaaS(gotoUnloggedPage);
-}
 /**
  * Shows the login screen, or focus the email field if the screen is already present
  */
@@ -415,6 +331,9 @@ function showOrHighlightRegisterScreen() {
     }
 }
 
+/**
+ * Looks for the login screenset component and focus the cursor in the first element
+ */
 function focusLoginBox() {
     // Look if the screenset was already shown
     const loginScreenset = query("#not_logged_placeholder .gigya-login-form");
@@ -429,6 +348,9 @@ function focusLoginBox() {
     }
 }
 
+/**
+ * Looks for the register screenset component and focus the cursor in the first element
+ */
 function focusRegisterBox() {
     // Look if the screenset was already shown
     const registerScreenset = query(
@@ -444,6 +366,9 @@ function focusRegisterBox() {
     }
 }
 
+/**
+ * Focuses the top of the body
+ */
 function focusBody() {
     // Look if the screenset was already shown
     const navbar = query("body");
@@ -452,6 +377,65 @@ function focusBody() {
         navbar.scrollIntoView(); // sets focus to element
     }
 }
+/**
+ * Shows/Hides the right part of the navbar menu for small screen sizes
+ */
+function toggleBurgerMenu() {
+    var navbarMenu = query(".navbar-menu");
+    if (navbarMenu.classList.contains("is-opened")) {
+        navbarMenu.classList.remove("is-opened");
+    } else {
+        navbarMenu.classList.add("is-opened");
+    }
+}
+
+/**
+ * Shows the Change API Key Modal and initializes it.
+ */
+function showChangeApiKeyModal() {
+    showModal("change-api-key", initChangeApiKeyModal);
+}
+
+/**
+ * This function checks if there are pending offers to check from the user and if it has enabled the capability of seeing this offers popup.
+ * If there are pending offers, and the offers capability it's enabled, the user will see that popup each 3 logins until he disables this of
+ * accepts all the offers that are still pending.
+ * 
+ * @param {obect} event response event after onLogin
+ * @param {number} previousLogins number of previous logins
+ * @param {boolean} recieveOfferAlerts flat to show or not the popop
+ */
+function checkIfShowConsentsPopup(event, previousLogins, recieveOfferAlerts) {
+    if (event.status !== "FAIL" && currentUser && currentUser.preferences) {
+        const hasPendingAlerts =
+            (currentUser.preferences.offer_products_1 &&
+                currentUser.preferences.offer_products_1.isConsentGranted !== true) ||
+            (currentUser.preferences.offer_services_1 &&
+                currentUser.preferences.offer_services_1.isConsentGranted !== true) ||
+            (currentUser.preferences.offer_products_2 &&
+                currentUser.preferences.offer_products_2.isConsentGranted !== true) ||
+            (currentUser.preferences.offer_services_2 &&
+                currentUser.preferences.offer_services_2.isConsentGranted !== true);
+        if (
+            hasPendingAlerts &&
+            previousLogins % 3 === 0 &&
+            (recieveOfferAlerts === true || recieveOfferAlerts === "true")
+        ) {
+            /* Launch Screenset */
+            gigya.accounts.showScreenSet({
+                screenSet: "Default-ProfileUpdate",
+                startScreen: "gigya-update-consents-screen",
+                lang: window.config.lang,
+                // containerID,
+                // onAfterSubmit: gotoHome,
+            });
+        } else {}
+    }
+}
+/** *****************************************************/
+//                3. GOTO FUNCTIONS
+/** *****************************************************/
+
 /**
  * Switch the page elements into a non logged state
  */
@@ -474,7 +458,15 @@ function gotoHome() {
     window.location.href = window.config.main_url;
 }
 
-// Show / Hide Modals
+/** *****************************************************/
+//                4. MODAL FUNCTIONS
+/** *****************************************************/
+
+/**
+ * Shows the modal with the id of the param, and executes a callback once loaded if defined
+ * @param {string} modal the modal to show
+ * @param {function} callback if defined, the callback to exacute after the modal is loaded
+ */
 function showModal(modal, callback) {
     log("Showing " + capitalize(modal) + " Modal ...");
 
@@ -523,6 +515,10 @@ function showModal(modal, callback) {
     }
 }
 
+/**
+ * Hides the modal with the id of teh param
+ * @param {string} modal the modal to hide
+ */
 function hideModal(modal) {
     // log("Hiding " + capitalize(modal) + " Modal ...");
 
@@ -536,7 +532,7 @@ function hideModal(modal) {
 }
 
 /** *****************************************************/
-//                3. LANGUAGE FUNCTIONS
+//                5. LANGUAGE FUNCTIONS
 /** *****************************************************/
 
 /**
@@ -664,11 +660,129 @@ function toggleLanguageDropDown() {
     });
 }
 
+/** *****************************************************/
+//                6. SAMPLE CONTENT
+/** *****************************************************/
+
+/**
+ * Load some static content inside the page to show that the user is logged
+ * @param  {object} user The user object
+ */
+function loadSampleContent(user) {
+    const sampleContent = query(".sample-content");
+
+    if (sampleContent) {
+        const isLogged = user ? true : false;
+        const path = isLogged ?
+            "./html/sample-content/ecommerce.html" :
+            "./html/sample-content/ecommerce-not-logged.html";
+
+        // Load template
+        fetch(path)
+            .then((res) => {
+                return res.text();
+            })
+            .then((out) => {
+                // compile the template
+                var template = Handlebars.compile(out);
+
+                // execute the compiled template and print the output to the console
+                // Add config to the user element prior to compile (it will be used by the template) and compile
+                const user =
+                    currentUser && currentUser.status === "OK" ? currentUser : {};
+                user.config = config;
+
+                // Get price and fix currency if needed
+                let fixedCurrency = "$10000";
+                let classCurrency = "";
+                if (user.data && user.data.wallet.credits) {
+                    fixedCurrency =
+                        user.data.wallet.credits > 0 ?
+                        "$" + user.data.wallet.credits :
+                        "-$" + user.data.wallet.credits * -1;
+                    classCurrency = user.data.wallet.credits > 0 ? "" : "has-text-danger";
+                }
+                if (!user.data) {
+                    user.data = {};
+                }
+                user.data.fixedCurrency = fixedCurrency;
+                user.data.classCurrency = classCurrency;
+
+                const compiled = template(user);
+                sampleContent.innerHTML = compiled;
+
+                // Init the product buttons once content is loaded
+                initProductButtons(isLogged);
+
+                // Init tabs
+                initTabButtons();
+
+                // Focus the body on the top
+                focusBody();
+            })
+            .catch((err) => {
+                return console.error(err);
+            });
+    }
+}
+
+/**
+ * Cleans HTNL for sample content.
+ */
+function cleanSampleContent() {
+    var sampleContentDiv = query(".sample-content");
+
+    if (sampleContentDiv) {
+        sampleContentDiv.innerHTML = "";
+    }
+}
+
+/**
+ * Initialize all tab buttons
+ */
+function initTabButtons() {
+    // Init page tabs
+    const tabs = queryAll(".store-tabs a");
+
+    for (var k = 0; k < tabs.length; k++) {
+        const oneTab = tabs[k];
+        oneTab.addEventListener("click", activateTabButtons);
+    }
+}
+
+/**
+ * Activate a tab when clicked, deactivating after the previous one.
+ */
+function activateTabButtons(event) {
+    const element = event.srcElement;
+    if (element) {
+        // Update tabs
+        const elementToDeactivate = event.srcElement.parentElement.querySelector(
+            "a.is-active"
+        );
+        elementToDeactivate.classList.remove("is-active");
+        element.classList.add("is-active");
+
+        // Active content for that tab
+        const tabDataElement = element.getAttribute("data-tab");
+        query("#" + tabDataElement).classList.add("is-active");
+
+        // Hide current content and deactivate old tab
+        const dataTabElementToDeactivate = elementToDeactivate.getAttribute(
+            "data-tab"
+        );
+        query("#" + dataTabElementToDeactivate).classList.remove("is-active");
+    }
+}
 
 /** *****************************************************/
-//               6. PURCHASE FUNCTIONS
+//               7. PURCHASE FUNCTIONS
 /** *****************************************************/
 
+/**
+ * Show The purchase modal and adapt the content in function of if you are logged in or not
+ * @param {object} element HTML element that receives the click for a purchase
+ */
 function showPurchaseModal(element) {
 
     // Showing purchase Modal, and once shown, load dynamic content for that card
@@ -713,6 +827,9 @@ function showPurchaseModal(element) {
     });
 }
 
+/**
+ * Init all product buttons to lauch a purchase modal with the content of that product
+ */
 function initProductButtons() {
     // Init all product buttons
     const productButtons = queryAll(".product-actions .button");
@@ -723,34 +840,132 @@ function initProductButtons() {
     }
 }
 
-function initTabButtons() {
-    // Init page tabs
-    const tabs = queryAll(".store-tabs a");
 
-    for (var k = 0; k < tabs.length; k++) {
-        const oneTab = tabs[k];
-        oneTab.addEventListener("click", activateTabButtons);
+
+/** *****************************************************/
+//             8. CHANGE API KEY FUNCTIONS
+/** *****************************************************/
+
+/**
+ * Initializes the modal for the dynamic IP Key Load of the page. If the API key is valid, all buttons are enabled and the user can go to the next state.
+ * If it's invalid, it shows the error on the screen, and doesn't allow to continue with the dynamic load of the screen.
+ */
+function initChangeApiKeyModal() {
+
+    log('Initializing change api key modal....');
+    // Set the values for the modals
+    const configApiKeyInput = query(".change-api-key-modal .config-api-key-input");
+    const configApiKeyInputTag = query(".change-api-key-modal .config-api-key-input-tag");
+    const configApiKeyInputTagDisabled = query(".change-api-key-modal .config-api-key-input-tag-disabled");
+    const apiKeyInput = query(".change-api-key-modal .api-key-input");
+    const apiKeyInputTag = query(".change-api-key-modal .api-key-input-tag");
+    const apiKeyInputTagDisabled = query(".change-api-key-modal .api-key-input-tag-disabled");
+    const defaultApiKeyField = query(".change-api-key-modal .default-api-key-field");
+    const apiKeyValidityNotification = query(".change-api-key-modal .api-key-validity-notification");
+
+    const changeApiKeyButton = query(".change-api-key-modal .change-api-key-button");
+    const resetApiKeyButton = query(".change-api-key-modal .reset-api-key-button");
+    const apiKeyErrorLabel = query(".change-api-key-modal .api-key-error-label");
+
+    const apiKeyFromLocalStorage = localStorage.getItem("reload-with-apikey");
+    apiKeyInput.value = apiKeyFromLocalStorage;
+    configApiKeyInput.innerText = config.apiKey;
+
+    // Hide the previous errors
+    apiKeyErrorLabel.classList.add('is-hidden');
+
+
+    // Modify the UI accordingly
+    if (apiKeyFromLocalStorage && apiKeyFromLocalStorage !== null && apiKeyFromLocalStorage !== '') {
+
+        // Dynamic Loaded
+
+        apiKeyInput.classList.add("has-text-success-dark");
+        apiKeyInput.classList.add("active");
+        apiKeyInputTag.classList.remove("is-hidden");
+        configApiKeyInput.classList.add("is-disabled");
+        configApiKeyInputTagDisabled.classList.remove("is-hidden");
+        resetApiKeyButton.classList.remove("is-hidden");
+        defaultApiKeyField.classList.remove("is-hidden");
+    } else {
+
+        // FROM FILE !!
+
+        // Disable change button until having a good api key
+        changeApiKeyButton.classList.add("is-disabled");
+
+        // Show file api key
+        defaultApiKeyField.classList.remove("is-hidden");
+
+        // Show Is Active tab for this default api key
+        configApiKeyInputTag.classList.remove('is-hidden');
+
+        // Show Tags and validity message
+        apiKeyInputTagDisabled.classList.remove("is-hidden");
+        apiKeyValidityNotification.classList.remove("is-hidden");
     }
+
+    // Adding the change events to the button
+    apiKeyInput.addEventListener("input", updateChangeApiKeyElementsStatus);
 }
 
-function activateTabButtons(event) {
-    const element = event.srcElement;
-    if (element) {
-        // Update tabs
-        const elementToDeactivate = event.srcElement.parentElement.querySelector(
-            "a.is-active"
-        );
-        elementToDeactivate.classList.remove("is-active");
-        element.classList.add("is-active");
+/**
+ * Validates the inserted api key and updates the modal with the new values recieved from the inserted API Key. 
+ * @param {object} event HTML Element with the inserted API Key
+ */
+function updateChangeApiKeyElementsStatus(event) {
 
-        // Active content for that tab
-        const tabDataElement = element.getAttribute("data-tab");
-        query("#" + tabDataElement).classList.add("is-active");
+    // Get the value from the form...
+    const apiKeyFromForm = event.target.value;
 
-        // Hide current content and deactivate old tab
-        const dataTabElementToDeactivate = elementToDeactivate.getAttribute(
-            "data-tab"
-        );
-        query("#" + dataTabElementToDeactivate).classList.remove("is-active");
+    // Getting the button element
+    const changeApiKeyButton = query(".change-api-key-modal .change-api-key-button");
+    const apiKeyInputControl = query(".change-api-key-modal .api-key-input").parentElement;
+    const apiKeyErrorLabel = query(".change-api-key-modal .api-key-error-label");
+
+    // Restart initial components
+    apiKeyInputControl.classList.remove("has-success");
+    apiKeyInputControl.classList.remove("has-error");
+    apiKeyErrorLabel.classList.add("is-hidden");
+
+    // Compare with existing api keys and check if we must validate the incoming api key
+    const apiKeyFromLocalStorage = localStorage.getItem("reload-with-apikey");
+    if (apiKeyFromForm && apiKeyFromForm !== '' && apiKeyFromForm !== apiKeyFromLocalStorage && apiKeyFromForm !== config.apiKey) {
+
+        log("Checking API Key validity against backend...", "BACKEND CALL");
+        const isValidApiKey = validateAPIKey(apiKeyFromForm);
+        log("VALID API Key ?" + isValidApiKey + "...", "BACKEND CALL RESPONSE");
+
+        // Checking validity status and modify the change api key button accordingly.
+        if (isValidApiKey === "OK") {
+
+            // Enable the button and show the proper class for the input text
+            changeApiKeyButton.classList.remove("is-disabled");
+            apiKeyInputControl.classList.add("has-success");
+            apiKeyInputControl.classList.remove("has-error");
+
+            // Updating error label
+            apiKeyErrorLabel.classList.add("is-hidden");
+            apiKeyErrorLabel.querySelector('.error-reason').innerText = "";
+
+        } else {
+            // Disable the send button and show the proper class for the input text
+            changeApiKeyButton.classList.add("is-disabled");
+            apiKeyInputControl.classList.remove("has-success");
+            apiKeyInputControl.classList.add("has-error");
+
+            // Updating error label
+            apiKeyErrorLabel.classList.remove("is-hidden");
+            apiKeyErrorLabel.querySelector('.error-reason').innerText = isValidApiKey;
+        }
+
     }
+
+
+    // if (apiKeyFromLocalStorage && apiKeyFromLocalStorage !== null && apiKeyFromLocalStorage !== '') {
+    //     console.error('Invalid Api Key %c%s %c ... resetting to original state with api key %c%s', 'font-weight: bold;', apiKeyFromLocalStorage, 'font-weight: normal', 'font-weight: bold; color: #257942', config.apiKey);
+    //     clearCustomApiKey();
+    // }
 }
+
+/** *****************************************************/

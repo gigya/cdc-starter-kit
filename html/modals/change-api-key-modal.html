@@ -12,6 +12,8 @@
             <button class="delete" aria-label="close" onclick="hideModal('change-api-key')"></button>
         </header>
         <section class="modal-card-body">
+
+            <!-- DEFAULT API KEY SECTION -->
             <!--Simple Input-->
             <!--Default-->
             <div class="dapi-key-validity-notification content has-text-grey is-hiddend">
@@ -42,6 +44,9 @@
                 Switch between default and custom api keys
             </label>
             <br>
+
+
+            <!-- CUSTOM API KEY SECTION -->
             <!--Simple Input-->
             <div class="field">
                 <label>Custom API Key</label>
@@ -63,6 +68,7 @@
                 </blockquote>
             </div>
         </section>
+        <!-- ACTION BUTTONS -->
         <footer class="modal-card-foot">
             <button class="change-api-key-button button is-reversed-phantommmm is-info" onclick="changeAPIKey()">Change API Key</button>
             <button class="button" onclick="hideModal('change-api-key')">Cancel</button>

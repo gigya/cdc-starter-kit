@@ -1,6 +1,6 @@
 // main: ../../demo.less
 
-// 1. Flex Functions
+// 1. Flex Helper Functions
 .flex-centered-container {
     align-content: center;
     align-items: center;
@@ -20,7 +20,7 @@
     justify-content: right;
 }
 
-// 2. Border functions
+// 2. Border Helper functions
 .bordered {
     border: 2px solid red;
 }
@@ -34,18 +34,20 @@
     outline: 2px solid @color;
 }
 
-// 3. Font functions
+// 3. Font Helper functions
 .uppercased {
     text-transform: uppercase;
 }
+
+// 4. Size Helper functions
 .is-fullwidth {
     width: 100%!important;
 }
 
+// 5. Blink Helper functions
 .blink_me {
     animation: blinker 1.5s ease-in-out infinite;
 }
-
 @keyframes blinker {
     50% {
         opacity: 0;

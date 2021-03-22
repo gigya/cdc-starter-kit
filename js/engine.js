@@ -1,11 +1,25 @@
 /**
  * ----------------
- *  # Demo Engine JS File
+ *  # Engine JS File
  * ----------------
  *
  * This file includes some util and HTML functions to make the site fully functional, and to show/hide elements
- * depending if the user is logged or not.
+ * depending if the user is logged or not. It contains as well the main variables to control the statuses or the
+ * user / apikeys loaded in the page. Finally, there are methods to simulate purchases, to reload api keys
+ * dynamically or delete totally the logged user. Some of these functions are based in backend calls, that they
+ * are authorized using JWT communication between the frontend and the backend.
+ * 
+ * The file is divided in the next sections:
  *
+ *  - 0. window.document Shorthands
+ *  - 1. Logs Configuration
+ *  - 2. User Global variable
+ *  - 3. Demo Core Functions
+ *  - 4. Progressive profiling and advanced data functions
+ *  - 5. Deletion functions
+ *  - 6. Dynamic API Key functions
+ *
+ * 
  * @link   https://github.com/gigya/cdc-starter-kit/blob/master/js/engine.js
  * @file   This file defines the main functions to make the demo site work.
  * @author juan.andres.moreno@sap.com
@@ -16,13 +30,17 @@
 const query = document.querySelector.bind(document);
 const queryAll = document.querySelectorAll.bind(document);
 const logConfigFile = false; // Shows/hides config file into the console
+
+// -- 1. Logs Configuration
 var LOGS = true;
 var showLog = LOGS;
 var showEventsLog = LOGS;
+
+// -- 2. User Global variable
 var currentUser = null;
 
 /** *****************************************************/
-//                 1. DEMO CORE FUNCTIONS
+//                 3. DEMO CORE FUNCTIONS
 /** *****************************************************/
 /**
  * Loads the configuration file into the window object to be used later on to customize the UI
@@ -41,7 +59,7 @@ function initDemoSite() {
 }
 
 /**
- * Loads the site UI using the configuration file coming as parameter
+ * Loads the site UI using the configuration file coming as parameter, loading Gigya file at the end
  * @param  {object} out the config from the file
  */
 function loadConfigFromFile(out) {
@@ -55,6 +73,8 @@ function loadConfigFromFile(out) {
     if (storedLanguage !== null) {
         out.lang = storedLanguage;
     }
+
+    // Store the exit of the file as a global object to be used along the site
     window.config = out;
     log("1. Load Configuration from file ", "GET ACCOUNT INFO");
 
@@ -72,7 +92,7 @@ function loadConfigFromFile(out) {
 
 /**
  * Set all UI conponents using the configuration object and the state of the user
- * @param {object} config Configuration object
+ * @param {object} user User object
  */
 function initPage(user) {
     // First, we render the navbar from file, and once loaded, we start with all the rest of the renders
@@ -137,10 +157,34 @@ function initPage(user) {
         });
 }
 
+/**
+ * Logouts the user from the page, showing the logout modal, and the unlogged elements again
+ */
+function logoutFromSite() {
+    // Clean user state
+    currentUser = null;
+
+    // Show Logging out modal, and after that, showing again logged out page
+    showModal("logging-out", function() {
+        // Remove content from div (if we need to come back again)
+        cleanSampleContent();
+
+        // Call the logout function with the callback function
+        logoutWithRaaS(gotoUnloggedPage);
+    });
+
+}
 
 /** ***********************************************************/
-//  5. PROGRESSIVE PROFILING AND ADVANCED DATA FUNCTIONS
+//  4. PROGRESSIVE PROFILING AND ADVANCED DATA FUNCTIONS
 /** ***********************************************************/
+/**
+ * This method takes the associated product and substract the credit from the page,
+ * adding a new purchase to the user. Finally, performs a setAccountInfo against Gigya
+ * o update this information (the fields should be created previously into the schema).
+ * 
+ * @param {object} element The HTML button that triggered the purchase action
+ */
 function purchaseProduct(element) {
     // Get the data from the element
     const isLogged = currentUser && currentUser.status !== "FAIL";
@@ -188,11 +232,17 @@ function purchaseProduct(element) {
 
         //     }).catch((err) => { return console.error(err); });
     } else {
+
+        // Hide the modal and go to the login section of the page
         hideModal("purchase");
         showOrHighlightLoginScreen();
     }
 }
 
+/**
+ * This function render the number of previous logins of the user if defined in the data
+ * section of the schema for this API Key.
+ */
 function renderPreviousLoginsIfDefined(previousLogins) {
     // log('Previous logins (if enabled for this api key) : ' + previousLogins);
     const previousLoginsButton = query(".button-previous-logins");
@@ -213,6 +263,10 @@ function renderPreviousLoginsIfDefined(previousLogins) {
     }
 }
 
+/**
+ * Increase the number of previous logins of the user if defined in the data. After that,
+ * checks if it must show the popup of the consents for the user.
+ */
 function increasePreviousLogins(user) {
     if (user.status !== "FAIL") {
         // Increment number of logins count.
@@ -240,37 +294,14 @@ function increasePreviousLogins(user) {
     }
 }
 
-function checkIfShowConsentsPopup(event, previousLogins, recieveOfferAlerts) {
-    if (event.status !== "FAIL" && currentUser && currentUser.preferences) {
-        const hasPendingAlerts =
-            (currentUser.preferences.offer_products_1 &&
-                currentUser.preferences.offer_products_1.isConsentGranted !== true) ||
-            (currentUser.preferences.offer_services_1 &&
-                currentUser.preferences.offer_services_1.isConsentGranted !== true) ||
-            (currentUser.preferences.offer_products_2 &&
-                currentUser.preferences.offer_products_2.isConsentGranted !== true) ||
-            (currentUser.preferences.offer_services_2 &&
-                currentUser.preferences.offer_services_2.isConsentGranted !== true);
-        if (
-            hasPendingAlerts &&
-            previousLogins % 3 === 0 &&
-            (recieveOfferAlerts === true || recieveOfferAlerts === "true")
-        ) {
-            /* Launch Screenset */
-            gigya.accounts.showScreenSet({
-                screenSet: "Default-ProfileUpdate",
-                startScreen: "gigya-update-consents-screen",
-                lang: window.config.lang,
-                // containerID,
-                // onAfterSubmit: gotoHome,
-            });
-        } else {}
-    }
-}
 /** *****************************************************/
-//               7. DELETION FUNCTIONS
+//               5. DELETION FUNCTIONS
 /** *****************************************************/
 
+/**
+ * Function that takes the UID of the user and deletes it using a backend call.
+ * TODO: Include JWT Token to authorize the operation
+ */
 function deleteCurrentAccount() {
     //
     log("X. - Deleting account.... ", "GET ACCOUNT INFO");
@@ -305,10 +336,13 @@ function deleteCurrentAccount() {
     });
 }
 
-function showChangeApiKeyModal() {
-    showModal("change-api-key", initChangeApiKeyModal);
-}
+/** *****************************************************/
+//            6. DYNAMIC API Key FUNCTIONS
+/** *****************************************************/
 
+/**
+ * Changes the API key of the site, writing into the local storage the value of this new API Key and reloading the page.
+ */
 function changeAPIKey() {
     //
     log("X. - Changing API KEy.... ", "RELOAD ALL PAGE");
@@ -329,6 +363,10 @@ function changeAPIKey() {
 
 }
 
+/**
+ * Loads dynamically into the body of the page the Gigya WebSDK Js file for the incoming API Key.
+ * @param {string} apiKey Gigya API Key
+ */
 function loadGigyaForApiKey(apiKey) {
 
     // Adding new Gigya script from parameters
@@ -342,6 +380,9 @@ function loadGigyaForApiKey(apiKey) {
     setTimeout(checkIfGigyaLoaded, 1000);
 }
 
+/**
+ * Clears custom api key from local storage and reloads the page with the default one
+ */
 function clearCustomApiKey() {
 
     // Show the loading button
@@ -354,122 +395,9 @@ function clearCustomApiKey() {
     window.location.href = window.location.href;
 }
 
-function initChangeApiKeyModal() {
-
-    log('Initializing change api key modal....');
-    // Set the values for the modals
-    const configApiKeyInput = query(".change-api-key-modal .config-api-key-input");
-    const configApiKeyInputTag = query(".change-api-key-modal .config-api-key-input-tag");
-    const configApiKeyInputTagDisabled = query(".change-api-key-modal .config-api-key-input-tag-disabled");
-    const apiKeyInput = query(".change-api-key-modal .api-key-input");
-    const apiKeyInputTag = query(".change-api-key-modal .api-key-input-tag");
-    const apiKeyInputTagDisabled = query(".change-api-key-modal .api-key-input-tag-disabled");
-    const defaultApiKeyField = query(".change-api-key-modal .default-api-key-field");
-    const apiKeyValidityNotification = query(".change-api-key-modal .api-key-validity-notification");
-
-    const changeApiKeyButton = query(".change-api-key-modal .change-api-key-button");
-    const resetApiKeyButton = query(".change-api-key-modal .reset-api-key-button");
-    const apiKeyErrorLabel = query(".change-api-key-modal .api-key-error-label");
-
-    const apiKeyFromLocalStorage = localStorage.getItem("reload-with-apikey");
-    apiKeyInput.value = apiKeyFromLocalStorage;
-    configApiKeyInput.innerText = config.apiKey;
-
-    // Hide the previous errors
-    apiKeyErrorLabel.classList.add('is-hidden');
-
-
-    // Modify the UI accordingly
-    if (apiKeyFromLocalStorage && apiKeyFromLocalStorage !== null && apiKeyFromLocalStorage !== '') {
-
-        // Dynamic Loaded
-
-        apiKeyInput.classList.add("has-text-success-dark");
-        apiKeyInput.classList.add("active");
-        apiKeyInputTag.classList.remove("is-hidden");
-        configApiKeyInput.classList.add("is-disabled");
-        configApiKeyInputTagDisabled.classList.remove("is-hidden");
-        resetApiKeyButton.classList.remove("is-hidden");
-        defaultApiKeyField.classList.remove("is-hidden");
-    } else {
-
-        // FROM FILE !!
-
-        // Disable change button until having a good api key
-        changeApiKeyButton.classList.add("is-disabled");
-
-        // Show file api key
-        defaultApiKeyField.classList.remove("is-hidden");
-
-        // Show Is Active tab for this default api key
-        configApiKeyInputTag.classList.remove('is-hidden');
-
-        // Show Tags and validity message
-        apiKeyInputTagDisabled.classList.remove("is-hidden");
-        apiKeyValidityNotification.classList.remove("is-hidden");
-    }
-
-    // Adding the change events to the button
-    apiKeyInput.addEventListener("input", updateChangeApiKeyElementsStatus);
-}
-
-function updateChangeApiKeyElementsStatus(event) {
-
-    // Get the value from the form...
-    const apiKeyFromForm = event.target.value;
-    // console.log('Value Inserted: %s', apiKeyFromForm);
-
-    // Getting the button element
-    const changeApiKeyButton = query(".change-api-key-modal .change-api-key-button");
-    const apiKeyInputControl = query(".change-api-key-modal .api-key-input").parentElement;
-    const apiKeyErrorLabel = query(".change-api-key-modal .api-key-error-label");
-
-    // Restart initial components
-    apiKeyInputControl.classList.remove("has-success");
-    apiKeyInputControl.classList.remove("has-error");
-    apiKeyErrorLabel.classList.add("is-hidden");
-
-    // Compare with existing api keys and check if we must validate the incoming api key
-    const apiKeyFromLocalStorage = localStorage.getItem("reload-with-apikey");
-    if (apiKeyFromForm && apiKeyFromForm !== '' && apiKeyFromForm !== apiKeyFromLocalStorage && apiKeyFromForm !== config.apiKey) {
-
-        log("Checking API Key validity against backend...", "BACKEND CALL");
-        const isValidApiKey = validateAPIKey(apiKeyFromForm);
-        log("VALID API Key ?" + isValidApiKey + "...", "BACKEND CALL RESPONSE");
-
-        // Checking validity status and modify the change api key button accordingly.
-        if (isValidApiKey === "OK") {
-
-            // Enable the button and show the proper class for the input text
-            changeApiKeyButton.classList.remove("is-disabled");
-            apiKeyInputControl.classList.add("has-success");
-            apiKeyInputControl.classList.remove("has-error");
-
-            // Updating error label
-            apiKeyErrorLabel.classList.add("is-hidden");
-            apiKeyErrorLabel.querySelector('.error-reason').innerText = "";
-
-        } else {
-            // Disable the send button and show the proper class for the input text
-            changeApiKeyButton.classList.add("is-disabled");
-            apiKeyInputControl.classList.remove("has-success");
-            apiKeyInputControl.classList.add("has-error");
-
-            // Updating error label
-            apiKeyErrorLabel.classList.remove("is-hidden");
-            apiKeyErrorLabel.querySelector('.error-reason').innerText = isValidApiKey;
-        }
-
-    }
-
-
-    // if (apiKeyFromLocalStorage && apiKeyFromLocalStorage !== null && apiKeyFromLocalStorage !== '') {
-    //     console.error('Invalid Api Key %c%s %c ... resetting to original state with api key %c%s', 'font-weight: bold;', apiKeyFromLocalStorage, 'font-weight: normal', 'font-weight: bold; color: #257942', config.apiKey);
-    //     clearCustomApiKey();
-    // }
-}
-
-// Check if loaded properly, if don't, delete the localstorage param and reload the page again
+/**
+ * Check if loaded properly, if don't, delete the localstorage param and reload the page again
+ */
 function checkIfGigyaLoaded() {
     if (typeof gigya === 'undefined' || gigya.isReady === false) {
 
@@ -483,6 +411,11 @@ function checkIfGigyaLoaded() {
     }
 }
 
+/**
+ * Validates (Via backend) the incoming API Key. If the backend call is broken, it degrades to a valid API Key, that it will fail later when it's tried to be loaded.
+ * @param {string} apiKey the API Key to validate
+ * @returns {boolean} Validity of the API Key
+ */
 function validateAPIKey(apiKey) {
 
     var validApiKeyResponse = "";
@@ -516,3 +449,5 @@ function validateAPIKey(apiKey) {
     }
     return validApiKeyResponse;
 }
+
+/** *****************************************************/

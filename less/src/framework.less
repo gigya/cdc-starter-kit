@@ -1,29 +1,160 @@
 // main: ../demo.less
 
-// Fixing hint view
-[class*=hint--][aria-label]:after {
-    font-weight: normal;
-    font-size: 14px;
-    padding: 12px;
-    // background: whitesmoke;
-    // color: #333;
+/* 0. CONTAINER */
+.hero {
+    .hero-body {
+        flex-grow: 1;
+        flex-shrink: 0;
+        padding: 5rem 1.5rem;
+
+        // Logout effect
+        filter: blur(0px);
+        -webkit-transition: filter 1.0s;
+        transition: filter 1.0s;
+
+        &.blurred {
+            display: none;
+            -webkit-transition: filter 1.0s;
+            transition: filter 1.0s;
+            filter: blur(1px);
+
+            &::after {
+                content: "Logging out...";
+                background-color: #FFBA10;
+                border-color: black;
+                border-style: dotted;
+                width: 100%;
+                border: 2px solid red;
+                position: absolute;
+                text-align: center;
+                font-size: 2em;
+                color: #333;
+                border: solid 3px #eee;
+                border-bottom-color: #EF6565;
+                border-radius: 50%;
+                content: "";
+                height: 40px;
+                left: 50%;
+                position: absolute;
+                top: 50%;
+                transform: translate3d(-50%, -50%, 0);
+                width: 40px;
+
+            }
+        }
+
+    }
+
+    // Far from the top
+    margin-top: 0px;
+    // .bordered();
+
+    // HEADER
+    section.header {
+        img.site-logo {
+            display: inline-block;
+            // width: 45px;
+            top: 7px;
+            left: -15px;
+            position: relative;
+        }
+
+        h3.site-title {
+            display: inline-block;
+            margin-top: 35px;
+        }
+
+        // Separator
+        .login-hr {
+            // border-bottom: 1px solid #bbb;
+
+            margin: .1rem 0;
+            background: transparent;
+        }
+
+    }
+
+    // Site Box
+    // Container Screensets and logo box
+    .box {
+        margin-top: 5rem;
+        // .bordered();
+        max-height: 2000px;
+        min-height: 200px;
+        transition: max-height 1.35s ease-out;
+
+        border-radius: 15px;
+
+        position: relative;
+        z-index: 1;
+
+        .gigya-placeholder {
+            overflow-x: auto;
+
+        }
+
+        // Avatar
+        .avatar {
+            margin-top: -70px;
+            margin-bottom: -40px;
+
+            img {
+                padding: 10px;
+                background: #fff;
+                border-radius: 50%;
+                max-width: 145px;
+                -webkit-box-shadow: 0 2px 3px rgba(10, 10, 10, .1), 0 0 0 1px rgba(10, 10, 10, .1);
+                box-shadow: 0 2px 3px rgba(10, 10, 10, .1), 0 0 0 1px rgba(10, 10, 10, .1);
+            }
+        }
+    }
+
+    /* MESSAGE BOX */
+    .message {
+        width: 50%;
+        margin-left: 25%;
+
+        /* border: 1px solid red; */
+
+        &.logged {
+            /*float: right;*/
+            /* background: beige; */
+            /* border: 1px solid green; */
+
+            /* top: 120px; */
+            position: relative;
+        }
+    }
+
+    /* Logged Sample Content (Overwriting core.css)*/
+    .view-wrapper {
+        padding: 0px;
+        -webkit-transition: all .3s;
+        transition: all .3s;
+    }
+
+    // Footer
+    .hero-foot {
+        margin: 20px;
+
+        .gigya-demo-link {
+            text-decoration: none;
+            margin: 0 5px;
+            opacity: 0.65;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
 }
-// [class*=hint--]:after {
-// background:#383838;color:#fff; border-color: blue;
-// }
 
-html {
-    scroll-behavior: smooth;
-}
-
-
-/* NAVBAR */
+/* 1. NAVBAR */
 // Fixing default navbar behaviour and preparing it to use the burger button
 .navbar, .navbar-end, .navbar-menu, .navbar-start {
     align-items: stretch;
     display: flex;
 }
-
 .navbar {
 
     background: white!important;
@@ -166,141 +297,14 @@ html {
 
 
 }
-
-/* CONTAINER */
-.hero {
-    .hero-body {
-        flex-grow: 1;
-        flex-shrink: 0;
-        padding: 5rem 1.5rem;
-        
-        // Logout effect
-        filter: blur(0px);
-        -webkit-transition: filter 1.0s;
-        transition: filter 1.0s;
-
-        &.blurred {
-            display: none;
-            -webkit-transition: filter 1.0s;
-            transition: filter 1.0s;
-            filter: blur(1px);
-
-            &::after {
-                content: "Logging out...";
-                background-color: #FFBA10;
-                border-color: black;
-                border-style: dotted;
-                width: 100%;
-                border: 2px solid red;
-                position: absolute;
-                text-align: center;
-                font-size: 2em;
-                color: #333;
-                    border: solid 3px #eee;
-                    border-bottom-color: #EF6565;
-                    border-radius: 50%;
-                    content: "";
-                    height: 40px;
-                    left: 50%;
-                    position: absolute;
-                    top: 50%;
-                    transform: translate3d(-50%, -50%, 0);
-                    width: 40px;
-
-            }
-        }
-
-    }
-    // Far from the top
-    margin-top: 0px;
-    // .bordered();
-
-    // HEADER
-    section.header {
-        img.site-logo {
-            display: inline-block;
-            // width: 45px;
-            top: 7px;
-            left: -15px;
-            position: relative;
-        }
-        h3.site-title {
-            display: inline-block;
-            margin-top: 35px;
-        }
-        // Separator
-        .login-hr {
-            // border-bottom: 1px solid #bbb;
-
-            margin: .1rem 0;
-            background: transparent;
-        }
-
-    }
-
-    // Site Box
-    // Container Screensets and logo box
-    .box {
-      margin-top: 5rem;
-      // .bordered();
-      max-height: 2000px;
-      min-height: 200px;
-      transition: max-height 1.35s ease-out;
-
-      border-radius: 15px;
-
-                    position: relative;
-                    z-index: 1;
-      .gigya-placeholder {
-          overflow-x: auto;
-
-      }
-      // Avatar
-      .avatar {
-          margin-top: -70px;
-          margin-bottom: -40px;
-          img {
-              padding: 10px;
-              background: #fff;
-              border-radius: 50%;
-              max-width: 145px;
-              -webkit-box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
-              box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
-          }
-      }
-    }
-
-    /* MESSAGE BOX */
-    .message {
-        width: 50%;
-        margin-left: 25%;
-
-        /* border: 1px solid red; */
-
-        &.logged {
-            /*float: right;*/
-            /* background: beige; */
-            /* border: 1px solid green; */
-
-            /* top: 120px; */
-            position: relative;
-        }
-    }
-
-    /* Logged Sample Content (Overwriting core.css)*/
-    .view-wrapper {
-    padding: 0px;
-    -webkit-transition: all .3s;
-    transition: all .3s;
-    }
-}
-
 // Fixing menu for mobile
 .navbar-menu {
     display: none;
+
     &.is-opened {
         display: flex;
         justify-content: flex-end;
+
         .flag-icon {
             margin-top: 8px;
             // border: 2px solid red!important;
@@ -308,18 +312,73 @@ html {
     }
 }
 @media screen and (min-width: 1024px) {
-    .navbar-menu {display: flex;}
+    .navbar-menu {
+        display: flex;
+    }
+}
+// Ion Icons
+ion-icon {
+    font-size: 24px;
+    color: #999;
+    pointer-events: none;
+
+    &.social-provider-icon {
+        padding: 5px;
+        color: whitesmoke !important;
+        margin-left: 10px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 5px #ccc;
+    }
+
+    &.is-site {
+        background: #f1ab2b !important;
+    }
+
+    &.is-apple {
+        background: #333 !important;
+    }
+
+    &.is-amazon {
+        background: #333 !important;
+        color: #febd69 !important;
+    }
+
+    &[class*='is-saml'] {
+        // background:whitesmoke !important;
+        color: #f1ab2b !important;
+    }
 }
 
-// Delete popup (edit profile) 
-.delete-icon {
-        position: relative;
-        top: 4px;
-        font-weight: bold;
-        margin-right: 7px;
-        font-size: 1.5rem;
+// Navbar icons
+.icon-link:hover ion-icon {
+    color: whitesmoke !important;
+}
+.icon-link.is-active ion-icon {
+    color: whitesmoke !important;
 }
 
+/* 2. MODALS*/
+
+// loading
+.loading-modal,
+
+// logging out
+.logging-out-modal {
+    z-index: 20!important;
+    // To see the navbar all time
+    top: 57px;
+
+    .modal-background {
+        background-color: #f4f4f4;
+    }
+    
+    .modal-content {
+        .blink_me();
+    }
+
+}
+
+// change modal
 .change-api-key-modal {
 
     .change-apikey-icon {
@@ -329,7 +388,7 @@ html {
         font-size: 1.7rem;
         margin-bottom: -4px;
     }
-    
+
     .api-key-input {
         display: inline-block;
         width: 471px;
@@ -347,7 +406,7 @@ html {
         color: #49a949;
 
         &.is-disabled {
-            color: #666!important;
+            color: #666 !important;
         }
     }
 
@@ -356,15 +415,21 @@ html {
         margin-top: 7px;
         margin-left: 4px;
     }
+
     .modal-card-foot {
         justify-content: space-between;
     }
+
     .reset-api-key-button {
         font-size: 1rem !important;
         padding: 0 5px 0;
         margin: 0 12px;
-        color: #cc0f35!important;
-        &:hover {color: whitesmoke!important}
+        color: #cc0f35 !important;
+
+        &:hover {
+            color: whitesmoke !important
+        }
+
         margin-top: 10px;
         display: block;
     }
@@ -378,14 +443,16 @@ html {
     // }
 
     .content blockquote {
-        
+
         background-color: transparent !important;
     }
+
     .field {
-        
+
         .control {
             text-align: center;
         }
+
         label {
             margin: 5px 20px;
             display: block;
@@ -394,135 +461,78 @@ html {
     }
 
     .control.has-validation.has-success input {
-        border-color: #49a949!important;
+        border-color: #49a949 !important;
     }
 
     .api-key-error-label {
         color: #EF6565;
-        font-size: 0.8rem!important;
+        font-size: 0.8rem !important;
         text-align: left;
         margin-top: 10px;
         margin-left: 25px;
         font-weight: normal;
     }
 }
+// Product modal
+.purchase-modal {
 
-// Loading elements
-.loading-modal,
-.logging-out-modal {
-    z-index: 20!important;
-    // To see the navbar all time
-    top: 57px;
-
-    .modal-background {
-        background-color: #f4f4f4;
-    }
-    
-    .modal-content {
-        .blink_me();
+    // For price in purchase popups
+    .header .price {
+        &::before {
+            content: '' !important;
+        }
     }
 
-}
+    .button {
+        // border: 2px solid red;
+        text-decoration: none !important;
 
-// IonIcons
-  // Ion Icons
-  ion-icon {
-      font-size: 24px;
-      color: #999;
-      pointer-events: none;
+        span {
+            margin-right: 0 !important;
+        }
+    }
 
-      &.social-provider-icon {
-          padding: 5px;
-          color: whitesmoke !important;
-          margin-left: 10px;
-          border-radius: 5px;
-          box-shadow: 0px 0px 5px #ccc;
-      }
+    .modal-card-body {
+        // border: 2px solid red!important;
+        min-height: 200px;
 
-      &.is-site {
-          background: #f1ab2b !important;
-      }
+        .quickview-trigger {
+            display: none;
+        }
 
-      &.is-apple {
-          background: #333 !important;
-      }
+        .product-image img {
 
-      &.is-amazon {
-          background: #333 !important;
-          color: #febd69 !important;
-      }
+            // width: 70%;
+            // border: 2px solid red;;
+            display: block;
+            margin: 0 auto;
+        }
 
-      &[class*='is-saml'] {
-          // background:whitesmoke !important;
-          color: #f1ab2b !important;
-      }
-  }
-
-  .icon-link:hover ion-icon {
-      color: whitesmoke !important;
-  }
-
-  .icon-link.is-active ion-icon {
-      color: whitesmoke !important;
-  }
-
-  // List of products
-  .product-actions {
-      
-      .button {
-          text-decoration: none!important;
-      }
-  }
-
-  // Product modal
-  .purchase-modal {
-        // For price in purchase popups
-        .header .price {
-            &::before {
-                content: '' !important;
+        .product-info {
+            h3 {
+                font-weight: bold;
             }
         }
 
-        .button {
-            // border: 2px solid red;
-            text-decoration: none !important;
-            span {
-                margin-right: 0!important;
-            }
+        .left {
+            position: absolute;
+            right: 28px;
+            bottom: 110px;
+            // svg {
+
+            //     // color: red;
+            // }
         }
 
-      .modal-card-body {
-            // border: 2px solid red!important;
-            min-height: 200px;
-            .quickview-trigger {
+        .right {
+            float: right;
+
+            a {
                 display: none;
             }
-            .product-image img {
-                
-                // width: 70%;
-                // border: 2px solid red;;
-                display: block;
-                margin: 0 auto;
-            }
-            .product-info {
-                h3 {
-                    font-weight: bold;
-                }
-            }
-            .left {
-                position: absolute;
-                right: 28px;
-                bottom: 110px;
-                // svg {
-
-                //     // color: red;
-                // }
-            }
-            .right {
-                float: right;
-                a {display: none;}
-            }
         }
+    }
+
     .modal-card-foot {
         button {
             svg {
@@ -530,53 +540,74 @@ html {
                 float: left;
                 position: absolute;
                 left: 0;
-                margin-left: 10px;            }
+                margin-left: 10px;
             }
+        }
     }
-  }
+}
+// Delete popup (edit profile) 
+.delete-icon {
+    position: relative;
+    top: 4px;
+    font-weight: bold;
+    margin-right: 7px;
+    font-size: 1.5rem;
+}
 
-  .store-block img {
+
+/* 3. SAMPLE CONTENT COMPONENTS */
+// Store Block Message (SAP Image with status)
+.store-block img {
     //   border: 2px solid #AAA;
-      background: white;
-      box-shadow: 1px 1px 10px #ddd;
-      padding: 10px;
-  }
-
-  // Overlay products
-  .overlay-products {
+    background: white;
+    box-shadow: 1px 1px 10px #ddd;
+    padding: 10px;
+}
+// Overlay for products (The one that renders into a transparent layer)
+.overlay-products {
     //   border: 1px solid red;
-      z-index: 0;
-      display: block;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+    z-index: 0;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     //  background-color: whitesmoke;
     background-image: linear-gradient(to bottom, #F5F5F500, #F5F5F5 90%);
-      opacity: 1.5;
-        pointer-events: none; // To access links below!!
-      .columns {
-        border: 2px solid red;
-          position: absolute;
-          bottom: 0;
-          width: 100%;
-          text-align: center;
-      }
-  }
+    opacity: 1.5;
+    pointer-events: none; // To access links below!!
 
-  // Main page product navbar
+    .columns {
+        border: 2px solid red;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+    }
+}
+// List of products
+.product-actions {
+
+    .button {
+        text-decoration: none !important;
+    }
+}
+
+// Main page product navbar
 .store-block {
     .store-meta {
 
         h3 {
-    
-                color: #7a7a7a !important;
+
+            color: #7a7a7a !important;
         }
+
         .has-golden-color {
 
             color: #dcba01;
         }
+
         .has-standard-color {
 
             color: #428bca;
@@ -584,62 +615,66 @@ html {
         }
 
     }
+}
+
+.activity-block {
+
+    .stat-number {
+        // font-size: 3rem!important;
+        color: #7a7a7a;
+
     }
-    .activity-block {
+}
+// Purchase Popups (Inside sample content)
+.sample-content {
 
-        .stat-number {
-            // font-size: 3rem!important;
-            color: #7a7a7a;
-      
-        }
-    }
-
-    .is-divider[data-content="GOLDEN BENEFITS"] {
-
+    &.sample-content-not-logged {
         // border: 2px solid red;
-        &:after {
-            font-weight: bold;
-            color: #dcba01 !important;
+        margin-bottom: -150px;
+
+        // For the "Not logged" message on the sample content template in the home page
+
+        .has-text-danger-dark {
+            opacity: .5;
+            line-height: 1.2rem;
+            position: relative;
+            // top: 4px;
+        }
+
+        .store-meta h3 {
+            margin-bottom: 4px;
         }
     }
-    .is-divider[data-content="STANDARD BENEFITS"] {
 
-        // border: 2px solid red;
-        &:after {
-            font-weight: bold;
-            color: #428bca !important;
+    &.sample-content-logged {
+        .store-meta {
+
+            h3 {
+                margin-bottom: 4px;
+            }
+
+            span {
+                line-height: 1.2rem;
+            }
         }
     }
+}
 
-    // Purchase Popups (Inside sample content)
-    .sample-content {
+/* 5. EDIT PROFILE */
+.is-divider[data-content="GOLDEN BENEFITS"] {
 
-        &.sample-content-not-logged {
-            // border: 2px solid red;
-            margin-bottom: -150px;
-    
-            // For the "Not logged" message on the sample content template in the home page
-    
-                .has-text-danger-dark {
-                    opacity: .5;
-                    line-height: 1.2rem;
-                    position: relative;
-                    // top: 4px;
-                }
-                .store-meta h3 {
-                    margin-bottom: 4px;
-                }
-        }
-        &.sample-content-logged {
-            .store-meta {
-    
-                h3 {
-                    margin-bottom: 4px;
-                }
-                span {
-                    line-height: 1.2rem;
-                }
-            } 
-        }
+    // border: 2px solid red;
+    &:after {
+        font-weight: bold;
+        color: #dcba01 !important;
     }
+}
+.is-divider[data-content="STANDARD BENEFITS"] {
+
+    // border: 2px solid red;
+    &:after {
+        font-weight: bold;
+        color: #428bca !important;
+    }
+}
 
