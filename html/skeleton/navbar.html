@@ -115,6 +115,13 @@
                         <span class="span-apikey has-text-grey"></span>
                     </button>
                 </div>
+                <!-- User Info (UID) -->
+                <div class="navbar-item is-hidden user-info-navbar-item logged">
+                    <button class="button-user-info hint--bottom hint--bounce hint--infoo hint--medium hint--rounded button button is-white is-hovered" aria-label="UID: xxx">
+                        <ion-icon name="information-circle-outline"></ion-icon>
+                        <span class="span-user-info has-text-grey">UID: xxx</span>
+                    </button>
+                </div>
             </div>
             <div class="navbar-item is-icon drop-trigger is-separator">|</div>
 
@@ -139,6 +146,7 @@
                 <a class="icon-link" href="edit-profile.html">
                     <div class="user-image">
                         <ion-icon class="not-hidden" name="person-outline"></ion-icon>
+                        <img class="is-hidden provider-img" src="">
                         <span class="indicator"></span>
                     </div>
                 </a>

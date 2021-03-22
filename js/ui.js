@@ -208,6 +208,8 @@ function showLoggedHTML(user) {
     // Paint Providers
     const providersButton = query(".button-providers");
     const providersButtonIcons = queryAll(".button-providers ion-icon");
+    const userInfoButton = query(".button-user-info");
+    const userInfoSpan = query(".span-user-info");
     const providersSpan = query(".span-providers");
     var socialProvidersAsArray = user.socialProviders.split(",");
     var socialProvidersAsArraySanitized = [];
@@ -250,6 +252,14 @@ function showLoggedHTML(user) {
         renderPreviousLoginsIfDefined(user.data.previousLogins);
     }
 
+    // Show User Info
+    const text =
+        "USER INFO:\u000A\u000A· Login Provider: " +
+        capitalize(currentUser.loginProvider + "\u000A· UID: " + currentUser.UID + "\u000A· Last Login: " + capitalize(prettyDate(currentUser.lastLogin)) + "\u000A· Registered: " + capitalize(prettyDate(currentUser.registered)));
+
+    userInfoButton.setAttribute("aria-label", text);
+    userInfoSpan.innerHTML = "UID: " + currentUser.UID.substring(0, 6) + "...";
+
     // Load logged sample content
     loadSampleContent(user);
 }
@@ -276,6 +286,7 @@ function showUnloggedHTML() {
 
     /* Hide previous logged navbar element if shown */
     query(".previous-logins-navbar-item").classList.add("is-hidden");
+    query(".user-info-navbar-item").classList.add("is-hidden");
 
     // Load unlogged sample content
     loadSampleContent(null);

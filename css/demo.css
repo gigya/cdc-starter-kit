@@ -275,20 +275,34 @@ button {
 .navbar .navbar-item .span-apikey,
 .navbar .navbar-item .span-datacenter,
 .navbar .navbar-item .span-previous-logins,
-.navbar .navbar-item .span-providers {
+.navbar .navbar-item .span-providers,
+.navbar .navbar-item .span-user-info {
   font-size: 0.7em;
   padding: 0 10px;
 }
 .navbar .navbar-item .icon-link,
 .navbar .navbar-item .button-datacenter,
 .navbar .navbar-item .button-apikey,
-.navbar .navbar-item .button-previous-logins {
+.navbar .navbar-item .button-previous-logins,
+.navbar .navbar-item .button-user-info {
   opacity: 0.8;
+}
+.navbar .navbar-item .icon-link.hint--medium::after,
+.navbar .navbar-item .button-datacenter.hint--medium::after,
+.navbar .navbar-item .button-apikey.hint--medium::after,
+.navbar .navbar-item .button-previous-logins.hint--medium::after,
+.navbar .navbar-item .button-user-info.hint--medium::after {
+  width: 350px;
+  left: 40px;
+  text-align: left;
+  white-space: pre-wrap;
+  word-break: break-all;
 }
 .navbar .navbar-item .icon-link:hover,
 .navbar .navbar-item .button-datacenter:hover,
 .navbar .navbar-item .button-apikey:hover,
-.navbar .navbar-item .button-previous-logins:hover {
+.navbar .navbar-item .button-previous-logins:hover,
+.navbar .navbar-item .button-user-info:hover {
   opacity: 1;
 }
 .navbar .navbar-item .button-apikey.dynamic-apikey {
