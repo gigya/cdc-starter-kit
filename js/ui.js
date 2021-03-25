@@ -41,7 +41,7 @@ function renderNavbar(out) {
         // Modify the UI accordingly
         const hasApiKeyFromLocalStorage = apiKeyFromLocalStorage && apiKeyFromLocalStorage !== null && apiKeyFromLocalStorage !== '';
         const hasApiKeyFromQueryString = apiKeyFromQueryString && apiKeyFromQueryString !== null && apiKeyFromQueryString !== '';
-        if (hasApiKeyFromQueryString || hasApiKeyFromQueryString) {
+        if (hasApiKeyFromQueryString || hasApiKeyFromLocalStorage) {
             const apiKeyButtonInNavbar = query(".button-apikey");
             apiKeyButtonInNavbar.classList.add("dynamic-apikey");
         }
