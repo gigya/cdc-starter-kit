@@ -100,7 +100,7 @@ function loadConfigFromFile(out) {
             console.error("Invalid API Key. Loading default one...");
             // Updating error label to reflect the error
             setTimeout(function() {
-                const labelForApiKey = query('.navbar .button-apikey.dynamic-apikey');
+                const labelForApiKey = query('.navbar .button-apikey');
                 if (labelForApiKey) {
 
                     labelForApiKey.classList.add('api-key-error');
