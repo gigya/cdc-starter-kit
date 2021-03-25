@@ -82,11 +82,12 @@ function loadConfigFromFile(out) {
 
     // 2. Check if we have the dynamic ApiKey in the url. If yes, substitute in the url
     const apiKeyFromQueryString = getFromQueryString("apiKey");
+    var isValidApiKey = false;
     if (apiKeyFromQueryString && apiKeyFromQueryString !== null) {
 
 
 
-        const isValidApiKey = validateAPIKey(apiKeyFromQueryString);
+        isValidApiKey = validateAPIKey(apiKeyFromQueryString);
         log("VALID API Key ?" + isValidApiKey + "...", "BACKEND CALL RESPONSE");
 
         // Checking validity status and modify the change api key button accordingly.
@@ -143,7 +144,7 @@ function loadConfigFromFile(out) {
     var apiKey = out.apiKey;
 
     // Check if we have api key in the url
-    if (apiKeyFromQueryString && apiKeyFromQueryString !== null && apiKeyFromQueryString !== "") {
+    if (apiKeyFromQueryString && apiKeyFromQueryString !== null && apiKeyFromQueryString !== "" && isValidApiKey === true) {
         // We take the url of the query string and remove the dynamic one
         // setInLocalStorage("reload-with-apikey", apiKeyFromQueryString);
         apiKey = apiKeyFromQueryString;
