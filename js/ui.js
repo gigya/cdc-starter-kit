@@ -937,11 +937,11 @@ function initChangeApiKeyModal() {
         }
 
         // Additions in the screen if the Screenset Prefix was added.
-        if (hasApiKeyFromQueryString) {
+        if (hasScreensetPrefixFromQueryString) {
             const screensetPrefixField = query('.screenset-prefix-field');
             const screensetPrefixInput = query('.screenset-prefix-input');
-            screensetPrefixField.classList.remove("is-hidden");
             screensetPrefixInput.value = config.raas_prefix;
+            screensetPrefixField.classList.remove('is-hidden');
         }
 
     } else {
