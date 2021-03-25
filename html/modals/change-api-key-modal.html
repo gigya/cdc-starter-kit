@@ -6,7 +6,7 @@
             <p class="modal-card-title">
                 <ion-icon class="change-apikey-icon has-text-info" size="normal" name="key-outline"></ion-icon>
                 <b>
-                    Change API Key
+                    Change API Key & Screenset
                 </b>
             </p>
             <button class="delete" aria-label="close" onclick="hideModal('change-api-key')"></button>
@@ -25,7 +25,7 @@
             </div>
 
             <div class="field default-api-key-field is-hidden">
-                <label>Default API Key</label>
+                <label>Default API Key <span class="has-text-grey-light">&nbsp;(From File)</span></label>
                 <div class="control">
                     <code class="config-api-key-input"></code>
                     <span class="tag is-success config-api-key-input-tag is-hidden">IS ACTIVE</span>
@@ -49,7 +49,7 @@
             <!-- CUSTOM API KEY SECTION -->
             <!--Simple Input-->
             <div class="field">
-                <label>Custom API Key</label>
+                <label>Custom API Key <span class="from-url-notice has-text-grey-light is-hidden">&nbsp;(From URL)</span></label>
                 <div class="control has-validation">
                     <input type="text" class="input api-key-input">
                     <span class="tag is-success api-key-input-tag is-hidden">IS ACTIVE</span>
@@ -59,6 +59,32 @@
                         <span class="error-reason"></span>
                     </div>
                     <button class="button reset-api-key-button is-reversed-phantom primary-button is-hidden" onClick="clearCustomApiKey()">Reset</button>
+                    <div class="reset-url-message has-text-danger-dark has-text-left is-size-7">To reset this API Key, please remove it from the URL</div>
+                </div>
+            </div>
+            <div class="api-key-validity-notification content has-text-grey is-hidden">
+                <br>
+                <blockquote>
+                    <b class="has-text-grey-dark">IMPORTANT : </b><span class="">API Key must be valid and legitime to make this feature work properly. To enable your API key to be used here, please follow this <a href="https://github.com/gigya/cdc-starter-kit/blob/master/docs/advanced.md#3-use-your-own-api-key-in-the-online-demo-site" target="_blank"> instructions</a>.</span>
+                </blockquote>
+            </div>
+
+            <!-- CUSTOM SCREENSET PREFIX SECTION -->
+            <!--Simple Input-->
+            <div class="field screenset-prefix-field is-hidden">
+                <div class="api-key-validity-notification content has-text-grey">
+                    <br>
+                    <blockquote>
+                        <span class="has-text-grey"><b>Custom Screenset Prefix.</b> This parameter can be set only by url, and must be a valid screenset prefix ID to work</span>
+                    </blockquote>
+                </div>
+                <label>Custom Screenset Prefix <span class="from-url-notice has-text-grey-light is-hidden">&nbsp;(From URL)</span></label>
+                <div class="control">
+                    <input type="text" class="input screenset-prefix-input is-disabled has-text-success-dark">
+                    <div class="api-key-error-label label is-hidden">
+                        <b>Error: </b>
+                        <span class="error-reason"></span>
+                    </div>
                 </div>
             </div>
             <div class="api-key-validity-notification content has-text-grey is-hidden">

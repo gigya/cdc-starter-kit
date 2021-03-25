@@ -309,6 +309,9 @@ button {
   background-color: #e6f9e6;
   padding: 21px;
 }
+.navbar .navbar-item .button-apikey.dynamic-apikey.api-key-error {
+  background-color: #ff000033;
+}
 .navbar .provider-img {
   border: 2px solid #333;
   height: 30px!important;
@@ -458,6 +461,9 @@ ion-icon[class*='is-saml'] {
   margin-top: 10px;
   margin-left: 25px;
   font-weight: normal;
+}
+.change-api-key-modal .reset-url-message {
+  margin: 7px 0 0 10px;
 }
 .purchase-modal .header .price::before {
   content: '' !important;

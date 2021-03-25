@@ -32,9 +32,13 @@ const queryAll = document.querySelectorAll.bind(document);
 const logConfigFile = false; // Shows/hides config file into the console
 
 // -- 1. Logs Configuration
-var LOGS = true;
+var LOGS = false;
 var showLog = LOGS;
 var showEventsLog = LOGS;
+
+// -- 2. Sample Content
+var showSampleContent = true;
+
 
 // -- 2. User Global variable
 var currentUser = null;
@@ -59,35 +63,98 @@ function initDemoSite() {
 }
 
 /**
- * Loads the site UI using the configuration file coming as parameter, loading Gigya file at the end
+ * Loads the site UI using the configuration file coming as parameter, loading Gigya file at the end.
+ * If there are parameters in the query string, these are taken and overrides the ones in the file.
  * @param  {object} out the config from the file
  */
 function loadConfigFromFile(out) {
-    // Store config in window global (:-s)
+
+    // 0. Store config in window global (:-s)
     if (logConfigFile === true) {
         console.table(out);
     }
 
-    // Get proper language
+    // 1. Get proper language
     const storedLanguage = getLanguage();
     if (storedLanguage !== null) {
         out.lang = storedLanguage;
     }
 
-    // Store the exit of the file as a global object to be used along the site
+    // 2. Check if we have the dynamic ApiKey in the url. If yes, substitute in the url
+    const apiKeyFromQueryString = getFromQueryString("apiKey");
+    if (apiKeyFromQueryString && apiKeyFromQueryString !== null) {
+
+
+
+        const isValidApiKey = validateAPIKey(apiKeyFromQueryString);
+        log("VALID API Key ?" + isValidApiKey + "...", "BACKEND CALL RESPONSE");
+
+        // Checking validity status and modify the change api key button accordingly.
+        if (isValidApiKey === "OK") {
+
+            // Enable the button and show the proper class for the input text
+            out.apiKeyFromQueryString = apiKeyFromQueryString;
+
+        } else {
+            console.error("Invalid API Key. Loading default one...");
+            // Updating error label to reflect the error
+            setTimeout(function() {
+                const labelForApiKey = query('.navbar .button-apikey.dynamic-apikey');
+                if (labelForApiKey) {
+
+                    labelForApiKey.classList.add('api-key-error');
+                }
+            }, 1000);
+        }
+    }
+
+    // 3. Check if we have the dynamic Screenset in the url
+    const screensetPrefixFromQueryString = getFromQueryString("screensetPrefix");
+    if (screensetPrefixFromQueryString && screensetPrefixFromQueryString !== null) {
+        out.raas_prefix = screensetPrefixFromQueryString;
+    }
+
+    // 4. Check if we have the flag to show content into the page
+    const showSampleContentFromQueryString = getFromQueryString('showSampleContent');
+    if (showSampleContentFromQueryString && showSampleContentFromQueryString !== null) {
+        showSampleContent = showSampleContentFromQueryString === "true";
+    }
+
+    // 5. Check if we have the flag to show the logs into the page. If yes, override the default value
+    const showLogsFromQueryString = getFromQueryString('showLog');
+    if (showLogsFromQueryString && showLogsFromQueryString !== null) {
+        showLog = showLogsFromQueryString === "true";
+    }
+
+    // 6. Check if we have the flag to show the logs into the page. If yes, override the default value
+    const showEventLogsFromQueryString = getFromQueryString("showEventsLog");
+    if (showEventLogsFromQueryString && showEventLogsFromQueryString !== null) {
+        showEventsLog = showEventLogsFromQueryString === "true";
+    }
+
+    // 7. Store the exit of the file as a global object to be used along the site
     window.config = out;
     log("1. Load Configuration from file ", "GET ACCOUNT INFO");
 
     // Checking if we have api key in local storage
-    const apiKeyFromLocalStorage = localStorage.getItem("reload-with-apikey");
+    const apiKeyFromLocalStorage = getFromLocalStorage("reload-with-apikey");
+
+    // Loading (initially) api key from file
     var apiKey = out.apiKey;
 
-    // Loading api key from file
-    if (apiKeyFromLocalStorage && apiKeyFromLocalStorage !== null && apiKeyFromLocalStorage !== '') {
-        apiKey = apiKeyFromLocalStorage;
-    }
-    loadGigyaForApiKey(apiKey);
+    // Check if we have api key in the url
+    if (apiKeyFromQueryString && apiKeyFromQueryString !== null && apiKeyFromQueryString !== "") {
+        // We take the url of the query string and remove the dynamic one
+        // setInLocalStorage("reload-with-apikey", apiKeyFromQueryString);
+        apiKey = apiKeyFromQueryString;
+    } else {
 
+        if (apiKeyFromLocalStorage && apiKeyFromLocalStorage !== null && apiKeyFromLocalStorage !== "") {
+            apiKey = apiKeyFromLocalStorage;
+        }
+    }
+
+    loadGigyaForApiKey(apiKey);
 }
 
 /**
@@ -271,9 +338,7 @@ function increasePreviousLogins(user) {
     if (user.status !== "FAIL") {
         // Increment number of logins count.
         const previousLogins = (user.data.previousLogins || 0) + 1;
-        const recieveOfferAlerts = user.data.recieveOfferAlerts ?
-            user.data.recieveOfferAlerts :
-            false;
+        const recieveOfferAlerts = user.data.recieveOfferAlerts ? user.data.recieveOfferAlerts : false;
 
         //
         log("X. - Increase Previous logins...", "SET ACCOUNT INFO");
@@ -355,7 +420,7 @@ function changeAPIKey() {
     const apiKey = query(".change-api-key-modal .api-key-input").value;
 
     // Store api key in local storage and reload the page (it will load the new api key)
-    localStorage.setItem("reload-with-apikey", apiKey);
+    setInLocalStorage("reload-with-apikey", apiKey);
 
     // Reload page
     window.location.href = window.location.href;
@@ -402,7 +467,7 @@ function checkIfGigyaLoaded() {
     if (typeof gigya === 'undefined' || gigya.isReady === false) {
 
         // Clear wrong api key
-        const apiKeyFromLocalStorage = localStorage.getItem("reload-with-apikey");
+        const apiKeyFromLocalStorage = getFromLocalStorage("reload-with-apikey");
         if (apiKeyFromLocalStorage && apiKeyFromLocalStorage !== null && apiKeyFromLocalStorage !== '') {
             console.error('Invalid Api Key %c%s %c ... resetting to original state with api key %c%s', 'font-weight: bold;', apiKeyFromLocalStorage, 'font-weight: normal', 'font-weight: bold; color: #257942', config.apiKey);
             clearCustomApiKey();
@@ -426,7 +491,7 @@ function validateAPIKey(apiKey) {
     const id_token = '';
 
     // We make a SYNCHRONOUS url call (only few millis)
-    const baseDomainsForApiKey = gigya.partnerSettings.baseDomains;
+    const baseDomainsForApiKey = typeof gigya !== "undefined" ? gigya.partnerSettings.baseDomains : null;
     const validateAPIKeyUrl = `https://juan.gigya-cs.com/api/cdc-starter-kit/validate-apikey.php?apikey=${apiKey}&baseDomains=${baseDomainsForApiKey}&id_token=${id_token}`;
     var request = new XMLHttpRequest();
     request.open("GET", validateAPIKeyUrl, false); // `false` makes the request synchronous

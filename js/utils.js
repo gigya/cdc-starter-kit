@@ -8,6 +8,7 @@
  * - String / Date Helper Functions: Functions to deal with strings and thier conversions
  * - Gigya Helper Functions: Gigya related functions, basically to read info from the loaded file
  * - Log Functions:  Functions to log formatted messages for Gigya events and the main site actions.
+ * - Search Functions:  Functions to search and get paramteres from query string.
  *
  *
  * @link   https://github.com/gigya/cdc-starter-kit/blob/master/js/utils.js
@@ -164,7 +165,8 @@ function logEvents(eventName, methodName, show) {
         return;
     }
 
-    if (logEvents === true || show === true) {
+    // debugger;
+    if (showEventsLog === true /*|| show === true*/ ) {
         const title = window.config.menu_description;
         var backgroundColor = "#0089ff33";
         if (methodName) {
@@ -191,3 +193,43 @@ function logEvents(eventName, methodName, show) {
 }
 
 /** *****************************************************/
+
+
+/** *****************************************************/
+/*                  4. SEARCH FUNCTIONS                 */
+/** *****************************************************/
+/**
+ * Returns the value of the variable if exists into the query string in the url of the site.
+ * @param {string} variable the variable to search
+ * @returns {string} the value of the variable if found and null if not found
+ */
+function getFromQueryString(variable) {
+
+    // Take query string and make object
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has(variable)) {
+
+        if (urlParams.get(variable) !== '') {
+            return urlParams.get(variable);
+        }
+    }
+
+}
+
+/**
+ * Gets the variable (if exists) from the local storage
+ * @param {string} variable the name of the variable
+ * @param {object} value the value of the variable
+ */
+function getFromLocalStorage(variable) {
+    return localStorage.getItem(variable);
+}
+
+/**
+ * Sets the variable with the value in parameters into the local storage
+ * @param {string} variable the name of the variable
+ * @param {object} value the value of the variable
+ */
+function setInLocalStorage(variable, value) {
+    localStorage.setItem(variable, value);
+}

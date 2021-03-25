@@ -35,8 +35,13 @@ function renderNavbar(out) {
 
     setTimeout(function() {
         // Adding the colored background to the api key section if dinamically loaded
-        const apiKeyFromLocalStorage = localStorage.getItem("reload-with-apikey");
-        if (apiKeyFromLocalStorage && apiKeyFromLocalStorage !== null && apiKeyFromLocalStorage !== '') {
+        const apiKeyFromLocalStorage = getFromLocalStorage("reload-with-apikey");
+        const apiKeyFromQueryString = config.apiKeyFromQueryString;
+
+        // Modify the UI accordingly
+        const hasApiKeyFromLocalStorage = apiKeyFromLocalStorage && apiKeyFromLocalStorage !== null && apiKeyFromLocalStorage !== '';
+        const hasApiKeyFromQueryString = apiKeyFromQueryString && apiKeyFromQueryString !== null && apiKeyFromQueryString !== '';
+        if (hasApiKeyFromQueryString || hasApiKeyFromQueryString) {
             const apiKeyButtonInNavbar = query(".button-apikey");
             apiKeyButtonInNavbar.classList.add("dynamic-apikey");
         }
@@ -616,7 +621,7 @@ function setActiveLanguageFlag(config) {
  */
 function changeLanguage(language) {
     // set the language in local storage
-    localStorage.setItem("language", language);
+    setInLocalStorage("language", language);
 
     // Refresh the page
     location.href = location.href;
@@ -628,7 +633,7 @@ function changeLanguage(language) {
  */
 function getLanguage() {
     // get the language from local storage
-    return localStorage.getItem("language");
+    return getFromLocalStorage("language");
 }
 
 /**
@@ -680,61 +685,68 @@ function toggleLanguageDropDown() {
  * @param  {object} user The user object
  */
 function loadSampleContent(user) {
-    const sampleContent = query(".sample-content");
 
-    if (sampleContent) {
-        const isLogged = user ? true : false;
-        const path = isLogged ?
-            "./html/sample-content/ecommerce.html" :
-            "./html/sample-content/ecommerce-not-logged.html";
 
-        // Load template
-        fetch(path)
-            .then((res) => {
-                return res.text();
-            })
-            .then((out) => {
-                // compile the template
-                var template = Handlebars.compile(out);
+    // Check if we have the showSampleContent Enabled
+    if (showSampleContent === true) {
+        const sampleContent = query(".sample-content");
 
-                // execute the compiled template and print the output to the console
-                // Add config to the user element prior to compile (it will be used by the template) and compile
-                const user =
-                    currentUser && currentUser.status === "OK" ? currentUser : {};
-                user.config = config;
+        if (sampleContent) {
+            const isLogged = user ? true : false;
+            const path = isLogged ?
+                "./html/sample-content/ecommerce.html" :
+                "./html/sample-content/ecommerce-not-logged.html";
 
-                // Get price and fix currency if needed
-                let fixedCurrency = "$10000";
-                let classCurrency = "";
-                if (user.data && user.data.wallet.credits) {
-                    fixedCurrency =
-                        user.data.wallet.credits > 0 ?
-                        "$" + user.data.wallet.credits :
-                        "-$" + user.data.wallet.credits * -1;
-                    classCurrency = user.data.wallet.credits > 0 ? "" : "has-text-danger";
-                }
-                if (!user.data) {
-                    user.data = {};
-                }
-                user.data.fixedCurrency = fixedCurrency;
-                user.data.classCurrency = classCurrency;
+            // Load template
+            fetch(path)
+                .then((res) => {
+                    return res.text();
+                })
+                .then((out) => {
+                    // compile the template
+                    var template = Handlebars.compile(out);
 
-                const compiled = template(user);
-                sampleContent.innerHTML = compiled;
+                    // execute the compiled template and print the output to the console
+                    // Add config to the user element prior to compile (it will be used by the template) and compile
+                    const user =
+                        currentUser && currentUser.status === "OK" ? currentUser : {};
+                    user.config = config;
 
-                // Init the product buttons once content is loaded
-                initProductButtons(isLogged);
+                    // Get price and fix currency if needed
+                    let fixedCurrency = "$10000";
+                    let classCurrency = "";
+                    if (user.data && user.data.wallet.credits) {
+                        fixedCurrency =
+                            user.data.wallet.credits > 0 ?
+                            "$" + user.data.wallet.credits :
+                            "-$" + user.data.wallet.credits * -1;
+                        classCurrency =
+                            user.data.wallet.credits > 0 ? "" : "has-text-danger";
+                    }
+                    if (!user.data) {
+                        user.data = {};
+                    }
+                    user.data.fixedCurrency = fixedCurrency;
+                    user.data.classCurrency = classCurrency;
 
-                // Init tabs
-                initTabButtons();
+                    const compiled = template(user);
+                    sampleContent.innerHTML = compiled;
 
-                // Focus the body on the top
-                focusBody();
-            })
-            .catch((err) => {
-                return console.error(err);
-            });
+                    // Init the product buttons once content is loaded
+                    initProductButtons(isLogged);
+
+                    // Init tabs
+                    initTabButtons();
+
+                    // Focus the body on the top
+                    focusBody();
+                })
+                .catch((err) => {
+                    return console.error(err);
+                });
+        }
     }
+
 }
 
 /**
@@ -877,9 +889,14 @@ function initChangeApiKeyModal() {
     const changeApiKeyButton = query(".change-api-key-modal .change-api-key-button");
     const resetApiKeyButton = query(".change-api-key-modal .reset-api-key-button");
     const apiKeyErrorLabel = query(".change-api-key-modal .api-key-error-label");
+    const fromUrlNotice = query(".change-api-key-modal .from-url-notice");
+    const resetUrlMessage = query(".change-api-key-modal .reset-url-message");
 
-    const apiKeyFromLocalStorage = localStorage.getItem("reload-with-apikey");
-    apiKeyInput.value = apiKeyFromLocalStorage;
+    // Showing proper ApiKey (the one in the url takes precedence over the one in the localStorage)
+    const apiKeyFromLocalStorage = getFromLocalStorage("reload-with-apikey");
+    const apiKeyFromQueryString = config.apiKeyFromQueryString;
+    const screensetPrefixFromQueryString = getFromQueryString("screensetPrefix");
+    apiKeyInput.value = apiKeyFromQueryString ? apiKeyFromQueryString : apiKeyFromLocalStorage;
     configApiKeyInput.innerText = config.apiKey;
 
     // Hide the previous errors
@@ -887,17 +904,37 @@ function initChangeApiKeyModal() {
 
 
     // Modify the UI accordingly
-    if (apiKeyFromLocalStorage && apiKeyFromLocalStorage !== null && apiKeyFromLocalStorage !== '') {
+    const hasApiKeyFromLocalStorage = apiKeyFromLocalStorage && apiKeyFromLocalStorage !== null && apiKeyFromLocalStorage !== '';
+    const hasApiKeyFromQueryString = apiKeyFromQueryString && apiKeyFromQueryString !== null && apiKeyFromQueryString !== '';
+    const hasScreensetPrefixFromQueryString = screensetPrefixFromQueryString && screensetPrefixFromQueryString !== null && screensetPrefixFromQueryString !== '';
+    if (hasApiKeyFromLocalStorage || hasApiKeyFromQueryString) {
 
-        // Dynamic Loaded
-
+        // Dynamic Loaded. Common for both cases
         apiKeyInput.classList.add("has-text-success-dark");
         apiKeyInput.classList.add("active");
         apiKeyInputTag.classList.remove("is-hidden");
         configApiKeyInput.classList.add("is-disabled");
         configApiKeyInputTagDisabled.classList.remove("is-hidden");
-        resetApiKeyButton.classList.remove("is-hidden");
         defaultApiKeyField.classList.remove("is-hidden");
+
+        // Additional changes for API Key loaded from URL
+        if (hasApiKeyFromQueryString) {
+            fromUrlNotice.classList.remove("is-hidden");
+            resetUrlMessage.classList.remove("is-hidden");
+        } else {
+
+            resetApiKeyButton.classList.remove("is-hidden");
+
+        }
+
+        // Additions in the screen if the Screenset Prefix was added.
+        if (hasApiKeyFromQueryString) {
+            const screensetPrefixField = query('.screenset-prefix-field');
+            const screensetPrefixInput = query('.screenset-prefix-input');
+            screensetPrefixField.classList.remove("is-hidden");
+            screensetPrefixInput.value = config.raas_prefix;
+        }
+
     } else {
 
         // FROM FILE !!
@@ -940,7 +977,7 @@ function updateChangeApiKeyElementsStatus(event) {
     apiKeyErrorLabel.classList.add("is-hidden");
 
     // Compare with existing api keys and check if we must validate the incoming api key
-    const apiKeyFromLocalStorage = localStorage.getItem("reload-with-apikey");
+    const apiKeyFromLocalStorage = getFromLocalStorage("reload-with-apikey");
     if (apiKeyFromForm && apiKeyFromForm !== '' && apiKeyFromForm !== apiKeyFromLocalStorage && apiKeyFromForm !== config.apiKey) {
 
         log("Checking API Key validity against backend...", "BACKEND CALL");
