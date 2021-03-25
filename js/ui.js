@@ -929,6 +929,7 @@ function initChangeApiKeyModal() {
         if (hasApiKeyFromQueryString) {
             fromUrlNotice.classList.remove("is-hidden");
             resetUrlMessage.classList.remove("is-hidden");
+            changeApiKeyButton.classList.add("is-disabled");
         } else {
 
             resetApiKeyButton.classList.remove("is-hidden");
