@@ -470,8 +470,16 @@ function gotoUnloggedPage() {
  * Goes to the home page (defined in parameter 'main_url' inside config/site.json)
  */
 function gotoHome() {
-    // window.location.href = window.config.main_url.replace('http://', 'https://');
-    window.location.href = window.config.main_url;
+    const queryParamsAsString = getQueryParamsAsString();
+    window.location.href = window.config.main_url + queryParamsAsString;
+}
+
+/**
+ * Goes to the Edit page with the query url params attached if they are available
+ */
+function gotoEditPage() {
+    const queryParamsAsString = getQueryParamsAsString();
+    window.location.href = "edit-profile.html" + queryParamsAsString;
 }
 
 /** *****************************************************/

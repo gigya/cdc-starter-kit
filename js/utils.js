@@ -217,6 +217,14 @@ function getFromQueryString(variable) {
 }
 
 /**
+ *  It returns the url params of hte navigation bar
+ * @returns {string} the url params
+ */
+function getQueryParamsAsString() {
+    return window.location.search;
+}
+
+/**
  * Gets the variable (if exists) from the local storage
  * @param {string} variable the name of the variable
  * @param {object} value the value of the variable
