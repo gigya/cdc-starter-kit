@@ -80,18 +80,26 @@ function loadConfigFromFile(out) {
         out.lang = storedLanguage;
     }
 
+    log("2. Check URL Params  ");
+    // After having the initial configuration, we check if we have params that will override these properties.
+    // Properties accepted by the app are:
+    //
+    //      -  apiKey
+    //      - screensetPrefix
+    //      - showLog
+    //      - showEventsLog
+    //      - showSampleContent
+
     // 2. Check if we have the dynamic ApiKey in the url. If yes, substitute in the url
     const apiKeyFromQueryString = getFromQueryString("apiKey");
     var isValidApiKey = false;
     if (apiKeyFromQueryString && apiKeyFromQueryString !== null) {
 
-
-
-        isValidApiKey = validateAPIKey(apiKeyFromQueryString);
+        isValidApiKey = validateAPIKey(apiKeyFromQueryString) === "OK";
         log("VALID API Key ?" + isValidApiKey + "...", "BACKEND CALL RESPONSE");
 
         // Checking validity status and modify the change api key button accordingly.
-        if (isValidApiKey === "OK") {
+        if (isValidApiKey === true) {
 
             // Enable the button and show the proper class for the input text
             out.apiKeyFromQueryString = apiKeyFromQueryString;
@@ -133,10 +141,7 @@ function loadConfigFromFile(out) {
         showEventsLog = showEventLogsFromQueryString === "true";
     }
 
-    // 7. Store the exit of the file as a global object to be used along the site
-    window.config = out;
-    log("1. Load Configuration from file ", "GET ACCOUNT INFO");
-
+    // API KEY + GIGYA LOAD SECTION
     // Checking if we have api key in local storage
     const apiKeyFromLocalStorage = getFromLocalStorage("reload-with-apikey");
 
@@ -148,6 +153,7 @@ function loadConfigFromFile(out) {
         // We take the url of the query string and remove the dynamic one
         // setInLocalStorage("reload-with-apikey", apiKeyFromQueryString);
         apiKey = apiKeyFromQueryString;
+        // out.apiKey = apiKeyFromQueryString;
     } else {
 
         if (apiKeyFromLocalStorage && apiKeyFromLocalStorage !== null && apiKeyFromLocalStorage !== "") {
@@ -155,6 +161,10 @@ function loadConfigFromFile(out) {
         }
     }
 
+    // 7. Store the exit of the file as a global object to be used along the site
+    window.config = out;
+    // debugger;
+    log("3. Load Gigya for api key: " + apiKey, "LOAD GIGYA FILE");
     loadGigyaForApiKey(apiKey);
 }
 
@@ -401,119 +411,3 @@ function deleteCurrentAccount() {
         },
     });
 }
-
-/** *****************************************************/
-//            6. DYNAMIC API Key FUNCTIONS
-/** *****************************************************/
-
-/**
- * Changes the API key of the site, writing into the local storage the value of this new API Key and reloading the page.
- */
-function changeAPIKey() {
-    //
-    log("X. - Changing API KEy.... ", "RELOAD ALL PAGE");
-
-    // Show the loading button
-    const changeAPIKeyButton = query(".change-api-key-modal .modal-card-foot .change-api-key-button");
-    changeAPIKeyButton.classList.add("is-loading");
-
-    // Take the api key
-    const apiKey = query(".change-api-key-modal .api-key-input").value;
-
-    // Store api key in local storage and reload the page (it will load the new api key)
-    setInLocalStorage("reload-with-apikey", apiKey);
-
-    // Reload page
-    window.location.href = window.location.href;
-
-
-}
-
-/**
- * Loads dynamically into the body of the page the Gigya WebSDK Js file for the incoming API Key.
- * @param {string} apiKey Gigya API Key
- */
-function loadGigyaForApiKey(apiKey) {
-
-    // Adding new Gigya script from parameters
-    log("2. Load Gigya File with apiKey " + apiKey, "LOAD GIGYA FILE");
-
-    var newScript = document.createElement('script');
-    newScript.setAttribute('src', 'https://cdns.gigya.com/js/gigya.js?apikey=' + apiKey);
-    document.body.appendChild(newScript);
-
-    // Check if loaded properly, if don't, delete the localstorage param and reload the page again
-    setTimeout(checkIfGigyaLoaded, 1000);
-}
-
-/**
- * Clears custom api key from local storage and reloads the page with the default one
- */
-function clearCustomApiKey() {
-
-    // Show the loading button
-    const resetAPIKeyButton = query(".change-api-key-modal .reset-api-key-button");
-    if (resetAPIKeyButton) {
-        resetAPIKeyButton.classList.add("is-loading");
-    }
-
-    localStorage.removeItem("reload-with-apikey");
-    window.location.href = window.location.href;
-}
-
-/**
- * Check if loaded properly, if don't, delete the localstorage param and reload the page again
- */
-function checkIfGigyaLoaded() {
-    if (typeof gigya === 'undefined' || gigya.isReady === false) {
-
-        // Clear wrong api key
-        const apiKeyFromLocalStorage = getFromLocalStorage("reload-with-apikey");
-        if (apiKeyFromLocalStorage && apiKeyFromLocalStorage !== null && apiKeyFromLocalStorage !== '') {
-            console.error('Invalid Api Key %c%s %c ... resetting to original state with api key %c%s', 'font-weight: bold;', apiKeyFromLocalStorage, 'font-weight: normal', 'font-weight: bold; color: #257942', config.apiKey);
-            clearCustomApiKey();
-        }
-
-    }
-}
-
-/**
- * Validates (Via backend) the incoming API Key. If the backend call is broken, it degrades to a valid API Key, that it will fail later when it's tried to be loaded.
- * @param {string} apiKey the API Key to validate
- * @returns {boolean} Validity of the API Key
- */
-function validateAPIKey(apiKey) {
-
-    var validApiKeyResponse = "";
-    //
-    log("X. - Validating api key " + apiKey + "... ", "BACKEND CALL");
-
-    // TODO Include this as part of the call!
-    const id_token = '';
-
-    // We make a SYNCHRONOUS url call (only few millis)
-    const baseDomainsForApiKey = typeof gigya !== "undefined" ? gigya.partnerSettings.baseDomains : null;
-    const validateAPIKeyUrl = `https://juan.gigya-cs.com/api/cdc-starter-kit/validate-apikey.php?apikey=${apiKey}&baseDomains=${baseDomainsForApiKey}&id_token=${id_token}`;
-    var request = new XMLHttpRequest();
-    request.open("GET", validateAPIKeyUrl, false); // `false` makes the request synchronous
-
-    try {
-        request.send(null);
-    } catch (error) {
-        // console.log('isInvalid URL');
-    }
-
-    if (request.status === 200) {
-        validApiKeyResponse = request.responseText;
-        // console.log(validApiKeyResponse);
-        log("Is this a valid api key ? : " + validApiKeyResponse);
-
-    } else {
-
-        // If for whatever reason is broken, we send true (no backend validation)
-        validApiKeyResponse = "OK";
-    }
-    return validApiKeyResponse;
-}
-
-/** *****************************************************/

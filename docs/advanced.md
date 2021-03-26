@@ -45,6 +45,7 @@ This section shows the project file structure with a brief explanation of the ma
 │   ├── ui.js
 │   ├── utils.js
 │   ├── gigya-raas.js
+│   ├── dynamic-apikey.js
 │   └── main.js
 |
 ├── less
@@ -73,8 +74,8 @@ This section shows the project file structure with a brief explanation of the ma
 3. __docs__: This set of docs.
 4. __html__: Main HTML content of the site. The navigation bar and logged sample content it's stored here.
 5. __img__: It contains all the images for the project.
-6. __js__: It contains the files with the logic of the site. It has a specific file for Gigya functions (gigya-raas.js), another one to make the site demo work (engine.js), and a last one (main.js), that will start all the process.
-7. __less__: css files are automatically generated using these less files as source. Using a proper plugin, any modification over these files will generate a new css set of files in the /css folder.
+6. __js__: It contains the files with the logic of the site. It has a specific file for Gigya functions (gigya-raas.js), and other set of files  to make the site demo work (like engine.js or ui.js), and a last one (main.js), that will start all the process.
+7. __less__: All style files are automatically generated using these less files as source. Using a proper plugin, any modification over these files will generate a new css set of files in the /css folder.
 8. __index.html__: This is the main page of the site. It contains all the elements needed to manage both logged and not logged states for the user.
 9. __edit-profile.html__: The edit profile page. This page will be shown only for logged in users, being redirected to the index.html page when the user's session is not present.
 10. __Other files__: The rest of the files are or README files, or editor configuration files, like the .eslintrc.js. Git files are also there, and they can all be removed, and the project will work as expected.
@@ -218,6 +219,8 @@ The ```edit-profile.html``` page it's very similar to this one, except for the f
 The project uses vanilla javascript  for all their interactions, although it uses [handlebars](https://handlebars.org) as template engine to simplify the pages and make them more meaningful. There are three main files that manage all the website:
 
 1. **gigya-raas.js**: This file contains all typical gigya functions in a RaaS process. You will find here the triggers for the login, the registration, or the reset password process. __This is the file you want to copy in your project to have a set of default gigya functions__.
+
+1. **dynamic-apikey.js**: This file contains some specific logic to be able to switch between api keys in realtime. __This file is not needed for a regular gigya implementation__, although it's interesting to understand how to load dinamically Gigya api keys into a site.
 
 1. **ui.js**: This file contains all the logic related to the UI stuff, like re-painting the screen, dealing with popups, etc.
 
