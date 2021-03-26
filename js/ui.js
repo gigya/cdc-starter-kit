@@ -893,6 +893,7 @@ function initChangeApiKeyModal() {
     const apiKeyInputTagDisabled = query(".change-api-key-modal .api-key-input-tag-disabled");
     const defaultApiKeyField = query(".change-api-key-modal .default-api-key-field");
     const apiKeyValidityNotification = query(".change-api-key-modal .api-key-validity-notification");
+    const changeApiKeyExplanations = queryAll(".change-api-key-modal .change-api-key-explanation");
 
     const changeApiKeyButton = query(".change-api-key-modal .change-api-key-button");
     const resetApiKeyButton = query(".change-api-key-modal .reset-api-key-button");
@@ -923,16 +924,19 @@ function initChangeApiKeyModal() {
         apiKeyInputTag.classList.remove("is-hidden");
         configApiKeyInput.classList.add("is-disabled");
         configApiKeyInputTagDisabled.classList.remove("is-hidden");
-        defaultApiKeyField.classList.remove("is-hidden");
 
         // Additional changes for API Key loaded from URL
         if (hasApiKeyFromQueryString) {
             fromUrlNotice.classList.remove("is-hidden");
             resetUrlMessage.classList.remove("is-hidden");
             changeApiKeyButton.classList.add("is-disabled");
+            changeApiKeyExplanations.forEach(element => {
+                element.classList.add("is-hidden");
+            });
         } else {
 
             resetApiKeyButton.classList.remove("is-hidden");
+            defaultApiKeyField.classList.remove("is-hidden");
 
         }
 

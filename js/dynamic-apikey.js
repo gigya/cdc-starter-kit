@@ -137,4 +137,15 @@ function validateAPIKey(apiKey) {
     return validApiKeyResponse;
 }
 
+/**
+ * Disables the button to show the API key popup because of an error
+ */
+function disableChangeApiKeyButton() {
+    const labelForApiKey = query('.navbar .button-apikey');
+    if (labelForApiKey) {
+        labelForApiKey.classList.add("api-key-error");
+        labelForApiKey.style.pointerEvents = "none";
+        labelForApiKey.setAttribute("aria-label", "Please, fix the API Key in the url");
+    }
+}
 /** *****************************************************/
