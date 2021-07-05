@@ -82,13 +82,13 @@ function renderMainSiteData(config) {
     const datacenterSpan = query(".span-datacenter");
 
     for (const siteTitle of siteTitles) {
-        siteTitle.innerText = siteTitle.innerText.replaceAll(
+        siteTitle.innerText = siteTitle.innerText.replace(
             "{{Title}}",
             config.site_title
         );
     }
     for (const siteDescription of siteDescriptions) {
-        siteDescription.innerText = siteDescription.innerText.replaceAll(
+        siteDescription.innerText = siteDescription.innerText.replace(
             "{{Description}}",
             config.site_description
         );
@@ -174,17 +174,17 @@ function showLoggedHTML(user) {
     const lastLoginUserFriendlyDate = prettyDate(user.lastLogin);
 
     for (const siteTitle of siteTitles) {
-        siteTitle.innerText = siteTitle.innerText.replaceAll(
+        siteTitle.innerText = siteTitle.innerText.replace(
             "{{Username}}",
             username
         );
     }
     for (const siteTitle of siteTitles) {
-        siteTitle.innerText = siteTitle.innerText.replaceAll("{{Again}}", again);
+        siteTitle.innerText = siteTitle.innerText.replace("{{Again}}", again);
     }
 
     for (const siteDescription of siteDescriptions) {
-        siteDescription.innerText = siteDescription.innerText.replaceAll(
+        siteDescription.innerText = siteDescription.innerText.replace(
             "{{Last Login}}",
             lastLoginUserFriendlyDate
         );
@@ -583,7 +583,7 @@ function setActiveLanguageFlag(config) {
     /* SET CORRECT FLAG IN FUNCTION OF LANGUAGE */
 
     // Set language name from language code
-    const lang = config.lang.replaceAll("-inf", "");
+    const lang = config.lang.replace("-inf", "");
     if (Intl.DisplayNames) {
         languageNames = new Intl.DisplayNames([lang], { type: "language" });
         langName = capitalize(languageNames.of(lang));

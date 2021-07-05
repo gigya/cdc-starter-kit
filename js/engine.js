@@ -34,7 +34,7 @@ const logConfigFile = false; // Shows/hides config file into the console
 // -- 1. Logs Configuration
 var LOGS = false;
 var showLog = LOGS;
-var showEventsLog = LOGS;
+let showEventsLog = LOGS;
 
 // -- 2. Sample Content
 var showSampleContent = true;
