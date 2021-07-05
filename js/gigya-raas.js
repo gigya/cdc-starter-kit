@@ -203,6 +203,7 @@ function onSubmit(event) {}
  */
 function onLogin(response) {
     log("4 - On Login!", "GET ACCOUNT INFO");
+    console.log(response);
     // Get the user information, redirecting if needed to the logged in page
     if (response.profile !== null) {
         gigya.accounts.getAccountInfo({ include: 'emails, profile, data, preferences', callback: initPage });
