@@ -34,17 +34,11 @@ Now that we have a site in Gigya, we can include it in a web project. To do it:
 git clone https://github.com/gigya/cdc-starter-kit my-cdc-demo-app
 ```
 
-1. Look for the line below and change the placeholder **__API_KEY__** inside ```index.html``` and  ```edit-profile.html``` files, commenting or removing the example provided by default.
+2. Open the file ```config/site.json``` and look for the **apiKey** parameter, and substitute the sample API Key provided by default with your own value.
 
+3. Navigate to ```http://localhost/my-cdc-demo-app```
 
-```html
-<script type="text/javascript" lang="javascript" src="https://cdns.gigya.com/js/gigya.js?apikey=__API_KEY__"></script>
-```
-
-
-1. Navigate to ```http://localhost/my-cdc-demo-app```
-
-1. Enjoy!
+4. Enjoy!
 
 ## 3. Next steps
 
