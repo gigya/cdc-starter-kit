@@ -5,38 +5,47 @@
   display: flex;
   justify-content: center;
 }
+
 .flex-lefted-container {
   align-content: center;
   align-items: center;
   display: flex;
   justify-content: left;
 }
+
 .flex-righted-container {
   align-content: center;
   align-items: center;
   display: flex;
   justify-content: right;
 }
+
 .bordered {
   border: 2px solid red;
 }
+
 .outlined {
   outline: 2px solid red;
 }
+
 .uppercased {
   text-transform: uppercase;
 }
+
 .is-fullwidth {
-  width: 100%!important;
+  width: 100% !important;
 }
+
 .blink_me {
   animation: blinker 1.5s ease-in-out infinite;
 }
+
 @keyframes blinker {
   50% {
     opacity: 0;
   }
 }
+
 /* 0. Global Site Properties */
 html {
   background: #F2F6FA;
@@ -45,33 +54,40 @@ html {
   background-position: center 91px;
   scroll-behavior: smooth;
 }
+
 html,
 body {
   font-family: 'Questrial', sans-serif !important;
-  font-size: 14px!important;
+  font-size: 14px !important;
   font-weight: 300;
 }
+
 /* 1. Layout */
 a {
-  font-size: 14px!important;
+  font-size: 14px !important;
   text-decoration: none;
 }
+
 a:hover {
   text-decoration: underline;
 }
+
 button {
-  font-size: 16px!important;
+  font-size: 16px !important;
   font-family: 'Questrial', sans-serif;
 }
+
 .sections {
   margin-top: 60px;
 }
+
 /* HINT CSS FIXES */
 [class*=hint--][aria-label]:after {
   font-weight: normal;
   font-size: 14px;
   padding: 12px;
 }
+
 #gigya_actions_placeholder button {
   width: 100%;
   align-content: center;
@@ -79,19 +95,21 @@ button {
   display: flex;
   justify-content: center;
 }
+
 /* GIGYA SCREENSET FIXES */
 .gigya-screen-caption {
   color: #999 !important;
   text-align: center;
-  width: 100%!important;
+  width: 100% !important;
   font-family: 'Questrial', sans-serif !important;
-  padding: 0!important;
-  margin-top: 50px!important;
-  padding-bottom: 20px!important;
+  padding: 0 !important;
+  margin-top: 50px !important;
+  padding-bottom: 20px !important;
   margin-bottom: -30px !important;
   border-bottom-color: #f1f1f1 !important;
   font-size: 1.4em !important;
 }
+
 /* - DEMO SITE - */
 /* 0. CONTAINER */
 .hero {
@@ -99,6 +117,7 @@ button {
   /* MESSAGE BOX */
   /* Logged Sample Content (Overwriting core.css)*/
 }
+
 .hero .hero-body {
   flex-grow: 1;
   flex-shrink: 0;
@@ -107,12 +126,14 @@ button {
   -webkit-transition: filter 1s;
   transition: filter 1s;
 }
+
 .hero .hero-body.blurred {
   display: none;
   -webkit-transition: filter 1s;
   transition: filter 1s;
   filter: blur(1px);
 }
+
 .hero .hero-body.blurred::after {
   content: "Logging out...";
   background-color: #FFBA10;
@@ -134,20 +155,24 @@ button {
   transform: translate3d(-50%, -50%, 0);
   width: 40px;
 }
+
 .hero section.header img.site-logo {
   display: inline-block;
   top: 7px;
   left: -15px;
   position: relative;
 }
+
 .hero section.header h3.site-title {
   display: inline-block;
   margin-top: 35px;
 }
+
 .hero section.header .login-hr {
   margin: 0.1rem 0;
   background: transparent;
 }
+
 .hero .box {
   margin-top: 5rem;
   max-height: 2000px;
@@ -157,13 +182,17 @@ button {
   position: relative;
   z-index: 1;
 }
+
 .hero .box .gigya-placeholder {
   overflow-x: auto;
+  max-width: 90vw;
 }
+
 .hero .box .avatar {
   margin-top: -70px;
   margin-bottom: -40px;
 }
+
 .hero .box .avatar img {
   padding: 10px;
   background: #fff;
@@ -172,11 +201,13 @@ button {
   -webkit-box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
   box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
 }
+
 .hero .message {
   width: 50%;
   margin-left: 25%;
   /* border: 1px solid red; */
 }
+
 .hero .message.logged {
   /*float: right;*/
   /* background: beige; */
@@ -184,22 +215,27 @@ button {
   /* top: 120px; */
   position: relative;
 }
+
 .hero .view-wrapper {
   padding: 0px;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
 }
+
 .hero .hero-foot {
   margin: 20px;
 }
+
 .hero .hero-foot .gigya-demo-link {
   text-decoration: none;
   margin: 0 5px;
   opacity: 0.65;
 }
+
 .hero .hero-foot .gigya-demo-link:hover {
   opacity: 1;
 }
+
 /* 1. NAVBAR */
 .navbar,
 .navbar-end,
@@ -208,21 +244,26 @@ button {
   align-items: stretch;
   display: flex;
 }
+
 .navbar {
-  background: white!important;
+  background: white !important;
   /* Logged Image user */
   /* Language */
   /* Flag Dropdown */
 }
+
 .navbar .navbar-item:not(.is-icon):hover {
   height: auto;
 }
+
 .navbar .navbar-brand {
   height: auto;
 }
+
 .navbar .navbar-brand a {
   text-decoration: none;
 }
+
 .navbar .navbar-brand .site-title,
 .navbar .navbar-brand .menu-description {
   margin-left: 25px;
@@ -231,12 +272,15 @@ button {
   color: #999;
   margin-right: 20px;
 }
+
 .navbar .navbar-brand img {
   width: auto;
 }
+
 .navbar .navbar-menu {
-  background: white!important;
+  background: white !important;
 }
+
 .navbar .navbar-item.is-account img {
   height: 20px;
   width: 20px;
@@ -245,10 +289,12 @@ button {
   margin-top: 0px;
   margin-left: 0px;
 }
+
 .navbar .navbar-item .user-image {
   position: relative;
   top: 3px;
 }
+
 .navbar .navbar-item .user-image .indicator {
   display: block;
   position: absolute;
@@ -260,18 +306,22 @@ button {
   border: 2px solid #fff;
   background: #1fb91f !important;
 }
+
 .navbar .navbar-item.is-separator {
   opacity: 0.4;
   cursor: default;
 }
+
 .navbar .navbar-item .button {
   width: auto;
   background: transparent;
 }
+
 .navbar .navbar-item .button.is-white.is-focused:not(:active),
 .navbar .navbar-item .button.is-white:focus:not(:active) {
   box-shadow: none;
 }
+
 .navbar .navbar-item .span-apikey,
 .navbar .navbar-item .span-datacenter,
 .navbar .navbar-item .span-previous-logins,
@@ -280,6 +330,7 @@ button {
   font-size: 0.7em;
   padding: 0 10px;
 }
+
 .navbar .navbar-item .icon-link,
 .navbar .navbar-item .button-datacenter,
 .navbar .navbar-item .button-apikey,
@@ -287,6 +338,7 @@ button {
 .navbar .navbar-item .button-user-info {
   opacity: 0.8;
 }
+
 .navbar .navbar-item .icon-link.hint--medium::after,
 .navbar .navbar-item .button-datacenter.hint--medium::after,
 .navbar .navbar-item .button-apikey.hint--medium::after,
@@ -298,6 +350,7 @@ button {
   white-space: pre-wrap;
   word-break: break-all;
 }
+
 .navbar .navbar-item .icon-link:hover,
 .navbar .navbar-item .button-datacenter:hover,
 .navbar .navbar-item .button-apikey:hover,
@@ -305,20 +358,24 @@ button {
 .navbar .navbar-item .button-user-info:hover {
   opacity: 1;
 }
+
 .navbar .navbar-item .button-apikey.dynamic-apikey {
   background-color: #e6f9e6;
   padding: 21px;
 }
+
 .navbar .navbar-item .button-apikey.api-key-error {
   padding: 21px;
   background-color: #ff000033;
 }
+
 .navbar .provider-img {
   border: 2px solid #333;
-  height: 30px!important;
-  width: 30px!important;
-  max-height: 30px!important;
+  height: 30px !important;
+  width: 30px !important;
+  max-height: 30px !important;
 }
+
 .navbar .flag-icon {
   border: 2px solid #555 !important;
   background-size: cover;
@@ -327,6 +384,7 @@ button {
   height: 1.5em;
   text-indent: 20px;
 }
+
 .navbar .language-dropdown .dropdown-menu {
   max-height: 400px;
   overflow: auto;
@@ -336,29 +394,36 @@ button {
   width: 10px;
   top: 64px;
 }
+
 .navbar .language-dropdown .dropdown-menu .dropdown-item:hover .flag-icon {
   font-weight: bold;
 }
+
 .navbar-menu {
   display: none;
 }
+
 .navbar-menu.is-opened {
   display: flex;
   justify-content: flex-end;
 }
+
 .navbar-menu.is-opened .flag-icon {
   margin-top: 8px;
 }
+
 @media screen and (min-width: 1024px) {
   .navbar-menu {
     display: flex;
   }
 }
+
 ion-icon {
   font-size: 24px;
   color: #999;
   pointer-events: none;
 }
+
 ion-icon.social-provider-icon {
   padding: 5px;
   color: whitesmoke !important;
@@ -366,39 +431,49 @@ ion-icon.social-provider-icon {
   border-radius: 5px;
   box-shadow: 0px 0px 5px #ccc;
 }
+
 ion-icon.is-site {
   background: #f1ab2b !important;
 }
+
 ion-icon.is-apple {
   background: #333 !important;
 }
+
 ion-icon.is-amazon {
   background: #333 !important;
   color: #febd69 !important;
 }
+
 ion-icon[class*='is-saml'] {
   color: #f1ab2b !important;
 }
+
 .icon-link:hover ion-icon {
   color: whitesmoke !important;
 }
+
 .icon-link.is-active ion-icon {
   color: whitesmoke !important;
 }
+
 /* 2. MODALS*/
 .loading-modal,
 .logging-out-modal {
-  z-index: 20!important;
+  z-index: 20 !important;
   top: 57px;
 }
+
 .loading-modal .modal-background,
 .logging-out-modal .modal-background {
   background-color: #f4f4f4;
 }
+
 .loading-modal .modal-content,
 .logging-out-modal .modal-content {
   animation: blinker 1.5s ease-in-out infinite;
 }
+
 .change-api-key-modal .change-apikey-icon {
   position: relative;
   top: 4px;
@@ -406,6 +481,7 @@ ion-icon[class*='is-saml'] {
   font-size: 1.7rem;
   margin-bottom: -4px;
 }
+
 .change-api-key-modal .api-key-input {
   display: inline-block;
   width: 471px;
@@ -413,23 +489,29 @@ ion-icon[class*='is-saml'] {
   text-size-adjust: auto;
   padding: 0 0px 0 8px;
 }
+
 .change-api-key-modal .api-key-input.active {
   width: 513px;
 }
+
 .change-api-key-modal .config-api-key-input {
   color: #49a949;
 }
+
 .change-api-key-modal .config-api-key-input.is-disabled {
   color: #666 !important;
 }
+
 .change-api-key-modal .api-key-input-tag,
 .change-api-key-modal .api-key-input-tag-disabled {
   margin-top: 7px;
   margin-left: 4px;
 }
+
 .change-api-key-modal .modal-card-foot {
   justify-content: space-between;
 }
+
 .change-api-key-modal .reset-api-key-button {
   font-size: 1rem !important;
   padding: 0 5px 0;
@@ -438,23 +520,29 @@ ion-icon[class*='is-saml'] {
   margin-top: 10px;
   display: block;
 }
+
 .change-api-key-modal .reset-api-key-button:hover {
   color: whitesmoke !important;
 }
+
 .change-api-key-modal .content blockquote {
   background-color: transparent !important;
 }
+
 .change-api-key-modal .field .control {
   text-align: center;
 }
+
 .change-api-key-modal .field label {
   margin: 5px 20px;
   display: block;
   font-weight: bold;
 }
+
 .change-api-key-modal .control.has-validation.has-success input {
   border-color: #49a949 !important;
 }
+
 .change-api-key-modal .api-key-error-label {
   color: #EF6565;
   font-size: 0.8rem !important;
@@ -463,42 +551,54 @@ ion-icon[class*='is-saml'] {
   margin-left: 25px;
   font-weight: normal;
 }
+
 .change-api-key-modal .reset-url-message {
   margin: 7px 0 0 10px;
 }
+
 .purchase-modal .header .price::before {
   content: '' !important;
 }
+
 .purchase-modal .button {
   text-decoration: none !important;
 }
+
 .purchase-modal .button span {
   margin-right: 0 !important;
 }
+
 .purchase-modal .modal-card-body {
   min-height: 200px;
 }
+
 .purchase-modal .modal-card-body .quickview-trigger {
   display: none;
 }
+
 .purchase-modal .modal-card-body .product-image img {
   display: block;
   margin: 0 auto;
 }
+
 .purchase-modal .modal-card-body .product-info h3 {
   font-weight: bold;
 }
+
 .purchase-modal .modal-card-body .left {
   position: absolute;
   right: 28px;
   bottom: 110px;
 }
+
 .purchase-modal .modal-card-body .right {
   float: right;
 }
+
 .purchase-modal .modal-card-body .right a {
   display: none;
 }
+
 .purchase-modal .modal-card-foot button svg {
   border: 0px solid red;
   float: left;
@@ -506,6 +606,7 @@ ion-icon[class*='is-saml'] {
   left: 0;
   margin-left: 10px;
 }
+
 .delete-icon {
   position: relative;
   top: 4px;
@@ -513,12 +614,14 @@ ion-icon[class*='is-saml'] {
   margin-right: 7px;
   font-size: 1.5rem;
 }
+
 /* 3. SAMPLE CONTENT COMPONENTS */
 .store-block img {
   background: white;
   box-shadow: 1px 1px 10px #ddd;
   padding: 10px;
 }
+
 .overlay-products {
   z-index: 0;
   display: block;
@@ -531,6 +634,7 @@ ion-icon[class*='is-saml'] {
   opacity: 1.5;
   pointer-events: none;
 }
+
 .overlay-products .columns {
   border: 2px solid red;
   position: absolute;
@@ -538,44 +642,56 @@ ion-icon[class*='is-saml'] {
   width: 100%;
   text-align: center;
 }
+
 .product-actions .button {
   text-decoration: none !important;
 }
+
 .store-block .store-meta h3 {
   color: #7a7a7a !important;
 }
+
 .store-block .store-meta .has-golden-color {
   color: #dcba01;
 }
+
 .store-block .store-meta .has-standard-color {
   color: #428bca;
   line-height: 1.2 rem;
 }
+
 .activity-block .stat-number {
   color: #7a7a7a;
 }
+
 .sample-content.sample-content-not-logged {
   margin-bottom: -150px;
 }
+
 .sample-content.sample-content-not-logged .has-text-danger-dark {
   opacity: 0.5;
   line-height: 1.2rem;
   position: relative;
 }
+
 .sample-content.sample-content-not-logged .store-meta h3 {
   margin-bottom: 4px;
 }
+
 .sample-content.sample-content-logged .store-meta h3 {
   margin-bottom: 4px;
 }
+
 .sample-content.sample-content-logged .store-meta span {
   line-height: 1.2rem;
 }
+
 /* 5. EDIT PROFILE */
 .is-divider[data-content="GOLDEN BENEFITS"]:after {
   font-weight: bold;
   color: #dcba01 !important;
 }
+
 .is-divider[data-content="STANDARD BENEFITS"]:after {
   font-weight: bold;
   color: #428bca !important;

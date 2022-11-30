@@ -90,7 +90,7 @@ function loginWithRaaS(containerID, onAfterScreenLoadIfDefined) {
         containerID,
 
         // Events..
-        onAfterScreenLoad: onAfterScreenLoadIfDefined,
+        // onAfterScreenLoad: onAfterScreenLoadIfDefined,
     });
 
     /* Actions associated to events */
@@ -177,7 +177,7 @@ function logoutWithRaaS(callBackFunction) {
  * A reference to a function that will be called before a new screen is rendered.
  * @param  {object} event Form Event object
  */
-function onAfterScreenLoad(event) {}
+function onAfterScreenLoad(event) { }
 
 /**
  * Event handler function that will be called before a form is submitted.
@@ -192,7 +192,7 @@ function onBeforeSubmit(event) {
  * Event handler function that will be called when a form is submitted.
  * @param  {object} event Form Event object
  */
-function onSubmit(event) {}
+function onSubmit(event) { }
 
 /** **************************************************/
 //       GIGYA GLOBAL EVENT FUNCTIONS
