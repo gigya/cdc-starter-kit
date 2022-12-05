@@ -7,7 +7,7 @@
 SAP Customer Data Cloud (SAP CDC) Starter Kit is a simple front-end template for building
 fast, robust, and adaptable web apps or sites, including SAP CDC capabilities.
 
-The project includes a demo website with the most common user flows, like registration, login, profile update, reset password, etc. All these flows are offered OOTB using SAP CDC [Screensets](https://developers.gigya.com/display/GD/Screen-Sets), and only using **HTML**, **CSS** and **JS**.
+The project includes a demo website with the most common user flows, like registration, login, profile update, reset password, etc. All these flows are offered OOTB using SAP Customer Data Cloud [Screen-Sets](https://developers.gigya.com/display/GD/Screen-Sets), and only using **HTML**, **CSS** and **JS**.
 
 * Homepage: [https://github.com/gigya/cdc-starter-kit](https://github.com/gigya/cdc-starter-kit)
 * Source: [https://github.com/gigya/cdc-starter-kit](https://github.com/gigya/cdc-starter-kit)
