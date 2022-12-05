@@ -7,7 +7,7 @@
 SAP Customer Data Cloud (SAP CDC) Starter Kit is a simple front-end template for building
 fast, robust, and adaptable web apps or sites, including SAP CDC capabilities.
 
-The project includes a demo website with the most common user flows, like registration, login, profile update, reset password, etc. All these flows are offered OOTB using SAP CDC [Screensets](https://developers.gigya.com/display/GD/Screen-Sets), and only using **HTML**, **CSS** and **JS**.
+The project includes a demo website with the most common user flows, like registration, login, profile update, reset password, etc. All these flows are offered OOTB using SAP Customer Data Cloud [Screen-Sets]([https://developers.gigya.com/display/GD/Screen-Sets](https://help.sap.com/docs/SAP_CUSTOMER_DATA_CLOUD/8b8d6fffe113457094a17701f63e3d6a/416fc0d470b21014bbc5a10ce4041860.html)), and only using **HTML**, **CSS** and **JS**.
 
 * Homepage: [https://github.com/gigya/cdc-starter-kit](https://github.com/gigya/cdc-starter-kit)
 * Source: [https://github.com/gigya/cdc-starter-kit](https://github.com/gigya/cdc-starter-kit)
@@ -31,16 +31,16 @@ The included flows in the demo are:
 
 | Flow | Description |
 |-|-|
-| Registration | A [Full Registration](https://developers.gigya.com/display/GD/Screen-Sets#Screen-Sets-RegistrationFlows) user flow, which creates a user in Gigya.|
-| Login | [Login](https://developers.gigya.com/display/GD/Screen-Sets#Screen-Sets-RegistrationFlows) capabilities for created users in Gigya. |
-| Update Profile | Once logged, you have the screens used when [updating](https://developers.gigya.com/display/GD/Default+Screen-sets#DefaultScreen-sets-DefaultScreen-Sets) a user profile. |
-| Email / Code Verification | Performs email / code verification inside the registration flow. To be [enabled](https://developers.gigya.com/display/GD/Policies#Policies-email_verificationEmailVerification) in Gigya console. |
-| Reset Password | Link to get a [Reset Password](https://developers.gigya.com/display/GD/Email+Templates#EmailTemplates-PasswordReset) email whenever a user chooses to reset their password. The link is valid for 1 hour by default.|
-| Change Password | Once logged in, link to [change](https://developers.gigya.com/display/GD/Policies#Policies-PasswordChange) the current user password. |
-| Consent | Test Gigya [Consent](https://developers.gigya.com/display/GD/Consent+Management) features with very few steps and checks them inside the console. |
-| Subscriptions / Lite Registrations | No password involved. Used typically for subscriptions, and any flow where only an email address is required, such as competition sign-ups, unlocking restricted content, voting, etc. For more information, see [Lite Registration](). |
-| Social Login | Login with Facebook, Google, Apple, Twitter, LinkedIn, etc..., and create a Gigya account with the data obtained from that [Social Provider](https://developers.gigya.com/display/GD/Social+Login). |
-| Link Accounts | With social accounts, enable [Linking](https://developers.gigya.com/display/GD/Linking+Social+Accounts) feature to merge them into a single one, associated with two identities, rather than maintaining two separate accounts. |
+| Registration | A [Full Registration](https://help.sap.com/docs/SAP_CUSTOMER_DATA_CLOUD/8b8d6fffe113457094a17701f63e3d6a/416fc0d470b21014bbc5a10ce4041860.html#registration-flows) user flow, which creates a user in Gigya.|
+| Login | [Login](https://help.sap.com/docs/SAP_CUSTOMER_DATA_CLOUD/8b8d6fffe113457094a17701f63e3d6a/416fc0d470b21014bbc5a10ce4041860.html#registration-flows) capabilities for created users in Gigya. |
+| Update Profile | Once logged, you have the screens used when [updating](https://help.sap.com/docs/SAP_CUSTOMER_DATA_CLOUD/8b8d6fffe113457094a17701f63e3d6a/4150730070b21014bbc5a10ce4041860.html) a user profile. |
+| Email / Code Verification | Performs email / code verification inside the registration flow. To be [enabled](https://help.sap.com/docs/SAP_CUSTOMER_DATA_CLOUD/8b8d6fffe113457094a17701f63e3d6a/4139d66d70b21014bbc5a10ce4041860.html) in Gigya console. |
+| Reset Password | Link to get a [Reset Password](https://help.sap.com/docs/SAP_CUSTOMER_DATA_CLOUD/8b8d6fffe113457094a17701f63e3d6a/50ea527441844c589fd1731116fc079d.html) email whenever a user chooses to reset their password. The link is valid for 1 hour by default.|
+| Change Password | Once logged in, link to [change](https://help.sap.com/docs/SAP_CUSTOMER_DATA_CLOUD/8b8d6fffe113457094a17701f63e3d6a/4139d66d70b21014bbc5a10ce4041860.html) the current user password. |
+| Consent | Test Gigya [Consent](https://help.sap.com/docs/SAP_CUSTOMER_DATA_CLOUD/8b8d6fffe113457094a17701f63e3d6a/414efcc570b21014bbc5a10ce4041860.html) features with very few steps and checks them inside the console. |
+| Subscriptions / Lite Registrations | No password involved. Used typically for subscriptions, and any flow where only an email address is required, such as competition sign-ups, unlocking restricted content, voting, etc. For more information, see [Lite Registration](https://help.sap.com/docs/SAP_CUSTOMER_DATA_CLOUD/8b8d6fffe113457094a17701f63e3d6a/4162dc4a70b21014bbc5a10ce4041860.html). |
+| Social Login | Login with Facebook, Google, Apple, Twitter, LinkedIn, etc..., and create a Gigya account with the data obtained from that [Social Provider](https://help.sap.com/docs/SAP_CUSTOMER_DATA_CLOUD/8b8d6fffe113457094a17701f63e3d6a/4172d0a670b21014bbc5a10ce4041860.html). |
+| Link Accounts | With social accounts, enable [Linking](https://help.sap.com/docs/SAP_CUSTOMER_DATA_CLOUD/8b8d6fffe113457094a17701f63e3d6a/41627d4a70b21014bbc5a10ce4041860.html) feature to merge them into a single one, associated with two identities, rather than maintaining two separate accounts. |
 
 
 #### Features
@@ -55,16 +55,16 @@ Global features (Cross-flow capabilities):
 
 | Feature | Description |
 |-|-|
-| i18n | Set the [language]() of your screensets. |
-| Captcha | Add [CAPTCHA]() to your screensets to protect them against automated scripts. |
-| Events | Execute actions after a successful login, after screen is loaded, or before submitting elements. Full list of available events [here](https://developers.gigya.com/display/GD/accounts.showScreenSet+JS#accounts.showScreenSetJS-Events). |
-| Extensions | Add [Extensions]() to control or enrich your flows serverside. |
+| i18n | Set the [language](https://help.sap.com/docs/SAP_CUSTOMER_DATA_CLOUD/8b8d6fffe113457094a17701f63e3d6a/4141d83470b21014bbc5a10ce4041860.html) of your screensets. |
+| Captcha | Add [CAPTCHA](https://help.sap.com/docs/SAP_CUSTOMER_DATA_CLOUD/8b8d6fffe113457094a17701f63e3d6a/4144cd9670b21014bbc5a10ce4041860.html) to your screensets to protect them against automated scripts. |
+| Events | Execute actions after a successful login, after screen is loaded, or before submitting elements. Full list of available events [here](https://help.sap.com/docs/SAP_CUSTOMER_DATA_CLOUD/8b8d6fffe113457094a17701f63e3d6a/41532ab870b21014bbc5a10ce4041860.html). |
+| Extensions | Add [Extensions](https://help.sap.com/docs/SAP_CUSTOMER_DATA_CLOUD/8b8d6fffe113457094a17701f63e3d6a/4153ec2f70b21014bbc5a10ce4041860.html) to control or enrich your flows serverside. |
 
 ## Requirements
 
 1. Gigya Console access with Create Site capabilities.
 
-1. Web server. (Apache, ngix, ...)
+1. Web server. (Apache, ngix, etc.)
 
 ## Documentation
 
