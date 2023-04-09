@@ -68,7 +68,7 @@ function renderMainSiteData(config) {
     var srcMainPic = "img/logos/" + config.main_pic;
     var srcMenuPic = "img/logos/" + config.menu_pic;
     const srcMainPicElement = query(".main-pic");
-    srcMainPicElement.setAttribute("src", srcMainPic);
+    // srcMainPicElement.setAttribute("src", srcMainPic);
     const srcMenuPicElement = query(".menu-pic");
     srcMenuPicElement.setAttribute("src", srcMenuPic);
 

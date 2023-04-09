@@ -1,16 +1,16 @@
 {
-    "menu_description": "CDC Starter Kit",
-    "site_title": "SAP Customer Data Cloud Starter Kit",
-    "site_description": "Sample Site with basic Customer Data Cloud capabilities",
-    "menu_bg_color": "white",
+    "menu_description": "",
+    "site_title": "Yaparcoyo",
+    "site_description": "[ Screensets en català ]",
+    "menu_bg_color": "#ffc847",
     "menu_bg_color_hover": "#1d87ff2a",
     "menu_text_color": "#999",
-    "text_color": "#7a7a7a",
-    "background_color": "#f4f4f4",
-    "menu_pic": "sap.png",
-    "main_url": "/cdc-starter-kit/",
-    "main_pic": "sap.png",
-    "raas_prefix": "Default",
-    "lang": "en",
-    "apiKey": "3_gRq1MaCq77LfHT2SITkHpxCK-_7WJi_H2yVkhha9yZaIKLxY2t5u37JRIC4W3m0s"
+    "text_color": "whitesmoke",
+    "background_color": "#ec7205",
+    "menu_pic": "yaparcoyo.png",
+    "main_url": "/",
+    "main_pic": "yaparcoyo.png",
+    "raas_prefix": "Valet",
+    "lang": "ca",
+    "apiKey": "4_514oO5LwCA_MvOKlEBASzQ"
 }
