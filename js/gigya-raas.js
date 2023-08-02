@@ -59,7 +59,7 @@ function registerWithRaaS(containerID, onAfterScreenLoadIfDefined) {
         screenSet: `${config.raas_prefix}-RegistrationLogin`,
         startScreen: 'gigya-register-screen',
         lang: window.config.lang,
-        // containerID, // <-- if we omit this property the screen it's shown in a pop-up
+        containerID, // <-- if we omit this property the screen it's shown in a pop-up
 
         // Some sample events..
         onBeforeSubmit,
@@ -87,7 +87,7 @@ function loginWithRaaS(containerID, onAfterScreenLoadIfDefined) {
         screenSet: `${config.raas_prefix}-RegistrationLogin`,
         startScreen: "gigya-login-screen",
         lang: window.config.lang,
-        // containerID,
+        containerID,
 
         // Events..
         // onAfterScreenLoad: onAfterScreenLoadIfDefined,

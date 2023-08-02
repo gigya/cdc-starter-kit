@@ -1,9 +1,59 @@
 {
     "languages": [
         {
+            "label": "Arabic",
+            "key": "ar",
+            "flag": "eg"
+        },
+        {
+            "label": "Bulgarian",
+            "key": "bg",
+            "flag": "bg"
+        },
+        {
             "label": "Catalan",
             "key": "ca",
             "flag": "es-ca"
+        },
+        {
+            "label": "Chinese (Hong Kong)",
+            "key": "zh-hk",
+            "flag": "cn"
+        },
+        {
+            "label": "Chinese (Mandarin)",
+            "key": "zh-cn",
+            "flag": "cn"
+        },
+        {
+            "label": "Chinese (Taiwan)",
+            "key": "zh-tw",
+            "flag": "cn"
+        },
+        {
+            "label": "Croatian",
+            "key": "hr",
+            "flag": "hr"
+        },
+        {
+            "label": "Czech",
+            "key": "cs",
+            "flag": "cz"
+        },
+        {
+            "label": "Danish",
+            "key": "da",
+            "flag": "dk"
+        },
+        {
+            "label": "Dutch",
+            "key": "nl",
+            "flag": "nl"
+        },
+        {
+            "label": "Dutch Informal",
+            "key": "nl-inf",
+            "flag": "nl"
         },
         {
             "label": "English (default)",
@@ -11,9 +61,194 @@
             "flag": "gb"
         },
         {
+            "label": "Estonian",
+            "key": "et-ee",
+            "flag": "et"
+        },
+        {
+            "label": "Finnish",
+            "key": "fi",
+            "flag": "fi"
+        },
+        {
+            "label": "French",
+            "key": "fr",
+            "flag": "fr"
+        },
+        {
+            "label": "French Informal",
+            "key": "fr-inf",
+            "flag": "fr"
+        },
+        {
+            "label": "German",
+            "key": "de",
+            "flag": "de"
+        },
+        {
+            "label": "German Informal",
+            "key": "de-inf",
+            "flag": "de"
+        },
+        {
+            "label": "Greek",
+            "key": "el",
+            "flag": "gr"
+        },
+        {
+            "label": "Hebrew",
+            "key": "he",
+            "flag": "il"
+        },
+        {
+            "label": "Hindi (*SMS TFA Only)",
+            "key": "hi",
+            "flag": "in"
+        },
+        {
+            "label": "Hungarian",
+            "key": "hu",
+            "flag": "hu"
+        },
+        {
+            "label": "Indonesian (Bahasa)",
+            "key": "id",
+            "flag": "id"
+        },
+        {
+            "label": "Italian",
+            "key": "it",
+            "flag": "it"
+        },
+        {
+            "label": "Japanese",
+            "key": "ja",
+            "flag": "jp"
+        },
+        {
+            "label": "Kannada (*SMS TFA Only)",
+            "key": "kn",
+            "flag": "kn"
+        },
+        {
+            "label": "Korean",
+            "key": "ko",
+            "flag": "kr"
+        },
+        {
+            "label": "Latvian",
+            "key": "lv-lv",
+            "flag": "lv"
+        },
+        {
+            "label": "Lithuanian",
+            "key": "lt-lt",
+            "flag": "lt"
+        },
+        {
+            "label": "Malay",
+            "key": "ms",
+            "flag": "ms"
+        },
+        {
+            "label": "Marathi (*SMS TFA Only)",
+            "key": "mr",
+            "flag": "mr"
+        },
+        {
+            "label": "Norwegian",
+            "key": "no",
+            "flag": "no"
+        },
+        {
+            "label": "Persian (Farsi)",
+            "key": "fa",
+            "flag": "ir"
+        },
+        {
+            "label": "Polish",
+            "key": "pl",
+            "flag": "pl"
+        },
+        {
+            "label": "Portuguese",
+            "key": "pt",
+            "flag": "pt"
+        },
+        {
+            "label": "Portuguese (Brazil)",
+            "key": "pt-br",
+            "flag": "br"
+        },
+        {
+            "label": "Romanian",
+            "key": "ro",
+            "flag": "ro"
+        },
+        {
+            "label": "Russian",
+            "key": "ru",
+            "flag": "ru"
+        },
+        {
+            "label": "Serbian (Cyrillic)",
+            "key": "sr",
+            "flag": "sr"
+        },
+        {
+            "label": "Slovak",
+            "key": "sk",
+            "flag": "sk"
+        },
+        {
+            "label": "Slovenian",
+            "key": "sl",
+            "flag": "sl"
+        },
+        {
             "label": "Spanish",
             "key": "es",
             "flag": "es"
+        },
+        {
+            "label": "Spanish (Lat-Am)",
+            "key": "es-mx",
+            "flag": "mx"
+        },
+        {
+            "label": "Spanish Informal",
+            "key": "es-inf",
+            "flag": "es"
+        },
+        {
+            "label": "Swedish",
+            "key": "sv",
+            "flag": "sv"
+        },
+        {
+            "label": "Tagalog",
+            "key": "tl",
+            "flag": "tl"
+        },
+        {
+            "label": "Thai",
+            "key": "th",
+            "flag": "th"
+        },
+        {
+            "label": "Turkish",
+            "key": "tr",
+            "flag": "tr"
+        },
+        {
+            "label": "Ukrainian",
+            "key": "uk",
+            "flag": "ua"
+        },
+        {
+            "label": "Vietnamese",
+            "key": "vi",
+            "flag": "vi"
         }
     ]
 }

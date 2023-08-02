@@ -220,7 +220,7 @@ function initPage(user) {
                     user.data.since = user.created.substr(0, 10);
                     user.data.memberTypeIcon = user.data.memberType.toLowerCase();
                 } else {
-                    editProfileWithRaaS();
+                    editProfileWithRaaS("edit_profile_placeholder");
                 }
             }
         })
